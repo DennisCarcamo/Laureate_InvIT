@@ -9,7 +9,7 @@ from resources.Item import Item, ItemList, items
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://postgres:Javascript@localhost:5432/db_test' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 app.secret_key = 'jose'
 api = Api(app)
 
@@ -35,4 +35,6 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 
 if __name__ == '__main__':
+    from db import db
+    db.init_app(app)
     app.run(debug=True)  # important to mention debug=True
