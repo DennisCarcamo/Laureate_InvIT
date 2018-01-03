@@ -29,3 +29,5 @@ class ItemModel(db.Model):
     def delete_item(self):
         db.session.delete(self)
         db.session.commit()
+
+    #def update_item():
