@@ -2,7 +2,8 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 from flask_sqlalchemy import SQLAlchemy
-from resources.Item import Item, ItemList, items
+from resources.Item import Item, ItemList, items, Workstation
+from resources.asset import CI
 
 #from security import authenticate, identity
 
@@ -22,6 +23,8 @@ def after_request(response):
         "Authorization"]
 
     response.headers.add('Access-Control-Allow-Origin', '*')
+    #response.headers.add('Cache-Control', 'no-cache,no-store')
+    
     response.headers.add(
         'Access-Control-Allow-Headers',
         ", ".join(valid_headers))
@@ -30,9 +33,12 @@ def after_request(response):
     return response
 
 
+
+
 #jwt = JWT(app, authenticate, identity)
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
+api.add_resource(CI, '/ci/<string:name>/<int:page>')
 
 if __name__ == '__main__':
     from db import db
