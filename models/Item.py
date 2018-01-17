@@ -11,8 +11,8 @@ class ItemModel(db.Model):
         self.price = price
 
     def insert(self):
-        db.session.add(self)
-        db.session.commit()
+         db.session.add(self)
+         db.session.commit()
 
 
     @classmethod
@@ -29,3 +29,4 @@ class ItemModel(db.Model):
     def delete_item(self):
         db.session.delete(self)
         db.session.commit()
+

@@ -2,7 +2,6 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
-from models.Item import ItemModel
 import requests,codecs,sys,pprint
 
 class CI(Resource):

@@ -8,7 +8,7 @@ from resources.asset import CI
 #from security import authenticate, identity
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://postgres:Javascript@localhost:5432/db_test' 
+app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://postgres:Javascript@localhost:5432/migrateTest' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #db = SQLAlchemy(app)
 app.secret_key = 'jose'
@@ -30,7 +30,7 @@ def after_request(response):
         ", ".join(valid_headers))
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
 
-    return response
+    return response 
 
 
 
@@ -42,5 +42,5 @@ api.add_resource(CI, '/ci/<string:name>/<int:page>')
 
 if __name__ == '__main__':
     from db import db
-    db.init_app(app)
+    #db.init_app(app)
     app.run(debug=True)  # important to mention debug=True

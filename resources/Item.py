@@ -2,7 +2,8 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
-from models.Item import ItemModel
+#from models.Item import ItemModel
+from models.signature import Type, SignatureSheet, SignatureProducts
 import requests
 
 items = []
@@ -76,9 +77,10 @@ class Item(Resource):
         return{'messege':"Item price updated"}
 class ItemList(Resource):
     def get(self):
-        item = ItemModel.query.all()
-        if item:
-            return{'items':  list(map(lambda x: x.json(), ItemModel.query.all()))}
+        return { 'message': 'Hello world'}
+        #item = ItemModel.query.all()
+        #if item:
+            #return{'items':  list(map(lambda x: x.json(), ItemModel.query.all()))}
             #return{'items': ItemModel.query.all()} 
 
 class Workstation(Resource):
