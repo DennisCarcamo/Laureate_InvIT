@@ -11,12 +11,15 @@ class TypeModel(db.Model):
     phone =   db.Column(db.String(15), nullable = False)
     terms =   db.Column(db.String(200), nullable = False)
     image =   db.Column(db.String(30), nullable = True)
-    def __init__(self, name, address, phone, terms):
+    enable = db.Column(db.SMALLINT, nullable = True)
+
+    def __init__(self, name, address, phone, terms, num):
         self.name = name
         self.address = address,
         self.phone = phone
         self.terms = terms
         #self.image = image
+        self.enable = num
 
     def json(self):
         return{
@@ -25,6 +28,7 @@ class TypeModel(db.Model):
                 'address': self.address,
                 'phone': self.phone,
                 'terms': self.terms,
+                'enable': self.enable
                 #'image': self.image
               }
 
@@ -51,13 +55,15 @@ class SignatureSheetModel(db.Model):
     updated = db.Column(db.DateTime, nullable = False )
     image_url = db.Column(db.String(50), nullable = True)
     id_type = db.Column(db.Integer, db.ForeignKey('tbl_type.id_type'), nullable= False)
+    id_employee = db.Column(db.String(12), nullable = False)
     #type = db.relationship('TypeModel', backref = db.backref('post', lazy = True))
 
-    def __init__(self, id_signature,updated,image_url, id_type):
+    def __init__(self, id_signature,updated,image_url, id_type, id_employee):
         self.id_signature = id_signature
         self.updated = updated
         self.image_url = image_url
         self.id_type = id_type
+        self.id_employee = id_employee
 
     def json(self):
         date = self.myConvertor()
@@ -66,7 +72,8 @@ class SignatureSheetModel(db.Model):
                 #ojo con las fechas  Object of type 'datetime' is not JSON serializable
                 'updated': date,
                 'image_url': self.image_url,
-                'id_type': self.id_type
+                'id_type': self.id_type,
+                'id_employee': self.id_employee
                 #pendiente jalar la relacion type
               }
 

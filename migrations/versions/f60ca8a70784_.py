@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3bb906774d71
+Revision ID: f60ca8a70784
 Revises: 
-Create Date: 2018-01-17 11:19:33.448253
+Create Date: 2018-01-18 11:44:51.546036
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3bb906774d71'
+revision = 'f60ca8a70784'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,6 +25,7 @@ def upgrade():
     sa.Column('phone', sa.String(length=15), nullable=False),
     sa.Column('terms', sa.String(length=200), nullable=False),
     sa.Column('image', sa.String(length=30), nullable=True),
+    sa.Column('enable', sa.SMALLINT(), nullable=True),
     sa.PrimaryKeyConstraint('id_type')
     )
     op.create_table('tbl_signature_sheet',
@@ -32,11 +33,12 @@ def upgrade():
     sa.Column('updated', sa.DateTime(), nullable=False),
     sa.Column('image_url', sa.String(length=50), nullable=True),
     sa.Column('id_type', sa.Integer(), nullable=False),
+    sa.Column('id_employee', sa.String(length=12), nullable=False),
     sa.ForeignKeyConstraint(['id_type'], ['tbl_type.id_type'], ),
     sa.PrimaryKeyConstraint('id_signature')
     )
     op.create_table('tbl_signature_x_product',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=True),
     sa.Column('id_product', sa.String(length=15), nullable=False),
     sa.Column('id_signature', sa.String(length=10), nullable=False),
     sa.ForeignKeyConstraint(['id_signature'], ['tbl_signature_sheet.id_signature'], ),

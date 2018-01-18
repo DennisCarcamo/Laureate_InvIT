@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 from flask_sqlalchemy import SQLAlchemy
-from resources.signature import Type, Types, SignatureSheets
+from resources.signature import Type, Types, SignatureSheets, SignatureSheet
 from resources.Item import Item, ItemList, items, Workstation
 from resources.asset import CI
 
@@ -44,6 +44,7 @@ api.add_resource(CI, '/ci/<string:name>/<int:page>')
 api.add_resource(Type, '/type/<int:id>')
 api.add_resource(Types, '/types')
 api.add_resource(SignatureSheets, '/signaturesheets')
+api.add_resource(SignatureSheet, '/signaturesheet/<string:id>')
 
 if __name__ == '__main__':
     from db import db
