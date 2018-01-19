@@ -2,9 +2,11 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 from flask_sqlalchemy import SQLAlchemy
-from resources.signature import Type, Types, SignatureSheets, SignatureSheet
+from resources.signature import Type, Types, SignatureSheets, SignatureSheet, SignatureProducts, Signatureproduct 
 from resources.Item import Item, ItemList, items, Workstation
+from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations
 from resources.asset import CI
+
 
 
 #from security import authenticate, identity
@@ -38,13 +40,18 @@ def after_request(response):
 
 
 #jwt = JWT(app, authenticate, identity)
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(ItemList, '/items')
-api.add_resource(CI, '/ci/<string:name>/<int:page>')
-api.add_resource(Type, '/type/<int:id>')
-api.add_resource(Types, '/types')
-api.add_resource(SignatureSheets, '/signaturesheets')
-api.add_resource(SignatureSheet, '/signaturesheet/<string:id>')
+api.add_resource(Item, '/api/v1/item/<string:name>')
+api.add_resource(ItemList, '/api/v1/items')
+api.add_resource(CI, '/api/v1/ci/<string:name>/<int:page>')
+api.add_resource(Type, '/api/v1/type/<int:id>')
+api.add_resource(Types, '/api/v1/types')
+api.add_resource(SignatureSheets, '/api/v1/signaturesheets')
+api.add_resource(SignatureSheet, '/api/v1/signaturesheet/<string:id>')
+api.add_resource(SignatureProducts, '/api/v1/signatureproducts')
+api.add_resource(Signatureproduct, '/api/v1/signatureproduct/<string:id_signature>')
+api.add_resource(AssetexplorerUsers, '/api/v1/assetexplorerusers')
+api.add_resource(AssetexplorerResources, '/api/v1/assetexplorerresources')
+api.add_resource(Assetworkstations, '/api/v1/assetexplorerworkstations')
 
 if __name__ == '__main__':
     from db import db

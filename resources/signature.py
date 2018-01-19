@@ -52,7 +52,7 @@ class SignatureSheets(Resource):
     def get(self):
         sheet = SignatureSheetModel.query.all()
         if sheet:
-            return{ 'Signature Sheets':  list(map(lambda x: x.json(), SignatureSheetModel.query.all()))}
+            return{ 'SignatureSheets':  list(map(lambda x: x.json(), SignatureSheetModel.query.all()))}
         return{'message': 'Nothing found'}
 
     def post(self):
@@ -76,6 +76,39 @@ class SignatureSheet(Resource):
             return sheet.json()
 
         return{'message': 'Nothing found'}
-  
+
 
   
+class SignatureProducts(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('id_signature')
+    parser.add_argument('id_product')
+
+    def get(self):
+        sheetproduct = SignatureProductsModel.query.all()
+        if sheetproduct:
+            return {'sheetproducts': list(map(lambda x: x.json(), SignatureProductsModel.query.all())) } 
+        return{'message': 'Nothing found'}  
+
+    def post(self):
+        data = SignatureProducts.parser.parse_args()
+        sp = SignatureProductsModel(data['id_signature'], data['id_product'])
+        
+        try:
+            sp.insert()
+            return {'message': 'Row correctly inserted'}
+        except:
+            return{'message': 'Row could not be inserted'} 
+
+class Signatureproduct(Resource):
+    #parser = reqparse.RequestParser()
+    #parser.add_argument('id_signature')
+    #parser.add_argument('id_product')
+
+    def get(self, id_signature):
+        sheet = SignatureProductsModel.find_by_id(id_signature)
+        if sheet:
+            return { 'SignatureSheets':  list(map(lambda x: x.json(), sheet ))}
+
+        return {'message': 'Nothing Found'}
+    

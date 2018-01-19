@@ -103,8 +103,8 @@ class SignatureProductsModel(db.Model):
     id_product = db.Column(db.String(15), primary_key = True, nullable = False)
     id_signature = db.Column(db.String(10), db.ForeignKey('tbl_signature_sheet.id_signature'), nullable = False, primary_key = True)
 
-    def __init__(self, id, id_signature, id_product):
-        self.id = id
+    def __init__(self, id_signature, id_product):
+        #self.id = id
         self.id_signature = id_signature
         self.id_product = id_product
 
@@ -121,7 +121,7 @@ class SignatureProductsModel(db.Model):
 
     @classmethod
     def find_by_id(cls, id):
-        return cls.query.filter_by(id=id).first()
+        return cls.query.filter_by(id_signature=id).all()
 
     @classmethod
     def bring_all(cls):
