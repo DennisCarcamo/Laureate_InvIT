@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
 #from models.Item import ItemModel
-from models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel
+from models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel, ImageModel
 import requests
 import datetime
 
@@ -48,6 +48,8 @@ class SignatureSheets(Resource):
     parser.add_argument('id_signature')
     parser.add_argument('id_type')
     parser.add_argument('id_employee')
+    parser.add_argument('first_name')
+    parser.add_argument('last_name')
 
     def get(self):
         sheet = SignatureSheetModel.query.all()
@@ -58,7 +60,7 @@ class SignatureSheets(Resource):
     def post(self):
         date = datetime.datetime.now()
         data = SignatureSheets.parser.parse_args()
-        sheet = SignatureSheetModel(data['id_signature'], date,'image' ,data['id_type'], data['id_employee'] )
+        sheet = SignatureSheetModel(date, data['id_type'], data['id_employee'], date['first_name'], data['last_name'], 1,1)
 
         try: 
             sheet.insert()
