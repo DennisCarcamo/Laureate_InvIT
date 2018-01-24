@@ -14,17 +14,45 @@ import psycopg2
 
 
 class AssetexplorerUsers(Resource):
-    def get(self):
+    def get(self, page):
         engine = sqlalchemy.create_engine('postgresql://postgres:Laureate123$@172.20.33.55:65433/assetexplorer')
         Session = scoped_session(sessionmaker(autocommit = False, bind=engine))
 
         s = Session()
-        result = s.execute('SELECT A.USERID	AS "USER_ID", A.EMPLOYEEID	AS "EMPLOYEE_ID", A.JOBTITLE	AS "JOB_TITLE", A.DOMAIN_ID	AS "DOMAIN_ID",  A.CIID		AS "CI_ID",  A.FIRSTNAME	AS "FIRST_NAME",  A.LASTNAME	AS "LAST NAME", C.DEPTNAME	AS "DEPARTMENT",   D.NAME		AS "SITE", G.EMAILID AS "EMAIL", G.MOBILE	AS "PHONE" FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID) LIMIT 10')
+        result = s.execute('SELECT A.USERID	AS "USER_ID", A.EMPLOYEEID	AS "EMPLOYEE_ID", A.JOBTITLE	AS "JOB_TITLE", A.DOMAIN_ID	AS "DOMAIN_ID",  A.CIID		AS "CI_ID",  A.FIRSTNAME	AS "FIRST_NAME",  A.LASTNAME	AS "LAST NAME", C.DEPTNAME	AS "DEPARTMENT",   D.NAME		AS "SITE", G.EMAILID AS "EMAIL", G.MOBILE	AS "PHONE" FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID) order by (A.FIRSTNAME) LIMIT 10 offset {}'.format(page))
         query = json.dumps( [dict(ix) for ix in result] )
         return {"query": json.loads(query) }    
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
+        Session.close()
+
+class AssetUsersSearch(Resource):
+    def get(self, text, page):
+        param = "'" + text + "%'" 
+        #print(param)
+        engine = sqlalchemy.create_engine('postgresql://postgres:Laureate123$@172.20.33.55:65433/assetexplorer')
+        Session = scoped_session(sessionmaker(autocommit = False, bind=engine))
+
+        s = Session()
+        result = s.execute('SELECT A.EMPLOYEEID	AS "EMPLOYEE_ID",   A.FIRSTNAME	AS "FIRST_NAME",  A.LASTNAME	AS "LAST NAME", C.DEPTNAME	AS "DEPARTMENT",   D.NAME		AS "SITE", G.EMAILID AS "EMAIL", G.MOBILE	AS "PHONE" FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID)  WHERE A.LASTNAME LIKE {} OR G.EMAILID LIKE {} OR C.DEPTNAME like {} order by (A.FIRSTNAME)   limit 10 offset {}'.format(param, param, param,page))
+        count = s.execute('SELECT count(1) FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID)  WHERE A.LASTNAME LIKE {} OR G.EMAILID LIKE {} OR C.DEPTNAME like {} '.format(param,param,param))
+        query = json.dumps( [dict(ix) for ix in result] ) 
+        c = json.dumps( [dict(ix) for ix in count] )
+        c = json.loads(c)
+        count_number = c[0].get('count')
+        return {
+                    "query": json.loads(query), 
+                    "meta": {
+                        "count": count_number,
+                        "cursor": page + 10,
+                        "more": (page + 10) < count_number
+                    }
+               }    
+            #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
+        s.close()
+        engine.close()
+        Session.close()
 
 class AssetexplorerResources(Resource):
     def get(self):
@@ -38,6 +66,7 @@ class AssetexplorerResources(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
+        Session.close()
 
 class Assetworkstations(Resource):
      def get(self):
@@ -50,7 +79,8 @@ class Assetworkstations(Resource):
         return {"query": json.loads(query) }    
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
-        engine.close()   
+        engine.close()
+        Session.close()   
 
         
 

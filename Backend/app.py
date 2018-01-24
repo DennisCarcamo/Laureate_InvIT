@@ -4,7 +4,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 from flask_sqlalchemy import SQLAlchemy
 from resources.signature import Type, Types, SignatureSheets, SignatureSheet, SignatureProducts, Signatureproduct 
 from resources.Item import Item, ItemList, items, Workstation
-from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations
+from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch
 from resources.asset import CI
 
 
@@ -49,7 +49,8 @@ api.add_resource(SignatureSheets, '/api/v1/signaturesheets')
 api.add_resource(SignatureSheet, '/api/v1/signaturesheet/<string:id>')
 api.add_resource(SignatureProducts, '/api/v1/signatureproducts')
 api.add_resource(Signatureproduct, '/api/v1/signatureproduct/<string:id_signature>')
-api.add_resource(AssetexplorerUsers, '/api/v1/assetexplorerusers')
+api.add_resource(AssetexplorerUsers, '/api/v1/assetexplorerusers/<int:page>')
+api.add_resource(AssetUsersSearch, '/api/v1/assetusersearch/<string:text>/<int:page>')
 api.add_resource(AssetexplorerResources, '/api/v1/assetexplorerresources')
 api.add_resource(Assetworkstations, '/api/v1/assetexplorerworkstations')
 

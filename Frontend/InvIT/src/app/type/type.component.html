@@ -1,0 +1,28 @@
+<div class="container">
+  
+    <button (click)="getTypes()">Types</button>
+  
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr class="">
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Terms</th>
+        <th scope="col">Select</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let type of types">
+  
+      <tr class="select">
+        <th scope="row">{{type.name}}</th>
+        <td>{{type.address}}</td>
+        <td>{{type.phone}}</td>
+        <td>{{type.terms}}</td>
+        <td><button class="btn btn-success">Select</button></td>
+      </tr>
+  
+    </tbody>
+  </table>
+  
+  </div>
