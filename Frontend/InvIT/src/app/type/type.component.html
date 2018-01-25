@@ -1,6 +1,6 @@
 <div class="container">
   
-    <button (click)="getTypes()">Types</button>
+   <!--  <button (click)="getTypes()">Types</button>
   
   <table class="table table-bordered">
     <thead class="thead-light">
@@ -23,6 +23,17 @@
       </tr>
   
     </tbody>
-  </table>
+  </table> -->
+
+  <h3>Select a Type</h3>
+    <div class="col-5">
+        <button (click)="getTypes()" class="btn btn-info">Get Types</button>
+        <select class="form-control" [(ngModel)]="option" >
+              <option *ngFor="let type of types" value="{{type.id_type}}" >{{type.name}}</option>
+        
+        </select>
+    </div>
+    <button (click)="verify()">v</button>
+ 
   
   </div>

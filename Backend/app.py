@@ -4,8 +4,11 @@ from flask_jwt import JWT, jwt_required, current_identity
 from flask_sqlalchemy import SQLAlchemy
 from resources.signature import Type, Types, SignatureSheets, SignatureSheet, SignatureProducts, Signatureproduct 
 from resources.Item import Item, ItemList, items, Workstation
-from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch
+from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch, AssetProductSearch
 from resources.asset import CI
+from db import db
+#from webargs import fields
+#from webargs.flaskparser import use_args
 
 
 
@@ -17,6 +20,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #db = SQLAlchemy(app)
 #app.secret_key = 'jose'
 api = Api(app)
+db.init_app(app)
 
 @app.after_request
 def after_request(response):
@@ -50,11 +54,12 @@ api.add_resource(SignatureSheet, '/api/v1/signaturesheet/<string:id>')
 api.add_resource(SignatureProducts, '/api/v1/signatureproducts')
 api.add_resource(Signatureproduct, '/api/v1/signatureproduct/<string:id_signature>')
 api.add_resource(AssetexplorerUsers, '/api/v1/assetexplorerusers/<int:page>')
-api.add_resource(AssetUsersSearch, '/api/v1/assetusersearch/<string:text>/<int:page>')
+api.add_resource(AssetUsersSearch, '/api/v1/assetusersearch')
+api.add_resource(AssetProductSearch, '/api/v1/assetproductsearch')
 api.add_resource(AssetexplorerResources, '/api/v1/assetexplorerresources')
 api.add_resource(Assetworkstations, '/api/v1/assetexplorerworkstations')
 
 if __name__ == '__main__':
-    from db import db
-    db.init_app(app)
+ 
+    
     app.run(debug=True)  # important to mention debug=True

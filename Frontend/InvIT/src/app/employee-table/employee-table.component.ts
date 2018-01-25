@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgIf } from '@angular/common'
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-employee-table',
@@ -8,11 +10,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmployeeTableComponent implements OnInit {
      public employees:any = [];
-     public empref: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+     public search: any;
+     public meta: any = [];
+     public page: any = 0;
+     public count: any;
+     public cursor: any = 0;
+     public more: any;
+     public showmeta: any = false;
+     public shownext: any = false;
+     public showpreview: any = false;
+     //public empref: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
      public ref: any = [];
      public var: any = 2;
-     public max;
-     public min;
+     //public max;
+     //public min;
      public cont: any = 0;
      public url;
 
@@ -36,12 +47,64 @@ export class EmployeeTableComponent implements OnInit {
       this.cont = this.cont + 1;
   }
 
+  searchEmployee(event:any){
+    this.search = event.target.value
+  }
 
+  searchEmployees(){
+    this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
+    this.httpClient.get<elementos>
+    (this.url)
+    .subscribe(
+      (data) => {
+        this.employees = data.query;
+        this.meta = data.meta;
+        this.count = this.meta.count;
+        this.cursor = this.meta.cursor;
+        this.more = this.meta.more;
+        this.showmeta = true;
+
+        if(this.more){
+          this.shownext = true;
+        }else{
+          this.shownext = false;
+        }
+
+        if(this.cursor == 10){
+          this.showpreview = false
+        }
+        else{
+          this.showpreview = true;
+        }
+        //alert( this.cursor );
+       }
+      
+       )
+  }
+
+  preview(){
+    this.cursor = this.cursor - 20;
+    this.searchEmployees();
+    //alert(this.cursor);
+  }
+
+  find(){
+    this.cursor = 0;
+    this.searchEmployees();
+    //alert(this.cursor + "aqui" );
+  }
+
+  onSelect(selectedItem: any) {
+    console.log("Selected item Id: ", selectedItem.EMPLOYEE_ID); // You get the Id of the selected item here
+    alert(selectedItem.EMPLOYEE_ID);
+  }
 
 }
 
 interface elementos {
   query : string;
+  meta: string;
+  count: number;
 
 }
 

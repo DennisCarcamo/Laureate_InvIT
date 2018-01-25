@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TypeComponent implements OnInit {
     public types:any = [];
+    public option: any;
   constructor(private httpClient:HttpClient) { }
 
   ngOnInit() {
@@ -22,6 +23,15 @@ getTypes(){
      }
     
      )
+
+}
+
+getOption(event:any){
+  this.option = event.target.value
+}
+
+verify(){
+  alert(this.option);
 }
 
 }
