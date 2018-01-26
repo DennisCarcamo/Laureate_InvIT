@@ -1,34 +1,52 @@
-<div class="container">
-  <div class=" row form-group">
-    <div class="col-5">
-     <label for="fulllist">Select the products</label>
-     <select multiple class="form-control form-control-lg" id="fulllist">
-        <option value="value1">Value1</option>
-        <option value="value2">Value2</option>
-        <option value="value3">Value3</option>
-        <option value="value4">palue4</option>
-
-
-    </select>
-
+<div class=" container-fluid">
+    <h3>Select the products</h3>
+  <div class="">
+    <br><div  class="d-flex justify-content-end">
+        <form class="form-inline">
+          <div class="form-group">
+              <input type="text" placeholder="Search" class="form-control" (keyup)="textproduct($event)">
+              <button class="btn btn-info" (click)="find()">Find Products</button><br>
+      
+          </div>
+      
+        </form>
+      </div><br>
+      
+      <table class="table">
+          <thead class="thead-dark">
+            <tr class="">
+              <th scope="col">CI Name</th>
+              <th scope="col">CI Type</th>
+              <th scope="col">Product Code</th>
+              <th scope="col">Serial N°</th>
+              <th scope="col">State</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              
+            </tr>
+          </thead>
+          <tbody *ngFor="let product of allProducts">
+        
+            <tr class="select">
+              <th scope="row">{{product.CI_NAME}}</th>
+              <td>{{product.CI_TYPE}}</td>
+              <td>{{product.PRODUCT_CODE}}</td>
+              <td>{{product.SERIAL_NUMBER}}</td>
+              <td>{{product.STATE}}</td>
+              <td><button class="btn btn-primary btn-sm" (click)="onSelect(product)">Add</button></td>
+              <td><button class="btn btn-danger btn-sm" (click)="onRemove()" >Rmv</button></td>
+            </tr>
+        
+          </tbody>
+        
+        </table>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-link" *ngIf="showpreview" (click)="preview()">Preview</button>
+            <button class="btn btn-link" (click)="searchProducts()" *ngIf="shownext">Next</button>
+        </div>
+        <div class="d-flex justify-content-start" *ngIf="showmeta">
+            <p>Search Result Quantity: {{count}}, cursor {{cursor}} More?  {{more}}.</p>
+        </div>
   </div>
-    <div class="col-1">
-       <button class="btn btn-primary">>></button>
-    </div>
-    <div class="col-1">
-        <button class="btn btn-danger"> << </button>
-    </div>
-    <div class="col-5">
-      <label for="emptylist">Signature sheet products</label>
-      <select  class="form-control form-control-lg" id="emptylist" multiple >
-      </select >
 
-      <p>hdhd</p>
-      <select class="selectpicker" multiple>
-          <option>Mustard</option>
-          <option>Ketchup</option>
-          <option>Relish</option>
-      </select>
-    </div>
-  </div>
 </div>

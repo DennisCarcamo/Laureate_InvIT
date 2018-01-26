@@ -1,12 +1,12 @@
 
-<div class="container">
+<div class="container-fluid">
   
  
 <br><div  class="d-flex justify-content-end">
   <form class="form-inline">
     <div class="form-group">
         <input type="text" placeholder="Search" class="form-control" (keyup)="searchEmployee($event)">
-        <button class="btn btn-primary" (click)="find()">Find Employee</button><br>
+        <button class="btn btn-info" (click)="find()">Find Employee</button><br>
 
     </div>
 
@@ -34,7 +34,7 @@
       <td>{{employ.EMAIL}}</td>
       <td>{{employ.DEPARTMENT}}</td>
       <td>{{employ.SITE}} </td>
-      <td><button class="btn btn-primary" (click)="onSelect(employ)">Select</button></td>
+      <td><button class="btn btn-primary btn-sm" (click)="onSelect(employ)">Select</button></td>
     </tr>
 
   </tbody>
@@ -60,156 +60,6 @@
 </div>
 
 
-<table class="table">
-    <thead class="thead-light">
-      <tr class="">
-        <th scope="col">Employeeid</th>
-        <th scope="col">Firstname</th>
-        <th scope="col">Last name</th>
-        <th scope="col">e-mail</th>
-        <th scope="col">Department</th>
-        <th scope="col">Site</th>
-        <th scope="col">Select</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-        <tr class="select">
-            <th scope="row">214785</th>
-            <td>Steve</td>
-            <td>Wozniak</td>
-            <td>steve.wozniak@laureate.net</td>
-            <td>IT</td>
-            <td>LNO HN </td>
-            <td><button class="btn btn-primary">Select</button></td>
-          </tr>
-          <tr class="select">
-              <th scope="row">214785</th>
-              <td>Steve</td>
-              <td>Wozniak</td>
-              <td>steve.wozniak@laureate.net</td>
-              <td>IT</td>
-              <td>LNO HN </td>
-              <td><button class="btn btn-primary">Select</button></td>
-            </tr>
-            <tr class="select">
-                <th scope="row">214785</th>
-                <td>Steve</td>
-                <td>Wozniak</td>
-                <td>steve.wozniak@laureate.net</td>
-                <td>IT</td>
-                <td>LNO HN </td>
-                <td><button class="btn btn-primary">Select</button></td>
-              </tr>
-              <tr class="select">
-                  <th scope="row">214785</th>
-                  <td>Steve</td>
-                  <td>Wozniak</td>
-                  <td>steve.wozniak@laureate.net</td>
-                  <td>IT</td>
-                  <td>LNO HN </td>
-                  <td><button class="btn btn-primary">Select</button></td>
-                </tr>
-                <tr class="select">
-                    <th scope="row">214785</th>
-                    <td>Steve</td>
-                    <td>Wozniak</td>
-                    <td>steve.wozniak@laureate.net</td>
-                    <td>IT</td>
-                    <td>LNO HN </td>
-                    <td><button class="btn btn-primary">Select</button></td>
-                  </tr>
-                  <tr class="select">
-                      <th scope="row">214785</th>
-                      <td>Steve</td>
-                      <td>Wozniak</td>
-                      <td>steve.wozniak@laureate.net</td>
-                      <td>IT</td>
-                      <td>LNO HN </td>
-                      <td><button class="btn btn-primary">Select</button></td>
-                    </tr>
-                    <tr class="select">
-                        <th scope="row">214785</th>
-                        <td>Steve</td>
-                        <td>Wozniak</td>
-                        <td>steve.wozniak@laureate.net</td>
-                        <td>IT</td>
-                        <td>LNO HN </td>
-                        <td><button class="btn btn-primary">Select</button></td>
-                      </tr>
-                      <tr class="select">
-                          <th scope="row">214785</th>
-                          <td>Steve</td>
-                          <td>Wozniak</td>
-                          <td>steve.wozniak@laureate.net</td>
-                          <td>IT</td>
-                          <td>LNO HN </td>
-                          <td><button class="btn btn-primary">Select</button></td>
-                      </tr>
-                      <tr class="select">
-                          <th scope="row">214785</th>
-                          <td>Steve</td>
-                          <td>Wozniak</td>
-                          <td>steve.wozniak@laureate.net</td>
-                          <td>IT</td>
-                          <td>LNO HN </td>
-                          <td><button class="btn btn-primary">Select</button></td>
-                        </tr>
-                        <tr class="select">
-                            <th scope="row">214785</th>
-                            <td>Steve</td>
-                            <td>Wozniak</td>
-                            <td>steve.wozniak@laureate.net</td>
-                            <td>IT</td>
-                            <td>LNO HN </td>
-                            <td><button class="btn btn-primary">Select</button></td>
-                          </tr>
-                          <tr class="select">
-                              <th scope="row">214785</th>
-                              <td>Steve</td>
-                              <td>Wozniak</td>
-                              <td>steve.wozniak@laureate.net</td>
-                              <td>IT</td>
-                              <td>LNO HN </td>
-                              <td><button class="btn btn-primary">Select</button></td>
-                            </tr>
-                            <tr class="select">
-                                <th scope="row">214785</th>
-                                <td>Steve</td>
-                                <td>Wozniak</td>
-                                <td>steve.wozniak@laureate.net</td>
-                                <td>IT</td>
-                                <td>LNO HN </td>
-                                <td><button class="btn btn-primary">Select</button></td>
-                              </tr>
-                              <tr class="select">
-                                  <th scope="row">214785</th>
-                                  <td>Steve</td>
-                                  <td>Wozniak</td>
-                                  <td>steve.wozniak@laureate.net</td>
-                                  <td>IT</td>
-                                  <td>LNO HN </td>
-                                  <td><button class="btn btn-primary">Select</button></td>
-                                </tr>
-    </tbody>
-  </table>
-  <p>13 Employees</p>
-  <div class="row justify-content-center">
-      
-      <button value="1" class="btn">1</button>
-      <button value="2" class="btn">2</button>
-      <button value="3" class="btn">3</button>
-     
-  </div>
-
-
-   <div >
-
-  <button (click)="calculate()">calcular</button>
-
-  <ul *ngFor="let em of ref">
-     <li>{{em}}</li>
-  </ul>
 
  </div>
 -->

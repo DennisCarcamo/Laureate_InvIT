@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgModel } from '@angular/forms';
 @Component({
   selector: 'app-type',
   templateUrl: './type.component.html',
