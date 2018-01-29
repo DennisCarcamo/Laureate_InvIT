@@ -12,6 +12,7 @@ import { EmployeeTableComponent } from './employee-table/employee-table.componen
 import { CreatesheetComponent } from './createsheet/createsheet.component';
 import { TypeComponent } from './type/type.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { SelectedProductsComponent } from './selected-products/selected-products.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ProductListComponent } from './product-list/product-list.component';
     EmployeeTableComponent,
     CreatesheetComponent,
     TypeComponent,
-    ProductListComponent
+    ProductListComponent,
+    SelectedProductsComponent
   ],
   imports: [
     BrowserModule,

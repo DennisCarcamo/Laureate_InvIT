@@ -7,6 +7,7 @@ from resources.Item import Item, ItemList, items, Workstation
 from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch, AssetProductSearch
 from resources.asset import CI
 from db import db
+import os
 #from webargs import fields
 #from webargs.flaskparser import use_args
 
@@ -17,9 +18,12 @@ from db import db
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] =  'postgresql://postgres:Javascript@localhost:5432/migrateTest' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_pyfile(os.environ.get('CONFIG_FILE', 'qa.cfg'))
 #db = SQLAlchemy(app)
 #app.secret_key = 'jose'
 api = Api(app)
+settings = app.config
+
 db.init_app(app)
 
 @app.after_request
@@ -63,3 +67,6 @@ if __name__ == '__main__':
  
     
     app.run(debug=True)  # important to mention debug=True
+
+
+    

@@ -34,7 +34,7 @@
               <td>{{product.SERIAL_NUMBER}}</td>
               <td>{{product.STATE}}</td>
               <td><button class="btn btn-primary btn-sm" (click)="onSelect(product)">Add</button></td>
-              <td><button class="btn btn-danger btn-sm" (click)="onRemove()" >Rmv</button></td>
+              <td><button class="btn btn-danger btn-sm" (click)="onRemove(product)" >Rmv</button></td>
             </tr>
         
           </tbody>
@@ -47,6 +47,11 @@
         <div class="d-flex justify-content-start" *ngIf="showmeta">
             <p>Search Result Quantity: {{count}}, cursor {{cursor}} More?  {{more}}.</p>
         </div>
+  </div>
+
+  <div *ngIf="bool">
+      <!--   <app-list [parentData]="oneItem"></app-list> -->
+      <app-selected-products [parentData]="selectproducts"></app-selected-products>
   </div>
 
 </div>

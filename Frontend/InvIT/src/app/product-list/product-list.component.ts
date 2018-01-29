@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
   public product: any;
   public allProducts:any = [];
   public selectedProducts: any = [];
+  public bool: any = false;
 
   public meta: any = [];
   public page: any = 0;
@@ -53,17 +54,50 @@ export class ProductListComponent implements OnInit {
       'SERIAL_NUMBER': selectedItem.SERIAL_NUMBER,
       'CI_TYPE' : selectedItem.CI_TYPE 
     };
+    let index = 0;
+      
+    for(let i of this.selectproducts){
+      if(x.CI_NAME == i.CI_NAME){
+        index = 1;
+      }
+    }
+    if(index == 0){
+      this.selectproducts.push(x);
+      this.bool = true;
+    }
+    else{
+      console.log("Item already exist");
+    }
+    
+      
+    
 
-    this.selectproducts.push(x);
+
+    
     //alert(selectedItem.CI_NAME); 
-    for ( let p of this.selectproducts){ alert(p.CI_NAME);}
-
+    for ( let p of this.selectproducts){  
+      console.log(p.CI_NAME);
+    }
+    console.log("-----------------------");
     //console.log("Selected item Id: ", selectedItem.PRODUCT_CODE); // You get the Id of the selected item here
     //alert(selectedItem.PRODUCT_CODE);
   }
 
-  onRemove(){
-    alert("Ready to remove bithc");
+  onRemove(selectedItem: any){
+    let x =  selectedItem.PRODUCT_CODE;
+  
+    for(let item of this.selectproducts){
+      if(item.PRODUCT_CODE == x){
+
+        this.selectproducts.splice(this.selectproducts.indexOf(item),1);
+      } 
+
+    }
+
+    for ( let p of this.selectproducts){ 
+      console.log(p.CI_NAME);
+    }
+    console.log("-----------------------");
   }
 
   searchProducts(){
