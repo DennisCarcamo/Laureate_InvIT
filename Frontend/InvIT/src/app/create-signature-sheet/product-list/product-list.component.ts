@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common'
 import { tick } from '@angular/core/testing';
@@ -32,6 +32,7 @@ export class ProductListComponent implements OnInit {
   //public empref: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   public ref: any = [];
   public selectproducts:any = [];
+  @Output() public productsevent = new EventEmitter();
   public var: any = 2;
   //public max;
   //public min;
@@ -63,6 +64,7 @@ export class ProductListComponent implements OnInit {
     }
     if(index == 0){
       this.selectproducts.push(x);
+      this.productsevent.emit(this.selectproducts);
       this.bool = true;
     }
     else{

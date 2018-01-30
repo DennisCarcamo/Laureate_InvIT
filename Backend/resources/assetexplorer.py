@@ -1,3 +1,4 @@
+
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
@@ -13,7 +14,7 @@ import json
 import psycopg2
 from webargs import fields
 from webargs.flaskparser import use_args
-
+#from app import settings
 
 class AssetexplorerUsers(Resource):
     def get(self, page):
@@ -42,7 +43,6 @@ class AssetUsersSearch(Resource):
         page = args.get('page', None)
         limit = args.get('limit', None)
         param = "'" + text + "%'" 
-        #print(param)
         engine = sqlalchemy.create_engine('postgresql://postgres:Laureate123$@172.20.33.55:65433/assetexplorer')
         Session = scoped_session(sessionmaker(autocommit = False, bind=engine))
 
@@ -65,6 +65,7 @@ class AssetUsersSearch(Resource):
         s.close()
         engine.close()
         Session.close()
+        
 
 
 class AssetProductSearch(Resource):
@@ -89,8 +90,8 @@ class AssetProductSearch(Resource):
 
         
         s = Session()
-        result = s.execute('SELECT  A.CIID           AS "ID",  A.CINAME         AS "CI_NAME", B.TYPENAME       AS "CI_TYPE", C.ASSETTAG       AS "PRODUCT_CODE", C.SERIALNO       AS "SERIAL_NUMBER", E.BARCODE        AS "BARCODE", D.NAME           AS "SITE", F.STATEDESC      AS "STATE" FROM CI AS A INNER JOIN CITYPE AS B  ON(A.CITYPEID = B.TYPEID) INNER JOIN RESOURCES AS C ON(A.CIID = C.CIID) LEFT JOIN SDORGANIZATION AS D ON(A.SITEID = D.ORG_ID) LEFT JOIN BARCODES AS E ON(C.BARCODEID = E.BARCODEID) INNER JOIN RESOURCESTATE AS F ON(C.RESOURCESTATEID = F.RESOURCESTATEID) WHERE ( B.TYPENAME Like {}  OR A.CINAME LIKE {} OR C.ASSETTAG LIKE {}  OR  C.SERIALNO LIKE {} ) AND F.STATEDESC = {} LIMIT 10 OFFSET {}'.format(param, param, param,param,state,page))
-        count = s.execute('SELECT  count(1) FROM CI AS A INNER JOIN CITYPE AS B  ON(A.CITYPEID = B.TYPEID) INNER JOIN RESOURCES AS C ON(A.CIID = C.CIID) LEFT JOIN SDORGANIZATION AS D ON(A.SITEID = D.ORG_ID) LEFT JOIN BARCODES AS E ON(C.BARCODEID = E.BARCODEID) INNER JOIN RESOURCESTATE AS F ON(C.RESOURCESTATEID = F.RESOURCESTATEID) WHERE ( B.TYPENAME Like {}  OR A.CINAME LIKE {} OR C.ASSETTAG LIKE {}  OR  C.SERIALNO LIKE {} ) AND F.STATEDESC = {} '.format(param, param, param,param,state))
+        result = s.execute('SELECT  A.CIID           AS "ID",  A.CINAME         AS "CI_NAME", B.TYPENAME       AS "CI_TYPE", C.ASSETTAG       AS "PRODUCT_CODE", C.SERIALNO       AS "SERIAL_NUMBER", E.BARCODE        AS "BARCODE", D.NAME           AS "SITE", J.MODEL AS "MODEL",F.STATEDESC      AS "STATE" FROM CI AS A INNER JOIN CITYPE AS B  ON(A.CITYPEID = B.TYPEID) INNER JOIN RESOURCES AS C ON(A.CIID = C.CIID) LEFT JOIN SDORGANIZATION AS D ON(A.SITEID = D.ORG_ID) LEFT JOIN BARCODES AS E ON(C.BARCODEID = E.BARCODEID) INNER JOIN RESOURCESTATE AS F ON(C.RESOURCESTATEID = F.RESOURCESTATEID) LEFT JOIN SYSTEMINFO AS J ON(C.RESOURCEID = J.WORKSTATIONID) WHERE ( B.TYPENAME Like {}  OR A.CINAME LIKE {} OR C.ASSETTAG LIKE {}  OR  C.SERIALNO LIKE {} ) AND F.STATEDESC = {} LIMIT 10 OFFSET {}'.format(param, param, param,param,state,page))
+        count = s.execute('SELECT  count(1) FROM CI AS A INNER JOIN CITYPE AS B  ON(A.CITYPEID = B.TYPEID) INNER JOIN RESOURCES AS C ON(A.CIID = C.CIID) LEFT JOIN SDORGANIZATION AS D ON(A.SITEID = D.ORG_ID) LEFT JOIN BARCODES AS E ON(C.BARCODEID = E.BARCODEID) INNER JOIN RESOURCESTATE AS F ON(C.RESOURCESTATEID = F.RESOURCESTATEID) LEFT JOIN SYSTEMINFO AS J ON(C.RESOURCEID = J.WORKSTATIONID)  WHERE ( B.TYPENAME Like {}  OR A.CINAME LIKE {} OR C.ASSETTAG LIKE {}  OR  C.SERIALNO LIKE {} ) AND F.STATEDESC = {} '.format(param, param, param,param,state))
         query = json.dumps( [dict(ix) for ix in result] ) 
         c = json.dumps( [dict(ix) for ix in count] )
         c = json.loads(c)

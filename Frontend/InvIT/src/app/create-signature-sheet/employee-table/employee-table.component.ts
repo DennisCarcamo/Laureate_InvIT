@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common'
 import { tick } from '@angular/core/testing';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-employee-table',
@@ -19,13 +20,15 @@ export class EmployeeTableComponent implements OnInit {
      public showmeta: any = false;
      public shownext: any = false;
      public showpreview: any = false;
-     //public empref: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+
      public ref: any = [];
+     @Output() public employeevent = new EventEmitter();
      public var: any = 2;
-     //public max;
-     //public min;
+
      public cont: any = 0;
      public url;
+
+
 
 
   constructor(private httpClient:HttpClient) { }
@@ -53,6 +56,7 @@ export class EmployeeTableComponent implements OnInit {
 
   searchEmployees(){
     this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
+    this.url = `http://127.0.0.1:5000/api/v1/assetusersearch?page=${this.cursor}&limit=10&text=${this.search}`;
     this.httpClient.get<elementos>
     (this.url)
     .subscribe(
@@ -95,8 +99,21 @@ export class EmployeeTableComponent implements OnInit {
   }
 
   onSelect(selectedItem: any) {
-    console.log("Selected item Id: ", selectedItem.EMPLOYEE_ID); // You get the Id of the selected item here
-    alert(selectedItem.EMPLOYEE_ID);
+   // console.log("Selected item Id: ", selectedItem.EMPLOYEE_ID); // You get the Id of the selected item here
+   let x = {
+    'EMPLOYEE_ID': selectedItem.EMPLOYEE_ID,
+    'FIRST_NAME' :selectedItem.FIRST_NAME,
+    'EMAIL': selectedItem.EMAIL,
+    'DEPARTMENT':  selectedItem.DEPARTMENT,
+    'Site':  selectedItem.Site
+    
+    };
+    this.ref.splice(0);
+    this.ref.push(x);
+    this.employeevent.emit(this.ref);
+    //alert(this.ref[0].EMAIL)
+
+
   }
 
 }

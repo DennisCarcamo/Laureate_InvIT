@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from resources.signature import Type, Types, SignatureSheets, SignatureSheet, SignatureProducts, Signatureproduct 
 from resources.Item import Item, ItemList, items, Workstation
 from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch, AssetProductSearch
-from resources.asset import CI
+from resources.asset import CI, test
 from db import db
 import os
 #from webargs import fields
@@ -44,8 +44,12 @@ def after_request(response):
 
     return response 
 
+@app.route("/")
+def hello():
+    return settings['URLDB'] + 'YEY' 
 
 
+from resources.asset import *
 
 #jwt = JWT(app, authenticate, identity)
 api.add_resource(Item, '/api/v1/item/<string:name>')
@@ -62,6 +66,8 @@ api.add_resource(AssetUsersSearch, '/api/v1/assetusersearch')
 api.add_resource(AssetProductSearch, '/api/v1/assetproductsearch')
 api.add_resource(AssetexplorerResources, '/api/v1/assetexplorerresources')
 api.add_resource(Assetworkstations, '/api/v1/assetexplorerworkstations')
+
+api.add_resource(test, '/api/v1/test')
 
 if __name__ == '__main__':
  

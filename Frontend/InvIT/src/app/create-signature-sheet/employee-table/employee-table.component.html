@@ -3,7 +3,7 @@
       
  
 <br><div  class="">
-  <h4>Search the Employee</h4>
+  <!-- <h4>Search the Employee</h4> -->
   <form class="form-inline d-flex justify-content-end">
     <div class="form-group">
         <input type="text" placeholder="Search" class="form-control" (keyup)="searchEmployee($event)">
@@ -22,7 +22,7 @@
       <th scope="col">e-mail</th>
       <th scope="col">Department</th>
       <th scope="col">Site</th>
-      <th scope="col">Model</th>
+
       <th scope="col">Select</th>
       
     </tr>
@@ -36,7 +36,7 @@
       <td>{{employ.EMAIL}}</td>
       <td>{{employ.DEPARTMENT}}</td>
       <td>{{employ.SITE}} </td>
-      <td></td>
+
       <td><button class="btn btn-primary btn-sm" (click)="onSelect(employ)">Select</button></td>
     </tr>
 

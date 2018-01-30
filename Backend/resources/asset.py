@@ -46,4 +46,7 @@ class CI(Resource):
         response = requests.post(url,params=args)
         return {'response': response.json()}   
 
-        
+
+class test(Resource):
+    def get(self):
+        return{'url': 'url'}

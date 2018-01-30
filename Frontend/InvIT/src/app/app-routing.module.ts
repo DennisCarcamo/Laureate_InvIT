@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeTableComponent } from './employee-table/employee-table.component';
-import { CreatesheetComponent } from './createsheet/createsheet.component';
+import { CreatesheetComponent } from './create-signature-sheet/createsheet/createsheet.component';
 
 const routes: Routes = [
 

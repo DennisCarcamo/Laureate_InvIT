@@ -1,5 +1,6 @@
 from db import db
 from sqlalchemy import Table, Column, Float, Integer, String, MetaData, ForeignKey
+from app import app
 
 class ItemModel(db.Model):
     __tablename__ = 'tbl_items'
