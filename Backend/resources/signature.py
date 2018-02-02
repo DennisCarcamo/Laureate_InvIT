@@ -7,41 +7,42 @@ from models.signature import TypeModel, SignatureSheetModel, SignatureProductsMo
 import requests
 import datetime
 
-class Type(Resource):
-    def get(self, id):
-        tipo = TypeModel.find_by_id(id)
+############### Recurso Signature types.py #####################
+#class Type(Resource):
+ #   def get(self, id):
+ #       tipo = TypeModel.find_by_id(id)
 
-        if tipo:
-            return tipo.json()
+#        if tipo:
+#            return tipo.json()
 
-        return {'message': 'Not Type Found'}
+#        return {'message': 'Not Type Found'}
       
 
-class Types(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('name')
-    parser.add_argument('address')
-    parser.add_argument('phone')
-    parser.add_argument('terms')
+#class Types(Resource):
+#    parser = reqparse.RequestParser()
+#    parser.add_argument('name')
+#    parser.add_argument('address')
+#    parser.add_argument('phone')
+#    parser.add_argument('terms')
     #parser.add_argument('enable', type=in)
     #cuidado con el parse es case sensitive, al enviar el json desde el postman o desde el front end enviar bien los argumentos
 
-    def get(self):
-        tipo = TypeModel.query.all()
-        if tipo:
-            return{ 'Types':  list(map(lambda x: x.json(), TypeModel.query.all()))}
+#    def get(self):
+#        tipo = TypeModel.query.all()
+#        if tipo:
+#            return{ 'Types':  list(map(lambda x: x.json(), TypeModel.query.all()))}
         
-        return {'message': 'Nothing found'}
+#        return {'message': 'Nothing found'}
 
-    def post(self):
-        #validar que el id no exista. no olvidalo el id es serial.
-        data = Types.parser.parse_args()
-        tipo = TypeModel(data['name'], data['address'], data['phone'], data['terms'], 1)
-        try:
-            tipo.insert()
-            return {'message': 'Item correctly inserted'}
-        except:
-            return{'messege': "something wrong probably item already exist"}
+#    def post(self):
+#        #validar que el id no exista. no olvidalo el id es serial.
+#        data = Types.parser.parse_args()
+#        tipo = TypeModel(data['name'], data['address'], data['phone'], data['terms'], 1)
+#        try:
+##            tipo.insert()
+#            return {'message': 'Item correctly inserted'}
+#        except:
+#            return{'messege': "something wrong probably item already exist"}
 
 class SignatureSheets(Resource):
     parser = reqparse.RequestParser()

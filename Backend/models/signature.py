@@ -115,21 +115,31 @@ class SignatureSheetModel(db.Model):
 
 class SignatureProductsModel(db.Model):
     __tablename__ = 'tbl_signature_x_product'
-    id = db.Column(db.Integer, autoincrement = True, unique = True)
-    id_product = db.Column(db.String(15), primary_key = True, nullable = False)
-    id_signature = db.Column(db.Integer, db.ForeignKey('tbl_signature_sheet.id_signature'), nullable = False, primary_key = True)
+    id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    id_product = db.Column(db.String(20),  nullable = False)
+    id_signature = db.Column(db.Integer, db.ForeignKey('tbl_signature_sheet.id_signature'), nullable = False)
+    product_name =  db.Column(db.String(20),  nullable = False)
+    serial_number = db.Column(db.String(25),  nullable = True)
+    model =  db.Column(db.String(25),  nullable = True)
 
-    def __init__(self, id_signature, id_product):
+    def __init__(self, id_signature, id_product, product_name, serial_number, model):
         #self.id = id
         self.id_signature = id_signature
         self.id_product = id_product
+        self.product_name = product_name
+        self.serial_number = serial_number
+        self.model = model
 
     def json(self):
         return {
                     'id': self.id,
                     'id_product': self.id_product,
-                    'id_signature': self.id_signature
+                    'id_signature': self.id_signature,
+                    'product_name': self.product_name,
+                    'serial_number': self.serial_number,
+                    'model': self.model
                }
+               
 
     def insert(self):
         db.session.add(self)

@@ -1,0 +1,152 @@
+<link rel="stylesheet" href="bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css">
+<style>
+    .email{
+        color: rgba(70, 70, 255, 0.87);
+    }
+
+    p {
+
+        margin: 0px;
+    }
+
+    .tab {
+        border-style:  solid ;
+       padding-left: 10px;
+    }
+
+    .tabwidth {
+        width: 250;
+    }
+</style>
+<div class="container">
+    <div style="">
+       <div class="row"> 
+            <div class="col-4">
+                <!-- <img style="heigth: 150px; width: 230px;" src="logo.png" alt="Logo"> -->
+                <div><br>
+                    <p>CEUTEC Building, 8th Floor</p>
+                    <p>Col. Matamoros, Tegucigalpa</p>
+                    <p>Francisco Morazan, Honduras</p>
+                    <p>Phone: 22755780</p>
+                </div>
+            
+             </div>
+        
+            <div class=" col-4" style="padding-top: 50px;">
+                 <table class="tabwidth">
+                     <thead>
+                         <tr>
+                            <th class="tab" >Email Address</th>
+                         </tr>
+                         
+                     </thead>
+                     <tbody class="">
+                         <tr class="">
+                            <td class="tab"><span class="email">  {{email}}} </span></td>
+                         </tr>
+                         
+                     </tbody>
+                 </table> <br>
+
+                 <table class="tabwidth">
+                        <thead>
+                            <tr>
+                               <th class="tab" >Contact Name</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody class="">
+                            <tr class="">
+                               <td class="tab"><span class="email">  {{name}} </span></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+            </div>
+
+            <div class="col-4">
+                    <table class="tabwidth">
+                            <thead>
+                                <tr>
+                                    <th class="tab" > TBD000008</th>
+                                </tr>
+                                        
+                            </thead>
+                    </table> <br>  
+                    <table class="tabwidth">
+                    <thead>
+                        <tr>
+                            <th class="tab" > Updated Oct-30-2017</th>
+                        </tr>
+                                
+                    </thead>
+                 </table> <br>
+
+                 <table class="tabwidth">
+                        <thead>
+                            <tr>
+                               <th class="tab" >Office</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody class="">
+                            <tr class="">
+                               <td class="tab"><span class="email">  Walden </span></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table> <br>
+
+                    <table class="tabwidth">
+                            <thead>
+                                <tr>
+                                   <th class="tab" >Customer Phone</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody class="">
+                                <tr class="">
+                                   <td class="tab"><span class="email">  31913037 </span></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                 
+                 
+            </div>
+        </div><br>
+        
+        <div class="row">
+            <div class="col-12">
+                    <table class="table">
+                            <thead class="thead-dark">
+                              <tr class="">
+                                <th scope="col">Product Code</th>
+                                <th scope="col">CI Name</th>
+                                <th scope="col">Serial N°</th>
+                                <th scope="col">Model</th>
+                              </tr>
+                            </thead>
+                            <tbody >
+                          
+                              <tr class="select">
+                                <th scope="row">{{CI_NAME}}</th>
+                                <td>{{CI_TYPE}}</td>
+                                <td>{{PRODUCT_CODE}}</td>
+                                <td>{{SERIAL_NUMBER}}</td>
+                              </tr>
+                          
+                            </tbody>
+                          
+                          </table>
+            </div>
+
+        </div>
+        
+    </div>
+    
+
+
+
+    
+</div>

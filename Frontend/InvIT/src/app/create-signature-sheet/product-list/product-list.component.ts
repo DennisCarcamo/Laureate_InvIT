@@ -53,6 +53,7 @@ export class ProductListComponent implements OnInit {
       'PRODUCT_CODE': selectedItem.PRODUCT_CODE,
       'CI_NAME' :selectedItem.CI_NAME,
       'SERIAL_NUMBER': selectedItem.SERIAL_NUMBER,
+      'MODEL': selectedItem.MODEL,
       'CI_TYPE' : selectedItem.CI_TYPE 
     };
     let index = 0;
