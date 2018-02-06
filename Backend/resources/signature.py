@@ -44,64 +44,66 @@ import datetime
 #        except:
 #            return{'messege': "something wrong probably item already exist"}
 
-class SignatureSheets(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('id_signature')
-    parser.add_argument('id_type')
-    parser.add_argument('id_employee')
-    parser.add_argument('first_name')
-    parser.add_argument('last_name')
 
-    def get(self):
-        sheet = SignatureSheetModel.query.all()
-        if sheet:
-            return{ 'SignatureSheets':  list(map(lambda x: x.json(), SignatureSheetModel.query.all()))}
-        return{'message': 'Nothing found'}
+#siganture sheet ###
+#class SignatureSheets(Resource):
+#    parser = reqparse.RequestParser()
+#    parser.add_argument('id_signature')
+#    parser.add_argument('id_type')
+#    parser.add_argument('id_employee')
+#    parser.add_argument('first_name')
+#    parser.add_argument('last_name')
 
-    def post(self):
-        date = datetime.datetime.now()
-        data = SignatureSheets.parser.parse_args()
-        sheet = SignatureSheetModel(date, data['id_type'], data['id_employee'], date['first_name'], data['last_name'], 1,1)
+#    def get(self):
+#        sheet = SignatureSheetModel.query.all()
+#        if sheet:
+#            return{ 'SignatureSheets':  list(map(lambda x: x.json(), SignatureSheetModel.query.all()))}
+#        return{'message': 'Nothing found'}
 
-        try: 
-            sheet.insert()
-            return{'message': 'Signature Sheet correctly inserted'}
-        except:
-            return {'messege': "something wrong probably item already exist"}
+#    def post(self):
+#        date = datetime.datetime.now()
+#        data = SignatureSheets.parser.parse_args()
+#        sheet = SignatureSheetModel(date, data['id_type'], data['id_employee'], date['first_name'], data['last_name'], 1,1)
+
+#        try: 
+#            sheet.insert()
+#            return{'message': 'Signature Sheet correctly inserted'}
+#        except:
+#            return {'messege': "something wrong probably item already exist"}
         
 
-class SignatureSheet(Resource):
+#class SignatureSheet(Resource):
    
-    def get(self, id):
-        sheet = SignatureSheetModel.find_by_id(id)
+#    def get(self, id):
+#        sheet = SignatureSheetModel.find_by_id(id)
 
-        if sheet:
-            return sheet.json()
+#        if sheet:
+#            return sheet.json()
 
-        return{'message': 'Nothing found'}
+#        return{'message': 'Nothing found'}
 
 
   
-class SignatureProducts(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('id_signature')
-    parser.add_argument('id_product')
+#class SignatureProducts(Resource):
+#    parser = reqparse.RequestParser()
+#    parser.add_argument('id_signature')
+#    parser.add_argument('id_product')
 
-    def get(self):
-        sheetproduct = SignatureProductsModel.query.all()
-        if sheetproduct:
-            return {'sheetproducts': list(map(lambda x: x.json(), SignatureProductsModel.query.all())) } 
-        return{'message': 'Nothing found'}  
+#    def get(self):
+#        sheetproduct = SignatureProductsModel.query.all()
+#        if sheetproduct:
+#            return {'sheetproducts': list(map(lambda x: x.json(), SignatureProductsModel.query.all())) } 
+#        return{'message': 'Nothing found'}  
 
-    def post(self):
-        data = SignatureProducts.parser.parse_args()
-        sp = SignatureProductsModel(data['id_signature'], data['id_product'])
+#    def post(self):
+#        data = SignatureProducts.parser.parse_args()
+#        sp = SignatureProductsModel(data['id_signature'], data['id_product'])
         
-        try:
-            sp.insert()
-            return {'message': 'Row correctly inserted'}
-        except:
-            return{'message': 'Row could not be inserted'} 
+#        try:
+#            sp.insert()
+#            return {'message': 'Row correctly inserted'}
+#        except:
+#            return{'message': 'Row could not be inserted'} 
 
 class Signatureproduct(Resource):
     #parser = reqparse.RequestParser()

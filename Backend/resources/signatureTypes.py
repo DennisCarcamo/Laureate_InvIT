@@ -1,8 +1,4 @@
 from flask import Flask, request
-from flask_restful import Resource, Api, reqparse
-#from flask_jwt import JWT, jwt_required, current_identity
-#from flask_sqlalchemy import SQLAlchemy
-#from models.Item import ItemModel
 import requests
 import datetime
 import sqlalchemy
@@ -10,7 +6,7 @@ import json
 import json
 import psycopg2
 from webargs import fields
-
+from flask_restful import Resource, Api, reqparse
 from app import settings, app, api, ma
 from webargs import fields
 from webargs.flaskparser import use_args

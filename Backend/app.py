@@ -307,6 +307,9 @@ def hello():
 
 from resources.assetexplorer import *
 from resources.signatureTypes import *
+from resources.signaturesheets import *
+from resources.signaturesheetproducts import *
+#from resources.createAssetRelationships import *
 
 #jwt = JWT(app, authenticate, identity)
 #api.add_resource(Item, '/api/v1/item/<string:name>')

@@ -69,7 +69,7 @@ class SignatureSheetModel(db.Model):
         #self.image_url = image_url
         self.id_type = id_type
         self.id_employee = id_employee
-        self.first_name = first_name
+        self.first_name = first
         self.last_name = lastn
         self.email = email
         self.status = status
