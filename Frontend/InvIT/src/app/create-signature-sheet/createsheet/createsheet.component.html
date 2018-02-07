@@ -1,6 +1,6 @@
 <br>
 <div class="container">
-    <p *ngFor="let item of selectemploye">{{item.EMAIL}}</p>
+    <p *ngFor="let item of selectemploye">{{item.LAST_NAME}}</p>
     <p *ngFor="let product of productsevent">{{product.CI_NAME}}</p>
     <div>
         <h3>OnBoarding- Loan new Signature Sheet</h3>
@@ -49,6 +49,6 @@
     <br><br><br><br>
     <div *ngIf="boolproducts" class="d-flex justify-content-center">
         <button class="btn btn-link btn-lg">Preview</button>
-        <button class="btn btn-primary btn-lg">Save</button>
+        <button class="btn btn-primary btn-lg" (click)="create_json()">Save</button>
     </div>
 </div>

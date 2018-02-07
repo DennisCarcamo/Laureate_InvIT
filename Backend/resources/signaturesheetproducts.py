@@ -46,27 +46,27 @@ class SignatureProducts(Resource):
         value = request.json['Products']
         signature_id = request.json['signature_id']
         
-        sheet_signature = SignatureSheetModel.get_last_id('56')
+        sheet_signature = SignatureSheetModel.get_last_id(signature_id['id_employee'])
         id_ss = sheet_signature.json()
         signature_sheet_id = id_ss['id_signature']
 
 
         relationship = CreateAssetRelationships()
         #"relationship.createRelationship(signature_id['requesterid'], )
-        print(signature_id['requesterid'])
+        #print(signature_id['requesterid'])
         #print(prod['ciid'])
-        #for prod in value:
+        for prod in value:
             #print(prod['ciid'])
-            #val = relationship.createRelationship(signature_id['requesterid'], prod['ciid'])
+            val = relationship.createRelationship(signature_id['requesterid'], prod['ciid'])
             #print(val)
             #-----
-            #sp = SignatureProductsModel(signature_id['id_signature'], prod['id_product'], prod['product_name'] , prod['serial'], prod['model'])
-            #try:
-            #    sp.insert()
-            #except:
-            #    return{'message': 'Row could not be inserted'}
+            sp = SignatureProductsModel(id_ss, prod['id_product'], prod['product_name'] , prod['serial'], prod['model'])
+            try:
+                sp.insert()
+            except:
+                return{'message': 'Row could not be inserted'}
 
-        #return "Success"       
+        return "Success"       
         #------------------------------------------------------------------------------------------------------------------
         #sp = SignatureProductsModel(id_signature, id_product, product_name , serial, model)
         #print(data.item['Model'])

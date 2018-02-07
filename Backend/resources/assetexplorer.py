@@ -29,6 +29,7 @@ class AssetexplorerUsers(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
+        
        # Session.close()
 
 class AssetUsersSearch(Resource):

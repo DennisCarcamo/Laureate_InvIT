@@ -103,6 +103,7 @@ export class EmployeeTableComponent implements OnInit {
    let x = {
     'EMPLOYEE_ID': selectedItem.EMPLOYEE_ID,
     'FIRST_NAME' :selectedItem.FIRST_NAME,
+    'LAST_NAME' : selectedItem.LAST_NAME,
     'EMAIL': selectedItem.EMAIL,
     'DEPARTMENT':  selectedItem.DEPARTMENT,
     'Site':  selectedItem.Site
