@@ -15,6 +15,7 @@ import psycopg2
 from webargs import fields
 from webargs.flaskparser import use_args
 from app import settings, app, api
+from marshmallow import fields
 
 class AssetexplorerUsers(Resource):
     def get(self, page):
@@ -28,7 +29,7 @@ class AssetexplorerUsers(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
-        Session.close()
+       # Session.close()
 
 class AssetUsersSearch(Resource):
     user_args = {
@@ -107,7 +108,7 @@ class AssetProductSearch(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
-        Session.close()
+       # Session.close()
 
 
 class AssetexplorerResources(Resource):

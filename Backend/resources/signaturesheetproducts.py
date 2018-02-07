@@ -11,8 +11,8 @@ from app import settings, app, api, ma
 from webargs import fields
 from webargs.flaskparser import use_args
 from sqlalchemy.orm import sessionmaker, scoped_session
-#from resources.createAssetRelationships import *
-from models.signature import SignatureProductsModel
+from resources.createAssetRelationships import *
+from models.signature import SignatureProductsModel, SignatureSheetModel
 from webargs.flaskparser import use_args
 from marshmallow import fields
 #
@@ -42,20 +42,32 @@ class SignatureProducts(Resource):
         #product_name = args.get('product_name',None)
         #serial = args.get('serial', None)
         #model = args.get('model', None)
+        #--------------------------------------------------------------------------------------------------------------------
         value = request.json['Products']
         signature_id = request.json['signature_id']
+        
+        sheet_signature = SignatureSheetModel.get_last_id('56')
+        id_ss = sheet_signature.json()
+        signature_sheet_id = id_ss['id_signature']
+
+
         relationship = CreateAssetRelationships()
-        relationship.hello()
+        #"relationship.createRelationship(signature_id['requesterid'], )
+        print(signature_id['requesterid'])
+        #print(prod['ciid'])
+        #for prod in value:
+            #print(prod['ciid'])
+            #val = relationship.createRelationship(signature_id['requesterid'], prod['ciid'])
+            #print(val)
+            #-----
+            #sp = SignatureProductsModel(signature_id['id_signature'], prod['id_product'], prod['product_name'] , prod['serial'], prod['model'])
+            #try:
+            #    sp.insert()
+            #except:
+            #    return{'message': 'Row could not be inserted'}
 
-        for prod in value:
-            sp = SignatureProductsModel(signature_id['id_signature'], prod['id_product'], prod['product_name'] , prod['serial'], prod['model'])
-            try:
-                sp.insert()
-            except:
-                return{'message': 'Row could not be inserted'}
-
-        return "Success"       
-
+        #return "Success"       
+        #------------------------------------------------------------------------------------------------------------------
         #sp = SignatureProductsModel(id_signature, id_product, product_name , serial, model)
         #print(data.item['Model'])
         #print('hahah')

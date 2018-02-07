@@ -102,6 +102,10 @@ class SignatureSheetModel(db.Model):
         return cls.query.filter_by(id_signature=id_signature).first()
 
     @classmethod
+    def get_last_id(cls, employee_id):
+        return cls.query.filter_by(id_employee= employee_id ).order_by(cls.id_signature.desc()).first()
+
+    @classmethod
     def bring_all(cls):
         return cls.query.all()
 
