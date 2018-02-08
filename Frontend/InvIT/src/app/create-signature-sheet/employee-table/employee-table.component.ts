@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common'
 import { tick } from '@angular/core/testing';
 import { Alert } from 'selenium-webdriver';
+import { SearchEmployeeService } from '../search-employee.service';
 
 @Component({
   selector: 'app-employee-table',
@@ -20,6 +21,7 @@ export class EmployeeTableComponent implements OnInit {
      public showmeta: any = false;
      public shownext: any = false;
      public showpreview: any = false;
+     public answer:any = [];
 
      public ref: any = [];
      @Output() public employeevent = new EventEmitter();
@@ -31,7 +33,7 @@ export class EmployeeTableComponent implements OnInit {
 
 
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private _searchEmployees : SearchEmployeeService ) { }
 
   ngOnInit() {
   }
@@ -55,13 +57,14 @@ export class EmployeeTableComponent implements OnInit {
   }
 
   searchEmployees(){
-    this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
+    //this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
     this.url = `http://127.0.0.1:5000/api/v1/assetusersearch?page=${this.cursor}&limit=10&text=${this.search}`;
     this.httpClient.get<elementos>
     (this.url)
     .subscribe(
       (data) => {
         this.employees = data.query;
+        //console.log(this.employees);
         this.meta = data.meta;
         this.count = this.meta.count;
         this.cursor = this.meta.cursor;
@@ -82,8 +85,25 @@ export class EmployeeTableComponent implements OnInit {
         }
         //alert( this.cursor );
        }
-      
+       
        )
+
+       console.log(this.employees, this.meta, this.shownext, this.showpreview, this.showmeta, this.count, this.cursor, this.more);
+       console.log(this.employees);
+  }
+
+  employeeSearch(x, y){
+    
+    this.answer =  this._searchEmployees.searchEmployees(x, y)
+    this.employees = this.answer[0];
+    this.meta = this.answer[1];
+    this.shownext = this.answer[2];
+    this.showpreview = this.answer[3];
+    this.showmeta = this.answer[4];
+    this.count = this.answer[5];
+    this.cursor = this.answer[6];
+    this.more = this.answer[7];
+    console.log(this.answer);
   }
 
   preview(){
@@ -94,7 +114,10 @@ export class EmployeeTableComponent implements OnInit {
 
   find(){
     this.cursor = 0;
-    this.searchEmployees();
+    alert(this.search);
+    alert(this.cursor);
+    this.employeeSearch(this.cursor, this.search);
+    //this.searchEmployees();
     //alert(this.cursor + "aqui" );
   }
 

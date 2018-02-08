@@ -3,6 +3,7 @@ import { NgModel } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { fail } from 'assert';
 import { forEach } from '@angular/router/src/utils/collection';
+import { SearchEmployeeService } from '../search-employee.service';
 
 @Component({
   selector: 'app-createsheet',
@@ -23,7 +24,7 @@ export class CreatesheetComponent implements OnInit {
   public option: any;
   public date: any;
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private searchEmployeeService : SearchEmployeeService) { }
 
   ngOnInit() {
   }
@@ -62,6 +63,11 @@ export class CreatesheetComponent implements OnInit {
     this.boolproducts = false;
     this.boolemployee = true;
     this.boolfirst = false;
+  }
+
+  test2(){
+    alert(this.searchEmployeeService.getTest());
+
   }
 
   create_json(){

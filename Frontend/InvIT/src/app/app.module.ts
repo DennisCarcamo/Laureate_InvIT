@@ -10,6 +10,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { CreateSignatureSheetModule } from './create-signature-sheet/create-signature-sheet.module';
+import { SearchEmployeeService } from './create-signature-sheet/search-employee.service';
 
 
 
@@ -29,7 +30,7 @@ import { CreateSignatureSheetModule } from './create-signature-sheet/create-sign
     CreateSignatureSheetModule
 
   ],
-  providers: [],
+  providers: [SearchEmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
