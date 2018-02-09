@@ -11,8 +11,8 @@ from app import settings, app, api, ma
 from webargs import fields
 from webargs.flaskparser import use_args
 from sqlalchemy.orm import sessionmaker, scoped_session
-from resources.createAssetRelationships import *
-from models.signature import SignatureProductsModel, SignatureSheetModel
+from Backend.resources.createAssetRelationships import *
+from Backend.models.signature import SignatureProductsModel, SignatureSheetModel
 from webargs.flaskparser import use_args
 from marshmallow import fields
 #

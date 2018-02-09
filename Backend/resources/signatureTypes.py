@@ -11,7 +11,7 @@ from app import settings, app, api, ma
 from webargs import fields
 from webargs.flaskparser import use_args
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.signature import TypeModel
+from Backend.models.signature import TypeModel
 from webargs.flaskparser import use_args
 from marshmallow import fields
 

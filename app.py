@@ -1,18 +1,22 @@
-from flask import Flask, request, render_template, make_response, send_from_directory, current_app
-from flask_restful import Resource, Api, reqparse
+
+
 #from flask_jwt import JWT, jwt_required, current_identity
-from flask_sqlalchemy import SQLAlchemy
+
 #from resources.signature import Type, Types, SignatureSheets, SignatureSheet, SignatureProducts, Signatureproduct 
 #from resources.Item import Item, ItemList, items, Workstation
 #from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch, AssetProductSearch
 #from resources.asset import CI, test
-from db import db
+#from Backend.db import db
+from Backend import db
 import os
+import uuid
 import pdfkit
+import time
 #import StringIO
 from flask_marshmallow import Marshmallow
+from flask_restful import Resource, Api, reqparse
+from flask_sqlalchemy import SQLAlchemy
 #todo lo de canvas
-import time
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
@@ -22,7 +26,8 @@ from reportlab.lib.units import inch
 from reportlab.platypus.tables import Table,TableStyle
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from io import StringIO
-import uuid
+
+from flask import Flask, request, render_template, make_response, send_from_directory, current_app
 #from webargs import fields
 #from webargs.flaskparser import use_args
 #from security import authenticate, identity
@@ -60,13 +65,13 @@ def after_request(response):
 
 @app.route("/")
 def hello():
-    """Returns a random string of length string_length."""
+    """Return the signature sheet template in pdf format."""
     string_length = 10
     random = str(uuid.uuid4()) # Convert UUID format to a Python string.
     random = random.upper() # Make all characters uppercase.
     random = random.replace("-","") # Remove the UUID '-'.
     pdf_name = random[0:string_length]
-    path = "pdfs/" + pdf_name + ".pdf"
+    path = "Backend/pdfs/" + pdf_name + ".pdf"
     
     formatted_time = time.ctime()
     #pdf_name = formatted_time + '.pdf'
@@ -196,119 +201,16 @@ def hello():
     c.drawText(textitagent)
     c.drawText(textnamesign)
 
- # move the origin up and to the left
-   # c.translate(inch,inch)
- # define a large font
-    #c.setFont("Helvetica", 80)
- # choose some colors
-    #c.setStrokeColorRGB(0.2,0.5,0.3)
-    #c.setFillColorRGB(1,0,1)
- # draw a rectangle
-    #c.rect(inch,inch,6*inch,9*inch, fill=1)
- # make text go straight up
-    #c.rotate(90)
- # change color
-   # c.setFillColorRGB(0,0,0.77)
- # say hello (note after rotate the y coord needs to be negative!)
-   # c.drawString(3*inch, -3*inch, "Hello World")
-   # c.showPage()
     c.save()
 
     return send_from_directory(settings['PDFPATH'], 'plantilla.pdf', as_attachment=True)
     
-    #return "Hola carlos"
-    ################################## story ######################
-    #buffer = self.buffer
-   # c = canvas.Canvas("sample5.pdf")
-   # z=200
-   # y = 50
-   # collection = ['hey', 'hey2' , 'hey3']
-   # for x in collection:
-   #     c.drawString(z, y, x)
-   #     z = z-10
-   #     y = y +10
-   # c.save()
-   # doc = SimpleDocTemplate("form_letter17.pdf",pagesize=letter, rightMargin=10,leftMargin=10, topMargin=10,bottomMargin=10)
-   # Story=[]
-   # logo = "logo.png"    
-   # magName = "Pythonista"
-   # issueNum = 12
-   # subPrice = "99.00"
-   # limitedDate = "03/05/2010"
-   # freeGift = "tin foil hat"
- 
-   # formatted_time = time.ctime()
-    #full_name = "Mike Driscoll"
-   # address_parts = ["CEUTEC Building, 8th Floor", "Col. Matamoros Tegucigalpa", "Francisco Morazan Honduras" "Phone 22755780"]
-    #addres = 'CEUTEC Building, 8th Floor, '
-    #addresstext = '<font size=12>%s</font>' % addres
 
 
-    #im = Image(logo, 2.5*inch, 0.8*inch,  hAlign='LEFT')
-    
-   # styles=getSampleStyleSheet()
-   # styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-    #Story.append(Paragraph(addresstext, styles["Normal"]))
-    #Story.append(Spacer(, 0, isGlue=False))
-   # Story.append(im)
-
-   # ptext = 'Updated' + '<font size=12>%s</font>' % formatted_time
- 
-   # Story.append(Paragraph(ptext, styles["Normal"]))
-   # Story.append(Spacer(1, 12))
- 
-# Create return address
-    #ptext = '<font size=12>%s</font>' % full_name
-    #Story.append(Paragraph(ptext, styles["Normal"]))       
-   # for part in address_parts:
-   #     ptext = '<font size=12>%s</font>' % part.strip()
-   #     Story.append(Paragraph(ptext, styles["Normal"]))   
-
-    #ptext = '<font size=12>Dear %s:</font>' % full_name.split()[0].strip()
-    #Story.append(Paragraph(ptext, styles["Normal"]))
-   # Story.append(Spacer(1, 12))
-   # data= [['Porduct Code', 'Product name', 'Serial Number', 'Model']]
-        
-    #t=Table(data,5*[2*inch], 4*[3*inch])
-    #t.setStyle(TableStyle([('ALIGN','CENTER')]))
-    #Story.append(t)
- 
-    #ptext = '<font size=12>We would like to welcome you to our subscriber base for %s Magazine! \
-    #        You will receive %s issues at the excellent introductory price of $%s. Please respond by\
-    #        %s to start receiving your subscription and get the following free gift: %s.</font>' % (magName, 
-    #                                                                                            issueNum,
-    #                                                                                            subPrice,
-    #                                                                                            limitedDate,
-    #                                                                                            freeGift)
-    #Story.append(Paragraph(ptext, styles["Justify"]))
-    #Story.append(Spacer(1, 12))
- 
-    #doc.build(Story)
-    #pdf = buffer.getvalue()
-    #buffer.close()
-    #return formatted_time
-
-
- #-------------------------------------------------------------------------------------------------------------
-    #path_wkthmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-    #config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-    #rendered = render_template('pdf_template.html')
-    #pdfkit.from_url("https://pypi.python.org/pypi/pdfkit", "templates/out42.pdf", configuration=config)
-
-    #return "pdf"
-
-    #file = open('out2.pdf', 'r')
-    #response = make_response(file)
-    #response.headers['Content-Type']= 'application/pdf'
-    #response.headers['Content-disposition'] = 'inline; filename=out3.pdf'
-
-    #return response
-#------------------------------------------------------------wkhtmltopdf---------------------------------------------
-
-from resources.assetexplorer import *
-from resources.signatureTypes import *
-from resources.signaturesheets import *
-from resources.signaturesheetproducts import *
+from Backend.resources.assetexplorer import *
+from Backend.resources.signatureTypes import *
+from Backend.resources.signaturesheets import *
+from Backend.resources.signaturesheetproducts import *
 #from resources.createAssetRelationships import *
 
 #jwt = JWT(app, authenticate, identity)
@@ -331,7 +233,6 @@ from resources.signaturesheetproducts import *
 
 if __name__ == '__main__':
  
-    
     app.run(debug=True)  # important to mention debug=True
 
 

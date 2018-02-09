@@ -114,10 +114,10 @@ export class EmployeeTableComponent implements OnInit {
 
   find(){
     this.cursor = 0;
-    alert(this.search);
-    alert(this.cursor);
-    this.employeeSearch(this.cursor, this.search);
-    //this.searchEmployees();
+    //alert(this.search);
+    //alert(this.cursor);
+    //this.employeeSearch(this.cursor, this.search);
+    this.searchEmployees();
     //alert(this.cursor + "aqui" );
   }
 

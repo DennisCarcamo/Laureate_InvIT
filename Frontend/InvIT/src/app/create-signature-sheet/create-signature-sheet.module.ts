@@ -12,6 +12,7 @@ import { CreatesheetComponent } from './createsheet/createsheet.component';
 import { TypeComponent } from './type/type.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { SelectedProductsComponent } from './selected-products/selected-products.component';
+import { SearchEmployeeService } from './search-employee.service';
 
 @NgModule({
   imports: [

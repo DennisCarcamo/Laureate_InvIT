@@ -1,4 +1,4 @@
-from db import db
+from Backend import db
 from sqlalchemy import Table, Column, Float, Integer, String, MetaData, ForeignKey, DateTime, Date
 from datetime import datetime
 import json
@@ -9,7 +9,7 @@ class TypeModel(db.Model):
     name =    db.Column(db.String(40), nullable=False)
     address = db.Column(db.String(80), nullable = False)
     phone =   db.Column(db.String(15), nullable = False)
-    terms =   db.Column(db.String(200), nullable = False)
+    terms =   db.Column(db.String(400), nullable = False)
     image =   db.Column(db.String(30), nullable = True)
     enable = db.Column(db.SMALLINT, nullable = True)
 
