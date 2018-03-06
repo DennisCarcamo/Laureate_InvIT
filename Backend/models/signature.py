@@ -6,11 +6,11 @@ import json
 class TypeModel(db.Model):
     __tablename__ = 'tbl_type'
     id_type = db.Column(db.Integer, autoincrement=True, primary_key = True)
-    name =    db.Column(db.String(40), nullable=False)
-    address = db.Column(db.String(80), nullable = False)
-    phone =   db.Column(db.String(15), nullable = False)
-    terms =   db.Column(db.String(400), nullable = False)
-    image =   db.Column(db.String(30), nullable = True)
+    name =    db.Column(db.String(80), nullable=False)
+    address = db.Column(db.String(400), nullable = False)
+    phone =   db.Column(db.String(20), nullable = False)
+    terms =   db.Column(db.String(500), nullable = False)
+    image =   db.Column(db.String(100), nullable = True)
     enable = db.Column(db.SMALLINT, nullable = True)
 
     def __init__(self, name, address, phone, terms, num):
@@ -58,12 +58,14 @@ class SignatureSheetModel(db.Model):
     id_employee = db.Column(db.String(12), nullable = False)
     first_name = db.Column(db.String(20), nullable = False)
     last_name = db.Column(db.String(20), nullable = False)
-    email = db.Column(db.String(30), nullable = False)
+    email = db.Column(db.String(55), nullable = False)
+    phone = db.Column(db.String(55), nullable = True)
+
     #type = db.relationship('TypeModel', backref = db.backref('post', lazy = True))
     status = db.Column(db.Integer, nullable= True)
     last = db.Column(db.Integer, nullable = True)
 
-    def __init__(self,updated, id_type, id_employee,first,lastn,email, status, last):
+    def __init__(self,updated, id_type, id_employee,first,lastn,email, status, last, phone):
         #self.id_signature = id_signature
         self.updated = updated
         #self.image_url = image_url
@@ -74,6 +76,7 @@ class SignatureSheetModel(db.Model):
         self.email = email
         self.status = status
         self.last = last
+        self.phone = phone
 
 
     def json(self):
@@ -88,6 +91,7 @@ class SignatureSheetModel(db.Model):
                 'first_name': self.first_name,
                 'last_name': self.last_name,
                 'email': self.email,
+                'phone': self.phone,
                 'status': self.status,
                 'last': self.last
                 #pendiente jalar la relacion type
@@ -121,18 +125,20 @@ class SignatureProductsModel(db.Model):
     __tablename__ = 'tbl_signature_x_product'
     id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     id_product = db.Column(db.String(20),  nullable = False)
+    ciid = db.Column(db.Integer,  nullable = True)
     id_signature = db.Column(db.Integer, db.ForeignKey('tbl_signature_sheet.id_signature'), nullable = False)
     product_name =  db.Column(db.String(20),  nullable = False)
     serial_number = db.Column(db.String(25),  nullable = True)
     model =  db.Column(db.String(25),  nullable = True)
 
-    def __init__(self, id_signature, id_product, product_name, serial_number, model):
+    def __init__(self, id_signature, id_product, product_name, serial_number, model, ciid):
         #self.id = id
         self.id_signature = id_signature
         self.id_product = id_product
         self.product_name = product_name
         self.serial_number = serial_number
         self.model = model
+        self.ciid = ciid
 
     def json(self):
         return {
@@ -141,7 +147,8 @@ class SignatureProductsModel(db.Model):
                     'id_signature': self.id_signature,
                     'product_name': self.product_name,
                     'serial_number': self.serial_number,
-                    'model': self.model
+                    'model': self.model,
+                    'ciid': self.ciid
                }
                
 

@@ -1,0 +1,70 @@
+
+<div class="container-fluid">
+      
+ 
+<br><div  class="">
+  <!-- <h4>Search the Employee</h4> -->
+  <form class="form-inline d-flex justify-content-end">
+    <div class="form-group">
+        <input type="text" placeholder="Search" class="form-control" (keyup)="searchEmployee($event)">
+        <button class="btn btn-info" (click)="find()">Find Employee</button><br>
+
+    </div>
+
+  </form>
+</div><br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr class="">
+        <th scope="col">Id</th>
+      <th scope="col">Employeeid</th>
+      <th scope="col">Firstname</th>
+      <th scope="col">Last name</th>
+      <th scope="col">e-mail</th>
+      <th scope="col">Department</th>
+      <th scope="col">Site</th>
+
+      <th scope="col">Select</th>
+      
+    </tr>
+  </thead>
+  <tbody *ngFor="let employ of employees">
+
+    <tr class="select">
+      <th scope="row">{{employ.ID}}</th>
+      <td>{{employ.EMPLOYEE_ID}}</td>
+      <td>{{employ.FIRST_NAME}}</td>
+      <td>{{employ.LAST_NAME}}</td>
+      <td>{{employ.EMAIL}}</td>
+      <td>{{employ.DEPARTMENT}}</td>
+      <td>{{employ.SITE}} </td>
+
+      <td><button class="btn btn-primary btn-sm" (click)="onSelect(employ)">Select</button></td>
+    </tr>
+
+  </tbody>
+
+</table>
+  <div class="d-flex justify-content-center">
+      <button class="btn btn-link" *ngIf="showpreview" (click)="preview()">Preview</button>
+      <button class="btn btn-link" (click)="searchEmployees()" *ngIf="shownext">Next</button>
+  </div>
+  <div class="d-flex justify-content-start" *ngIf="showmeta">
+      <p>Search Result Quantity: {{count}}, cursor {{cursor}} More?  {{more}}.</p>
+  </div>
+
+<!-- <button (click)="getEmployees()" class="btn">Employees</button> -->
+
+</div>
+
+
+<!--
+<br>
+<div>
+    <input type="text" class="form-control col-3" placeholder="Search " id="search">
+</div>
+
+
+
+ </div>
+-->

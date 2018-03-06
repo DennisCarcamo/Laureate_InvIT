@@ -7,7 +7,7 @@
 #from resources.assetexplorer import AssetexplorerUsers, AssetexplorerResources, Assetworkstations, AssetUsersSearch, AssetProductSearch
 #from resources.asset import CI, test
 #from Backend.db import db
-from Backend import db
+
 import os
 import uuid
 import pdfkit
@@ -26,6 +26,7 @@ from reportlab.lib.units import inch
 from reportlab.platypus.tables import Table,TableStyle
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from io import StringIO
+from Backend import db
 
 from flask import Flask, request, render_template, make_response, send_from_directory, current_app
 #from webargs import fields
@@ -45,6 +46,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 ma = Marshmallow(app)
+
+
 @app.after_request
 def after_request(response):
     """after_request."""
@@ -63,7 +66,7 @@ def after_request(response):
 
     return response 
 
-@app.route("/")
+@app.route("/pdf")
 def hello():
     """Return the signature sheet template in pdf format."""
     string_length = 10
@@ -203,9 +206,18 @@ def hello():
 
     c.save()
 
+
     return send_from_directory(settings['PDFPATH'], 'plantilla.pdf', as_attachment=True)
     
+@app.route("/")
+def index():
+    #return app.send_static_file('Frontend/dist/index.html')
+    print(os.getcwd())
+    return send_from_directory('dist2/', 'index.html')
 
+@app.route('/home')
+def home():
+    return render_template('index.html')
 
 from Backend.resources.assetexplorer import *
 from Backend.resources.signatureTypes import *

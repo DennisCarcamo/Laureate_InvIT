@@ -49,7 +49,7 @@ class AssetUsersSearch(Resource):
         Session = scoped_session(sessionmaker(autocommit = False, bind=engine))
 
         s = Session()
-        result = s.execute('SELECT A.EMPLOYEEID	AS "EMPLOYEE_ID",   A.FIRSTNAME	AS "FIRST_NAME",  A.LASTNAME	AS "LAST_NAME", C.DEPTNAME	AS "DEPARTMENT",   D.NAME		AS "SITE", G.EMAILID AS "EMAIL", G.MOBILE	AS "PHONE" FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID)  WHERE A.LASTNAME LIKE {} OR G.EMAILID LIKE {} OR C.DEPTNAME like {} order by (A.FIRSTNAME)   limit 10 offset {}'.format(param, param, param,page))
+        result = s.execute('SELECT A.CIID AS "ID", A.EMPLOYEEID	AS "EMPLOYEE_ID",   A.FIRSTNAME	AS "FIRST_NAME",  A.LASTNAME	AS "LAST_NAME", C.DEPTNAME	AS "DEPARTMENT",   D.NAME		AS "SITE", G.EMAILID AS "EMAIL", G.MOBILE	AS "PHONE" FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID)  WHERE A.LASTNAME LIKE {} OR G.EMAILID LIKE {} OR C.DEPTNAME like {} order by (A.FIRSTNAME)   limit 10 offset {}'.format(param, param, param,page))
         count = s.execute('SELECT count(1) FROM  SDUSER AS A  LEFT JOIN USERDEPARTMENT AS B  ON(A.USERID = B.USERID) LEFT JOIN DEPARTMENTDEFINITION AS C ON (B.DEPTID = C.DEPTID) LEFT JOIN SDORGANIZATION AS D  ON (C.SITEID = D.ORG_ID) LEFT JOIN AAAUSERCONTACTINFO AS F ON (A.USERID = F.USER_ID) INNER JOIN AAACONTACTINFO AS G ON(F.CONTACTINFO_ID = G.CONTACTINFO_ID)  WHERE A.LASTNAME LIKE {} OR G.EMAILID LIKE {} OR C.DEPTNAME like {} '.format(param,param,param))
         query = json.dumps( [dict(ix) for ix in result] ) 
         c = json.dumps( [dict(ix) for ix in count] )
@@ -66,7 +66,7 @@ class AssetUsersSearch(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
-        Session.close()
+        #Session.close()
         
 
 
@@ -124,7 +124,7 @@ class AssetexplorerResources(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
-        Session.close()
+        #Session.close()
 
 class Assetworkstations(Resource):
      def get(self):
@@ -138,7 +138,7 @@ class Assetworkstations(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
-        Session.close()   
+        #Session.close()   
 
 api.add_resource(AssetUsersSearch, '/api/v1/assetusersearch')
 api.add_resource(AssetProductSearch, '/api/v1/assetproductsearch')

@@ -43,7 +43,8 @@ class SignatureSheets(Resource):
         email = args.get('email', None)
         date = datetime.datetime.now()
         #data = SignatureSheets.parser.parse_args()
-        sheet = SignatureSheetModel(date, id_type, id_employee, first_name, last_name, email, 1,1)
+        sheet = SignatureSheetModel(date, id_type, id_employee, first_name, last_name, email, 1,1, "504-xxxx-xxxx")
+        #print(sheet.json())
 
         try: 
             sheet.insert()
