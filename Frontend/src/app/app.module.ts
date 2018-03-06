@@ -13,7 +13,7 @@ import { CreateSignatureSheetModule } from './create-signature-sheet/create-sign
 import { SearchEmployeeService } from './create-signature-sheet/search-employee.service';
 import { UpdateSignatureSheetModule } from './update-signature-sheet/update-signature-sheet.module';
 
-//import { ShareModuleModule } from './share-module/share-module.module'
+import { ShareModuleModule } from './share-module/share-module.module'
 
 
 
@@ -32,7 +32,7 @@ import { UpdateSignatureSheetModule } from './update-signature-sheet/update-sign
     HttpClientModule,
     CreateSignatureSheetModule,
     UpdateSignatureSheetModule,
-    //ShareModuleModule,
+    ShareModuleModule,
 
   ],
   providers: [SearchEmployeeService],
