@@ -1,0 +1,228 @@
+
+
+<div class="container">
+    <br><h2>Dashboard</h2>
+    <div class="row justify-content-center">
+      <div>
+           <canvas id="bar-chart-horizontal" width="1" height="1"></canvas> 
+      </div>
+      <div>
+         <!--  <canvas id="doughnut-chart" width="400" height="400"></canvas>-->
+      </div>
+      <div>
+         <!-- <canvas id="doughnut-chart2" width="400" height="400"></canvas>  -->
+       </div>
+       
+      
+     
+    </div>
+    <div class="row">
+      <br>
+      <div class="justify-content-center">
+         
+        
+    </div>
+    <br>
+
+
+</div>
+
+
+
+</div>
+
+
+<div>
+  <button (click)="test()">test</button>
+</div> 
+
+<div class="row justify-content-center">
+
+
+
+    <div class="card border-secondary mb-3 ml-3" style="max-width: 24rem;">
+        <div class="card-header">Clock</div>
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Laureate Tegucigalpa</h5>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="card border-secondary mb-3 mx-3" style="max-width: 23rem;">
+          <div class="card-header">Workstation </div>
+          <div class="card-body text-secondary">
+            <h5 class="card-title">Amount of Workstations In the Storage Room</h5>
+            <h1>{{ inStoreWorkstationData }}</h1>
+          </div>
+        </div>
+
+        <div class="card border-secondary mb-3 mx-1" style="max-width: 23rem;">
+            <div class="card-header">Workstations</div>
+            <div class="card-body text-secondary">
+              <h5 class="card-title">Amount ofWorkstations In Use</h5>
+              <h1>{{ inUseWorkstationData }}</h1>
+            </div>
+          </div>
+
+          <div class="card border-secondary mb-3 mx-1" style="max-width: 23rem;">
+              <div class="card-header">Servers</div>
+              <div class="card-body text-secondary">
+                <h5 class="card-title">Amount Servers In Use</h5>
+                <h1>5</h1>
+              </div>
+            </div>
+
+  
+</div>
+
+<div class="row justify-content-center">
+
+
+
+    <div class="card border-secondary mb-3 ml-0" style="max-width: 25rem;">
+        <div class="card-header">Peripherals In Store</div>
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Amount of periphericals in storage </h5>
+          <canvas id="doughnut-chart2" width="400" height="400"></canvas>
+        </div>
+      </div>
+
+        <div class="card border-secondary mb-3 mx-3" style=" max-width: 25rem;  ">
+            <div class="card-header">Peripherals In Use</div>
+            <div class="card-body text-secondary">
+              <h5 class="card-title">Amount of perophericals in use</h5>
+              <canvas id="doughnut-chart" width="400" height="400"></canvas>
+            </div>
+          </div>
+
+          <div class="card border-secondary mb-3 mx-0" style=" max-width: 20rem;   max-height: 40rem; ">
+              <div class="card-header">Storage Move</div>
+              <div class="card-body text-secondary">
+                <h5 class="card-title">Last storage asset moves</h5>
+                  <ul *ngFor="let item of _statehistory">
+                    <li>{{item.resourcename}}, {{item.assettag}}, from {{item.Prev}} to {{item.State}}</li>
+                  </ul>
+                
+              </div>
+            </div>
+  
+</div>
+
+<div class="row justify-content-center">
+    <div class="card border-secondary mb-3 mx-2" style="max-width: 100rem;">
+        <div class="card-header">All periphericals</div>
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Assets Group by Type and State</h5>
+          <canvas id="myChart" width="1105" height="400"></canvas>
+        </div>
+      </div>
+</div>
+
+<br>
+<div class="row justify-content-center">
+       
+        <div class="form-inline">
+            <div class="form-inline">
+              <select class="form-control" [(ngModel)]="asset">
+                <option selected value="1">Workstation</option>
+                <option value="2">Printer</option>
+                <option value="3">Router</option>
+                <option value="4">Switch</option>
+                <option value="5">Scanner</option>
+                <option value="6">Projector</option>
+                <option value="7">Keyboard</option>
+                <option value="8">Software</option>
+                <option value="10">Server</option>
+                <option value="13">Storage Device</option>
+                <option value="14">Smart Phone</option>
+                <option value="15">Tablet</option>
+                <option value="304">Mouse</option>
+                <option value="318">Monitor</option>
+                <option value="311">Docking Station</option>
+                <option value="305">Headset</option>
+                <option value="302">Adapter</option>
+                <option value="314">Case</option>
+                <option value="315">Cell Phone</option>
+                <option value="316">Converter</option>
+                <option value="310">Webcam</option>
+                <option value="16">UPS</option>
+                <option value="605">Modem</option>
+                <option value="609">Data Show</option>
+              </select>-
+            </div>
+            <div class="form-group">
+              <select class="form-control" [(ngModel)]="state" name="beia beia">
+                <option selected value="2">In Store</option>
+                <option value="1">In Use</option>
+              </select>-
+            </div>
+            <button type="button" class="btn btn-info" (click)="inStoreWorkstationModels()">Graphic</button>
+          </div>
+
+</div><br><br>
+
+<div class=" row justify-content-center" *ngIf="allperiphericals">
+  <div class="">
+      
+  </div>
+    
+</div>
+
+<div class="row justify-content-center">
+    <div *ngIf="modelsbool" class="card border-secondary mb-3 mx-2" style="max-width: 100rem;">
+        <div class="card-header">All Models</div>
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Workstations Group by Models In Store</h5> 
+          <canvas id="modelChart" width="1105" height="400"></canvas>
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+
+<!-- 
+<div class="card border-success mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-success">
+    <h5 class="card-title">Success card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-danger mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-danger">
+    <h5 class="card-title">Danger card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-warning mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-warning">
+    <h5 class="card-title">Warning card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-info">
+    <h5 class="card-title">Info card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card border-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-dark">
+    <h5 class="card-title">Dark card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div> -->

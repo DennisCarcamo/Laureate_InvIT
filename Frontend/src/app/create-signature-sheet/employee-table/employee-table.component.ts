@@ -66,7 +66,7 @@ export class EmployeeTableComponent implements OnInit {
   }
 
   searchEmployees(){
-    //this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
+    //this.url = 'http://172.20.33.56/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
     this.url = `http://127.0.0.1:5000/api/v1/assetusersearch?page=${this.cursor}&limit=10&text=${this.search}`;
     this.httpClient.get<elementos>
     (this.url)

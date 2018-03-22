@@ -4,14 +4,15 @@ import datetime
 import sqlalchemy
 import json
 import json
-import psycopg2
+#import psycopg2
 from webargs import fields
 from flask_restful import Resource, Api, reqparse
 from app import settings, app, api, ma
 from webargs import fields
+from sqlalchemy import or_
 from webargs.flaskparser import use_args
 from sqlalchemy.orm import sessionmaker, scoped_session
-from Backend.models.signature import SignatureSheetModel
+from backend.models.signature import SignatureSheetModel
 from webargs.flaskparser import use_args
 from marshmallow import fields
 
@@ -28,9 +29,13 @@ class SignatureSheets(Resource):
     }
 
     def get(self):
-        sheet = SignatureSheetModel.query.all()
-        if sheet:
-            return{ 'SignatureSheets':  list(map(lambda x: x.json(), SignatureSheetModel.query.all()))}
+        """Return all the signature sheets in the db"""
+        page = 1
+        per_page = 10
+        sheet = SignatureSheetModel.get_last_date()
+        records = SignatureSheetModel.query.order_by(SignatureSheetModel.updated.desc()).limit(per_page).offset((page - 1) * per_page)
+        if records:
+            return{ 'SignatureSheets':  list(map(lambda x: x.json(),records))}
         return{'message': 'Nothing found'}
 
     @use_args(insert_sheet)
@@ -43,25 +48,55 @@ class SignatureSheets(Resource):
         email = args.get('email', None)
         date = datetime.datetime.now()
         #data = SignatureSheets.parser.parse_args()
-        sheet = SignatureSheetModel(date, id_type, id_employee, first_name, last_name, email, 1,1, "504-xxxx-xxxx")
-        #print(sheet.json())
+        if updated:
+            sheet = SignatureSheetModel(updated, id_type, id_employee, first_name, last_name, email, 1,1, "504-xxxx-xxxx")
+        else:
+            sheet = SignatureSheetModel(date, id_type, id_employee, first_name, last_name, email, 1,1, "504-xxxx-xxxx")
 
         try: 
             sheet.insert()
             return{'message': 'Signature Sheet correctly inserted'}
         except:
-            return {'messege': "something wrong probably item already exist"}
+            return {'message': "something wrong probably item already exist"}
         
 
 class SignatureSheet(Resource):
-   
-    def get(self, id):
-        sheet = SignatureSheetModel.find_by_id(id)
+    search_args = {
+        'page': fields.Int(required = True),
+        'text': fields.Str(required = True),
+        'limit': fields.Int(required = True)
+    }
 
-        if sheet:
-            return sheet.json()
+    @use_args(search_args)
+    def get(self, args):
+        text = args.get('text', None)
+        page = args.get('page', None)
+        limit = args.get('limit', None)
+        param =   text + "%"
 
+        _page = page 
+        per_page = limit
+        records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).order_by(SignatureSheetModel.updated.desc()).limit(per_page).offset((_page - 1) * per_page).all()
+        count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).count()
+        if records:
+            cursor = (page * 10) + 1
+            return{ 'SignatureSheets':  list(map(lambda x: x.json(),records)),
+                    'meta':{
+                        'count': count,
+                        "cursor": cursor,
+                        "more": cursor <= count
+                    }        
+                }
+        
         return{'message': 'Nothing found'}
 
+
+        #sheet = SignatureSheetModel.find_by_id(id)
+
+        #if sheet:
+            #return sheet.json()
+
+        #return{'message': 'Nothing found'}
+
 api.add_resource(SignatureSheets, '/api/v1/signaturesheets')
-api.add_resource(SignatureSheet, '/api/v1/signaturesheet/<string:id>')
+api.add_resource(SignatureSheet, '/api/v1/signaturesheet')

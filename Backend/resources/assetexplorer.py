@@ -4,14 +4,14 @@ from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
 #from models.Item import ItemModel
-from Backend.models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel
+from backend.models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel
 import requests
 import datetime
 import sqlalchemy
 import json
 from sqlalchemy.orm import sessionmaker, scoped_session
 import json
-import psycopg2
+#import psycopg2
 from webargs import fields
 from webargs.flaskparser import use_args
 from app import settings, app, api
@@ -138,8 +138,11 @@ class Assetworkstations(Resource):
             #no utilizar json. dumps este hace una conversion de un objeto a un string a diferencia del json.loads que hace la conversion a un diccionario 
         s.close()
         engine.close()
-        #Session.close()   
+        #Session.close()  
+        
+
 
 api.add_resource(AssetUsersSearch, '/api/v1/assetusersearch')
 api.add_resource(AssetProductSearch, '/api/v1/assetproductsearch')
+
 

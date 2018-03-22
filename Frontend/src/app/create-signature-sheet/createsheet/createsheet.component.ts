@@ -72,7 +72,7 @@ export class CreatesheetComponent implements OnInit {
     let response;
     let l = this.productsevent.length
     if(x && (l != 0)){
-      this.searchEmployeeService.insertSignatureSheet(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL)
+      this.searchEmployeeService.insertSignatureSheet(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL, this.date)
       .subscribe(data => response = data );
       //alert(response);
        alert("Response alert");
@@ -97,6 +97,14 @@ export class CreatesheetComponent implements OnInit {
 
   confirm(){
     this.confirmation = true;
+  }
+
+  abort(){
+    window.location.href = '/newsheet';
+  }
+
+  testalert(){
+    alert(this.date);
   }
 }
 

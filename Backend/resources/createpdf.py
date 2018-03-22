@@ -14,7 +14,7 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from io import StringIO
 
 class CreatePDF(object):
-    def createTemplate(self, id_signature, products, user_info, document_name):
+    def createTemplate(self, id_signature, products, user_info, document_name, ref_products):
         """Return the signature sheet template in pdf format."""
 
         string_length = 10
@@ -172,6 +172,7 @@ class CreatePDF(object):
             _product_name.textLine( prod['CI_NAME'])
             _product_serial.textLine( prod['SERIAL_NUMBER'])
             _product_model.textLine(prod['MODEL'])
+        
 
             c.drawText(_product_code)
             c.drawText(_product_name)
@@ -180,7 +181,24 @@ class CreatePDF(object):
 
             cord_y = (cord_y - 11)
 
-        
+        for prod in ref_products:
+            _product_code = c.beginText(cord_x_product_code, cord_y)
+            _product_name = c.beginText(cord_x_product_name, cord_y)
+            _product_serial = c.beginText(cord_x_product_serial, cord_y)
+            _product_model = c.beginText(cord_x_product_model, cord_y)
+
+            _product_code.textLine(prod['id_product'])
+            _product_name.textLine( prod['product_name'])
+            _product_serial.textLine( prod['serial_number'])
+            _product_model.textLine(prod['model'])
+
+            c.drawText(_product_code)
+            c.drawText(_product_name)
+            c.drawText(_product_serial)
+            c.drawText(_product_model)
+
+            cord_y = (cord_y - 11)
+            
         
         #texto de firmas
         textitagent = c.beginText(145,65)

@@ -125,12 +125,12 @@ class SignatureSheetModel(db.Model):
 class SignatureProductsModel(db.Model):
     __tablename__ = 'tbl_signature_x_product'
     id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    id_product = db.Column(db.String(20),  nullable = False)
+    id_product = db.Column(db.String(25),  nullable = False)
     ciid = db.Column(db.Integer,  nullable = True)
     id_signature = db.Column(db.Integer, db.ForeignKey('tbl_signature_sheet.id_signature'), nullable = False)
-    product_name =  db.Column(db.String(20),  nullable = False)
-    serial_number = db.Column(db.String(25),  nullable = True)
-    model =  db.Column(db.String(25),  nullable = True)
+    product_name =  db.Column(db.String(65),  nullable = False)
+    serial_number = db.Column(db.String(35),  nullable = True)
+    model =  db.Column(db.String(30),  nullable = True)
 
     def __init__(self, id_signature, id_product, product_name, serial_number, model, ciid):
         #self.id = id

@@ -29,13 +29,10 @@ export class ProductListComponent implements OnInit {
   public showmeta: any = false;
   public shownext: any = false;
   public showpreview: any = false;
-  //public empref: any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   public ref: any = [];
   public selectproducts:any = [];
   @Output() public productsevent = new EventEmitter();
   public var: any = 2;
-  //public max;
-  //public min;
   public cont: any = 0;
   public url;
   constructor(private httpClient:HttpClient) { }
@@ -73,10 +70,6 @@ export class ProductListComponent implements OnInit {
       console.log("Item already exist");
     }
     
-      
-    
-
-
     
     //alert(selectedItem.CI_NAME); 
     for ( let p of this.selectproducts){  

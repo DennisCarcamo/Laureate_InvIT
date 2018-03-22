@@ -1,0 +1,78 @@
+<br>
+<div class="container">
+    <div>
+        <h3>PDF Signature Sheet</h3>
+        <p>"The Portable Document Format (PDF) is a file format developed in the 1990s to present documents, including text formatting and images, in a manner independent of application software, hardware, and operating systems. Based on the PostScript language, each PDF file encapsulates a complete description of a fixed-layout flat document, including the text, fonts, vector graphics, raster images and other information needed to display it. PDF was standardized as an open format, ISO 32000, in 2008, and does not require any royalties for its implementation.
+
+            Today, PDF files may contain a variety of content besides flat text and graphics including logical structuring elements, interactive elements such as annotations and form-fields, layers, rich media (including video content) and three dimensional objects using U3D or PRC, and various other data formats. The PDF specification also provides for encryption and digital signatures, file attachments and metadata to enable workflows requiring these features."</p>
+         <br>
+    </div>
+    <div class="">
+        <h3>Historical Signature Sheet Table</h3>
+        <form class="form-inline d-flex justify-content-end">
+            <div class="form-group">
+                <input type="text" placeholder="Search" class="form-control" (keyup)="searchSheet($event)">
+                <button class="btn btn-info" (click)="find()">Find</button>
+        
+            </div>
+        
+        </form><br>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr class="">
+                <th scope="col">Sheet Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Employee ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">select</th>
+               <!-- <th scope="col">Status</th>
+                <th scope="col">Last?</th> -->
+                
+              </tr>
+            </thead>
+            <tbody *ngFor="let product of sheets">
+          
+              <tr class="select">
+                <th scope="row">{{product.id_signature}}</th>
+                <td>{{product.first_name}}</td>
+                <td>{{product.last_name}}</td>
+                <td>{{product.email}}</td>
+                <td>{{product.id_employee}}</td>
+                <td>{{product.updated}}</td>
+                <td><button class="btn btn-success btn-sm" (click)="onSelect(product)" >select</button></td>
+              </tr>
+          
+            </tbody>
+          
+          </table>
+          <div class="d-flex justify-content-center">
+              <button class="btn btn-link" *ngIf="showpreview" (click)="preview()">Preview</button>
+              <button class="btn btn-link" (click)="next()" *ngIf="shownext">Next</button>
+          </div>
+
+          <div class="d-flex justify-content-start" *ngIf="meta">
+              <p>Search Result Quantity: {{meta['count']}}, cursor {{meta['cursor']}} More?  {{meta['more']}}.</p>
+          </div>
+    </div>
+    <div><br>
+        <div class="form-group">
+          <h4>Find PDF</h4>
+          <label for="text-input">Please Enter the Signature pdf name, this is id of the sheet join with the employee id number</label>
+            <input type="text" id="text-input" class="form-control" [(ngModel)]="text">
+        </div>
+    </div>
+
+    <button class="btn btn-info" (click)="searchPdf()">Look for pdf.!</button>
+    <div class="container" *ngIf="boolpdfroute">
+      <p>In case download does not start copy the following url in the browser {{url}}</p>
+
+    </div><br><br>
+
+    <input type="file" (change)="onFileSelected($event)" class="from-control">
+    <button class="btn-primary btn-sm" (click)="onUpload()" >Upload</button>
+
+    
+</div>
+

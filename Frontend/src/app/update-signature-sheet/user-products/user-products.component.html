@@ -1,0 +1,55 @@
+<br>
+<div class="container">
+    <h3>Current products</h3>
+
+    <div class="">
+          <table class="table">
+              <thead class="thead-dark">
+                <tr class="">
+                    <th scope="col">Sheet Id</th>
+                  <th scope="col">CI Name</th>
+                  <!-- <th scope="col">CI Type</th> -->
+                  <th scope="col">Tag</th>
+                  <th scope="col">Serial N°</th>
+                  <th scope="col">Model</th>
+                  <th scope="col">CIID</th>
+                  <th scope="col">Remove?</th>
+                  
+                </tr>
+              </thead>
+              <tbody *ngFor="let product of currentproducts">
+            
+                <tr class="select">
+                  <th scope="row">{{product.id_signature}}</th>
+                  <td>{{product.product_name}}</td>
+                 <!-- <td>{{product.CI_TYPE}}</td> -->
+                  <td>{{product.id_product}}</td>
+                  <td>{{product.serial_number}}</td>
+                  <td>{{product.model}}</td>
+                  <td>{{product.ciid}}</td>
+                  <td><button class="btn btn-danger btn-sm" (click)="onRemove(product)" >Rmv</button></td>
+                </tr>
+            
+              </tbody>
+            
+            </table>
+      </div>
+      
+      <div class="container">
+          <h5>Items to remove</h5>
+          <div class="container">
+            <ul class="list-group" *ngFor="let product of selectproducts">
+                <li class="list-group-item list-group-item-danger ">Name: {{product.product_name}} - Code: {{product.id_product}} - Serial Number: {{product.serial_number}} - CIID: {{product.ciid}}</li>
+            
+              </ul>
+              
+        </div>
+        <br>
+        <div class="container d-flex justify-content-end">
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="rollback()"> <- Rollback</button> -
+            <button type="button" class="btn btn-sm btn-outline-success" (click)="noChanges()"> Remove Nothing</button>
+        </div>
+        <br>
+      </div> 
+      
+</div>

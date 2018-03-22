@@ -1,8 +1,21 @@
+
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
-import requests,codecs,sys,pprint
+#from models.Item import ItemModel
+from backend.models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel
+import requests
+import datetime
+import sqlalchemy
+import json
+from sqlalchemy.orm import sessionmaker, scoped_session
+import json
+#import psycopg2
+from webargs import fields
+from webargs.flaskparser import use_args
+from app import settings, app, api
+from marshmallow import fields
 
 class CI(Resource):
     def post(self,name,page):
@@ -50,3 +63,22 @@ class CI(Resource):
 class test(Resource):
     def get(self):
         return{'url': 'url'}
+
+
+class Dashboard(Resource):
+    def get(self):
+        
+        engine = sqlalchemy.create_engine(settings['ASSETDB'])
+        Session = scoped_session(sessionmaker(autocommit = False, bind=engine)) 
+        s = Session()
+        result = s.execute('select count(*), c.componenttypename,d.displaystate from resources as a left join componentdefinition as b on (a.componentid = b.componentid) left join componenttype as c on (b.componenttypeid = c.componenttypeid) left join resourcestate as d on (d.resourcestateid = a.resourcestateid) group by c.componenttypename,d.displaystate')
+        query = json.dumps( [dict(ix) for ix in result] ) 
+
+        return {
+                    "query": json.loads(query)
+               }  
+
+        s.close()
+        engine.close() 
+
+api.add_resource(Dashboard, '/api/v1/dashboard')

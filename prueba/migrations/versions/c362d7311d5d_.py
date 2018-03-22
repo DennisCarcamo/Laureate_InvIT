@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 31ee1e130861
+Revision ID: c362d7311d5d
 Revises: 
-Create Date: 2018-02-26 16:49:53.778155
+Create Date: 2018-03-09 14:27:59.761024
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '31ee1e130861'
+revision = 'c362d7311d5d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -57,12 +57,12 @@ def upgrade():
     )
     op.create_table('tbl_signature_x_product',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('id_product', sa.String(length=20), nullable=False),
+    sa.Column('id_product', sa.String(length=25), nullable=False),
     sa.Column('ciid', sa.Integer(), nullable=True),
     sa.Column('id_signature', sa.Integer(), nullable=False),
-    sa.Column('product_name', sa.String(length=20), nullable=False),
-    sa.Column('serial_number', sa.String(length=25), nullable=True),
-    sa.Column('model', sa.String(length=25), nullable=True),
+    sa.Column('product_name', sa.String(length=65), nullable=False),
+    sa.Column('serial_number', sa.String(length=35), nullable=True),
+    sa.Column('model', sa.String(length=30), nullable=True),
     sa.ForeignKeyConstraint(['id_signature'], ['tbl_signature_sheet.id_signature'], ),
     sa.PrimaryKeyConstraint('id')
     )

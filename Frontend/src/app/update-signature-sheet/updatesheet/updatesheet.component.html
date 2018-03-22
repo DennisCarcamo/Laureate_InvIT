@@ -1,3 +1,79 @@
-<p>
-  updatesheet works!
-</p>
+<br>
+<div class="container">
+    <div>
+        <h3>Update Signature Sheet</h3>
+        <p>"Offboarding is understood here as a software-supported process in personnel and identity management, which ensures the safe deactivation and documentation of the access rights of employees who have been relieved, thus preventing data misuse and theft. As part of computer security, the process will also ensure that access privileges are revoked when a person leaves, and may also cover other issues such as the recovery of equipment, keys and credit cards to ensure that security integrity be maintained."</p>
+         <br>
+        <div class="form-group"> 
+            <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button>
+        </div>
+    </div>
+
+    <div class=" col-6" *ngIf="boolfirst">
+        <h3>First-Step select a type and date</h3>
+        <div class="form-group">
+            <select class="form-control" [(ngModel)]="option">
+                    <option value="2">Offboarding</option>
+                    <option value="4">update</option>
+            </select>
+        </div>
+        <!-- <div class="form-group">
+            <input type="Date" class="form-control" [(ngModel)]="date">
+        </div> -->
+        <button class="btn btn-info d-flex justify-content-center btn-sm" (click)="validate()">Continue</button>
+    </div>
+    <ul class="list-group" *ngFor="let item of selectemploye">
+        <li class="list-group-item list-group-item-success ">{{item.FIRST_NAME}}  {{item.LAST_NAME}} - {{item.EMAIL}} - {{item.EMPLOYEE_ID}}</li>
+      
+      </ul>
+
+
+    <div *ngIf="boolemployee">
+         <h3>Second-Step select the employee</h3>
+          <!-- <ul class="list-group" *ngFor="let item of selectemploye">{{item.FIRST_NAME}} - {{item.LAST_NAME}} - {{item.EMAIL}} </ul> -->
+  
+  
+  
+         <app-employee-table (employeevent)="selectemploye=$event"></app-employee-table>
+         <div class="d-flex justify-content-center">
+                  <button class="btn btn-info btn-sm" (click)="backemployee()">Go Back</button><h4>-</h4>
+                  <button class="btn btn-info btn-sm" (click)="continueemployee()">Continue</button>
+         </div>    
+    </div >
+       
+    <div *ngIf="currentproducts">
+        <app-user-products [parentData]="selectemploye" (productremovesevent)="productremovesevent=$event" (currentproductrevent)="selectproducts=$event"></app-user-products>
+         <div class="d-flex justify-content-center">
+            <button class="btn btn-info btn-sm" (click)="backemployee()" >Go Back</button><h4>-</h4>
+            <button class="btn btn-info btn-sm" (click)="continueprods()">Add Product</button> 
+        </div> 
+    </div>
+
+    <div *ngIf="boolproducts" >
+        <app-product-list (productsevent)="productsevent=$event"></app-product-list>
+        <!--<button class="btn btn-info " (click)="backproducts()">Go Back</button> -->
+        <div class="d-flex justify-content-center">
+                <button class="btn btn-info btn-sm" (click)="backproducts()">Go Back</button>
+        </div>  
+    </div>
+
+    
+    <br><br><br><br>
+    
+    <div *ngIf="boolproducts" class="d-flex justify-content-center">
+            <!-- <button class="btn btn-link btn-lg" (click)="createSignatureSheet()"></button> -->
+            <button class="btn btn-primary btn-lg" (click)="confirm()">Save & Update SIgnatire Sheet</button><br>
+        </div><br>
+    <div *ngIf="confirmation" class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Are you sure of update this Signature Sheet?</h4>
+            <p>The information will be save and automatically download a pdf file of the sheet, press 'YES', to continue or 'No', to go back.</p>
+            <div class="d-flex justify-content-start">
+                <button class="btn btn-info btn-sm " (click)="updateSheet()" >YES</button><p>-</p>
+                <button class="btn btn-info btn-sm " (click)="abort()"> NO</button>
+            </div>
+            <hr>
+            <p class="mb-0">-LAUREATE IT-</p>
+        </div>
+  <!--  <button class="btn" (click)="testAlert()">Testbutton</button>  -->
+
+</div>

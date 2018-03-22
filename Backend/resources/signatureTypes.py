@@ -4,14 +4,14 @@ import datetime
 import sqlalchemy
 import json
 import json
-import psycopg2
+#import psycopg2
 from webargs import fields
 from flask_restful import Resource, Api, reqparse
 from app import settings, app, api, ma
 from webargs import fields
 from webargs.flaskparser import use_args
 from sqlalchemy.orm import sessionmaker, scoped_session
-from Backend.models.signature import TypeModel
+from backend.models.signature import TypeModel
 from webargs.flaskparser import use_args
 from marshmallow import fields
 

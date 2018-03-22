@@ -13,7 +13,11 @@ import { CreateSignatureSheetModule } from './create-signature-sheet/create-sign
 import { SearchEmployeeService } from './create-signature-sheet/search-employee.service';
 import { UpdateSignatureSheetModule } from './update-signature-sheet/update-signature-sheet.module';
 
-import { ShareModuleModule } from './share-module/share-module.module'
+import { ShareModuleModule } from './share-module/share-module.module';
+
+import { PdfModuleModule } from './pdf/pdf-module/pdf-module.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardService } from './dashboard.service';
 
 
 
@@ -22,7 +26,8 @@ import { ShareModuleModule } from './share-module/share-module.module'
     AppComponent,
     NavBarComponent,
     FooterComponent,
-    
+    DashboardComponent,
+        
 
   ],
   imports: [
@@ -33,9 +38,10 @@ import { ShareModuleModule } from './share-module/share-module.module'
     CreateSignatureSheetModule,
     UpdateSignatureSheetModule,
     ShareModuleModule,
+    PdfModuleModule,
 
   ],
-  providers: [SearchEmployeeService],
+  providers: [SearchEmployeeService, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

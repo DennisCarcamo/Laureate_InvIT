@@ -10,9 +10,9 @@ import { AppRoutingModule } from './../app-routing.module';
 //import { EmployeeTableComponent } from './employee-table/employee-table.component';
 import { CreatesheetComponent } from './createsheet/createsheet.component';
 import { TypeComponent } from './type/type.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { SelectedProductsComponent } from './selected-products/selected-products.component';
-import { SearchEmployeeService } from './search-employee.service';
+//import { ProductListComponent } from './product-list/product-list.component';
+//import { SelectedProductsComponent } from './selected-products/selected-products.component';
+//import { SearchEmployeeService } from './search-employee.service';
 
 import { ShareModuleModule } from '../share-module/share-module.module'
 
@@ -26,15 +26,15 @@ import { ShareModuleModule } from '../share-module/share-module.module'
     //EmployeeTableComponent,
     CreatesheetComponent,
     TypeComponent,
-    ProductListComponent,
-    SelectedProductsComponent
+    //ProductListComponent,
+    //SelectedProductsComponent
   ],
   declarations: [
     //EmployeeTableComponent,
     CreatesheetComponent,
     TypeComponent,
-    ProductListComponent,
-    SelectedProductsComponent,
+    //ProductListComponent,
+    //SelectedProductsComponent,
     
   ]
 })

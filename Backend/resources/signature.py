@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
 #from models.Item import ItemModel
-from models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel, ImageModel
+from backend.models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel, ImageModel
 import requests
 import datetime
 

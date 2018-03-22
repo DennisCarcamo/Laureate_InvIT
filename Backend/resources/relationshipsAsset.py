@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
 #from models.Item import ItemModel
-from Backend.models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel
+from backend.models.signature import TypeModel, SignatureSheetModel, SignatureProductsModel
 import requests
 import datetime
 import sqlalchemy
@@ -82,9 +82,11 @@ class AssetRelationships(object):
 
             s.commit() 
             s.close()
+            print("item inserted")
         except:
             s.rollback()
             s.close()
+            print("item wrong")
             return "Something wrong"
 
 
@@ -98,24 +100,29 @@ class AssetRelationships(object):
         session = scoped_session(sessionmaker(autocommit = True, bind=engine))
         s = session()
 
+
+
         # get the user ciid
         #employee id is a string
-        # param = "'" + text + "%'"
-        z = s.execute('SELECT CIID FROM SDUSER WHERE EMPLOYEEID = {}'.format(employee_id))
+        param = "'" + employee_id + "'"
+        z = s.execute('SELECT CIID FROM SDUSER WHERE EMPLOYEEID = {}'.format(param))
         x =  json.dumps( [dict(ix) for ix in z] )
         y = json.loads(x)
         user_ciid = y[0].get('ciid')
+        print(user_ciid)
 
         #get all the cirelationships for the user_ciid
         z = s.execute('SELECT CIRELATIONSHIPS FROM CIRELATIONSHIPS WHERE CIID = {}'.format(user_ciid))
         x =  json.dumps( [dict(ix) for ix in z] )
         user_relationships = json.loads(x)
+        print(user_relationships)
 
         #get the resourceid
         z = s.execute('SELECT resourceid FROM RESOURCES WHERE CIID = {}'.format(ciid_product))
         x =  json.dumps( [dict(ix) for ix in z] )
         y = json.loads(x)
         resource_id = y[0].get('resourceid')
+        print(resource_id)
 
         s.begin()
         try:
@@ -125,7 +132,8 @@ class AssetRelationships(object):
             #Update state
             s.execute('UPDATE RESOURCES SET  resourcestateid = 1 WHERE resourceid = {}'.format(resource_id))
             s.commit() 
-            s.close()            
+            s.close()
+            return "Done"            
         except:
             s.rollback()
             s.close()

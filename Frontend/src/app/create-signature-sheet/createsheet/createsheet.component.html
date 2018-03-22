@@ -3,7 +3,7 @@
     
     <div>
         <h3>OnBoarding- Loan new Signature Sheet</h3>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+        <p>"Onboarding, also known as organizational socialization, refers to the mechanism through which new employees acquire the necessary knowledge, skills, and behaviors to become effective organizational members and insiders.It is the process of integrating a new employee into the organization and its culture. Tactics used in this process include formal meetings, lectures, videos, printed materials, or computer-based orientations to introduce newcomers to their new jobs and organizations. Research has demonstrated that these socialization techniques lead to positive outcomes for new employees such as higher job satisfaction, better job performance, greater organizational commitment, and reduction in occupational stress and intent to quit."</p>
          <br>
         <div class="form-group"> 
             <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button>
@@ -18,7 +18,7 @@
                     <option value="1">OnBoarding</option>
                     <option value="3">Loan</option>
             </select>
-        </div>
+    </div>
         <div class="form-group">
             <input type="Date" class="form-control" [(ngModel)]="date">
         </div>
@@ -56,16 +56,17 @@
     <br><br><br><br>
     <div *ngIf="boolproducts" class="d-flex justify-content-center">
         <!-- <button class="btn btn-link btn-lg" (click)="createSignatureSheet()"></button> -->
-        <button class="btn btn-primary btn-lg" (click)="confirm()">Save & Download</button><br>
+        <button class="btn btn-primary btn-lg" (click)="confirm()">Save New Signature Sheet</button><br>
     </div>
     <div *ngIf="confirmation" class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Are you sure of save this Signature Sheet?</h4>
         <p>The information will be save and automatically download a pdf file of the sheet, press 'YES', to continue or 'No', to go back.</p>
         <div class="d-flex justify-content-start">
             <button class="btn btn-info btn-sm " (click)="insertSheet()" >YES</button><p>-</p>
-            <button class="btn btn-info btn-sm "> NO</button>
+            <button class="btn btn-info btn-sm " (click)="abort()"> NO</button>
         </div>
         <hr>
         <p class="mb-0">-LAUREATE IT-</p>
     </div>
+
 </div>

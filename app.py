@@ -16,6 +16,7 @@ import time
 from flask_marshmallow import Marshmallow
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
 #todo lo de canvas
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.pdfgen import canvas
@@ -26,9 +27,9 @@ from reportlab.lib.units import inch
 from reportlab.platypus.tables import Table,TableStyle
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from io import StringIO
-from Backend import db
-
-from flask import Flask, request, render_template, make_response, send_from_directory, current_app
+from backend import db
+from werkzeug.datastructures import FileStorage
+from flask import Flask, request, render_template, make_response, send_from_directory, current_app, redirect, url_for,flash
 #from webargs import fields
 #from webargs.flaskparser import use_args
 #from security import authenticate, identity
@@ -46,6 +47,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 ma = Marshmallow(app)
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 @app.after_request
@@ -65,6 +67,20 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
 
     return response 
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        #file = request.files['file']
+        fa = request.files.get('pdf')
+        fa.save('rastapon.pdf')
+        print(fa)
+
+        return 'baia baia'
 
 @app.route("/pdf")
 def hello():
@@ -219,10 +235,16 @@ def index():
 def home():
     return render_template('index.html')
 
-from Backend.resources.assetexplorer import *
-from Backend.resources.signatureTypes import *
-from Backend.resources.signaturesheets import *
-from Backend.resources.signaturesheetproducts import *
+@app.route("/pdf/<string:pdf_name>")
+def pdf(pdf_name):
+    name = pdf_name + '.pdf'
+    return send_from_directory(settings['PDFPATH'], name, as_attachment=True)
+
+from backend.resources.assetexplorer import *
+from backend.resources.signatureTypes import *
+from backend.resources.signaturesheets import *
+from backend.resources.signaturesheetproducts import *
+from backend.resources.dashboard import *
 #from resources.createAssetRelationships import *
 
 #jwt = JWT(app, authenticate, identity)
