@@ -3,9 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreatesheetComponent } from './create-signature-sheet/createsheet/createsheet.component';
 import { UpdatesheetComponent } from './update-signature-sheet/updatesheet/updatesheet.component';
 import { PdfsComponent } from "./pdf/pdfs/pdfs.component";
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
-
+import { LoanAComponent } from './loan-admin/loan-a/loan-a.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { UserAdminComponent } from './user-admin/user-admin.component';
+import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
+import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component'
 
 const routes: Routes = [
 
@@ -30,6 +35,37 @@ const routes: Routes = [
 	{
 		path: 'dashboard',
 		component: DashboardComponent
+
+	},
+
+	{
+		path: 'loan',
+		component: LoanAComponent
+
+	},
+
+	{
+		path: '',
+		component: LoginComponent
+
+	},
+
+	
+	{
+		path: 'admin',
+		component: UserAdminComponent
+
+	},
+
+	{
+		path: 'tables',
+		component: DashboardTablesComponent
+
+	},
+
+	{
+		path: 'lifetime',
+		component: LifetimeChartComponent
 
 	},
 

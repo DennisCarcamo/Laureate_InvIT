@@ -41,7 +41,7 @@ export class SearchEmployeeService {
   insertSignatureSheet(option, id, f_name, l_name, email, date): Observable<responde[]>{
     let answ;
     let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
-    return this.httpClient.post<responde[]>(url, {})
+    return this.httpClient.post<responde[]>(url, {}).map(result => result);
     /*.subscribe(
       (data) => {
         answ = data.message;
@@ -108,6 +108,34 @@ export class SearchEmployeeService {
   searchSignatureSheets(page, text , limit){
     return this.httpClient.get(`http://127.0.0.1:5000/api/v1/signaturesheet?page=${page}&text=${text}&limit=${limit}`).map(result => result);
   }
+
+  searchLoanSignatureSheets(page, text , limit, type){
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loansignaturesheets?page=${page}&text=${text}&limit=${limit}&type=${type}`).map(result => result);
+  }
+
+  searchLoanSheetsProducts(id){
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loansheetproducts?id_signature=${id}`).map(result => result);
+  }
+
+  updateOffLoanSheetsProducts(products, id_employee){
+    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/loansheetproducts`,{
+      Products:JSON.stringify(products),
+      id_employee: JSON.stringify(id_employee)
+    }).map(result => result);
+  }
+
+  createOffboarding(products_, id_employee_){
+    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/offboardingsheet`,
+    {
+      Products: JSON.stringify(products_),
+      id_employee: id_employee_
+    }).map(result => result);
+  }
+
+  processValidation(employee_id){
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/offboardingsheetvalidation/${employee_id}`).map(result => result);
+  }
+
 
 
 }

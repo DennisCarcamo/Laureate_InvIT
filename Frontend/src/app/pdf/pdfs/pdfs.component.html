@@ -1,14 +1,82 @@
 <br>
-<div class="container">
+<div class="container" *ngIf="privilege">
+    <h1 class="my-4">PDF Signature Sheet <span style="color:red;" ><i class="fa fa-file-pdf-o" aria-hidden="true" (click)="siteInformation()"></i></span>
+
+    </h1>
+        <div class="row" *ngIf="siteInfo">
+
+                <!-- Blog Entries Column -->
+                <div class="col-md-8">
+        
+        
+                  <!-- Blog Post -->
+                  <div class="card mb-4">
+                      <br>
+                    <img class="card-img-top" [src]="fullImagePath" alt="Card image cap">
+                    <div class="card-body">
+                      <h2 class="card-title">Some statements</h2>
+                      <p class="card-text">"The Portable Document Format (PDF) is a file format developed in the 1990s to present documents, including text formatting and images, in a manner independent of application software, hardware, and operating systems. Based on the PostScript language, each PDF file encapsulates a complete description of a fixed-layout flat document, including the text, fonts, vector graphics, raster images and other information needed to display it. PDF was standardized as an open format, ISO 32000, in 2008, and does not require any royalties for its implementation."</p>
+                     <!-- <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button> -->
+                    </div>
+                    <div class="card-footer text-muted">
+                      Laureate International Universities
+                    </div>
+                  </div>
+        
+                </div>
+        
+                <!-- Sidebar Widgets Column -->
+                <div class="col-md-4">
+        
+
+                  <br><br><br>
+        
+                  <!-- Categories Widget -->
+                  <div class="card my-4">
+                    <h5 class="card-header">Reminder</h5>
+                    <div class="card-body">
+                      <div class="">
+                        <p>Here you can search PDF, load the signed sheets and see the record of the sheets</p>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <!-- Side Widget -->
+                  <div class="card my-4">
+                    <h5 class="card-header">Loan Policy</h5>
+                    <div class="card-body">
+                            Today, PDF files may contain a variety of content besides flat text and graphics including logical structuring elements, interactive elements such as annotations and form-fields, layers, rich media (including video content) and three dimensional objects using U3D or PRC, and various other data formats. The PDF specification also provides for encryption and digital signatures, file attachments and metadata to enable workflows requiring these features."
+                    </div>
+                  </div>
+        
+                </div>
+        
+              </div>
+
+
     <div>
-        <h3>PDF Signature Sheet</h3>
+       <!-- <h3>PDF Signature Sheet <span style="color:red;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span></h3>
         <p>"The Portable Document Format (PDF) is a file format developed in the 1990s to present documents, including text formatting and images, in a manner independent of application software, hardware, and operating systems. Based on the PostScript language, each PDF file encapsulates a complete description of a fixed-layout flat document, including the text, fonts, vector graphics, raster images and other information needed to display it. PDF was standardized as an open format, ISO 32000, in 2008, and does not require any royalties for its implementation.
 
             Today, PDF files may contain a variety of content besides flat text and graphics including logical structuring elements, interactive elements such as annotations and form-fields, layers, rich media (including video content) and three dimensional objects using U3D or PRC, and various other data formats. The PDF specification also provides for encryption and digital signatures, file attachments and metadata to enable workflows requiring these features."</p>
-         <br>
+        --> <br>
+        <div><br>
+            <div class="form-group">
+              <h4>Find PDF <span><i class="fa fa-search" aria-hidden="true"></i></span> <span style="color:red;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span></h4>
+              <label for="text-input">Please select the Signature sheet in the table below</label>
+                <input disabled type="text" id="text-input" class="form-control" [(ngModel)]="text">
+            </div>
+        </div>
+    
+        <button class="btn btn-info" (click)="searchPdf()">Look for original pdf.!</button>
+        <button class="btn btn-info" (click)="searchScannedPdf()">Look for scanned pdf.!</button>
+        <div class="container" *ngIf="boolpdfroute">
+          <p>In case download does not start please contact a IT Agent</p>
+    
+        </div><br><br>
     </div>
     <div class="">
-        <h3>Historical Signature Sheet Table</h3>
+        <h3>Historical Signature Sheet Table <span><i class="fa fa-history" aria-hidden="true"></i></span></h3>
         <form class="form-inline d-flex justify-content-end">
             <div class="form-group">
                 <input type="text" placeholder="Search" class="form-control" (keyup)="searchSheet($event)">
@@ -27,6 +95,7 @@
                 <th scope="col">Employee ID</th>
                 <th scope="col">Date</th>
                 <th scope="col">select</th>
+                <th scope="col"></th>
                <!-- <th scope="col">Status</th>
                 <th scope="col">Last?</th> -->
                 
@@ -42,6 +111,7 @@
                 <td>{{product.id_employee}}</td>
                 <td>{{product.updated}}</td>
                 <td><button class="btn btn-success btn-sm" (click)="onSelect(product)" >select</button></td>
+                <td><button class="btn btn-primary btn-sm" (click)="onselectUpload(product)" >upload</button></td>
               </tr>
           
             </tbody>
@@ -56,23 +126,27 @@
               <p>Search Result Quantity: {{meta['count']}}, cursor {{meta['cursor']}} More?  {{meta['more']}}.</p>
           </div>
     </div>
-    <div><br>
+<!--    <div><br>
         <div class="form-group">
-          <h4>Find PDF</h4>
+          <h4>Find PDF <span><i class="fa fa-search" aria-hidden="true"></i></span> <span style="color:red;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span></h4>
           <label for="text-input">Please Enter the Signature pdf name, this is id of the sheet join with the employee id number</label>
-            <input type="text" id="text-input" class="form-control" [(ngModel)]="text">
+            <input disabled type="text" id="text-input" class="form-control" [(ngModel)]="text">
         </div>
     </div>
 
-    <button class="btn btn-info" (click)="searchPdf()">Look for pdf.!</button>
+    <button class="btn btn-info" (click)="searchPdf()">Look for original pdf.!</button>
+    <button class="btn btn-info" (click)="searchScannedPdf()">Look for scanned pdf.!</button>
     <div class="container" *ngIf="boolpdfroute">
-      <p>In case download does not start copy the following url in the browser {{url}}</p>
+      <p>In case download does not start please contact a IT Agent</p>
 
-    </div><br><br>
+    </div><br><br> -->
+    <div *ngIf="readyUpload">
+        <h4>Upload Pdf File <span style="color:rgb(0, 119, 255)"><i class="fa fa-cloud-upload" aria-hidden="true"></i></span></h4>
+        <label for="pdf-input">The File will be bound to the user selected</label>
+        <input disabled type="text" id="pdf-input" class="form-control" [(ngModel)]="pdfFile">
+        <input type="file" (change)="onFileSelected($event)" class="from-control">
+        <button class="btn btn-primary btn-sm" (click)="onUpload()" >Upload</button>
+    </div>
 
-    <input type="file" (change)="onFileSelected($event)" class="from-control">
-    <button class="btn-primary btn-sm" (click)="onUpload()" >Upload</button>
-
-    
 </div>
 

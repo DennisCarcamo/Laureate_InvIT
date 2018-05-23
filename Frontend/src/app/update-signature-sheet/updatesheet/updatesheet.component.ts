@@ -6,6 +6,13 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { SearchEmployeeService } from '../../create-signature-sheet/search-employee.service';
 import { ElementAst } from '@angular/compiler';
 
+import { TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CookieService } from 'ngx-cookie-service';
+import {Router} from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
+
 @Component({
   selector: 'app-updatesheet',
   templateUrl: './updatesheet.component.html',
@@ -13,26 +20,64 @@ import { ElementAst } from '@angular/compiler';
 })
 export class UpdatesheetComponent implements OnInit {
 
-  constructor(private _searchEmployees : SearchEmployeeService) { }
+  public fullImagePath;
+  constructor(private _searchEmployees : SearchEmployeeService,  private modalService: BsModalService, private cookieService: CookieService, private router : Router) {
+    this.fullImagePath = '/assets/images/blurred-background-close-up-coffee-cup-908284.jpg'
+   }
 
   public boolemployee:any = false;
   public boolproducts:any = false;
   public boolready:any = false;
-  public boolfirst:any = false;
+  public boolfirst:any = true;
   //data a enviar
   public selectemploye:any = [];
   public productsevent:any = [];
-  public option: any;
+  public option: any = 4;
   public date: any;
   public confirmation: any = false;
+  modalRef: BsModalRef
 
   //updating
   public userprod = "BVB";
   public currentproducts = false;
   public selectproducts:any = [];
   public productremovesevent:any = [];
+  public privilege = false;
+  public validation = 0;
+
+  public siteInfo = false;
+
+
 
   ngOnInit() {
+    /*if(!this.cookieService.get('user_name')){
+      this.router.navigateByUrl('/');
+    }*/
+    let val = this.cookieService.get("token");
+    if(val){
+
+      let djtw = jwt_decode(val);
+      let identity = djtw['identity'];
+      for (var _i = 0; _i < identity.length; _i++) {
+        if(identity[_i]['privilege'] == 'update_sheet' ){
+          this.privilege = true;
+        }
+      }
+  
+      if(this.privilege){
+  
+      }
+      else{
+        window.location.href = '/login';
+      }
+    }
+    else{
+      window.location.href = '/login';
+    }
+  }
+
+  openModal(template: TemplateRef<any>) {
+      this.modalRef = this.modalService.show(template);
   }
 
   start(){
@@ -41,6 +86,15 @@ export class UpdatesheetComponent implements OnInit {
     this.boolready = false;
     this.boolproducts = false;
     
+  }
+
+  siteInformation(){
+    if(this.siteInfo){
+      this.siteInfo = false;
+    }
+    else{
+      this.siteInfo = true;
+    }  
   }
 
   validate(){
@@ -54,30 +108,68 @@ export class UpdatesheetComponent implements OnInit {
     }
   }
 
-  continueemployee(){
+  continueemployee(template: TemplateRef<any>){
     //faltan los ifs;
-     this.boolemployee = false;
-     //this.boolproducts = true;
-     //console.log(this.selectemploye);
-     this.currentproducts = true;
-     //request de productos en la hoja utilizando el select employee
+    let x = this.selectemploye[0];
+    if(x){
+      //this.boolproducts = true;
+      //console.log(this.selectemploye);
+
+      let m;
+      this._searchEmployees.processValidation(x.EMPLOYEE_ID)
+      .subscribe( res => {
+        m = res['message'];
+        console.log(res);
+        if(this.option == 4 && m == 'null'){
+          this.validation = 0;
+          this.modalRef = this.modalService.show(template);
+
+        }
+        if((this.option == 4) && (m['id_type'] == 2)){
+          this.validation = 0;
+          this.modalRef = this.modalService.show(template);
+
+        }
+  
+        if(this.option == 4 && m['id_type'] != 2 && m != 'null'){
+          this.validation = 1;
+          this.currentproducts = true;
+          //request de productos en la hoja utilizando el select employee
+          this.boolemployee = false;
+        }
+  
+        /*if(m['id_type'] == '4'){
+          alert('aqui');
+          this.validation = 1
+        }*/
+  
+        //console.log(m['id_type']);
+        //console.log(this.validation);
+        //console.log(this.option);
+
+      })
+
+    }else{
+      alert('select employee first')
+    }
 
   }
 
+  ok(){
+    window.location.href = '/updatesheet';
+  }
+
   continueprods(){
-    /*let x = this.selectemploye[0];
-    this._searchEmployees.getUserProducts(this.selectemploye[0]['EMPLOYEE_ID'])
-    .subscribe(res => {
-       let x = res['SignatureSheetsProducts'];
-       this.currentproducts = x;
-       console.log(this.currentproducts);
-       console.log(x);
-       //this.currentproducts = this.selectproducts;
-     })*/
-    
-    this.currentproducts = false;
-    this.boolproducts = true;
-    this.boolemployee = false;
+    if(this.selectproducts.length == 0)
+    {
+      alert('Nothing to remove? Select Remove Nothing to Continue.!')
+    }
+    else{
+      this.currentproducts = false;
+      this.boolproducts = true;
+      this.boolemployee = false;
+
+    }
   }
 
   backemployee(){
@@ -118,22 +210,18 @@ export class UpdatesheetComponent implements OnInit {
     if(l != 0 && (this.productremovesevent.length != 0 || this.productsevent.length != 0) && x){
       this._searchEmployees.updateSheet(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL)
       .subscribe(result =>{
-        alert("Preparing to update..");
+        //alert("Preparing to update..");
         console.log(result);
         if(result['message'] == "Signature Sheet correctly inserted"){
           this._searchEmployees.updateSignatureSheet(this.productremovesevent,this.productsevent, this.selectproducts,this.selectemploye,this.option,this.selectemploye[0]['EMPLOYEE_ID'])
           .subscribe(result =>{
             console.log(result);
             alert("updated");
+            window.location.href = '/updatesheet';
           })
         }
       } );
-      //alert(response);
-      //this._searchEmployees.updateSignatureSheet(this.productremovesevent,this.productsevent, this.selectproducts,this.selectemploye,this.option,this.selectemploye[0]['EMPLOYEE_ID'])
-      //.subscribe(result =>{
-       // console.log(result);
-       // alert("updated");
-      //})
+
     }
     else{
       alert("make sure to select employee and products correctly");

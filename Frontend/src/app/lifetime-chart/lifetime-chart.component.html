@@ -1,0 +1,120 @@
+<br><br>
+<div class="row justify-content-center">
+    <div class="form-inline">
+        <h3><span><i class="fa fa-table" aria-hidden="true"></i></span> Lifetime Table - </h3>
+           <div class="form-inline">
+            <!-- menor mayor-->
+            <select class="form-control" [(ngModel)]="GreaterLess">
+              <option value="2" selected>Greater than</option>
+              <option value="1">Less than</option>
+            </select>
+
+            -
+
+            <input type="number" min="1" class="form-control" style="width:70px" [(ngModel)]="number">-
+            <select class="form-control" [(ngModel)]="state">
+              <option value="1" class="" selected>In Store</option>
+              <option value="2" class="">In Use</option>
+              <option value="3" class="">Both</option>
+            </select>-
+
+           </div>
+           <button type="button" class="btn btn-info"  (click)="funStorageMoveTable()">Generate Table</button>
+           <pre>   </pre>
+           <div class="form-inline">
+              <input type="text" class="form-control" placeholder="Search Asset State History" [(ngModel)]="searchInput" >
+              <button class="btn btn-info" (click)="searchField()"><span> <i class="fa fa-search" aria-hidden="true"></i>
+              </span></button>
+           </div>
+         </div>
+  
+  </div>
+
+  <br><br>
+  <div class="container" *ngIf="boolGenerateTable">
+    <h3>Result:</h3><br>
+      <table class="table">
+          <thead class="thead">
+            <tr class="">
+              <th scope="col">Lifetime</th>
+              <th scope="col">Model</th>
+              <th scope="col">State</th>
+              <th scope="col">Product Code</th>
+              <th scope="col">Service Tag</th>
+              
+              
+              <th scope="col">Acquisition Date</th>
+              <th scope="col">Warranty Expiry</th>
+              <th scope="col">Owner</th>
+              
+            </tr>
+          </thead>
+          <tbody *ngFor="let prod of items">
+        
+            <tr class="select">
+              <td >{{prod.Lifetime}}</td>
+              <td>{{prod.Model}}</td>
+              <td>{{prod.State}}</td>
+              <td>{{prod.Product_Code}}</td>
+              <td>{{prod.Service_Tag}}</td>
+              <td>{{prod.Acquisition_Date}}</td>
+              <td>{{prod.Warranty_Expiry}}</td>
+              <th >{{prod.User}}</th>
+            </tr>
+            
+          </tbody>
+        
+        </table>
+           <div class="d-flex justify-content-center">
+              <button class="btn btn-link" *ngIf="showpreview" (click)="preview()">Preview</button>
+              <button class="btn btn-link"  *ngIf="shownext" (click)="generateTable()">Next</button>
+          </div>
+          <div class="d-flex justify-content-start" *ngIf="shownext">
+              <p>Search Result <strong> Quantity: {{count}} </strong>, cursor {{cursor}} .</p>
+          </div> 
+  </div>
+
+  <div class="container" *ngIf="boolGenerateTable2">
+      <h3>Result:</h3><br>
+        <table class="table">
+            <thead class="thead">
+              <tr class="">
+                <th scope="col">Lifetime</th>
+                <th scope="col">Model</th>
+                <th scope="col">State</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Service Tag</th>
+                
+                
+                <th scope="col">Acquisition Date</th>
+                <th scope="col">Warranty Expiry</th>
+                <th scope="col">Owner</th>
+                
+              </tr>
+            </thead>
+            <tbody *ngFor="let prod of items2">
+          
+              <tr class="select">
+                <td >{{prod.Lifetime}}</td>
+                <td>{{prod.Model}}</td>
+                <td>{{prod.State}}</td>
+                <td>{{prod.Product_Code}}</td>
+                <td>{{prod.Service_Tag}}</td>
+                <td>{{prod.Acquisition_Date}}</td>
+                <td>{{prod.Warranty_Expiry}}</td>
+                <th >{{prod.User}}</th>
+              </tr>
+              
+            </tbody>
+          
+          </table>
+             <div class="d-flex justify-content-center">
+                <button class="btn btn-link" *ngIf="showpreview2" (click)="preview2()">Preview</button>
+                <button class="btn btn-link"  *ngIf="shownext2" (click)="search()">Next</button>
+            </div>
+            <div class="d-flex justify-content-start" *ngIf="shownext2">
+                <p>Search Result <strong> Quantity: {{count2}} </strong>, cursor {{cursor2}} .</p>
+            </div> 
+    </div>
+
+  <!-- <button (click)="test()" class="btn">Test</button> -->

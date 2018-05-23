@@ -12,16 +12,18 @@ from reportlab.lib.units import inch
 from reportlab.platypus.tables import Table,TableStyle
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from io import StringIO
+from app import settings, app, api
 
 class CreatePDF(object):
-    def createTemplate(self, id_signature, products, user_info, document_name, ref_products):
-        """Return the signature sheet template in pdf format."""
+    def createTemplate(self, id_signature, products, user_info, document_name, ref_products, onboardingDate):
+        """Create the signature sheet template in pdf format."""
 
         string_length = 10
         random = str(uuid.uuid4()) # Convert UUID format to a Python string.
         random = random.upper() # Make all characters uppercase.
         random = random.replace("-","") # Remove the UUID '-'.
         pdf_name = random[0:string_length]
+        qapath = settings['PDFSAVEPATH'] 
         path =  "Backend/pdfs/" + document_name + ".pdf"
         # "Backend/pdfs/" +
     
@@ -34,8 +36,13 @@ class CreatePDF(object):
         Town = 'Col, Matamoros Tegucigalpa '
         county = 'Francisco Morazan, Honduras'
         Phone = '2275-5780' 
-
-        text = 'The user must answer for any damages or partial or total loss, it is your responsability to return the computer equipment or devices in good condition within the established schedule service. to request any device or computer equipment must submit a ticket directed to the email: helpdeskit@laureate.net'
+        
+        if(user_info['id_type'] == 2):
+            text = 'The next document verify the return of the equipment detail above from the user to the IT department once the user finished the employment relationship with Laureate after a previous audit from an IT Agent.'
+        else:
+            text = 'The user must answer for any damages or partial or total loss, it is your responsability to return the computer equipment or devices in good condition within the established schedule service. to request any device or computer equipment must submit a ticket directed to the email: helpdeskit@laureate.net'
+            
+        
         #text = stringWidth(text, 'Helvetica-Bold', 9)
         #p = Paragraph(text, para)
         c = canvas.Canvas(path)
@@ -83,16 +90,20 @@ class CreatePDF(object):
         c.drawString(464, 807, _signature_sheet_id)
         c.drawString(178,716, user_info['email'])
         full_name = user_info['first_name'] + " " + user_info['last_name']
-        c.drawString(213,668, full_name)
+        c.drawString(178,668, full_name)
         _updated = str(formatted_time)
         c.drawString(182,770, _updated)
+        _onBoadinrDate = str(onboardingDate)
+        c.drawString(445,770, _onBoadinrDate)
+
+        c.drawString(445,668, user_info['id_employee'])
 
 
         #encabezados
         email = 'Email Addres' 
         contact = 'Contact Name'
         office = 'Office'
-        phone = 'Customer Phone'
+        phone = 'Employee ID'
 
         product_code = 'Product code'
         product_name = 'Product Name'
@@ -123,8 +134,8 @@ class CreatePDF(object):
         c.setFont('Helvetica-Bold', 9)
         textemail = c.beginText(213,729)
         textcontact = c.beginText(213,681)
-        textoffice = c.beginText(458,729)
-        textphone = c.beginText(443,681)
+        textoffice = c.beginText(451,729)
+        textphone = c.beginText(448,681)
 
         textemail.textLine(email)
         textcontact.textLine(contact)

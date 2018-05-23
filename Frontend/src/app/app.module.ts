@@ -18,6 +18,18 @@ import { ShareModuleModule } from './share-module/share-module.module';
 import { PdfModuleModule } from './pdf/pdf-module/pdf-module.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardService } from './dashboard.service';
+import { LoanAdminModule } from './loan-admin/loan-admin.module';
+import { LoginComponent } from './login/login.component'
+import { LoginService } from './login.service';
+import { AuthGuard } from './auth.guard';
+import { CookieService } from 'ngx-cookie-service';
+import { UserAdminComponent } from './user-admin/user-admin.component';
+import {ManagementService } from './management.service';
+
+import { NgDragDropModule } from 'ng-drag-drop';
+import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
+import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component';
+import { LifetimeTableComponent } from './lifetime-table/lifetime-table.component';
 
 
 
@@ -27,6 +39,11 @@ import { DashboardService } from './dashboard.service';
     NavBarComponent,
     FooterComponent,
     DashboardComponent,
+    LoginComponent,
+    UserAdminComponent,
+    DashboardTablesComponent,
+    LifetimeChartComponent,
+    LifetimeTableComponent,
         
 
   ],
@@ -39,9 +56,11 @@ import { DashboardService } from './dashboard.service';
     UpdateSignatureSheetModule,
     ShareModuleModule,
     PdfModuleModule,
+    LoanAdminModule,
+    NgDragDropModule.forRoot()
 
   ],
-  providers: [SearchEmployeeService, DashboardService],
+  providers: [SearchEmployeeService, DashboardService, LoginService, AuthGuard, CookieService, ManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

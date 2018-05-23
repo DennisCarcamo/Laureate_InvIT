@@ -62,9 +62,14 @@ export class ProductListComponent implements OnInit {
       }
     }
     if(index == 0){
-      this.selectproducts.push(x);
-      this.productsevent.emit(this.selectproducts);
-      this.bool = true;
+      if(x.PRODUCT_CODE){
+
+        this.selectproducts.push(x);
+        this.productsevent.emit(this.selectproducts);
+        this.bool = true;
+      }else{
+        alert('No Product Code.');
+      }
     }
     else{
       console.log("Item already exist");

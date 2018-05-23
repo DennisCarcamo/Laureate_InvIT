@@ -7,16 +7,19 @@ click==6.7
 colorama==0.3.9
 Flask==0.12.2
 Flask-JWT==0.3.2
+Flask-JWT-Extended==3.8.1
 flask-marshmallow==0.8.0
 Flask-Migrate==2.1.1
 Flask-RESTful==0.3.6
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
+Flask-WTF==0.14.2
 idna==2.6
 isort==4.2.15
 itsdangerous==0.24
 Jinja2==2.10
 lazy-object-proxy==1.3.1
+ldap3==2.4.1
 Mako==1.0.7
 MarkupSafe==1.0
 marshmallow==2.15.0
@@ -25,6 +28,8 @@ mccabe==0.6.1
 pdfkit==0.6.1
 Pillow==5.0.0
 psycopg2==2.7.3.2
+pyasn1==0.4.2
+pyasn1-modules==0.2.1
 PyJWT==1.4.2
 pylint==1.8.1
 python-dateutil==2.6.1
@@ -38,8 +43,9 @@ urllib3==1.22
 virtualenv==15.1.0
 virtualenvwrapper-win==1.2.5
 webargs==1.8.1
-Werkzeug==0.13
+Werkzeug==0.14.1
 wrapt==1.10.11
+WTForms==2.1
 
-https://github.com/angular/angular-cli/issues/8371
+
 

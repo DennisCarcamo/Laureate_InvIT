@@ -14,6 +14,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from backend.models.signature import TypeModel
 from webargs.flaskparser import use_args
 from marshmallow import fields
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt
 
 
 
@@ -36,7 +37,7 @@ class InvitTypes(Resource):
 
     #parser.add_argument('enable', type=in)
     #cuidado con el parse es case sensitive, al enviar el json desde el postman o desde el front end enviar bien los argumentos
-
+    @jwt_required
     def get(self):
         tipo = TypeModel.query.all()
         if tipo:

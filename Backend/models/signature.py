@@ -1,5 +1,5 @@
 from backend import db
-from sqlalchemy import Table, Column, Float, Integer, String, MetaData, ForeignKey, DateTime, Date
+from sqlalchemy import Table, Column, Float, Integer, String, MetaData, ForeignKey, DateTime, Date, and_, or_
 from datetime import datetime
 import json
 
@@ -107,11 +107,25 @@ class SignatureSheetModel(db.Model):
 
     @classmethod
     def get_last_id(cls, employee_id):
-        return cls.query.filter_by(id_employee= employee_id ).order_by(cls.id_signature.desc()).first()
+        res = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
+        if res:
+            return res
+        else:
+            res =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
+            return res
+
+    @classmethod
+    def get_last_sheet(cls, employee_id):
+        return cls.query.filter_by(id_employee= employee_id).order_by(cls.id_signature.desc()).first()
 
     @classmethod
     def get_last_date(cls):
         return cls.query.order_by(cls.updated.desc()).all()
+
+    @classmethod
+    def get_onboarding(cls,employee_id ):
+        #return cls.query.filter_by(and_(id_employee= employee_id, id_type = 1) ).order_by(cls.id_signature.desc()).first()
+        return cls.query.filter_by(id_employee= employee_id, id_type = 1).order_by(cls.updated.desc()).first()
 
     @classmethod
     def bring_all(cls):
@@ -208,5 +222,7 @@ class ImageModel(db.Model):
     def delete_item(self):
         db.session.delete(self)
         db.session.commit()
+
+
 
     

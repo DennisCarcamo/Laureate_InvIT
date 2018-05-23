@@ -68,7 +68,7 @@ class test(Resource):
 class Dashboard(Resource):
     def get(self):
         
-        engine = sqlalchemy.create_engine(settings['ASSETDB'])
+        engine = sqlalchemy.create_engine(settings['ASSETDB'], pool_pre_ping=True, pool_size=20, max_overflow=5)
         Session = scoped_session(sessionmaker(autocommit = False, bind=engine)) 
         s = Session()
         result = s.execute('select count(*), c.componenttypename,d.displaystate from resources as a left join componentdefinition as b on (a.componentid = b.componentid) left join componenttype as c on (b.componenttypeid = c.componenttypeid) left join resourcestate as d on (d.resourcestateid = a.resourcestateid) group by c.componenttypename,d.displaystate')

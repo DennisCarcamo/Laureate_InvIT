@@ -1,0 +1,100 @@
+
+<br> <br>
+<div class="row justify-content-center">
+    <div class="form-inline">
+        <h3><span><i class="fa fa-archive" aria-hidden="true"></i>
+        </span> Storage Moves -From - To -</h3>
+           <div class="form-inline">
+            <!-- dos calendarios-->
+            <input type="Date" class="form-control" [(ngModel)]="datefrom">-
+            <input type="Date" class="form-control" [(ngModel)]="dateto">-
+           </div>
+           <div class="form-group">
+           </div>
+           <button type="button" class="btn btn-info"  (click)="funStorageMoveTable()">Generate Table</button>
+           <pre>   </pre>
+           <div class="form-inline">
+              <input type="text" class="form-control" placeholder="Search Asset State History"  [(ngModel)]="searchprod">
+              <button class="btn btn-info" (click)="searchField()"><span> <i class="fa fa-search" aria-hidden="true"></i>
+              </span></button>
+           </div>
+         </div>
+  
+  </div><br><br>
+<br>
+  <div class="container" *ngIf="moveTable">
+    <h3>Storage Move from <strong>{{datefrom}}</strong> to <strong>{{dateto}}</strong>:</h3><br>
+      <table class="table">
+          <thead class="thead">
+            <tr class="">
+                <th scope="col">Assettag</th>
+              <th scope="col">Resource Name</th>
+              <th scope="col">State</th>
+              <th scope="col">Prev State</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Date</th>
+              
+            </tr>
+          </thead>
+          <tbody *ngFor="let employ of storageMovesItems">
+        
+            <tr class="select">
+              <th scope="row">{{employ.assettag}}</th>
+              <td>{{employ.resourcename}}</td>
+              <td>{{employ.STATE}}</td>
+              <td>{{employ.PREV}}</td>
+              <td>{{employ.NAME}}</td>
+              <td>{{employ.DATE}}</td>
+            </tr>
+        
+          </tbody>
+        
+        </table>
+           <div class="d-flex justify-content-center">
+              <button class="btn btn-link" *ngIf="showpreview" (click)="preview()">Preview</button>
+              <button class="btn btn-link"  *ngIf="shownext" (click)="storageMoveTable()">Next</button>
+          </div>
+          <div class="d-flex justify-content-start" *ngIf="shownext">
+              <p>Search Result <strong> Quantity: {{count}} </strong>, cursor {{cursor}} .</p>
+          </div> 
+  </div>
+
+  <div class="container" *ngIf="moveTable2">
+    <h3>Storage Move for <strong>{{searchprod}}</strong> :</h3><br>
+      <table class="table">
+          <thead class="thead">
+            <tr class="">
+                <th scope="col">Assettag</th>
+              <th scope="col">Resource Name</th>
+              <th scope="col">State</th>
+              <th scope="col">Prev State</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Date</th>
+              
+            </tr>
+          </thead>
+          <tbody *ngFor="let employ of storageMovesItems2">
+        
+            <tr class="select">
+              <th scope="row">{{employ.assettag}}</th>
+              <td>{{employ.resourcename}}</td>
+              <td>{{employ.STATE}}</td>
+              <td>{{employ.PREV}}</td>
+              <td>{{employ.NAME}}</td>
+              <td>{{employ.DATE}}</td>
+            </tr>
+        
+          </tbody>
+        
+        </table>
+           <div class="d-flex justify-content-center">
+              <button class="btn btn-link" *ngIf="showpreview2" (click)="preview2()">Preview</button>
+              <button class="btn btn-link"  *ngIf="shownext2" (click)="search()">Next</button>
+          </div>
+          <div class="d-flex justify-content-start" >
+              <p>Search Result <strong> Quantity: {{count2}} </strong>, cursor {{cursor2}} .</p>
+          </div> 
+  </div>
+
+
+ <!--  <button class="btn btn-primary" (click)="test()">TEST</button> -->  

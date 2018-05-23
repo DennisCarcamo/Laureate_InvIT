@@ -1,18 +1,69 @@
 <br>
-<div class="container">
+<div class="container" *ngIf="privilege">
+    <h1 class="my-4">OnBoarding- Loan new Signature Sheet <span style="color:rgb(0, 89, 255)"><i class="fa fa-paper-plane" aria-hidden="true" (click)="siteInformation()"></i></span>
+
+    </h1>
+        <div class="row" *ngIf="siteInfo">
+
+                <!-- Blog Entries Column -->
+                <div class="col-md-8">
+        
+        
+                  <!-- Blog Post -->
+                  <div class="card mb-4">
+                    <img class="card-img-top" [src]="fullImagePath" alt="Card image cap">
+                    <div class="card-body">
+                      <h2 class="card-title">Some statements</h2>
+                      <p class="card-text">"The sheet of onboarding is the first sheet that must be created to an employee, it is a process of only addition, where the initial equipment is established with which the user will work, no other process can be done to an employee without his sheet of onboarding."</p>
+                      <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button>
+                    </div>
+                    <div class="card-footer text-muted">
+                      Laureate International Universities
+                    </div>
+                  </div>
+        
+                </div>
+        
+                <!-- Sidebar Widgets Column -->
+                <div class="col-md-4">
+        
+
+                  <br><br><br>
+        
+                  <!-- Categories Widget -->
+                  <div class="card my-4">
+                    <h5 class="card-header">Reminder</h5>
+                    <div class="card-body">
+                      <div class="">
+                        <p>In this section you will not be able to create loan sheets, go create a sheet for that, you can only release the resources of loan sheets already created</p>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <!-- Side Widget -->
+                  <div class="card my-4">
+                    <h5 class="card-header">Loan Policy</h5>
+                    <div class="card-body">
+                            The policy should also address postorigination activities, such as ongoing monitoring and credit administration, including postorigination monitoring of loan covenants, obtaining financial information, and assessing the borrower's ongoing ability to service the debt and ultimately repay the loan.
+                    </div>
+                  </div>
+        
+                </div>
+        
+              </div>
     
-    <div>
-        <h3>OnBoarding- Loan new Signature Sheet</h3>
+  <!--  <div>
+        <h3>OnBoarding- Loan new Signature Sheet <span style="color:rgb(0, 89, 255)"><i class="fa fa-paper-plane" aria-hidden="true"></i></span></h3>
         <p>"Onboarding, also known as organizational socialization, refers to the mechanism through which new employees acquire the necessary knowledge, skills, and behaviors to become effective organizational members and insiders.It is the process of integrating a new employee into the organization and its culture. Tactics used in this process include formal meetings, lectures, videos, printed materials, or computer-based orientations to introduce newcomers to their new jobs and organizations. Research has demonstrated that these socialization techniques lead to positive outcomes for new employees such as higher job satisfaction, better job performance, greater organizational commitment, and reduction in occupational stress and intent to quit."</p>
          <br>
         <div class="form-group"> 
             <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button>
         </div>
-    </div>
+    </div> -->
 
-
+<br><br>
     <div class=" col-6" *ngIf="boolfirst">
-        <h3>First-Step select a type and date</h3>
+        <h3>First-Step select a type and date <span><i class="fa fa-calendar" aria-hidden="true"></i></span></h3>
         <div class="form-group">
             <select class="form-control" [(ngModel)]="option">
                     <option value="1">OnBoarding</option>
@@ -30,7 +81,7 @@
       </ul>
 
     <div *ngIf="boolemployee">
-        <h3>Second-Step select the employee</h3>
+        <h3>Second-Step select the employee <span><i class="fa fa-users" aria-hidden="true"></i></span></h3>
         <!-- <ul class="list-group" *ngFor="let item of selectemploye">{{item.FIRST_NAME}} - {{item.LAST_NAME}} - {{item.EMAIL}} </ul> -->
 
 
@@ -38,7 +89,7 @@
         <app-employee-table (employeevent)="selectemploye=$event"></app-employee-table>
         <div class="d-flex justify-content-center">
                 <button class="btn btn-info btn-sm" (click)="backemployee()">Go Back</button><h4>-</h4>
-                <button class="btn btn-info btn-sm" (click)="continueemployee()">Continue</button>
+                <button class="btn btn-info btn-sm" (click)="continueemployee(procesValidationtemplate)">Continue</button>
         </div>
 
         
@@ -56,17 +107,43 @@
     <br><br><br><br>
     <div *ngIf="boolproducts" class="d-flex justify-content-center">
         <!-- <button class="btn btn-link btn-lg" (click)="createSignatureSheet()"></button> -->
-        <button class="btn btn-primary btn-lg" (click)="confirm()">Save New Signature Sheet</button><br>
-    </div>
+        <button class="btn btn-primary btn-lg" (click)="openModal(template)">Save New Signature Sheet</button><br>
+    </div><br>
     <div *ngIf="confirmation" class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Are you sure of save this Signature Sheet?</h4>
-        <p>The information will be save and automatically download a pdf file of the sheet, press 'YES', to continue or 'No', to go back.</p>
-        <div class="d-flex justify-content-start">
-            <button class="btn btn-info btn-sm " (click)="insertSheet()" >YES</button><p>-</p>
-            <button class="btn btn-info btn-sm " (click)="abort()"> NO</button>
-        </div>
+        <h5 class="alert-heading">Warning.! <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span></h5>
+        <p>The employee does not have Employee Id, please make sure to get all the info ready before proceding</p>
         <hr>
-        <p class="mb-0">-LAUREATE IT-</p>
     </div>
 
 </div>
+
+
+
+<!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
+     
+<ng-template #template>
+    <div class="modal-body text-center alert alert-warning">
+        <p>Are you sure of save this Signature Sheet?? <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
+        <button type="button" class="btn btn-primary" (click)="insertSheet()" >Yes</button>
+        <button type="button" class="btn btn-danger" (click)="abort()" >No</button>
+        <div class="modal-body alert alert-warning" role="alert">
+                The information will be save and automatically create a pdf file of the sheet, press 'YES', to continue or 'No', to go back.
+        </div>
+    </div>
+
+   
+</ng-template>
+
+<ng-template #procesValidationtemplate>
+        <div class="modal-body text-center alert alert-info">
+            <p>It is not possible to create this sheet.! <span><i class="fa fa-times" aria-hidden="true"></i></span></p>
+            <button class="btn btn-danger" (click)="ok()">Ok</button><br>
+            <div class="modal-body alert alert-warning" role="alert">
+                    Verify that the user has an onboarding sheet, or does not have an offboarding sheet
+            </div>
+        </div>
+        
+           
+    </ng-template>
+
+

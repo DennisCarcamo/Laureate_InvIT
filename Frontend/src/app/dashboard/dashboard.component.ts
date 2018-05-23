@@ -3,6 +3,11 @@ import { Chart } from 'chart.js';
 import { NgModel } from '@angular/forms';
 import { DashboardService } from '../dashboard.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import { LoginService } from '../login.service';
+import { log } from 'util';
+import {Router} from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,40 +42,86 @@ export class DashboardComponent implements AfterViewInit {
   public modelLabels : any = [];
   public modelData : any = [];
 
+  public workstationLifetimeinUse;
+  public workstationLifetimeInStore;
+
   public state;
   public asset;
+  public smove;
+  
+  
   public c = 0;
   public myChart : any;
-
-  constructor( private _dashboardService : DashboardService) { }
+  public logged: any;
+  public cookieValue = 'UNKNOWN';
+  public privilege = false;
+  constructor( private _dashboardService : DashboardService, private login : LoginService, private router : Router, private cookieService: CookieService) { }
 
   ngAfterViewInit() {
 
   }
+  
 
   ngOnInit() {
-    this.initialDashboard();
+
+    //this.cookieValue = this.cookieService.get('user_name');
+    /*if(this.cookieService.get('user_name')){
+      this.initialDashboard();
+    }
+    else{
+     // alert(this.logged);
+      this.router.navigateByUrl('/');
+    }*/
+
+      let val = this.cookieService.get("token");
+      if(val){
+
+        let djtw = jwt_decode(val);
+        let identity = djtw['identity'];
+        for (var _i = 0; _i < identity.length; _i++) {
+          if(identity[_i]['privilege'] == 'dashboard' ){
+            this.privilege = true;
+          }
+        }
+  
+        if(this.privilege){
+          this.initialDashboard();
+        }
+        else{
+          window.location.href = '/login';
+        }
+      }
+      else{
+        window.location.href = '/login';
+      }
+
+    
   }
 
   initialDashboard(){
+
+
+    //------------------------------------------------
     this._dashboardService.loadInitialDashboard()
     .subscribe(result => {
       this._initialDashboard = result['query'];
       this._statehistory = result['History'];
       for(let item of this._initialDashboard){
         if(item['componenttypename'] != "Workstation" && item['displaystate'] == "In Store"){
+          let x =  item['componenttypename']  +'('+ item['count'] +')' ;
           this.inStorePeriphericalsData.push(item['count']);
-          this.inStorePeriphericalsLabel.push(item['componenttypename']);
+          this.inStorePeriphericalsLabel.push(x);
         }
 
         if(item['componenttypename'] != "Workstation" && item['displaystate'] == "In Use"){
+          let x =  item['componenttypename']  +'('+ item['count'] +')' ;
           this.inUsePeriphericalsData.push(item['count']);
-          this.inUsePeriphericalsLabel.push(item['componenttypename']);
+          this.inUsePeriphericalsLabel.push(x);
         }
 
         if(item['componenttypename'] == "Workstation" && (item['displaystate'] == "In Use" || item['displaystate'] == "In Store") ){
           if(item['displaystate'] == "In Store"){
-            this.inStoreWorkstationData = item['count'];
+            this.inStoreWorkstationData = item['count'] -1 ;
           }
 
           if(item['displaystate'] == "In Use"){
@@ -106,16 +157,58 @@ export class DashboardComponent implements AfterViewInit {
       this.inStorePeriphericalChart();
 
     })
+
+    this._dashboardService.searchLifetime()
+    .subscribe(res => {
+      console.log(res);
+      this.workstationLifetimeinUse = res['query_in_use'];
+      this.workstationLifetimeInStore = res['query_in_store'];
+
+    })
   }
 
-  test(){
-    console.log(this.state);
-    console.log(this.asset);
+
+  /*storageMoveTable(){
+    if(!this.datefrom && !this.dateto){
+      alert('Incomplete Information ');
+    }
+    this._dashboardService.stateTable(this.datefrom, this.dateto, this.cursor)
+    .subscribe(res=>{
+      console.log(res);
+      if(res['message'] == 'wrong_dates'){
+        alert('Incorrect date order.!');
+      }else{
+        this.storageMovesItems = res['query'];
+        this.meta = res['meta'];
+        //alert('aqui');
+        console.log(this.meta);
+        this.count = this.meta.count;
+        this.cursor = this.meta.cursor;
+        if(this.meta.more){
+          this.shownext = true;
+        }else{
+          this.shownext = false;
+        }
+        
+        if(this.cursor == 10){
+          this.showpreview = false
+        }
+        else{
+          this.showpreview = true;
+        }
+      }
+    })
     
     //console.log(this.modelData);
     //this.modelsbool = true;
     
   }
+
+  preview(){
+    this.cursor = this.cursor - 20;
+    this.storageMoveTable();
+    //alert(this.cursor);
+  } */
 
   inStorePeriphericalChart(){
     new Chart(document.getElementById("doughnut-chart"), {
@@ -125,7 +218,7 @@ export class DashboardComponent implements AfterViewInit {
         datasets: [
           {
             label: "Population (millions)",
-            backgroundColor: ["#0099cc", "#00ace6","#00bfff","#1ac6ff","#33ccff","#4dd2ff"],
+            backgroundColor: ["#007399", "#0099cc","#00bfff","#33ccff","#66d9ff","#99e6ff"],
             data: this.inStorePeriphericalsData,
             borderWidth: 8
           }
@@ -180,7 +273,7 @@ export class DashboardComponent implements AfterViewInit {
       datasets: [
         {
           label: "Population (millions)",
-          backgroundColor: ["#005ce6", "#0066ff","#1a75ff","#3385ff","#4d94ff","#66a3ff"],
+          backgroundColor: ["#004080", "#0059b3","#0073e6","#1a8cff","#4da6ff","#80bfff"],
           data: this.inUsePeriphericalsData,
           borderWidth: 8
         }
@@ -205,30 +298,30 @@ export class DashboardComponent implements AfterViewInit {
         datasets: [
           {
             label: "In Store",
-            backgroundColor: "#79a6d2",
+            backgroundColor: "#00334d",
             data: this.inStoreAssetsData
           }, {
             label: "In Use",
-            backgroundColor: "#6699cc",
+            backgroundColor: "#006699",
             
             data: this.inUseAssetsData
           },
           {
             label: "In Repair",
-            backgroundColor: "#538cc6",
+            backgroundColor: "#0099e6",
             data: this.inrepairAssetsData
           }, {
             label: "Disrepair",
-            backgroundColor: "#4080bf",
+            backgroundColor: "#33bbff",
             data: this.disrepairAssetsData
           },
           {
             label: "Expired",
-            backgroundColor: "#3973ac",
+            backgroundColor: "#80d4ff",
             data: this.expiredAssetsData
           }, {
             label: "Donation",
-            backgroundColor: "#336699",
+            backgroundColor: "#cceeff",
             data: this.outAssetsData
           },
         ]
@@ -250,10 +343,12 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   inStoreWorkstationModels(){
-    this.modelsbool = true;
+    this.modelsbool = false;
     this.modelLabels.splice(0);
     this.modelData.splice(0);
-    this._dashboardService.inStoreModels(this.asset)
+    this.myChart = null;
+    this.modelsbool = true;
+    this._dashboardService.inStoreModels(this.asset, this.state)
     .subscribe(result => {
       for(let item of result['query']){
         this.modelLabels.push(item['componentname'])
@@ -263,21 +358,21 @@ export class DashboardComponent implements AfterViewInit {
         this.createModelChart();
       }
       else{
-        this.myChart = [];
-        this.createModelChart();
+        window.myChart.update();
       }
         
       
       this.c = this.c +1;
-
+      
+      //this.createModelChart();
 
     })
   }
 
   createModelChart(){
      
-     this.myChart = new Chart(document.getElementById('modelChart'), {
-      type: 'bar',
+     window.myChart = new Chart(document.getElementById('modelChart'), {
+      type: 'horizontalBar',
       data: {
         labels: this.modelLabels,
         datasets: [
@@ -298,4 +393,8 @@ export class DashboardComponent implements AfterViewInit {
     
   }
 
+}
+
+declare global {
+  interface Window { myChart: any; }
 }

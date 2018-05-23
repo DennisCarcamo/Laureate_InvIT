@@ -1,0 +1,113 @@
+<head>
+        <style>
+            .navbar-custom {
+    background-color:    #000000   ;
+    height: 4.5em;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color:  #fdfefe ;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ff821c;
+}
+
+
+
+.element a{
+    color: #f8f4f4
+}
+
+.element {
+    color: #000000
+}
+
+#footer {
+    position: relative;
+    bottom: 0;
+    height: 15px;
+    font-family: 'Source Sans Pro';
+    color: #000000;
+    align-content: center;
+    margin: auto;
+    width: 380px;
+
+}
+
+/* for dropdown only - change the color of droodown */
+.navbar-custom .dropdown-menu {
+    background-color: #ff5500;
+}
+.navbar-custom .dropdown-item {
+    color: #ffffff;
+}
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+    color: #333333;
+    background-color: rgba(255,255,255,.5);
+}
+
+.nav-title{
+    font-size: 1.5em;
+    color : #fdfefe ;
+}
+
+
+h1 { color: #7c795d; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+
+p { color: #000000; font-family: 'Source Sans Pro', sans-serif; font-size: 18px; line-height: 32px; margin: 0 0 24px; }
+
+h5 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+h2 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+h3 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+h4 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+        </style>
+        <meta charset="utf-8">
+        <title>Invit Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+</head>
+<body background="{{ url_for('static', filename='DataCenter_Landing_3_servers.jpg') }}" >
+<div>
+</div>
+<br><br>
+
+<div class="d-flex justify-content-center">
+
+    <div class=" text-center" style="width: 25rem;" >
+    <div  class="">
+    </div><br><br>
+    <img style="    display: block; margin-left: auto; margin-right: auto; width: 40%;"  src="{{url_for('static', filename='leaf-icon.png')}}" /> <br><br>
+    <h1 class="card-title" style="color: #fd5a19; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px;">Please enter your credentials</h1>
+    {% from "_formhelpers.html" import render_field %}
+        <form method=post>
+        <dl>
+            {{ render_field(form.username, placeholder='Username', type='text', class='form-control') }}
+            {{ render_field(form.password, placeholder='Password', type='password', class='form-control') }}
+
+        </dl>
+        <p><input class="btn btn-primary  col-xs-12 " type=submit value=Login>
+        </form><br>
+        <div class=" text-whiye">
+                <p style="color: #fd5a19;">
+                    Laureate Honduras
+                </p>
+        </div>
+    </div>    
+</div><br><br><br><br><br>
+
+<footer id="footer" class="col-offset-5">
+        &copy; Copyright 2018 - Tegucigalpa City.  All rights reserved.
+</footer>
+
+</body>
