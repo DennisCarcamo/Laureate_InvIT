@@ -1,0 +1,128 @@
+<br>
+<div class="container" >
+    <h1 class="my-4">License Relationship 
+      <span style="color:red;">
+        <i class="fa fa-joomla" aria-hidden="true"(click)="siteInformation()"></i>
+      </span><hr>
+
+    </h1>
+        <div class="row" *ngIf="siteInfo">
+
+                <!-- Blog Entries Column -->
+                <div class="col-md-8">
+        
+        
+                  <!-- Blog Post -->
+                  <div class="card mb-4">
+                    <img class="card-img-top" [src]="fullImagePath" alt="Card image cap">
+                    <div class="card-body">
+                      <h2 class="card-title">Some statements</h2>
+                      <p class="card-text">"Once created the initial sheet we can update in this module, removing products from the sheet and adding new if we want this will generate a new sheet and the previous one will become part of the historical"</p>
+                      <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button>
+                    </div>
+                    <div class="card-footer text-muted">
+                      Laureate International Universities
+                    </div>
+                  </div>
+        
+                </div>
+        
+                <!-- Sidebar Widgets Column -->
+                <div class="col-md-4">
+        
+
+                  <br><br><br>
+        
+                  <!-- Categories Widget -->
+                  <div class="card my-4">
+                    <h5 class="card-header">Reminder</h5>
+                    <div class="card-body">
+                      <div class="">
+                        <p>The processes of adding and removing are independent, it is not necessary to do both but at least one</p>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <!-- Side Widget -->
+                  <div class="card my-4">
+                    <h5 class="card-header">Loan Policy</h5>
+                    <div class="card-body">
+                            The policy should also address postorigination activities, such as ongoing monitoring and credit administration, including postorigination monitoring of loan covenants, obtaining financial information, and assessing the borrower's ongoing ability to service the debt and ultimately repay the loan.
+                    </div>
+                  </div>
+        
+                </div>
+        
+              </div>
+    
+    
+    <ul class="list-group" *ngFor="let item of selectemploye">
+        <li class="list-group-item list-group-item-success ">{{item.FIRST_NAME}}  {{item.LAST_NAME}} - {{item.EMAIL}} - {{item.EMPLOYEE_ID}}</li>
+      
+      </ul>
+
+
+    <div *ngIf="boolemployee">
+    
+  
+         <app-employee-table (employeevent)="selectemploye=$event"></app-employee-table>
+         <div class="d-flex justify-content-center">
+                  <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="continueemployee(procesValidationtemplate)">Continue</button>
+         </div>    
+    </div >
+       
+    <div *ngIf="currentproducts">
+        <app-user-products [parentData]="selectemploye" (productremovesevent)="productremovesevent=$event" (currentproductrevent)="selectproducts=$event"></app-user-products>
+         <div class="d-flex justify-content-center">
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="backemployee()" >Go Back</button><h4>-</h4>
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="continueprods()">Add Product</button> 
+        </div> 
+    </div>
+
+        
+    <br><br><br><br>
+    
+    <div *ngIf="boolproducts" class="d-flex justify-content-center">
+            <!-- <button class="btn btn-link btn-lg" (click)="createSignatureSheet()"></button> -->
+            <button class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" (click)="openModal(template)">Save & Update Signature Sheet</button><br>
+        </div><br>
+    <div *ngIf="confirmation" class="alert" role="alert">
+            <h4 class="alert-heading">Are you sure of update this Signature Sheet?</h4>
+            <p>The information will be save and automatically download a pdf file of the sheet, press 'YES', to continue or 'No', to go back.</p>
+            <div class="d-flex justify-content-start">
+                <button class="btn btn-info btn-sm " (click)="updateSheet()" >YES</button><p>-</p>
+                <button class="btn btn-info btn-sm " (click)="abort()"> NO</button>
+            </div>
+            <hr>
+            <p class="mb-0">-LAUREATE IT-</p>
+        </div>
+    <!-- <button class="btn" (click)="testAlert()">Testbutton</button>  -->
+
+</div>
+<!-- <button (click)="testx()">test</button> -->
+
+<ng-template #template>
+    <div class="modal-body text-center alert">
+        <p>Are you sure of save this Signature Sheet?? <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
+        <button type="button" class="btn btn-primary" (click)="updateSheet()" [disabled]="disable_flag == 0">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="abort()" >No</button>
+        <div class="modal-body alert " role="alert">
+                    The information will be update and automatically create a pdf file of the sheet, press 'YES', to continue or 'No', to go back.
+        </div>
+    </div>
+    
+       
+</ng-template>
+
+<ng-template #procesValidationtemplate>
+        <div class="modal-body text-center alert ">
+            <p>It is not possible to Create this sheet.! <span><i class="fa fa-times" aria-hidden="true"></i></span></p>
+            <button class="btn btn-danger" (click)="ok()">Ok</button><br>
+            <div class="modal-body alert " role="alert">
+                    Verify that the user has an onboarding sheet, or does not have an offboarding sheet
+            </div>
+        </div>
+        
+           
+    </ng-template>
+

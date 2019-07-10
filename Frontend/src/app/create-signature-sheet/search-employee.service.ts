@@ -105,8 +105,8 @@ export class SearchEmployeeService {
 
   }
 
-  searchSignatureSheets(page, text , limit){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/signaturesheet?page=${page}&text=${text}&limit=${limit}`).map(result => result);
+  searchSignatureSheets(page, text , limit, sheet_option, status_option){
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/signaturesheet?page=${page}&text=${text}&limit=${limit}&idsheet=${sheet_option}&status=${status_option}`).map(result => result);
   }
 
   searchLoanSignatureSheets(page, text , limit, type){
@@ -117,10 +117,11 @@ export class SearchEmployeeService {
     return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loansheetproducts?id_signature=${id}`).map(result => result);
   }
 
-  updateOffLoanSheetsProducts(products, id_employee){
+  updateOffLoanSheetsProducts(products, id_employee, id_sheet){
     return this.httpClient.post(`http://127.0.0.1:5000/api/v1/loansheetproducts`,{
       Products:JSON.stringify(products),
-      id_employee: JSON.stringify(id_employee)
+      id_employee: JSON.stringify(id_employee),
+      id_signature:id_sheet
     }).map(result => result);
   }
 
@@ -134,6 +135,21 @@ export class SearchEmployeeService {
 
   processValidation(employee_id){
     return this.httpClient.get(`http://127.0.0.1:5000/api/v1/offboardingsheetvalidation/${employee_id}`).map(result => result);
+  }
+
+  searchLoanProducts(text_, page_, limit_, status_){
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loanstatussearch?text=${text_}&page=${page_}&limit=${limit_}&status=${status_}`).map(result => result);
+  }
+
+  pdf_validation(id_signature){
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/pdfimages?id_signature=${id_signature}`).map(result => result);
+  }
+
+  pdf_image_insert(id_signature_, doc_name_){
+    return this.httpClient.post(` http://127.0.0.1:5000/api/v1/pdfimages`, {
+      id_signature: id_signature_,
+      doc_name:doc_name_
+    }).map(result => result);
   }
 
 

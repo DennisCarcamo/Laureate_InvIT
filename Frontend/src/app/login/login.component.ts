@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
   public bitly;
   public officeImage;
   public mainImage;
+  public adimage;
+  public jamfimage;
 
 
   public secondRow = false;
@@ -45,6 +47,8 @@ export class LoginComponent implements OnInit {
     this.bitly = '/assets/images/Logo_bitly.jpg';
     this.officeImage = '/assets/images/office.jpg';
     this.mainImage = '/assets/images/beard-chair-computer-840996.jpg';
+    this.adimage = '/assets/images/ad.png';
+    this.jamfimage = '/assets/images/jamf.png'
   }
 
   ngOnInit() {
@@ -52,7 +56,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/');
     }*/
     this.login.getCookie().subscribe( res => {
-
+      //this.test();
     })
   }
   ngAfterViewInit() {

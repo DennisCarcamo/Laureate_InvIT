@@ -6,15 +6,15 @@
   <!-- <h4>Search the Employee</h4> -->
   <form class="form-inline d-flex justify-content-end">
     <div class="form-group">
-        <input type="text" placeholder="Search" class="form-control" (keyup)="searchEmployee($event)">
-        <button class="btn btn-info" (click)="find()">Find Employee</button><br>
+        <input type="text" [(ngModel)]="search" placeholder="Search" class="form-control" name="gay" >
+        <button class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" (click)="find()">Find Employee <span><i class="fa fa-address-book" aria-hidden="true"></i></span></button><br>
 
     </div>
 
   </form>
 </div><br>
-<table class="table">
-  <thead class="thead-dark">
+<table class="table table-hover table-bordered">
+  <thead class="table-head">
     <tr class="">
         <th scope="col">Id</th>
       <th scope="col">Employeeid</th>
@@ -39,7 +39,7 @@
       <td>{{employ.DEPARTMENT}}</td>
       <td>{{employ.SITE}} </td>
 
-      <td><button class="btn btn-primary btn-sm" (click)="onSelect(employ)">Select</button></td>
+      <td><button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit" (click)="onSelect(employ)">Select</button></td>
     </tr>
 
   </tbody>
@@ -57,16 +57,6 @@
 
 </div>
 
-
-
-
-<!--
-<br>
 <div>
-    <input type="text" class="form-control col-3" placeholder="Search " id="search">
-</div>
 
 
-
- </div>
--->

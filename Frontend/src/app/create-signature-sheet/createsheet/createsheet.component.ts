@@ -37,6 +37,7 @@ export class CreatesheetComponent implements OnInit {
 
   public fullImagePath;
   public siteInfo = false;
+  public disable_flag = 1;
 
   constructor(private httpClient:HttpClient, private searchEmployeeService : SearchEmployeeService, private modalService: BsModalService, private cookieService: CookieService, private router : Router) {
 
@@ -44,9 +45,9 @@ export class CreatesheetComponent implements OnInit {
    }
 
   ngOnInit() {
-    /*if(!this.cookieService.get('user_name')){
-      this.router.navigateByUrl('/');
-    }*/
+    //if(!this.cookieService.get('user_name')){
+      //this.router.navigateByUrl('/');
+    //}
     let val = this.cookieService.get("token");
     if(val){
 
@@ -67,7 +68,8 @@ export class CreatesheetComponent implements OnInit {
       }
     }
     else{
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
   }
 
@@ -198,6 +200,7 @@ export class CreatesheetComponent implements OnInit {
       
   } */
   insertSheet(){
+    this.disable_flag = 0;
     let x = this.selectemploye[0];
     //validacion
     /*let m;
@@ -234,7 +237,7 @@ export class CreatesheetComponent implements OnInit {
        alert("Creating sheet..");
       //pendiente aun #### 
       this.createSignatureSheet(x, this.productsevent);
-      alert('SIgnature sheet successfully created.!!');
+      alert('Signature sheet successfully created.!!');
     }
     else{
       if(this.validation == 0 && this.option == 1){
@@ -277,7 +280,7 @@ export class CreatesheetComponent implements OnInit {
   }
 
   testalert(){
-    alert(this.date);
+    alert(this.option);
   }
 }
 

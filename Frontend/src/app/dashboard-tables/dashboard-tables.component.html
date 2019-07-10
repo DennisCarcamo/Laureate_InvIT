@@ -11,11 +11,11 @@
            </div>
            <div class="form-group">
            </div>
-           <button type="button" class="btn btn-info"  (click)="funStorageMoveTable()">Generate Table</button>
+           <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit"  (click)="funStorageMoveTable()">Generate Table</button>
            <pre>   </pre>
            <div class="form-inline">
               <input type="text" class="form-control" placeholder="Search Asset State History"  [(ngModel)]="searchprod">
-              <button class="btn btn-info" (click)="searchField()"><span> <i class="fa fa-search" aria-hidden="true"></i>
+              <button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submi" (click)="searchField()"><span> <i class="fa fa-search" aria-hidden="true"></i>
               </span></button>
            </div>
          </div>
@@ -24,8 +24,8 @@
 <br>
   <div class="container" *ngIf="moveTable">
     <h3>Storage Move from <strong>{{datefrom}}</strong> to <strong>{{dateto}}</strong>:</h3><br>
-      <table class="table">
-          <thead class="thead">
+      <table class="table table-hover table-bordered">
+          <thead class="table-head">
             <tr class="">
                 <th scope="col">Assettag</th>
               <th scope="col">Resource Name</th>
@@ -61,8 +61,8 @@
 
   <div class="container" *ngIf="moveTable2">
     <h3>Storage Move for <strong>{{searchprod}}</strong> :</h3><br>
-      <table class="table">
-          <thead class="thead">
+      <table class="table table-hover table-bordered">
+          <thead class="thead-dark">
             <tr class="">
                 <th scope="col">Assettag</th>
               <th scope="col">Resource Name</th>

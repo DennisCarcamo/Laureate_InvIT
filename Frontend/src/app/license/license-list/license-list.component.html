@@ -1,0 +1,228 @@
+<div class="container">
+  <h1 class="my-4">
+    License List
+   <span style="color:purple;">
+      <i aria-hidden="true" class="fa fa-list-alt"></i>
+    </span> 
+  </h1>
+  <button type="button" class="btn btn-primary" (click)="createMode(); openModal(createModal)">
+    Create License
+  </button>
+  <hr>
+  <div>
+    <table class="table table-hover table-bordered">
+      <thead class="table-head">
+        <tr class="">
+          <th scope="col">Product Name</th>
+          <th scope="col">Licences</th>
+          <th scope="col">Product Version</th>
+          <th scope="col">Max Users</th>
+          <th scope="col">Enable</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="select" *ngFor="let item of licenseList">
+          <td [innerHtml]="item.name_product"></td>
+          <td [innerHtml]="item.licences"></td>
+          <td [innerHtml]="item.version_product"></td>
+          <td [innerHtml]="item.max_users"></td>
+          <td [innerHtml]="item.enable === 1 ? 'True' : 'False'"></td>
+          <td>
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit"
+              (click)="selectLicense(item); editMode(); openModal(createModal)">Edit</button>
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit"
+              (click)="openModal(showMoreModal); selectLicense(item)">Show More</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Create Modal -->
+<ng-template #createModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left" *ngIf="!isEditing">Create License</h4>
+    <h4 class="modal-title pull-left" *ngIf="isEditing">Edit License</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="licenseForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" formControlName="productName" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.productName.errors }" />
+        <div *ngIf="submitted && controls.productName.errors" class="invalid-feedback">
+          <div *ngIf="controls.productName.errors.required">Product name required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Licenses</label>
+        <input type="text" formControlName="licenses" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.licenses.errors }" />
+        <div *ngIf="submitted && controls.licenses.errors" class="invalid-feedback">
+          <div *ngIf="controls.licenses.errors.required">Licenses required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Vendor</label>
+        <input type="text" formControlName="vendor" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.vendor.errors }" />
+        <div *ngIf="submitted && controls.vendor.errors" class="invalid-feedback">
+          <div *ngIf="controls.vendor.errors.required">Vendor required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Adquisition Date</label>
+        <input type="date" formControlName="adquisitionDate" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.adquisitionDate.errors }" />
+        <div *ngIf="submitted && controls.adquisitionDate.errors" class="invalid-feedback">
+          <div *ngIf="controls.adquisitionDate.errors.required">Adquisition date required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Expiration Date</label>
+        <input type="date" formControlName="expirationDate" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.expirationDate.errors }" />
+        <div *ngIf="submitted && controls.expirationDate.errors" class="invalid-feedback">
+          <div *ngIf="controls.expirationDate.errors.required">Expiration date required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Product Version</label>
+        <input type="number" formControlName="productVersion" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.productVersion.errors }" />
+        <div *ngIf="submitted && controls.productVersion.errors" class="invalid-feedback">
+          <div *ngIf="controls.productVersion.errors.required">Product version required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Max Users</label>
+        <input type="number" formControlName="maxUsers" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.maxUsers.errors }" />
+        <div *ngIf="submitted && controls.maxUsers.errors" class="invalid-feedback">
+          <div *ngIf="controls.maxUsers.errors.required">Max users required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Accountable</label>
+        <input type="text" formControlName="accountable" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.accountable.errors }" />
+        <div *ngIf="submitted && controls.accountable.errors" class="invalid-feedback">
+          <div *ngIf="controls.accountable.errors.required">Accountable required</div>
+          <div *ngIf="controls.accountable.errors.email">Accountable have to be an email</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" formControlName="price" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && controls.price.errors }" />
+        <div *ngIf="submitted && controls.price.errors" class="invalid-feedback">
+          <div *ngIf="controls.price.errors.required">Price required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-control" formControlName="enable"
+          [ngClass]="{ 'is-invalid': submitted && controls.enable.errors }">
+          <option value="">Seleccionar</option>
+          <option [value]="1">Enable</option>
+          <option [value]="0">Disable</option>
+        </select>
+        <div *ngIf="submitted && controls.enable.errors" class="invalid-feedback">
+          <div *ngIf="controls.enable.errors.required">Por favor, Selecciona el status</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Save</button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>
+
+<!-- Show More Modal -->
+<ng-template #showMoreModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Details:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-hover table-bordered">
+      <thead class="table-head">
+        <tr class="">
+          <th scope="col">Field</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="select">
+          <td [innerHtml]="'Name Product'"></td>
+          <td [innerHtml]="license.name_product"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'License'"></td>
+          <td [innerHtml]="license.licences"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Vendor'"></td>
+          <td [innerHtml]="license.vendor"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Adquisition Date'"></td>
+          <td [innerHtml]="license.adquisition_date"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Date Expiration'"></td>
+          <td [innerHtml]="license.date_expiration"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Version Product'"></td>
+          <td [innerHtml]="license.version_product"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Max users'"></td>
+          <td [innerHtml]="license.max_users"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Accountable'"></td>
+          <td [innerHtml]="license.accountable"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Price'"></td>
+          <td [innerHtml]="license.price"></td>
+        </tr>
+
+        <tr class="select">
+          <td [innerHtml]="'Enable'"></td>
+          <td [innerHtml]="license.enable"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

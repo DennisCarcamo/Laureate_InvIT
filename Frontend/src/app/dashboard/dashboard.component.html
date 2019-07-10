@@ -1,7 +1,7 @@
 <div *ngIf="privilege">
 
 <div class="container">
-    <br><h2>Dashboard  <span style="color:rgb(255, 0, 76)"><i class="fa fa-bar-chart" aria-hidden="true"></i></span> <span style="color:rgb(15, 175, 0);"><i class="fa fa-pie-chart" aria-hidden="true"></i></span></h2>
+    <br><h2>Dashboard  <span style="color:#1da1f2"><i class="fa fa-bar-chart" aria-hidden="true"></i></span> <span style="color:#69C68E;"><i class="fa fa-pie-chart" aria-hidden="true"></i></span></h2>
     <div class="row justify-content-center">
       <div>
            <canvas id="bar-chart-horizontal" width="1" height="1"></canvas> 
@@ -35,10 +35,10 @@
 <div class="row justify-content-center">
 
       <div class="card border-info mb-3 mx-2" style="width: 19rem;">
-          <div class="card-header">Workstation </div>
+          <div class="card-header"><span class="card-header-dashboard"> Workstations </span></div>
           <div class="card-body text-secondary">
             <h5 class="card-title"> Workstations In Store</h5>
-            <h1>{{ inStoreWorkstationData }}</h1>
+            <h2>{{ inStoreWorkstationData }}</h2>
           </div>
         </div>
 
@@ -46,7 +46,7 @@
             <div class="card-header">Workstations</div>
             <div class="card-body text-secondary">
               <h5 class="card-title"> Workstations In Use</h5>
-              <h1>{{ inUseWorkstationData }}</h1>
+              <h2>{{ inUseWorkstationData }}</h2>
             </div>
           </div>
 
@@ -54,14 +54,14 @@
               <div class="card-header">Servers</div>
               <div class="card-body text-secondary">
                 <h5 class="card-title"> Servers In Use</h5>
-                <h1>5</h1>
+                <h2>{{ serversInUse }}</h2>
               </div>
             </div>
             <div class="card border-info mb-3 mx-1" style="width: 17rem;">
                 <div class="card-header">Servers</div>
                 <div class="card-body text-secondary">
                   <h5 class="card-title"> Servers In Store</h5>
-                  <h1>5</h1>
+                  <h2>{{ serversInStore }}</h2>
                 </div>
               </div>
   
@@ -110,7 +110,7 @@
         <h5 class="card-title"> Workstation Lifetime (In Use) <span style="color:rgb(15, 146, 15)"><i class="fa fa-battery-half" aria-hidden="true"></i>
 
         </span></h5>
-        <h1>{{workstationLifetimeinUse}} </h1>
+        <h2>{{workstationLifetimeinUse}} </h2>
       </div>
     </div>
 
@@ -120,12 +120,12 @@
           <h5 class="card-title"> Workstation Lifetime (In Store) <span style="color:rgb(15, 146, 15)"><i class="fa fa-battery-half" aria-hidden="true"></i>
 
           </span></h5>
-          <h1>{{workstationLifetimeInStore}} </h1>
+          <h2>{{workstationLifetimeInStore}} </h2>
         </div>
       </div>
 
 </div>
-
+<!-- query aqui docking es el modelo a seguir -->
 <div class="row justify-content-center">
     <div class="card border-info mb-3 mx-2" style="max-width: 100rem;">
         <div class="card-header">All periphericals <span style="color:aqua"><i class="fa fa-bar-chart" aria-hidden="true"></i></span></div>
@@ -176,7 +176,7 @@
                 <option value="2">In Use</option>
               </select>-
             </div>
-            <button type="button" class="btn btn-info"  (click)="inStoreWorkstationModels()">Generate Graphic</button>
+            <button type="button" class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit"  (click)="inStoreWorkstationModels()">Generate Graphic</button>
 
           </div>
 

@@ -23,6 +23,9 @@ export class NavBarComponent implements OnInit {
   public privilegeReports = false;
   public privilegeAdmin = false;
   public dropdown = false;
+  public dropdownPdf_ = false;
+  public dropdownLicences = false; 
+
   ngOnInit() {
    /* if(this.cookieService.get('user_name')){
       this.loggedIn = true;
@@ -33,8 +36,16 @@ export class NavBarComponent implements OnInit {
       this.loggedIn = false;
     }*/
 
+    //comentar la funcion dev only al deployar;
+    this.devOnly();
+
+
+    //descomentar al deployar;
+    /*
     let val = this.cookieService.get("token");
     let djtw = jwt_decode(val);
+    console.log(djtw);
+    console.log("up");
     let identity = djtw['identity'];
     for (var _i = 0; _i < identity.length; _i++) {
       if(identity[_i]['privilege'] == 'dashboard' ){
@@ -60,16 +71,21 @@ export class NavBarComponent implements OnInit {
       }
     }
 
+    //
+
+    */
+
+
   }
 
   Logout(){
     //destruir ss python
-    /*this.loginService.logout()
+    this.loginService.logout()
     .subscribe(res => {
       this.cookieService.deleteAll();
       window.location.href = '/login';
 
-    })*/ 
+    }) 
     this.cookieService.deleteAll();
     let url = `http://127.0.0.1:5000/logout`;
     window.location.href = url;
@@ -84,4 +100,37 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+
+  dropdPdf(){
+    if(this.dropdownPdf_){
+      this.dropdownPdf_ = false;
+    }
+    else{
+      this.dropdownPdf_ = true;
+    }
+  }
+
+  dropdLicences(){
+    if(this.dropdownLicences){
+      this.dropdownLicences = false;
+    }
+    else{
+      this.dropdownLicences = true;
+    }
+  }
+
+  devOnly(){
+    //OJO manejo de los permisos del nav bar se removeran solo para el ambiente de desarrollo comentar lo de abajo y descomentar lo de arriba. 
+    //comentar desde aqui
+    this.privilegeDashboard = true;
+    this.privilegeAdmin = true;
+    this.privilegeCreate = true;
+    this.privilegeLoan = true;
+    this.privilegePdf = true;
+    this.privilegeReports = true
+    this.privilegeUpdtae = true;
+    //alert("Done");
+
+    //hasta aqui.
+  }
 }

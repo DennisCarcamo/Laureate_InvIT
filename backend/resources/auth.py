@@ -36,10 +36,13 @@ class DomainController(object):
             z = conn.search('dc=hnsc , dc=net', filter_ , attributes=['cn', 'mail', 'sAMAccountName'])
             #comparison = conn.compare('cn=jzuniga,ou=COPR,o=COMPANY', 'company', 'Laureate International Universities')
             #print(comparison)
-
-            x = conn.entries[0].entry_to_json()
-            conn.unbind()
-
+            print(email)
+            try:
+                x = conn.entries[0].entry_to_json()
+                conn.unbind()
+            except:
+                x = 'error'
+                    
         if not conn.bind():
             x = 'error'
             print('error', conn.result)

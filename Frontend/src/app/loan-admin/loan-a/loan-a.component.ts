@@ -43,6 +43,9 @@ export class LoanAComponent implements OnInit {
   public fullImagePath;
   public siteInfo = false;
 
+  public boolLoanPending = false;
+  public messegeError = 'More information required.';
+
   constructor(private modalService: BsModalService, private _Service : SearchEmployeeService, private cookieService: CookieService, private router : Router) { 
         this.fullImagePath = '/assets/images/adult-book-business-297755.jpg'
   }
@@ -69,7 +72,8 @@ export class LoanAComponent implements OnInit {
       }
 
     }else{
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
 
   }
@@ -97,7 +101,9 @@ export class LoanAComponent implements OnInit {
 
     }
     else{
-      alert('Select Type first!');
+      this.messegeError = 'Select Type first!'
+      document.getElementById('errorModalbtn').click();
+      //alert('Select Type first!');
     }
   }
 
@@ -109,6 +115,7 @@ export class LoanAComponent implements OnInit {
         this.searchText = x.EMAIL
         this._Service.searchLoanSignatureSheets(this.page, this.searchText, this.limit, this.option)
         .subscribe(res => {
+            console.log(res);
             let x = res['SignatureSheets'];
             let y = res['meta'];
             this.sheets = x;
@@ -157,9 +164,13 @@ export class LoanAComponent implements OnInit {
       }
     }
     else{
-      alert("Select Employee first.!")
+      //alert("Select Employee first.!")
+      this.messegeError = 'Select Employee first!'
+      document.getElementById('errorModalbtn').click();
     }
   }
+
+
 
   onSelect(selectedItem: any){
     let x = {
@@ -184,27 +195,33 @@ export class LoanAComponent implements OnInit {
         this.modalRef = this.modalService.show(template);
        }
        else{
-         alert('No products for that sheet');
+         //alert('No products for that sheet');
+         this.messegeError = 'No products for that sheet';
+         document.getElementById('errorModalbtn').click();
        }
       })
       
     }
     else{
-      alert("Select a Sheet first");
+      //alert("Select a Sheet first");
+      this.messegeError = 'Select a sheet first!';
+      document.getElementById('errorModalbtn').click();
     }
     
   }
 
   confirm(){
     let x = this.selectLoanSheet[0];
-    this._Service.updateOffLoanSheetsProducts(this.modalProducts, x.id_employee)
+    this._Service.updateOffLoanSheetsProducts(this.modalProducts, x.id_employee, x.id_signature)
     .subscribe(res => {
       if(res['message'] == 'Done'){
         alert('Relationships removed');
         window.location.href = '/loan';
       }
       else{
-        alert('Assets already removed');
+        //alert('Assets already removed');
+        this.messegeError = 'Assets already removed!';
+        document.getElementById('errorModalbtn').click();
       }
     })
 
@@ -215,7 +232,40 @@ export class LoanAComponent implements OnInit {
   }
 
   openOffboardingModal(template: TemplateRef<any>){
-    this.modalRef = this.modalService.show(template);
+    //Validar que no tenga hojas de prestamo pendientes.
+    let x = this.selectemploye[0];
+    //this.searchText = x.EMAIL
+    this._Service.searchLoanSignatureSheets(1, x.EMAIL, 10, 3)
+    .subscribe(res => {
+        //console.log("############");
+        //console.log(res);
+        let y = res['meta'];
+        let msg = res['message'];
+        if(y){
+          if(y['count'] > 0){
+            this.boolLoanPending = true; 
+          }
+          else{
+            this.boolLoanPending = false;
+          }
+        }else{
+          if(msg){
+            this.boolLoanPending = false;
+          }
+        }
+        
+      
+        //condicionante si se debe mostrar o no el dialogo de offboarding.
+         if(this.boolLoanPending){
+          this.messegeError = 'This user have Loan sheets pending, make sure to release then first'
+          document.getElementById('errorModalbtn').click();
+         }
+         else{
+           this.modalRef = this.modalService.show(template);  
+         }
+      });
+
+      
   }
 
   makeOffboarding(){
@@ -244,17 +294,22 @@ export class LoanAComponent implements OnInit {
         }
         else{
           alert('Something Wrong');
+          window.location.href = '/loan';
         }
       })
     }else{
-      alert('Offboarding Process already done');
+      //alert('Offboarding Process already done');
+      this.messegeError = 'Offboarding process already done';
+      document.getElementById('errorModalbtn').click();
+      
     }
 
   }
 
-  test(){
-    let x = this.selectemploye[0];
-    console.log(this.validation);
+  openErrorModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+    document.getElementById('errorMessage').innerHTML = this.messegeError;
+
   }
 
 

@@ -27,7 +27,9 @@ export class DashboardComponent implements AfterViewInit {
 
   public inStoreWorkstationData : any;
   public inUseWorkstationData : any;
-
+  public serversInUse : any = 0;
+  public serversInStore : any = 0;
+  
   public inStoreAssetsLabels : any = [];
   
   public inStoreAssetsData : any = [];
@@ -36,6 +38,14 @@ export class DashboardComponent implements AfterViewInit {
   public disrepairAssetsData : any = [];
   public expiredAssetsData : any = [];
   public outAssetsData : any = [];
+
+  public inStoreAssetsDataflag : any = [];
+  public inrepairAssetsDataflag : any = [];
+  public inUseAssetsDataflag : any = [];
+  public disrepairAssetsDataflag : any = [];
+  public expiredAssetsDataflag : any = [];
+  public outAssetsDataflag : any = [];
+  public flag_ = 0;
   
   public allperiphericals = true;
   public modelsbool = false;
@@ -65,13 +75,17 @@ export class DashboardComponent implements AfterViewInit {
   ngOnInit() {
 
     //this.cookieValue = this.cookieService.get('user_name');
-    /*if(this.cookieService.get('user_name')){
-      this.initialDashboard();
-    }
-    else{
+    //if(this.cookieService.get('user_name')){
+      //this.initialDashboard();
+    //}
+    //else{
      // alert(this.logged);
-      this.router.navigateByUrl('/');
-    }*/
+      //this.router.navigateByUrl('/');
+    //}
+
+      //comentar los privilegios en producción y qa;
+      //this.privilege = true;
+      //OJO
 
       let val = this.cookieService.get("token");
       if(val){
@@ -92,7 +106,12 @@ export class DashboardComponent implements AfterViewInit {
         }
       }
       else{
-        window.location.href = '/login';
+
+      //comentar los privilegios en producción y qa;
+      this.privilege = true;
+      this.initialDashboard();
+      //OJO descomentar el href;
+        //window.location.href = '/login';
       }
 
     
@@ -104,6 +123,7 @@ export class DashboardComponent implements AfterViewInit {
     //------------------------------------------------
     this._dashboardService.loadInitialDashboard()
     .subscribe(result => {
+      console.log(result);
       this._initialDashboard = result['query'];
       this._statehistory = result['History'];
       for(let item of this._initialDashboard){
@@ -131,84 +151,86 @@ export class DashboardComponent implements AfterViewInit {
         }
         if(item['componenttypename'] != "Workstation" || item['componenttypename'] == "Workstation" ){
           if(item['displaystate'] == "In Use"){
-            this.inUseAssetsData.push(item['count'])
+            this.inUseAssetsData.push({ componenttypename: item['componenttypename'], value : item['count']})
           }
           if(item['displaystate'] == "In Store"){
-            this.inStoreAssetsData.push(item['count'])
+            this.inStoreAssetsData.push({ componenttypename: item['componenttypename'], value : item['count']} )
           }
           if(item['displaystate'] == "Expired"){
-            this.expiredAssetsData.push(item['count'])
+            this.expiredAssetsData.push({ componenttypename: item['componenttypename'], value : item['count']} )
           }
           if(item['displaystate'] == "Disrepair"){
-            this.disrepairAssetsData.push(item['count'])
+            this.disrepairAssetsData.push({ componenttypename: item['componenttypename'], value : item['count']} )
           }
           if(item['displaystate'] == "Donation"){
-            this.outAssetsData.push(item['count'])
+            this.outAssetsData.push({ componenttypename: item['componenttypename'], value : item['count']} )
           }
           if(item['displaystate'] == "In Repair"){
-            this.inrepairAssetsData.push(item['count'])
+            this.inrepairAssetsData.push({ componenttypename: item['componenttypename'], value : item['count']} )
           }
+
+          
         }
 
 
-
-      }
+      } //end for
+      //console.log('Resultados en variables');
+      //console.log('In Use.');
+      //console.table(this.inUseAssetsData);
+      //console.log('In Store');
+      //console.table(this.inStoreAssetsData);
+      //console.log('Expired');
+      //console.table(this.expiredAssetsData);
+      //console.log('disrepair');
+      //console.table(this.disrepairAssetsData);
+      //console.log('Out');
+      //console.table(this.outAssetsData);
+      //console.log('Repair');
+      //console.table(this.inrepairAssetsData);
       
-      this.inStorePeriphericalChart();
+      this.validatePeriphericalStates();
+      
+      //console.log("Arreglo in use");
+      //console.log(this.inUseAssetsDataflag);
 
-    })
+      //console.log("Arreglo in Store");
+      //console.log(this.inStoreAssetsDataflag);
+      
+      //console.log("Arreglo in Expire");
+      //console.log(this.expiredAssetsDataflag);
+
+  
+     this.inStorePeriphericalChart();
+    }) 
 
     this._dashboardService.searchLifetime()
     .subscribe(res => {
-      console.log(res);
+      //console.log(res);
       this.workstationLifetimeinUse = res['query_in_use'];
       this.workstationLifetimeInStore = res['query_in_store'];
 
     })
-  }
 
+    this._dashboardService.serversCount()
+    .subscribe(res => {
+      let x = res['message'];
+      //console.log(x[1]);
 
-  /*storageMoveTable(){
-    if(!this.datefrom && !this.dateto){
-      alert('Incomplete Information ');
-    }
-    this._dashboardService.stateTable(this.datefrom, this.dateto, this.cursor)
-    .subscribe(res=>{
-      console.log(res);
-      if(res['message'] == 'wrong_dates'){
-        alert('Incorrect date order.!');
-      }else{
-        this.storageMovesItems = res['query'];
-        this.meta = res['meta'];
-        //alert('aqui');
-        console.log(this.meta);
-        this.count = this.meta.count;
-        this.cursor = this.meta.cursor;
-        if(this.meta.more){
-          this.shownext = true;
-        }else{
-          this.shownext = false;
+      for(let item of x){
+        //console.log(item['count']);
+        if(item['displaystate'] == "In Store"){
+          this.serversInStore = item['count'];
         }
-        
-        if(this.cursor == 10){
-          this.showpreview = false
+        if(item['displaystate'] == "In Use"){
+          this.serversInUse = item['count']
         }
-        else{
-          this.showpreview = true;
-        }
-      }
+
+      } 
     })
-    
-    //console.log(this.modelData);
-    //this.modelsbool = true;
-    
   }
 
-  preview(){
-    this.cursor = this.cursor - 20;
-    this.storageMoveTable();
-    //alert(this.cursor);
-  } */
+
+
 
   inStorePeriphericalChart(){
     new Chart(document.getElementById("doughnut-chart"), {
@@ -289,8 +311,8 @@ export class DashboardComponent implements AfterViewInit {
     }
   });
 
-    //this.canvas = document.getElementById('myChart');
-    //this.ctx = this.canvas.getContext('2d');
+
+
     let myChart = new Chart(document.getElementById('myChart'), {
       type: 'bar',
       data: {
@@ -299,30 +321,30 @@ export class DashboardComponent implements AfterViewInit {
           {
             label: "In Store",
             backgroundColor: "#00334d",
-            data: this.inStoreAssetsData
+            data: this.inStoreAssetsDataflag
           }, {
             label: "In Use",
             backgroundColor: "#006699",
             
-            data: this.inUseAssetsData
+            data: this.inUseAssetsDataflag
           },
           {
             label: "In Repair",
             backgroundColor: "#0099e6",
-            data: this.inrepairAssetsData
+            data: this.inrepairAssetsDataflag
           }, {
             label: "Disrepair",
             backgroundColor: "#33bbff",
-            data: this.disrepairAssetsData
+            data: this.disrepairAssetsDataflag
           },
           {
             label: "Expired",
             backgroundColor: "#80d4ff",
-            data: this.expiredAssetsData
+            data: this.expiredAssetsDataflag
           }, {
             label: "Donation",
             backgroundColor: "#cceeff",
-            data: this.outAssetsData
+            data: this.outAssetsDataflag
           },
         ]
       },
@@ -331,7 +353,7 @@ export class DashboardComponent implements AfterViewInit {
           text: 'Population growth (millions)'
         }
       }
-    });
+    }); 
 
 
 
@@ -377,7 +399,7 @@ export class DashboardComponent implements AfterViewInit {
         labels: this.modelLabels,
         datasets: [
           {
-            label: "Quantity In Store",
+            label: "Quantity",
             backgroundColor: "#3e95cd",
             data: this.modelData
           }
@@ -392,6 +414,276 @@ export class DashboardComponent implements AfterViewInit {
 
     
   }
+
+  validatePeriphericalStates(){
+    let xExpireDocking = 0;
+    let xExpireheadsets = 0;
+    let xExpireKeyboard = 0;
+    let xExpireMonitor = 0;
+    let xExpireMouse = 0;
+    let xExpireUPS = 0;
+    let xExpireWorkstation = 0;
+
+    let flag = 0;
+
+    for(let item of this.expiredAssetsData){
+      if( item['componenttypename'] == 'Docking Station'){
+        xExpireDocking = item['value'];
+      }
+
+      
+      if( item['componenttypename'] == 'Headset'){
+        xExpireheadsets = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Keyboard'){
+        xExpireKeyboard = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Monitor'){
+        xExpireMonitor = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Mouse'){
+        xExpireMouse = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'UPS'){
+        xExpireUPS = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Workstation'){
+        xExpireWorkstation = item['value'];
+      }
+      
+    }
+
+    //console.log('###### Expire Array ####');
+    //console.log(xExpireDocking,xExpireheadsets, xExpireKeyboard, xExpireMonitor, xExpireMouse, xExpireUPS, xExpireWorkstation )
+    this.expiredAssetsDataflag.push(xExpireDocking,xExpireheadsets, xExpireKeyboard, xExpireMonitor, xExpireMouse, xExpireUPS, xExpireWorkstation )
+
+
+    let xInStoreDocking = 0;
+    let xInStoreheadsets = 0;
+    let xInStoreKeyboard = 0;
+    let xInStoreMonitor = 0;
+    let xInStoreMouse = 0;
+    let xInStoreUPS = 0;
+    let xInStoreWorkstation = 0;
+
+    for(let item of this.inStoreAssetsData){
+      if( item['componenttypename'] == 'Docking Station'){
+        xInStoreDocking = item['value'];
+      }
+
+      
+      if( item['componenttypename'] == 'Headset'){
+        xInStoreheadsets = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Keyboard'){
+        xInStoreKeyboard = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Monitor'){
+        xInStoreMonitor = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Mouse'){
+        xInStoreMouse = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'UPS'){
+        xInStoreUPS = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Workstation'){
+        xInStoreWorkstation = item['value'];
+      }
+      
+    }
+
+    //console.log('###### InStore Array ####');
+    //console.log(xInStoreDocking,xInStoreheadsets, xInStoreKeyboard, xInStoreMonitor, xInStoreMouse, xInStoreUPS, xInStoreWorkstation )
+    this.inStoreAssetsDataflag.push(xInStoreDocking,xInStoreheadsets, xInStoreKeyboard, xInStoreMonitor, xInStoreMouse, xInStoreUPS, xInStoreWorkstation )
+
+    let xInUseDocking = 0;
+    let xInUseheadsets = 0;
+    let xInUseKeyboard = 0;
+    let xInUseMonitor = 0;
+    let xInUseMouse = 0;
+    let xInUseUPS = 0;
+    let xInUseWorkstation = 0;
+
+    for(let item of this.inUseAssetsData){
+      if( item['componenttypename'] == 'Docking Station'){
+        xInUseDocking = item['value'];
+      }
+
+      
+      if( item['componenttypename'] == 'Headset'){
+        xInUseheadsets = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Keyboard'){
+        xInUseKeyboard = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Monitor'){
+        xInUseMonitor = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Mouse'){
+        xInUseMouse = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'UPS'){
+        xInUseUPS = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Workstation'){
+        xInUseWorkstation = item['value'];
+      }
+      
+    }
+
+    //console.log('###### InUse Array ####');
+    //console.log(xInUseDocking,xInUseheadsets, xInUseKeyboard, xInUseMonitor, xInUseMouse, xInUseUPS, xInUseWorkstation )
+    this.inUseAssetsDataflag.push(xInUseDocking,xInUseheadsets, xInUseKeyboard, xInUseMonitor, xInUseMouse, xInUseUPS, xInUseWorkstation)
+
+    let xDisrepairDocking = 0;
+    let xDisrepairheadsets = 0;
+    let xDisrepairKeyboard = 0;
+    let xDisrepairMonitor = 0;
+    let xDisrepairMouse = 0;
+    let xDisrepairUPS = 0;
+    let xDisrepairWorkstation = 0;
+
+    for(let item of this.disrepairAssetsData){
+      if( item['componenttypename'] == 'Docking Station'){
+        xDisrepairDocking = item['value'];
+      }
+
+      
+      if( item['componenttypename'] == 'Headset'){
+        xDisrepairheadsets = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Keyboard'){
+        xDisrepairKeyboard = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Monitor'){
+        xDisrepairMonitor = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Mouse'){
+        xDisrepairMouse = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'UPS'){
+        xDisrepairUPS = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Workstation'){
+        xDisrepairWorkstation = item['value'];
+      }
+      
+    }
+
+    //console.log('###### Disrepair Array ####');
+    //console.log(xDisrepairDocking,xDisrepairheadsets, xDisrepairKeyboard, xDisrepairMonitor, xDisrepairMouse, xDisrepairUPS, xDisrepairWorkstation )
+    this.disrepairAssetsDataflag.push(xDisrepairDocking,xDisrepairheadsets, xDisrepairKeyboard, xDisrepairMonitor, xDisrepairMouse, xDisrepairUPS, xDisrepairWorkstation )
+
+    let xOutDocking = 0;
+    let xOutheadsets = 0;
+    let xOutKeyboard = 0;
+    let xOutMonitor = 0;
+    let xOutMouse = 0;
+    let xOutUPS = 0;
+    let xOutWorkstation = 0;
+
+    for(let item of this.outAssetsData){
+      if( item['componenttypename'] == 'Docking Station'){
+        xOutDocking = item['value'];
+      }
+
+      
+      if( item['componenttypename'] == 'Headset'){
+        xOutheadsets = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Keyboard'){
+        xOutKeyboard = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Monitor'){
+        xOutMonitor = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Mouse'){
+        xOutMouse = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'UPS'){
+        xOutUPS = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Workstation'){
+        xOutWorkstation = item['value'];
+      }
+      
+    }
+
+    //console.log('###### Out Array ####');
+    //console.log(xOutDocking,xOutheadsets, xOutKeyboard, xOutMonitor, xOutMouse, xOutUPS, xOutWorkstation )
+    this.outAssetsDataflag.push(xOutDocking,xOutheadsets, xOutKeyboard, xOutMonitor, xOutMouse, xOutUPS, xOutWorkstation  )
+
+    let xRepairDocking = 0;
+    let xRepairheadsets = 0;
+    let xRepairKeyboard = 0;
+    let xRepairMonitor = 0;
+    let xRepairMouse = 0;
+    let xRepairUPS = 0;
+    let xRepairWorkstation = 0;
+
+    for(let item of this.inrepairAssetsData){
+      if( item['componenttypename'] == 'Docking Station'){
+        xRepairDocking = item['value'];
+      }
+
+      
+      if( item['componenttypename'] == 'Headset'){
+        xRepairheadsets = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Keyboard'){
+        xRepairKeyboard = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Monitor'){
+        xRepairMonitor = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Mouse'){
+        xRepairMouse = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'UPS'){
+        xRepairUPS = item['value'];
+      }
+      
+      if( item['componenttypename'] == 'Workstation'){
+        xRepairWorkstation = item['value'];
+      }
+      
+    }
+
+    //console.log('###### Repair Array ####');
+    //console.log(xRepairDocking,xRepairheadsets, xRepairKeyboard, xRepairMonitor, xRepairMouse, xRepairUPS, xRepairWorkstation )
+    this.inrepairAssetsDataflag.push(xRepairDocking,xRepairheadsets, xRepairKeyboard, xRepairMonitor, xRepairMouse, xRepairUPS, xRepairWorkstation)
+
+  }//end Function
 
 }
 

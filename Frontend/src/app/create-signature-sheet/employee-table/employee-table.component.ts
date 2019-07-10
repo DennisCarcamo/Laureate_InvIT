@@ -4,6 +4,11 @@ import { NgIf } from '@angular/common'
 import { tick } from '@angular/core/testing';
 import { Alert } from 'selenium-webdriver';
 import { SearchEmployeeService } from '../search-employee.service';
+import { NgModel } from '@angular/forms';
+import { TemplateRef } from '@angular/core';
+import { fail } from 'assert';
+import { forEach } from '@angular/router/src/utils/collection';
+import { UrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 
 @Component({
   selector: 'app-employee-table',
@@ -13,7 +18,7 @@ import { SearchEmployeeService } from '../search-employee.service';
 export class EmployeeTableComponent implements OnInit {
      public employees:any = [];
      public andres:any = [];
-     public search: any;
+     public search: any = '';
      public meta: any = [];
      public page: any = 0;
      public count: any;
@@ -41,6 +46,7 @@ export class EmployeeTableComponent implements OnInit {
       .subscribe( data =>this.employees = data)
       alert(this.employees);
       console.log(this.employees);*/
+      this.find();
     
   }
   testem(){
@@ -96,8 +102,7 @@ export class EmployeeTableComponent implements OnInit {
        }
        
        )
-       //alert( this.andres );
-       //console.log(this.employees, this.meta, this.shownext, this.showpreview, this.showmeta, this.count, this.cursor, this.more);
+
        console.log(this.employees);
   }
 
@@ -107,17 +112,7 @@ export class EmployeeTableComponent implements OnInit {
    
     //this.employees = this.a.query;
     console.log(this.a);
-    //console.log(this.answer)
-    /*this.employees = this.a[0];
-    //this.employees = this.a['query'];
-    this.meta = this.a[1];
-    this.shownext = this.a[2];
-    this.showpreview = this.a[3];
-    this.showmeta = this.a[4];
-    this.count = this.a[5];
-    this.cursor = this.a[6];
-    this.more = this.a[7];
-    //console.log(this.answer);*/
+
   }
 
   preview(){
@@ -128,16 +123,13 @@ export class EmployeeTableComponent implements OnInit {
 
   find(){
     this.cursor = 0;
-    //alert(this.search);
-    //alert(this.cursor);
-    //this.employeeSearch(this.cursor, this.search);
+
     this.searchEmployees();
-    //console.log(this.employees);
-    //alert(this.cursor + "aqui" );
+    
   }
 
   onSelect(selectedItem: any) {
-   // console.log("Selected item Id: ", selectedItem.EMPLOYEE_ID); // You get the Id of the selected item here
+
    let x = {
      'CIID': selectedItem.ID,
     'EMPLOYEE_ID': selectedItem.EMPLOYEE_ID,
@@ -155,6 +147,10 @@ export class EmployeeTableComponent implements OnInit {
     //alert(this.ref[0].EMAIL)
 
 
+  }
+
+  test(){
+    alert(this.search);
   }
 
 }

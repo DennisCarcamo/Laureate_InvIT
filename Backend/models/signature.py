@@ -127,6 +127,11 @@ class SignatureSheetModel(db.Model):
         #return cls.query.filter_by(and_(id_employee= employee_id, id_type = 1) ).order_by(cls.id_signature.desc()).first()
         return cls.query.filter_by(id_employee= employee_id, id_type = 1).order_by(cls.updated.desc()).first()
 
+    #funcion para jalar fecha de retorno.
+    @classmethod
+    def get_return_day(cls, id_signature_):
+        return cls.query.filter_by(id_signature = id_signature_).order_by(cls.updated.desc()).first()
+
     @classmethod
     def bring_all(cls):
         return cls.query.all()
@@ -137,6 +142,17 @@ class SignatureSheetModel(db.Model):
 
     def myConvertor(self):
             return self.updated.__str__()
+    
+    def commit_(self):
+        db.session.commit()
+
+    def updatedLoan(self):
+        self.status = 2
+        db.session.commit()
+
+        
+        
+
    
 
 class SignatureProductsModel(db.Model):

@@ -1,27 +1,44 @@
-import { Component, OnInit, trigger } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { SearchEmployeeService } from '../../create-signature-sheet/search-employee.service';
 import { HttpClient } from '@angular/common/http';
+import { TemplateRef } from '@angular/core';
 import { fail } from 'assert';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { trigger, transition, animate, style } from '@angular/animations'
 @Component({
   selector: 'app-pdfs',
   templateUrl: './pdfs.component.html',
-  styleUrls: ['./pdfs.component.css']
+  styleUrls: ['./pdfs.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateY(-100%)'}),
+        animate('200ms ease-in', style({transform: 'translateY(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
+      ])
+    ])
+  ]
 })
 export class PdfsComponent implements OnInit {
   public fullImagePath;
 
-  constructor(private _Service : SearchEmployeeService, private httpClient:HttpClient, private cookieService: CookieService, private router : Router) {
+  constructor(private _Service : SearchEmployeeService, private httpClient:HttpClient, private cookieService: CookieService, private router : Router, private modalService: BsModalService) {
     this.fullImagePath = '/assets/images/advice-advise-advisor-7096.jpg'
    }
 
   public text;
   public pdfFile;
+  public pdf_id;
+  public pdf_flag;
   public boolpdfroute = false
   public url;
   public selectedFile: File = null;
@@ -31,7 +48,10 @@ export class PdfsComponent implements OnInit {
   public limit = 10;
   public searchText = "";
   public search;
-  public readyUpload = false; 
+  public readyUpload = false;
+  public sheet_option = "5";
+  public status_option = "1";
+  public option: any; 
 
   //service response
   public sheets = [];
@@ -41,6 +61,13 @@ export class PdfsComponent implements OnInit {
   public privilege = false;
   public siteInfo = false;
 
+  public disable_flag = 1;
+  public messegeError = 'More information required';
+  public fileUploadedflag = false;
+
+  public findPdfBool = false;
+  
+  modalRef: BsModalRef;
 
   ngOnInit() {
     /*if(!this.cookieService.get('user_name')){
@@ -57,12 +84,13 @@ export class PdfsComponent implements OnInit {
       }
 
     }else{
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
 
     if(this.privilege){
 
-        this._Service.searchSignatureSheets(this.page, this.searchText, this.limit)
+        this._Service.searchSignatureSheets(this.page, this.searchText, this.limit, this.sheet_option, this.status_option)
         .subscribe(res => {
           let x = res['SignatureSheets'];
           let y = res['meta'];
@@ -93,7 +121,8 @@ export class PdfsComponent implements OnInit {
   }
 
   test(){
-    alert(this.search);
+    //alert(this.option);
+    console.log(this.sheet_option + ' ' + this.status_option);
     }
 
   siteInformation(){
@@ -107,15 +136,40 @@ export class PdfsComponent implements OnInit {
 
 
     searchPdf(){
-      this.boolpdfroute = true;
-      this.url = `http://127.0.0.1:5000/pdf/${this.text}`;
-      window.location.href = this.url;
+      if(this.text){
+        this.boolpdfroute = true;
+        this.url = `http://127.0.0.1:5000/pdf/${this.text}`;
+        window.location.href = this.url;          
+      }
+      else{
+        this.messegeError = 'Select a sheet First.!';
+        document.getElementById('modal').click();
+      }
+
     }
 
     searchScannedPdf(){
-      this.boolpdfroute = true;
-      this.url = `http://127.0.0.1:5000/scannedpdf/${this.text}`;
-      window.location.href = this.url;
+      if(this.text){
+        this._Service.pdf_validation(this.pdf_id)
+        .subscribe(res => {
+          if(res['message'] == 'Yes'){
+            this.boolpdfroute = true;
+            this.url = `http://127.0.0.1:5000/scannedpdf/${this.text}`;
+            window.location.href = this.url;
+          }
+          else{
+            //alert('No file to show');
+            this.messegeError = 'No file to show';
+            document.getElementById('modal').click();
+          }
+        })
+      }
+      else{
+        this.messegeError = 'Select a sheet First';
+        document.getElementById('modal').click();
+      }
+
+
     }  
 
     searchSheet(event:any){
@@ -123,6 +177,7 @@ export class PdfsComponent implements OnInit {
     }
 
     onSelect(selectedItem: any){
+      this.findPdfBool = true;
       let x = {
         'ID_SIGNATURE': selectedItem.id_signature,
        'EMPLOYEE_ID': selectedItem.id_employee,
@@ -131,6 +186,7 @@ export class PdfsComponent implements OnInit {
 
        let pdfname = x['ID_SIGNATURE'] + x['EMPLOYEE_ID'];
        this.text = pdfname;
+       this.pdf_id = x['ID_SIGNATURE'];
 
     }
     onselectUpload(selectedItem: any){
@@ -144,8 +200,10 @@ export class PdfsComponent implements OnInit {
        };
        
        let pdfname = x['ID_SIGNATURE'] + x['EMPLOYEE_ID'];
+       this.pdf_id = x['ID_SIGNATURE'];
        this.pdfFile = pdfname;
        this.readyUpload = true;
+       //console.log(this.pdf_id);
 
     }
 
@@ -156,7 +214,10 @@ export class PdfsComponent implements OnInit {
       else{
         this.search = "";  
       }
-      this._Service.searchSignatureSheets(this.page, this.search, this.limit)
+      if(this.sheet_option != '3'){
+        this.status_option = '1';
+      }
+      this._Service.searchSignatureSheets(this.page, this.search, this.limit, this.sheet_option, this.status_option)
     .subscribe(res => {
       let x = res['SignatureSheets'];
       let y = res['meta'];
@@ -193,16 +254,60 @@ export class PdfsComponent implements OnInit {
 
     onFileSelected(event){
       this.selectedFile = <File>event.target.files[0];
+      this.fileUploadedflag = true;
     }
 
+
+
     onUpload(){
-      const fd = new FormData();
-      fd.append('pdf', this.selectedFile, this.selectedFile.name)
-      this.httpClient.post(`http://127.0.0.1:5000/upload/${this.pdfFile}`, fd)
-      .subscribe(result => {
-          if(result['message'] == 'Done'){
-            window.location.href = '/pdf';
+      if(this.fileUploadedflag){
+        this._Service.pdf_validation(this.pdf_id)
+        .subscribe (res => {
+          console.log(res['message']);
+          if(res['message'] == 'Yes'){
+            this.messegeError = 'Image already Uploaded';
+            document.getElementById('modal').click();
+            //alert('Image already Uploaded');
           }
-      });
+          else{
+            this._Service.pdf_image_insert(this.pdf_id, this.pdfFile)
+            .subscribe(res => {
+              console.log(res);
+              //alert();
+              if(res['message'] == 'Done'){
+                //alert('Cargar archivo terminar');
+                //alert(this.pdfFile);
+                const fd = new FormData();
+                fd.append('pdf', this.selectedFile, this.selectedFile.name)
+                this.httpClient.post(`http://127.0.0.1:5000/upload/${this.pdfFile}`, fd)
+                .subscribe(result => {
+                    if(result['message'] == 'Done'){
+                      window.location.href = '/pdf';
+                    }
+                });
+                
+              }
+              else{
+                this.messegeError = 'Something Wrong';
+                document.getElementById('modal').click();
+              }
+            })
+          }
+        })
+      }
+      else{
+        this.messegeError = 'No file Chosen';
+        document.getElementById('modal').click();
+      }
+    }
+
+    disable(){
+      this.disable_flag = 0;
+    }
+
+    openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template);
+        document.getElementById('errorMessage').innerHTML = this.messegeError;
+
     }
 }

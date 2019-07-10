@@ -47,6 +47,8 @@ export class UpdatesheetComponent implements OnInit {
 
   public siteInfo = false;
 
+  public disable_flag = 1;
+
 
 
   ngOnInit() {
@@ -72,7 +74,8 @@ export class UpdatesheetComponent implements OnInit {
       }
     }
     else{
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
   }
 
@@ -160,15 +163,27 @@ export class UpdatesheetComponent implements OnInit {
   }
 
   continueprods(){
-    if(this.selectproducts.length == 0)
+    if(this.selectproducts){
+      //alert("No esta definido");
+      console.log(this.selectproducts);
+      if(this.selectproducts.length == 0)
+      {
+        alert('Nothing to remove? Select Remove Nothing to Continue.!');
+        console.log(this.selectproducts);
+      }
+      else{
+        this.currentproducts = false;
+        this.boolproducts = true;
+        this.boolemployee = false;
+  
+      }
+    }else
     {
-      alert('Nothing to remove? Select Remove Nothing to Continue.!')
-    }
-    else{
+      this.selectproducts = [];
+      console.log(this.selectproducts);
       this.currentproducts = false;
       this.boolproducts = true;
       this.boolemployee = false;
-
     }
   }
 
@@ -205,9 +220,10 @@ export class UpdatesheetComponent implements OnInit {
   }
 
   updateSheet(){
+    this.disable_flag = 0;
     let l = this.selectproducts.length;
     let x = this.selectemploye[0];
-    if(l != 0 && (this.productremovesevent.length != 0 || this.productsevent.length != 0) && x){
+    if( (this.productremovesevent.length != 0 || this.productsevent.length != 0) && x){
       this._searchEmployees.updateSheet(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL)
       .subscribe(result =>{
         //alert("Preparing to update..");

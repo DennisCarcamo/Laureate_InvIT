@@ -68,7 +68,7 @@ app.config['SQLALCHEMY_MAX_OVERFLOW'] = 10
 db.init_app(app)
 ma = Marshmallow(app)
 jwt = JWTManager(app)
-app.config['JWT_SECRET_KEY'] = 'kwjsiwd56d4w962wd6262326t543kwuhi")jhb/&%$3S67)(u09?¡jhv228573w3e41frerf186g54g4565534uig367t7636rtujyhgbt!$6yc56/&v76jehdbjfe1ry354h3rt5h4156yh'
+app.config['JWT_SECRET_KEY'] = 'kwajsiwd56d4w962wd6262326t543kwuhi")jhb/&%$3S67)(u09?¡jhv228573w3e41frerf186g54g4565534uig367t7636rtujyhgbt!$6yc56/&v76jehdbjfe1ry354h3rt5h4156yh'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -94,30 +94,20 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-#cambia desarrollo y produccion
 
-#@app.route('/upload/<string:name>', methods=['POST'])
-#def upload_file(name):
-#    if request.method == 'POST':
-#        #file = request.files['file']
-#        f = settings['UPLOAD_FOLDER'] + '\\{}.pdf'.format(name)
-#        fa = request.files.get('pdf')
-#        fa.save(f)
-
-#        res = {'message': 'Done'}
-
-#        return jsonify(res)
 @app.route('/upload/<string:name>', methods=['POST'])
 def upload_file(name):
     if request.method == 'POST':
         #file = request.files['file']
+        #quietar la contrapleca en produccion.
+        #desarrollo
+        #f = settings['UPLOAD_FOLDER'] + '\{}.pdf'.format(name)
+        #produccion
         f = settings['UPLOAD_FOLDER'] + '{}.pdf'.format(name)
         fa = request.files.get('pdf')
         fa.save(f)
         res = {'message': 'Done'}
         return jsonify(res)
-
-
 
 
 @app.route('/')
@@ -129,162 +119,6 @@ def home():
         resp = make_response(redirect('/login'))
         return resp
 
-@app.route('/report')
-def reportTemplate():
-    """Return the signature sheet template in pdf format."""
-    string_length = 10
-    random = str(uuid.uuid4()) # Convert UUID format to a Python string.
-    random = random.upper() # Make all characters uppercase.
-    random = random.replace("-","") # Remove the UUID '-'.
-    pdf_name = random[0:string_length]
-    path = settings['REPORTSPATH'] + pdf_name + ".pdf"
-    
-    formatted_time = time.ctime()
-    #pdf_name = formatted_time + '.pdf'
-    name = 'Julio Zuniga'
-    #address
-    
-    Building = 'CEUTECBAIA BAIA Building, 8th Floor'
-    Town = 'Col, Matamoros Tegucigalpa '
-    county = 'Francisco Morazan, Honduras'
-    Phone = '2275-5780' 
-
-    text = 'The user must answer for any damages or partial or total loss, it is your responsability to return the computer equipment or devices in good condition within the established schedule service. to request any device or computer equipment must submit a ticket directed to the email: helpdeskit@laureate.net'
-    #text = stringWidth(text, 'Helvetica-Bold', 9)
-    #p = Paragraph(text, para)
-    c = canvas.Canvas(path)
-    c.setFont('Helvetica', 9)
-    #city = stringWidth(Town, 'Helvetica-Bold', 9 )
-    #Estructura
-    c.drawImage('log.jpg', 20, 700, height=130, width=100)
-    c.roundRect(408, 800, 1.8*inch, 0.30*inch, radius=2)
-    c.rect(170,760,2*inch,0.40*inch)
-    
-    c.rect(170,726,2*inch,0.20*inch)
-    c.rect(170,712,2*inch,0.20*inch)
-    
-    c.rect(170,678,2*inch,0.20*inch)
-    c.rect(170,664,2*inch,0.20*inch)
-
-    c.rect(400,760,2*inch,0.40*inch)
-
-    c.rect(400,726,2*inch,0.20*inch)
-    c.rect(400,712,2*inch,0.20*inch)
-
-    c.rect(400,678,2*inch,0.20*inch)
-    c.rect(400,664,2*inch,0.20*inch)
-
-    c.drawString(20,690, Building)
-    c.drawString(20,680, Town)
-    c.drawString(20,670, county)
-    c.drawString(20,660, Phone)
-
-    c.rect(35,280, 7.3*inch, 5*inch )
-    c.rect(35,280, 1.1*inch, 5*inch)
-    c.rect(35,280, 3.6*inch, 5*inch)
-    c.rect(35,280, 5.6*inch, 5*inch)
-    c.rect(35,280, 7.3*inch, 5*inch)
-
-    c.rect(35,604, 7.3*inch, 0.5*inch)
-
-    c.rect(35,170, 7.3*inch, 1.1*inch )
-
-    c.line(75, 80, 275,80)
-    c.line(335, 80, 535,80)
-
-    #encabezados
-    email = 'Email Addres' 
-    contact = 'Contact Name'
-    office = 'Office'
-    phone = 'Customer Phone'
-
-    product_code = 'Product code'
-    product_name = 'Product Name'
-    serial = 'Serial'
-    model = 'Model'
-
-    it_agent = 'IT Agent'
-
-
-
-    #Asignar Tereminos 
-    length = len(text)
-    part1 = text[0:125]
-    part2 = text[125: 245]
-    part3 = text[245:length]
-    textobject1 = c.beginText(45, 220)
-    textobject2 = c.beginText(45,210 )
-    textobject3 = c.beginText(45, 200)
-    
-    textobject1.textLine(part1)
-    textobject2.textLine(part2)
-    textobject3.textLine(part3)
-    c.drawText(textobject1)
-    c.drawText(textobject2)
-    c.drawText(textobject3)  
-
-    #Asignar Encabezados
-
-    textemail = c.beginText(213,729)
-    textcontact = c.beginText(213,681)
-    textoffice = c.beginText(458,729)
-    textphone = c.beginText(443,681)
-
-    textemail.textLine(email)
-    textcontact.textLine(contact)
-    textoffice.textLine(office)
-    textphone.textLine(phone)
-
-    c.setFont('Helvetica-Bold', 8)
-    c.drawText(textemail)
-    c.drawText(textcontact)
-    c.drawText(textoffice)
-    c.drawText(textphone)
-    c.setFont('Helvetica', 8)
-    #encabezados de tabla
-    textpcode = c.beginText(41, 616)
-    textpname = c.beginText(177, 616)
-    textserial = c.beginText(350, 616)
-    textmodel = c.beginText(480, 616)
-
-    textpcode.textLine(product_code)
-    textpname.textLine(product_name)
-    textserial.textLine(serial)
-    textmodel.textLine(model)
-
-    c.drawText(textpcode)
-    c.drawText(textpname)
-    c.drawText(textserial)
-    c.drawText(textmodel)
-
-    #texto de firmas
-    textitagent = c.beginText(145,65)
-    textnamesign = c.beginText(405,65)
-
-    textitagent.textLine(it_agent)
-    textnamesign.textLine(name)
-    c.setFont('Helvetica-Bold', 8)
-    c.drawText(textitagent)
-    c.drawText(textnamesign)
-
- # move the origin up and to the left
-   # c.translate(inch,inch)
- # define a large font
-    #c.setFont("Helvetica", 80)
- # choose some colors
-    #c.setStrokeColorRGB(0.2,0.5,0.3)
-    #c.setFillColorRGB(1,0,1)
- # draw a rectangle
-    #c.rect(inch,inch,6*inch,9*inch, fill=1)
- # make text go straight up
-    #c.rotate(90)
- # change color
-   # c.setFillColorRGB(0,0,0.77)
- # say hello (note after rotate the y coord needs to be negative!)
-   # c.drawString(3*inch, -3*inch, "Hello World")
-   # c.showPage()
-    c.save()
-    return 'baia baia'
 
 class RegistrationForm(Form):
     username = StringField('', [validators.Length(min=4, max=25)])
@@ -337,6 +171,15 @@ def loan():
 
 @app.route('/pdf')
 def pdf():
+    name = request.cookies.get('token')
+    if name:
+        return render_template('index.html')
+    else:
+        resp = make_response(redirect('/login'))
+        return resp
+
+@app.route('/loansheets')
+def loansheets():
     name = request.cookies.get('token')
     if name:
         return render_template('index.html')
@@ -418,37 +261,17 @@ def descookie():
 @app.route('/template')
 def temp():
     email_user = 'rrastapon@gmail.com'
-    email_send = 'rody.carbajal@laureate.net'
+    email_send = 'julio.zuniga@laureate.net'
 
     server = smtplib.SMTP('smtp.gmail.com',587)
     server.starttls()
     server.login(email_user, 'Javascript96')
 
-    message = 'Hola joshi'
+    message = 'GG'
     server.sendmail(email_user, email_send, message)
     server.quit()
     return 'hello0'
 
-#@app.route('/test')
-#def testqa():
-    #signature_sheet_id = 34
-    #id_employ = '307000171'
-    #x = []
-    #productsSig = SignatureProductsModel.query.filter(SignatureProductsModel.id_signature == signature_sheet_id).all()
-    #if productsSig: 
-        #x = list(map(lambda x: x.json(),productsSig))
-        #for prod in x:
-            #sp = SignatureProductsModel(signature_sheet_id, prod['id_product'], prod['product_name'] , prod['serial_number'], prod['model'], prod['ciid'])
-            #sp = SignatureProductsModel.query.filter(SignatureProductsModel.id == prod['id']).first()
-            #sp.delete_item()
-    
-    #productsSig.delete_item()
-
-    #sheet = SignatureSheetModel.query.filter(SignatureSheetModel.id_signature == signature_sheet_id).first()
-    #if sheet:
-        #sheet.delete_item()
-
-    #return 'hello0'
 
 @app.route("/pdf/<string:pdf_name>")
 def pdfs(pdf_name):
@@ -476,6 +299,11 @@ from backend.resources.signaturesheetproducts import *
 from backend.resources.dashboard import *
 from backend.resources.auth import *
 from backend.resources.user_management import *
+from backend.resources.loansheets import *
+from backend.resources.lifetime import *
+from backend.resources.dashboardStates import *
+from backend.resources.images import *
+from backend.resources.license import *
 
 
 if __name__ == '__main__':

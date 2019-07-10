@@ -9,33 +9,164 @@ import { CookieService } from 'ngx-cookie-service';
 import * as jwt_decode from 'jwt-decode';
 
 
-
 @Component({
   selector: 'app-user-admin',
   templateUrl: './user-admin.component.html',
   styles: [`
-  div.scroll-list {
-    overflow: auto;
-    max-height: 70vh;
+  h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
   }
 
-  .drag-over {
-    border: #ff525b dashed 2px;
+  h3 {
+    display: block;
+    font-size: 1.8em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+  }
+  .EdgeButton:hover{
+    background-color: #E0F8FF;
   }
 
-  .drag-hint {
-    border: #ffc100 dashed 2px;
+  .EdgeButton--secondary-file:hover{
+      background-color: #afe0ff;
   }
 
-  .drag-target-border {
-    border: #00bfff dashed 2px;
+  .EdgeButton--secondaryii:hover{
+      background-color: #E0F8FF;
+      color: #1da1f2;
   }
 
-  .drag-target-border-green {
-    border: #3c763d dashed 2px;
+  .EdgeButton--secondaryiii:hover{
+      background-color: #DBFCE8;
+      /*color: #69C68E;*/
   }
-`
-]
+
+
+
+  /*input {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      margin-top: 12px;
+      width: 100%;
+  } */
+
+
+  .EdgeButton--secondary {
+      background-color: #fff;
+      border: 1px solid #1da1f2;
+      color: #1da1f2;
+  }
+
+  .EdgeButton--secondaryii {
+      background-color: #1da1f2;
+      border: 1px solid #fff;
+      color: #fff;
+  
+  }
+
+  .EdgeButton--secondaryiii {
+      background-color: #fff;
+      border: 1px solid #69C68E;
+      color: #69C68E;
+  
+  }
+
+
+
+  .EdgeButton--secondary-file {
+      background-color: #1da1f2;
+      border: 1px solid #fff;
+      color: #fff;
+  }
+
+
+
+  .EdgeButton--medium {
+      font-size: 14px;
+      line-height: 20px;
+      padding: 6px 16px;
+  }
+
+  /*.EdgeButton, .EdgeButton:visited {
+      border-radius: 100px;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 20px;
+      padding: 6px 16px;
+      position: relative;
+      text-align: center;
+      white-space: nowrap;
+  }*/
+
+  .EdgeButton {
+      border-radius: 100px;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 25px;
+      padding: 8px 18px;
+      position: relative;
+      text-align: center;
+      white-space: nowrap;
+  }
+
+  .EdgeButton--secondaryii {
+      border-radius: 100px;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 6px 16px;
+      position: relative;
+      text-align: center;
+      white-space: nowrap;
+  }
+
+  .EdgeButton--secondaryiii {
+      border-radius: 100px;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 6px 16px;
+      position: relative;
+      text-align: center;
+      white-space: nowrap;
+  }
+
+  .table-head {
+    background-color: rgb(35, 47, 62);
+    border-color: rgb(35, 47, 62);
+    color: #fff;
+  }
+
+  p, label, option{
+    font-size: 1em;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color: rgb(101, 119, 134);
+  }
+
+  option, select{
+    font-size: 0.9em;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color: rgb(101, 119, 134);
+  }
+
+  `]
 })
 export class UserAdminComponent implements OnInit {
   public boolproducts:any = false;
@@ -57,6 +188,8 @@ export class UserAdminComponent implements OnInit {
   public users = [];
   public users2 = [];
   public selectedUser = [];
+
+  public messegeError = 'More information required';
 
 
   vegetables = [
@@ -99,7 +232,8 @@ export class UserAdminComponent implements OnInit {
       }
     }
     else{
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
 
   }
@@ -117,7 +251,7 @@ export class UserAdminComponent implements OnInit {
     this.boolDelete = false;
   }
 
-  deleteRole(){
+ /* deleteRole(){
     this.boolroles = false;
     this.boolemployee = false;
     this.managment.getSystemUsers()
@@ -132,6 +266,30 @@ export class UserAdminComponent implements OnInit {
 
     })
 
+  } */
+
+  deleteRole(){
+    if(!this.users2[0]){
+      this.boolroles = false;
+      this.boolemployee = false;
+      this. boolassign = false;
+      this.managment.getSystemUsers()
+      .subscribe(res => {
+        this.boolDelete = true;
+        this.users = res['p'];
+        for (let item of this.users){
+          this.users2.push(item['privilege']);
+        }
+      })
+    }
+    else{
+      this.boolroles = false;
+      this.boolemployee = false;
+      this.boolDelete = true;
+      this. boolassign = false;
+    }
+    
+
   }
 
   continueroles(){
@@ -145,7 +303,9 @@ export class UserAdminComponent implements OnInit {
       this.boolassign = true;
 
     }else{
-      alert('Select employee first');
+      //alert('Select employee first');
+      this.messegeError = "Select employee first";
+      document.getElementById("modalError").click();
     }
   }
 
@@ -178,7 +338,9 @@ export class UserAdminComponent implements OnInit {
       })
     }
     else{
-      alert("Select a Role first");
+      //alert("Select a Role first");
+      this.messegeError = "Select a Role First";
+      document.getElementById("modalError").click();
       //this.confirmation = true;
       //alert("The employee does not have Employee Id, please make sure to get all the info ready before proceding");
     }
@@ -194,11 +356,15 @@ export class UserAdminComponent implements OnInit {
     this.managment.postUseradmin(x.EMAIL, this.option).subscribe(res=>{
       if(res['message']== 'Item correctly inserted'){
         alert('User Correctly inserted');
+        //this.messegeError = "User Correctly inserted";
+        //document.getElementById("modalError").click();
         window.location.href = '/admin';
 
       }else{
-        alert('Wrong User try again');
-        window.location.href = '/admin';
+        //alert('Wrong User try again');
+        this.messegeError = "Invalid user, check email in the Active Directory and that is not a duplicate user";
+        document.getElementById("modalError").click();
+        //window.location.href = '/admin';
       }
     })
 
@@ -208,6 +374,7 @@ export class UserAdminComponent implements OnInit {
     this.boolemployee = false;
     this.boolroles = true;
     this.boolDelete = false;
+    this.boolassign = false;
   }
 
   /*updateCheck(e){
@@ -252,12 +419,14 @@ export class UserAdminComponent implements OnInit {
     list.splice(index, 1);
   }
 
-  confirmRolePrivileges(){
+  /*confirmRolePrivileges(){
     if(this.newRoleName){
       this.managment.postNewRolePrivileges(this.newRoleName, this.droppedItems)
       .subscribe(res =>{
         if(res['message'] == 'Items correctly inserted'){
-          alert('Items correctly inserted');
+          //alert('Items correctly inserted');
+          this.messegeError = "Items correctly inserted";
+          document.getElementById("modalError").click();
           window.location.href = '/admin';
         }else{
           console.log(res);
@@ -265,7 +434,34 @@ export class UserAdminComponent implements OnInit {
       })
 
     }else{
-      alert('Set a Role name first.!');
+      //alert('Set a Role name first.!');
+      this.messegeError = "Set a Role name first";
+      document.getElementById("modalError").click();
+    }
+  }*/
+
+  confirmRolePrivileges(){
+    if(this.newRoleName && this.droppedItems[0]){
+      //alert("Baia Baia");
+      //console.log(this.droppedItems);
+      //alert();
+      this.managment.postNewRolePrivileges(this.newRoleName, this.droppedItems)
+      .subscribe(res =>{
+        if(res['message'] == 'Items correctly inserted'){
+          alert('Items correctly inserted');
+          //this.messegeError = "Items correctly inserted";
+          //document.getElementById("modalError").click();
+          window.location.href = '/admin';
+        }else{
+          console.log(res);
+        }
+      })
+
+    }else{
+      //alert('Set a Role name first.!');
+      console.log(this.droppedItems);
+      this.messegeError = "Set a Role name first and at least one Privilege";
+      document.getElementById("modalError").click();
     }
   }
 
@@ -275,7 +471,9 @@ export class UserAdminComponent implements OnInit {
       this.modalRef = this.modalService.show(template);
 
     }else{
-      alert('Select an User.!');
+      //alert('Select an User.!');
+      this.messegeError = "Select an user";
+      document.getElementById("modalError").click();
     }
   }
 
@@ -285,18 +483,29 @@ export class UserAdminComponent implements OnInit {
     .subscribe(res => {
       if(res['message'] == 'superuser'){
         alert('Cant Remove this user');
+        //this.messegeError = "Can't Remove this user";
+        //document.getElementById("modalError").click();
         window.location.href = '/admin';
       }
 
       if(res['message'] == 'wrong'){
         alert('Something Wrong try again');
+        //this.messegeError = "Something wrong try again";
+        //document.getElementById("modalError").click();
         window.location.href = '/admin';
       }
 
       if(res['message'] == 'done'){
         alert('User removed.!');
+        //this.messegeError = "User Removed.!";
+        //document.getElementById("modalError").click();
         window.location.href = '/admin';
       }
     })
+  }
+
+  openErrorTemplate(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+    document.getElementById('errorMessage').innerHTML = this.messegeError;
   }
 }

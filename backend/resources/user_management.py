@@ -177,9 +177,16 @@ class UserAdmins(Resource):
             va = values['attributes']
             sAMAccountName = va['sAMAccountName']
             user = UsersModel(sAMAccountName[0], id_role_, 'administrator', 'administrator', date, date)
+            userExist = UsersModel.query.filter_by(user_name = sAMAccountName[0]).first()
+            #print('############## User Name exist ################')
+            #print(userExist.json())
+
             try:
-                user.insert()
-                return{'message': 'Item correctly inserted'}
+                if userExist:
+                    return {'messege': "something wrong"}
+                else:    
+                    user.insert()
+                    return{'message': 'Item correctly inserted'}
         
             except:
                 return {'messege': "something wrong"}
