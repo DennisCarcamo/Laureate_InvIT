@@ -107,12 +107,29 @@ class SignatureSheetModel(db.Model):
 
     @classmethod
     def get_last_id(cls, employee_id):
-        res = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
-        if res:
-            return res
+        resUpdate = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
+        resOnboarding =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
+        
+        if resOnboarding and resUpdate:
+            resUpdate_ = resUpdate.json()
+            resOnboarding_ = resOnboarding.json()
+            #print("$$$$$$$$$$$$$$$$$$$$$$$$$$")
+            print(resUpdate_['id_signature']) 
+            print(resOnboarding_['id_signature'])
+            if resUpdate_['id_signature'] > resOnboarding_['id_signature']:
+                return resUpdate
+            else:
+                return resOnboarding
         else:
-            res =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
-            return res
+            return resOnboarding
+
+        ###################################################
+        #res = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
+        #if res:
+        #    return res
+        #else:
+        #    res =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
+        #    return res
 
     @classmethod
     def get_last_sheet(cls, employee_id):

@@ -149,18 +149,25 @@ export class LoanAComponent implements OnInit {
             alert('No signature to show');
             window.location.href = '/loan';
           }
-          if(m['id_type'] != 2){
+
+          if(m['id_type'] == 2){
+            alert('No signature to show');
+            window.location.href = '/loan';
+          }
+          if((m['id_type'] != 2)){
             this.validation = 1;
+            this._Service.getUserProducts(x.EMPLOYEE_ID)
+            .subscribe(res=> {
+              console.log(res);
+              this.offBoardingProducts = res['SignatureSheetsProducts'];
+              this.booloffboarding = true;
+              this.boolemployee = false;
+            })
           }
           console.log(res)
+          
         })
-        this._Service.getUserProducts(x.EMPLOYEE_ID)
-        .subscribe(res=> {
-          console.log(res);
-          this.offBoardingProducts = res['SignatureSheetsProducts'];
-          this.booloffboarding = true;
-          this.boolemployee = false;
-        })
+
       }
     }
     else{

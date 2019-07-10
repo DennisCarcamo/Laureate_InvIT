@@ -168,6 +168,8 @@ class Signatureproduct(Resource):
         sheet_signature = SignatureSheetModel.get_last_id(id_employee)
         id_ss = sheet_signature.json()
         signature_sheet_id = id_ss['id_signature']
+        print("##  Ultima Hoja  ##")
+        print(signature_sheet_id)
 
         prod = SignatureProductsModel.find_by_id(signature_sheet_id)
         print(signature_sheet_id)

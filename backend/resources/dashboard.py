@@ -88,6 +88,8 @@ class Dashboardservers(Resource):
 
 
 
+
 api.add_resource(BasicDashboard, '/api/v1/dashboard')
 api.add_resource(DashboardModel, '/api/v1/dashboarddetail/<int:type>/<int:state>')
 api.add_resource(Dashboardservers, '/api/v1/dashboradserverscount')
+

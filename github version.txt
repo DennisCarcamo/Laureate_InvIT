@@ -1,0 +1,2 @@
+Julio 10 2019
+Push con el fix en la creacion de hojas de inventario.

@@ -33,15 +33,15 @@ export class SearchEmployeeService {
   searchEmployees(curso, text): Observable<elementos[]>{
     //this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
     this.url = `http://127.0.0.1:5000/api/v1/assetusersearch?page=${curso}&limit=10&text=${text}`;
-    return this.httpClient.get<elementos[]>(this.url)
+    return this.httpClient.get<elementos[]>(this.url).map( result => result);
 
   }
 
 
-  insertSignatureSheet(option, id, f_name, l_name, email, date): Observable<responde[]>{
+  insertSignatureSheet(option, id, f_name, l_name, email, date){
     let answ;
     let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
-    return this.httpClient.post<responde[]>(url, {}).map(result => result);
+    return this.httpClient.post(url, {}).map(result => result);
     /*.subscribe(
       (data) => {
         answ = data.message;
@@ -56,7 +56,7 @@ export class SearchEmployeeService {
   updateSheet(option, id, f_name, l_name, email): Observable<responde[]>{
     let answ;
     let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}`
-    return this.httpClient.post<responde[]>(url, {})
+    return this.httpClient.post<responde[]>(url, {}).map(result => result);
     /*.subscribe(
       (data) => {
         answ = data.message;
@@ -71,19 +71,20 @@ export class SearchEmployeeService {
   saveRelationships(user, products){
     //Insert into my ASSET Data base
 
-    this.httpClient.post(`http://127.0.0.1:5000/api/v1/signatureproducts`,
+    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/signatureproducts`,
     {
       Products:JSON.stringify(products),
       id_employee: user.EMPLOYEE_ID,
       requesterid: user.CIID
 
-    })
-    .subscribe(
+    }).map(result => result);
+    /*.subscribe(
       (data:any) => {
         console.log(JSON.stringify(products));
         this.getTest();
-      }
-    )
+        alert("Sheet done.");
+      }*/
+    
 
 
 
@@ -151,6 +152,18 @@ export class SearchEmployeeService {
       doc_name:doc_name_
     }).map(result => result);
   }
+
+  signatureSheetInsert(option, id, f_name, l_name, email, date){
+    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`, {}).map(result => result);
+  }
+
+  updateSheetInsert(option, id, f_name, l_name, email, date): Observable<responde[]>{
+    let answ;
+    let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
+    return this.httpClient.post<responde[]>(url, {}).map(result => result);
+
+  }
+
 
 
 

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { fail } from 'assert';
 import { forEach } from '@angular/router/src/utils/collection';
 import { SearchEmployeeService } from '../search-employee.service';
+import { ElementAst } from '@angular/compiler';
 
 import { TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -11,6 +12,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
+import { PdfSheetService } from '../../pdf-sheet.service';
 
 @Component({
   selector: 'app-createsheet',
@@ -39,7 +41,7 @@ export class CreatesheetComponent implements OnInit {
   public siteInfo = false;
   public disable_flag = 1;
 
-  constructor(private httpClient:HttpClient, private searchEmployeeService : SearchEmployeeService, private modalService: BsModalService, private cookieService: CookieService, private router : Router) {
+  constructor(private httpClient:HttpClient, private searchEmployeeService : SearchEmployeeService, private modalService: BsModalService, private cookieService: CookieService ,private router : Router) {
 
     this.fullImagePath = '/assets/images/black-coffee-cactus-cellphone-875514.jpg'
    }
@@ -202,29 +204,6 @@ export class CreatesheetComponent implements OnInit {
   insertSheet(){
     this.disable_flag = 0;
     let x = this.selectemploye[0];
-    //validacion
-    /*let m;
-    this.searchEmployeeService.processValidation(x.EMPLOYEE_ID)
-    .subscribe( res => {
-      m = res['message'];
-      console.log(res);
-      if(this.option == 1 && m == 'null'){
-        this.validation = 1;
-      }
-      if((this.option == 1) && (m['id_type'] == 2)){
-        this.validation = 1;
-      }
-
-      if(this.option == 3 && m['id_type'] != 2){
-        this.validation = 1;
-      }
-
-
-      console.log(m['id_type']);
-      console.log(this.validation);
-      console.log(this.option);
-    }) */ 
-
 
     let response;
     let l = this.productsevent.length
@@ -232,6 +211,15 @@ export class CreatesheetComponent implements OnInit {
       this.searchEmployeeService.insertSignatureSheet(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL, this.date)
       .subscribe(res =>{
         console.log(res);
+        if(res['message'] == 'Signature Sheet correctly inserted'){
+          console.log('Hoja creada');
+          alert('Hoja creada');
+        }
+        else{
+          console.log('Hoja no creada.');
+          alert('Hoja no creada');
+        }
+      
       });
       //alert(response);
        alert("Creating sheet..");
@@ -253,7 +241,64 @@ export class CreatesheetComponent implements OnInit {
     }
 
     
-    window.location.href = '/newsheet'; 
+    //window.location.href = '/newsheet'; 
+      
+  }
+
+  insertSheet2(){
+    this.disable_flag = 0;
+    let x = this.selectemploye[0];
+
+    let response;
+    let l = this.productsevent.length
+    if(x && (l != 0) && this.validation == 1){
+      this.searchEmployeeService.updateSheetInsert(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL, this.date)
+      .subscribe(result =>{
+        //alert("Preparing to update..");
+        console.log(result);
+        if(result['message'] == "Signature Sheet correctly inserted"){
+          console.log('Dentro del condicionante del mensaje')
+          alert("Creating sheet this could take a few seconds.!");
+          //this.createSignatureSheet(x, this.productsevent);
+          this.searchEmployeeService.saveRelationships(x, this.productsevent)
+          .subscribe(result => {
+            console.log(result);
+            alert("Done");
+            //alert('Signature Sheet successfully created.!');
+            window.location.href = '/newsheet'; 
+          })
+          //alert('Carajo1');
+
+
+        }
+        else{
+          alert('Something wrong contact your System Admin.');
+        }
+      } );
+      
+      //alert(response);
+      // alert("Creating sheet..");
+      //pendiente aun #### 
+      //this.createSignatureSheet(x, this.productsevent);
+      //alert('Signature sheet successfully created.!!');
+
+  
+    }
+    else{
+      if(this.validation == 0 && this.option == 1){
+        alert('You cannot create this signature sheet, offboarding sheet is needed')
+      }
+      if(this.validation == 0 && this.option == 3){
+        alert('You have to create an onboarding sheet first');
+      }
+      if( (l == 0)){
+        alert('Make sure to select at least one Product');
+
+      }
+    }
+
+    //alert('Signature Sheet successfully created.!');
+    //window.location.href = '/newsheet'; 
       
   }
 

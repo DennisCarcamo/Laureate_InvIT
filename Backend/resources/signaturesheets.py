@@ -57,6 +57,7 @@ class SignatureSheets(Resource):
 
         try: 
             sheet.insert()
+            print('Hoja insertada')
             return{'message': 'Signature Sheet correctly inserted'}
         except:
             return {'message': "something wrong probably item already exist"}
@@ -253,7 +254,8 @@ class OffboardingValidation(Resource):
     """Validate if user already has an offboarding sheet"""
     def get(self, id):
         val = SignatureSheetModel.query.filter_by(id_employee=id).order_by(SignatureSheetModel.id_signature.desc()).first()
-
+        print("(((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))")
+        print(val.json())
         if val:
             return {'message': val.json()}
         else:
