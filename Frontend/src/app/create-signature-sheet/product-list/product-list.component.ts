@@ -16,7 +16,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 
 
 export class ProductListComponent implements OnInit {
-  public product: any;
+  public product: any = '';
   public allProducts:any = [];
   public selectedProducts: any = [];
   public bool: any = false;
@@ -38,6 +38,7 @@ export class ProductListComponent implements OnInit {
   constructor(private httpClient:HttpClient) { }
 
   ngOnInit() {
+    this.find();
   }
 
   textproduct(event:any){

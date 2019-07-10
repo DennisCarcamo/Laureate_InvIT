@@ -30,6 +30,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
 import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component';
 import { LifetimeTableComponent } from './lifetime-table/lifetime-table.component';
+import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
 
 
 
@@ -44,6 +45,7 @@ import { LifetimeTableComponent } from './lifetime-table/lifetime-table.componen
     DashboardTablesComponent,
     LifetimeChartComponent,
     LifetimeTableComponent,
+    LoanAssetsComponent,
         
 
   ],

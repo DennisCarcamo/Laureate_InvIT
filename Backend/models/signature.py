@@ -107,12 +107,29 @@ class SignatureSheetModel(db.Model):
 
     @classmethod
     def get_last_id(cls, employee_id):
-        res = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
-        if res:
-            return res
+        resUpdate = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
+        resOnboarding =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
+        
+        if resOnboarding and resUpdate:
+            resUpdate_ = resUpdate.json()
+            resOnboarding_ = resOnboarding.json()
+            #print("$$$$$$$$$$$$$$$$$$$$$$$$$$")
+            print(resUpdate_['id_signature']) 
+            print(resOnboarding_['id_signature'])
+            if resUpdate_['id_signature'] > resOnboarding_['id_signature']:
+                return resUpdate
+            else:
+                return resOnboarding
         else:
-            res =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
-            return res
+            return resOnboarding
+
+        ###################################################
+        #res = cls.query.filter_by(id_employee= employee_id, id_type = 4 ).order_by(cls.id_signature.desc()).first()
+        #if res:
+        #    return res
+        #else:
+        #    res =  cls.query.filter_by(id_employee= employee_id, id_type = 1 ).order_by(cls.id_signature.desc()).first()
+        #    return res
 
     @classmethod
     def get_last_sheet(cls, employee_id):
@@ -127,6 +144,11 @@ class SignatureSheetModel(db.Model):
         #return cls.query.filter_by(and_(id_employee= employee_id, id_type = 1) ).order_by(cls.id_signature.desc()).first()
         return cls.query.filter_by(id_employee= employee_id, id_type = 1).order_by(cls.updated.desc()).first()
 
+    #funcion para jalar fecha de retorno.
+    @classmethod
+    def get_return_day(cls, id_signature_):
+        return cls.query.filter_by(id_signature = id_signature_).order_by(cls.updated.desc()).first()
+
     @classmethod
     def bring_all(cls):
         return cls.query.all()
@@ -137,6 +159,17 @@ class SignatureSheetModel(db.Model):
 
     def myConvertor(self):
             return self.updated.__str__()
+    
+    def commit_(self):
+        db.session.commit()
+
+    def updatedLoan(self):
+        self.status = 2
+        db.session.commit()
+
+        
+        
+
    
 
 class SignatureProductsModel(db.Model):

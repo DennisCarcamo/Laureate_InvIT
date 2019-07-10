@@ -23,8 +23,15 @@ class CreatePDF(object):
         random = random.upper() # Make all characters uppercase.
         random = random.replace("-","") # Remove the UUID '-'.
         pdf_name = random[0:string_length]
-        qapath = settings['PDFSAVEPATH'] 
+        qapath = settings['PDFSAVEPATH']
+
+        #path produccion
+        #path = qapath + document_name + ".pdf"
+
+        #path desarrollo. 
         path =  "Backend/pdfs/" + document_name + ".pdf"
+        print(path)
+        #nada
         # "Backend/pdfs/" +
     
         formatted_time = time.ctime()
@@ -35,14 +42,20 @@ class CreatePDF(object):
         Building = 'CEUTEC Building, 8th Floor'
         Town = 'Col, Matamoros Tegucigalpa '
         county = 'Francisco Morazan, Honduras'
-        Phone = '2275-5780' 
+        Phone = '2275-5780'
+        officeText = "LNO Honduras" 
         
+        #bug no agarra el text toma el offboarding como update.
+        # 
+        #  
         if(user_info['id_type'] == 2):
             text = 'The next document verify the return of the equipment detail above from the user to the IT department once the user finished the employment relationship with Laureate after a previous audit from an IT Agent.'
         else:
-            text = 'The user must answer for any damages or partial or total loss, it is your responsability to return the computer equipment or devices in good condition within the established schedule service. to request any device or computer equipment must submit a ticket directed to the email: helpdeskit@laureate.net'
+            if(user_info['id_type'] == 3):
+                text = 'This is a loan sheet, the user must respond for any damage or partial or total loss, it is your responsibility to return the equipment or computing devices in good condition within the established programming service. To request any device or computer equipment you must send a ticket addressed to the email: helpdeskit@laureate.net. The first two lines of signatures are for delivery, and the second lines are return signatures. Return date: ' + str(onboardingDate)
+            else:
+                text = 'The user must answer for any damages or partial or total loss, it is your responsability to return the computer equipment or devices in good condition within the established schedule service. to request any device or computer equipment must submit a ticket directed to the email: helpdeskit@laureate.net'
             
-        
         #text = stringWidth(text, 'Helvetica-Bold', 9)
         #p = Paragraph(text, para)
         c = canvas.Canvas(path)
@@ -82,8 +95,20 @@ class CreatePDF(object):
 
         c.rect(35,170, 7.3*inch, 1.1*inch )
 
-        c.line(75, 80, 275,80)
-        c.line(335, 80, 535,80)
+
+###Loan ONLY Line Changes####
+        if(user_info['id_type'] == 3):
+            c.line(75, 110, 275,110)
+            c.line(335, 110, 535,110)
+
+            c.line(75, 65, 275,65)
+            c.line(335, 65, 535,65)
+
+        else:
+            c.line(75, 80, 275,80)
+            c.line(335, 80, 535,80)
+
+
 
         #user info
         _signature_sheet_id = str(id_signature)
@@ -95,6 +120,7 @@ class CreatePDF(object):
         c.drawString(182,770, _updated)
         _onBoadinrDate = str(onboardingDate)
         c.drawString(445,770, _onBoadinrDate)
+        c.drawString(445,716, officeText)
 
         c.drawString(445,668, user_info['id_employee'])
 
@@ -111,6 +137,9 @@ class CreatePDF(object):
         model = 'Model'
 
         it_agent = 'IT Agent'
+        it_agent1 = 'IT Agent (Delivery)'
+        it_agent2 = 'IT Agent (Return)'
+        
 
 
 
@@ -118,14 +147,31 @@ class CreatePDF(object):
         length = len(text)
         part1 = text[0:125]
         part2 = text[125: 245]
-        part3 = text[245:length]
+        part3 = 0
+        part4 = 0
+        if(length > 350):
+            part3 = text[245:367]
+            part4 = text[367:length]
+            #print("Parte numero 4")
+            #print(part4)
+        
+        else:
+            part3 = text[245:length]
+
         textobject1 = c.beginText(45, 220)
         textobject2 = c.beginText(45,210 )
         textobject3 = c.beginText(45, 200)
+        textobject4 = c.beginText(45,190)
     
         textobject1.textLine(part1)
         textobject2.textLine(part2)
         textobject3.textLine(part3)
+
+        if(length > 350):
+            textobject4.textLine(part4)
+            c.drawText(textobject4)
+            #print("Aqui")
+
         c.drawText(textobject1)
         c.drawText(textobject2)
         c.drawText(textobject3)  
@@ -212,15 +258,48 @@ class CreatePDF(object):
             
         
         #texto de firmas
-        textitagent = c.beginText(145,65)
-        textnamesign = c.beginText(405,65)
+        #textitagent = c.beginText(145,65)
+        #textnamesign = c.beginText(405,65)
 
-        textitagent.textLine(it_agent)
-        textnamesign.textLine(full_name)
-        c.setFont('Helvetica-Bold', 8)
-        c.drawText(textitagent)
-        c.drawText(textnamesign)
+        #textitagent.textLine(it_agent)
+        #textnamesign.textLine(full_name)
+        #c.setFont('Helvetica-Bold', 8)
+        #c.drawText(textitagent)
+        #c.drawText(textnamesign)
+
+        ##############Sign Loan changes#############
+        if(user_info['id_type'] == 3):
+            full_name1 = full_name + ' ' + '(Delivery)'
+            full_name2 = full_name + ' ' + '(Return)' 
+
+            textitagent = c.beginText(145,100)
+            textnamesign = c.beginText(405,100)
+
+            textitagent.textLine(it_agent1)
+            textnamesign.textLine(full_name1)
+            c.setFont('Helvetica-Bold', 8)
+            c.drawText(textitagent)
+            c.drawText(textnamesign)
+
+            #cambios loan
+            textitagent = c.beginText(145,50)
+            textnamesign = c.beginText(405,50)
+            textitagent.textLine(it_agent2)
+            textnamesign.textLine(full_name2)
+            c.setFont('Helvetica-Bold', 8)
+            c.drawText(textitagent)
+            c.drawText(textnamesign)
+        else:
+            textitagent = c.beginText(145,65)
+            textnamesign = c.beginText(405,65)
+
+            textitagent.textLine(it_agent)
+            textnamesign.textLine(full_name)
+            c.setFont('Helvetica-Bold', 8)
+            c.drawText(textitagent)
+            c.drawText(textnamesign)
+        
         c.save()
-        print('guardado')
+        print('Hoja creada exitosamente.')
 
         #return send_from_directory(settings['PDFPATH'], 'plantilla.pdf', as_attachment=True)

@@ -68,11 +68,24 @@ export class DashboardService {
   }
 
   searchLifetimeDetail(less, number, state, page){
+    let x = 'Bearer' + ' ' + this.cookieService.get("token")
+    const headers = new HttpHeaders()
+    .set( 'Authorization', x);
     return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardlifetimedetail?less=${less}&number=${number}&state=${state}&page=${page}`).map(result => result);
   }
 
   searchItemLifetimeDetail(page, text){
+    let x = 'Bearer' + ' ' + this.cookieService.get("token")
+    const headers = new HttpHeaders()
+    .set( 'Authorization', x);
     return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardsearchlifetimedetail?text=${text}&page=${page}`).map(result => result);
+  }
+
+  serversCount(){
+    let x = 'Bearer' + ' ' + this.cookieService.get("token")
+    const headers = new HttpHeaders()
+    .set( 'Authorization', x);
+    return this.httpClient.get(` http://127.0.0.1:5000/api/v1/dashboradserverscount`).map(result => result);
   }
 
 }

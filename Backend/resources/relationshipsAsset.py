@@ -136,7 +136,7 @@ class AssetRelationships(object):
         # get the user ciid
         #employee id is a string
         param = "'" + employee_id + "'"
-        z = s.execute('SELECT CIID FROM SDUSER WHERE EMPLOYEEID = {}'.format(param))
+        z = s.execute('SELECT CIID FROM SDUSER WHERE EMPLOYEEID = {} order by ciid desc'.format(param))
         x =  json.dumps( [dict(ix) for ix in z] )
         y = json.loads(x)
         user_ciid = y[0].get('ciid')

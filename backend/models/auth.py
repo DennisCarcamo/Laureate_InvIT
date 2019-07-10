@@ -75,6 +75,9 @@ class UsersModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    @classmethod
+    def usernameExist(cls, username):
+        return cls.query.filter_by(user_name = username).first()
 
 class PrivilegesModel(db.Model):
     __tablename__ = 'tbl_privileges'

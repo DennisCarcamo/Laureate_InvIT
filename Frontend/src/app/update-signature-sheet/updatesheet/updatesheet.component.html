@@ -1,6 +1,6 @@
 <br>
 <div class="container" *ngIf="privilege">
-    <h1 class="my-4">Update Signature Sheet <span style="color:yellowgreen"><i class="fa fa-pencil" aria-hidden="true"(click)="siteInformation()"></i></span>
+    <h1 class="my-4">Update Signature Sheet <span style="color:red;"><i class="fa fa-pencil" aria-hidden="true"(click)="siteInformation()"></i></span><hr>
 
     </h1>
         <div class="row" *ngIf="siteInfo">
@@ -59,9 +59,8 @@
             <button class="btn btn-info btn-sm" (click)="start()">Let's Get Started!</button>
         </div> -->
     </div>
-    <br><br>
     <div class=" col-6" *ngIf="boolfirst">
-        <h3> Select a type <span><i class="fa fa-calendar" aria-hidden="true"></i></span></h3>
+        <h3> Select a type <span><i class="fa fa-calendar" aria-hidden="true" style="color:red;"></i></span></h3>
         <div class="form-group">
             <select class="form-control" [(ngModel)]="option">
             <!--        <option value="2">Offboarding</option> -->
@@ -71,7 +70,7 @@
         <!-- <div class="form-group">
             <input type="Date" class="form-control" [(ngModel)]="date">
         </div> -->
-        <button class="btn btn-info d-flex justify-content-center btn-sm" (click)="validate()">Continue</button>
+        <button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit" (click)="validate()">Continue</button>
     </div>
     <ul class="list-group" *ngFor="let item of selectemploye">
         <li class="list-group-item list-group-item-success ">{{item.FIRST_NAME}}  {{item.LAST_NAME}} - {{item.EMAIL}} - {{item.EMPLOYEE_ID}}</li>
@@ -87,16 +86,16 @@
   
          <app-employee-table (employeevent)="selectemploye=$event"></app-employee-table>
          <div class="d-flex justify-content-center">
-                  <button class="btn btn-info btn-sm" (click)="backemployee()">Go Back</button><h4>-</h4>
-                  <button class="btn btn-info btn-sm" (click)="continueemployee(procesValidationtemplate)">Continue</button>
+                  <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="backemployee()">Go Back</button><h4>-</h4>
+                  <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="continueemployee(procesValidationtemplate)">Continue</button>
          </div>    
     </div >
        
     <div *ngIf="currentproducts">
         <app-user-products [parentData]="selectemploye" (productremovesevent)="productremovesevent=$event" (currentproductrevent)="selectproducts=$event"></app-user-products>
          <div class="d-flex justify-content-center">
-            <button class="btn btn-info btn-sm" (click)="backemployee()" >Go Back</button><h4>-</h4>
-            <button class="btn btn-info btn-sm" (click)="continueprods()">Add Product</button> 
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="backemployee()" >Go Back</button><h4>-</h4>
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="continueprods()">Add Product</button> 
         </div> 
     </div>
 
@@ -104,7 +103,7 @@
         <app-product-list (productsevent)="productsevent=$event"></app-product-list>
         <!--<button class="btn btn-info " (click)="backproducts()">Go Back</button> -->
         <div class="d-flex justify-content-center">
-                <button class="btn btn-info btn-sm" (click)="backproducts()">Go Back</button>
+                <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="backproducts()">Go Back</button>
         </div>  
     </div>
 
@@ -113,9 +112,9 @@
     
     <div *ngIf="boolproducts" class="d-flex justify-content-center">
             <!-- <button class="btn btn-link btn-lg" (click)="createSignatureSheet()"></button> -->
-            <button class="btn btn-primary btn-lg" (click)="openModal(template)">Save & Update Signature Sheet</button><br>
+            <button class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" (click)="openModal(template)">Save & Update Signature Sheet</button><br>
         </div><br>
-    <div *ngIf="confirmation" class="alert alert-warning" role="alert">
+    <div *ngIf="confirmation" class="alert" role="alert">
             <h4 class="alert-heading">Are you sure of update this Signature Sheet?</h4>
             <p>The information will be save and automatically download a pdf file of the sheet, press 'YES', to continue or 'No', to go back.</p>
             <div class="d-flex justify-content-start">
@@ -131,11 +130,11 @@
 <!-- <button (click)="testx()">test</button> -->
 
 <ng-template #template>
-    <div class="modal-body text-center alert alert-warning">
+    <div class="modal-body text-center alert">
         <p>Are you sure of save this Signature Sheet?? <span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
-        <button type="button" class="btn btn-primary" (click)="updateSheet()" >Yes</button>
+        <button type="button" class="btn btn-primary" (click)="updateSheet()" [disabled]="disable_flag == 0">Yes</button>
         <button type="button" class="btn btn-danger" (click)="abort()" >No</button>
-        <div class="modal-body alert alert-warning" role="alert">
+        <div class="modal-body alert " role="alert">
                     The information will be update and automatically create a pdf file of the sheet, press 'YES', to continue or 'No', to go back.
         </div>
     </div>
@@ -144,10 +143,10 @@
 </ng-template>
 
 <ng-template #procesValidationtemplate>
-        <div class="modal-body text-center alert alert-info">
+        <div class="modal-body text-center alert ">
             <p>It is not possible to Create this sheet.! <span><i class="fa fa-times" aria-hidden="true"></i></span></p>
             <button class="btn btn-danger" (click)="ok()">Ok</button><br>
-            <div class="modal-body alert alert-warning" role="alert">
+            <div class="modal-body alert " role="alert">
                     Verify that the user has an onboarding sheet, or does not have an offboarding sheet
             </div>
         </div>

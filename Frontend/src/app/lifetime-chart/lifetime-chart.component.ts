@@ -57,7 +57,8 @@ export class LifetimeChartComponent implements OnInit {
       }
     }
     else{
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
   }
 
@@ -106,23 +107,36 @@ export class LifetimeChartComponent implements OnInit {
 
       this._dashboardService.searchItemLifetimeDetail(this.cursor2, this.searchInput)
       .subscribe(res => {
-        this.items2 = res['query'];
-        this.count2 = res['count'];
-        this.cursor2 = res['cursor'];
-        this.more2 = res['more'];
+        if(res['count'] != 0){
+          this.items2 = res['query'];
+          this.count2 = res['count'];
+          this.cursor2 = res['cursor'];
+          this.more2 = res['more'];
+          //alert('aqui');
 
-        if(this.more2){
-          this.shownext2 = true;
-        }else{
-          this.shownext2 = false;
         }
-        
-        if(this.cursor2 == 10){
-          this.showpreview2 = false
+        console.log(res['count']);
+        if(res['count'] == 0){
+          alert("Nothing Found.!");
+          this.searchInput = '';
         }
         else{
-          this.showpreview2 = true;
+
+          if(this.more2){
+            this.shownext2 = true;
+          }else{
+            this.shownext2 = false;
+          }
+          
+          if(this.cursor2 == 10){
+            this.showpreview2 = false
+          }
+          else{
+            this.showpreview2 = true;
+          }
         }
+
+
       })
     }
   }

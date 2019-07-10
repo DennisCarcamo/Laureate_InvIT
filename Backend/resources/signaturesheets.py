@@ -17,6 +17,7 @@ from webargs.flaskparser import use_args
 from marshmallow import fields
 from backend.resources.createpdf import *
 from backend.resources.relationshipsAsset import *
+from backend.resources.loansheets import *
 
 class SignatureSheets(Resource):
     insert_sheet = {
@@ -34,7 +35,7 @@ class SignatureSheets(Resource):
         page = 1
         per_page = 10
         sheet = SignatureSheetModel.get_last_date()
-        records = SignatureSheetModel.query.order_by(SignatureSheetModel.updated.desc()).limit(per_page).offset((page - 1) * per_page)
+        records = SignatureSheetModel.query.order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((page - 1) * per_page)
         if records:
             return{ 'SignatureSheets':  list(map(lambda x: x.json(),records))}
         return{'message': 'Nothing found'}
@@ -56,16 +57,19 @@ class SignatureSheets(Resource):
 
         try: 
             sheet.insert()
+            print('Hoja insertada')
             return{'message': 'Signature Sheet correctly inserted'}
         except:
             return {'message': "something wrong probably item already exist"}
         
-
+#pdf
 class SignatureSheet(Resource):
     search_args = {
         'page': fields.Int(required = True),
         'text': fields.Str(required = True),
-        'limit': fields.Int(required = True)
+        'limit': fields.Int(required = True),
+        'idsheet': fields.Str(required= True),
+        'status':fields.Str(required= True)
     }
 
     @use_args(search_args)
@@ -73,12 +77,23 @@ class SignatureSheet(Resource):
         text = args.get('text', None)
         page = args.get('page', None)
         limit = args.get('limit', None)
+        sheet_option = args.get('idsheet', None)
+        status_option = args.get('status', None)
         param =   text + "%"
+
+        #print("IDS")
+        #print(sheet_option + ' ' + status_option)
 
         _page = page 
         per_page = limit
-        records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).order_by(SignatureSheetModel.updated.desc()).limit(per_page).offset((_page - 1) * per_page).all()
-        count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).count()
+
+        if sheet_option == '5':
+            records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
+            count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).count()
+        else:
+            records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param)), and_(SignatureSheetModel.id_type == sheet_option, SignatureSheetModel.status == status_option)).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
+            count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param)) , and_(SignatureSheetModel.id_type == sheet_option, SignatureSheetModel.status == status_option)).count()
+        
         if records:
             cursor = (page * 10) + 1
             return{ 'SignatureSheets':  list(map(lambda x: x.json(),records)),
@@ -111,8 +126,8 @@ class LoanSignatureSheets(Resource):
         _page = page 
         per_page = limit
 
-        records = SignatureSheetModel.query.filter(and_(SignatureSheetModel.email.like(param), SignatureSheetModel.id_type == type_)).order_by(SignatureSheetModel.updated.desc()).limit(per_page).offset((_page - 1) * per_page).all()
-        count = SignatureSheetModel.query.filter(and_(SignatureSheetModel.email.like(param), SignatureSheetModel.id_type == type_)).count()
+        records = SignatureSheetModel.query.filter(and_(SignatureSheetModel.email.like(param), SignatureSheetModel.id_type == type_, SignatureSheetModel.status == 1)).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
+        count = SignatureSheetModel.query.filter(and_(SignatureSheetModel.email.like(param), SignatureSheetModel.id_type == type_, SignatureSheetModel.status == 1)).count()
 
         if records:
             cursor = (page * 10) + 1
@@ -130,6 +145,7 @@ class LoanSheetProducts(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('Products', any)
     parser.add_argument('id_employee', any)
+    parser.add_argument('id_signature', any)
     loan_sheet_args = {
         'id_signature':fields.Int(required=True)
     }
@@ -145,7 +161,7 @@ class LoanSheetProducts(Resource):
             }
         return{'message': 'Nothing found'}
 
-    
+    ##cambiar status##
     def post(self):
         parser = reqparse.RequestParser()
         args = LoanSheetProducts.parser.parse_args()
@@ -154,12 +170,16 @@ class LoanSheetProducts(Resource):
         value = json.loads(val)
         id_ = args['id_employee']
         id_emp = json.loads(id_)
+        id_sheet = args['id_signature']
+        id_sheet_ = json.loads(id_sheet)
         
         relationships = AssetRelationships()
         for x in value:
             print(x['ciid'])
             relationships.DeleteRelationship(id_emp, x['ciid'])
 
+        loan_sheet_status = LoanStatus()
+        loan_sheet_status.StatusTwo(id_sheet_)
         #print(value)
         #print(id_emp)
 
@@ -234,7 +254,8 @@ class OffboardingValidation(Resource):
     """Validate if user already has an offboarding sheet"""
     def get(self, id):
         val = SignatureSheetModel.query.filter_by(id_employee=id).order_by(SignatureSheetModel.id_signature.desc()).first()
-
+        print("(((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))")
+        print(val.json())
         if val:
             return {'message': val.json()}
         else:

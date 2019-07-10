@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
-import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component'
+import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component' 
+import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component'
 
 const routes: Routes = [
 
@@ -66,6 +67,12 @@ const routes: Routes = [
 	{
 		path: 'lifetime',
 		component: LifetimeChartComponent
+
+	},
+
+	{
+		path: 'loansheets',
+		component: LoanAssetsComponent
 
 	},
 

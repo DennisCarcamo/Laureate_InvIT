@@ -53,6 +53,10 @@ class SignatureProducts(Resource):
         sheet_signature = SignatureSheetModel.get_last_sheet(id_employ)
         id_ss = sheet_signature.json()
         signature_sheet_id = id_ss['id_signature']
+        print('########################################################################')
+        print(signature_sheet_id)
+        print('########################################################################')
+        
 
         relationship = AssetRelationships()
         print(value)
@@ -62,7 +66,7 @@ class SignatureProducts(Resource):
             val = relationship.createRelationship(requ_id, prod['CIID'])
 #            print(prod['CIID'])
             #-----
-            print(val)
+            print('val' + val)
             if(val == "Done" ):
                 sp = SignatureProductsModel(signature_sheet_id, prod['PRODUCT_CODE'], prod['CI_NAME'] , prod['SERIAL_NUMBER'], prod['MODEL'], prod['CIID'])
                 try:
@@ -85,11 +89,14 @@ class SignatureProducts(Resource):
                             sp = SignatureProductsModel.query.filter(SignatureProductsModel.id == prod['id']).first()
                             sp.delete_item()
 
+                    
                     sheet = SignatureSheetModel.query.filter(SignatureSheetModel.id_signature == signature_sheet_id).first()
                     if sheet:
+                        print('Deleting sheet')
                         sheet.delete_item()
 
                         return{'message': 'Row could not be inserted'}
+            #rolback
 
             if(val != "Done"):
                 x = []
@@ -109,18 +116,25 @@ class SignatureProducts(Resource):
                 sheet = SignatureSheetModel.query.filter(SignatureSheetModel.id_signature == signature_sheet_id).first()
                 if sheet:
                     sheet.delete_item()
-
+                    print("Borrar hoja")
                     return{'message': 'Row could not be inserted'}
 
         print('onboarding date')
+        ##hacer un if que traiga la fehca de la hoja tipo get onboarding
         try:
-            onboarding_date = SignatureSheetModel.get_onboarding(id_employ)
-            print(onboarding_date)
-            if onboarding_date:
-                onboarding_date_json = onboarding_date.json()
-                onboarding_date__ = onboarding_date_json['updated']
+            if id_ss['id_type'] != 3:
+                onboarding_date = SignatureSheetModel.get_onboarding(id_employ)
+                if onboarding_date:
+                    onboarding_date_json = onboarding_date.json()
+                    onboarding_date__ = onboarding_date_json['updated']
+                else:
+                    onboarding_date__ = "0000-00-00"
             else:
-                onboarding_date__ = "0000-00-00"
+                onboarding_date = SignatureSheetModel.get_return_day(signature_sheet_id)
+                if onboarding_date:
+                    onboarding_date_json = onboarding_date.json()
+                    onboarding_date__ = onboarding_date_json['updated']
+
         except: 
             onboarding_date__ = "0000-00-00"
         #print(onboarding_date__)       
@@ -154,6 +168,8 @@ class Signatureproduct(Resource):
         sheet_signature = SignatureSheetModel.get_last_id(id_employee)
         id_ss = sheet_signature.json()
         signature_sheet_id = id_ss['id_signature']
+        print("##  Ultima Hoja  ##")
+        print(signature_sheet_id)
 
         prod = SignatureProductsModel.find_by_id(signature_sheet_id)
         print(signature_sheet_id)

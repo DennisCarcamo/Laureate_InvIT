@@ -54,13 +54,13 @@
               </div>
 
 
-    <div>
+    <div *ngIf="findPdfBool" [@slideInOut]>
        <!-- <h3>PDF Signature Sheet <span style="color:red;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span></h3>
         <p>"The Portable Document Format (PDF) is a file format developed in the 1990s to present documents, including text formatting and images, in a manner independent of application software, hardware, and operating systems. Based on the PostScript language, each PDF file encapsulates a complete description of a fixed-layout flat document, including the text, fonts, vector graphics, raster images and other information needed to display it. PDF was standardized as an open format, ISO 32000, in 2008, and does not require any royalties for its implementation.
 
             Today, PDF files may contain a variety of content besides flat text and graphics including logical structuring elements, interactive elements such as annotations and form-fields, layers, rich media (including video content) and three dimensional objects using U3D or PRC, and various other data formats. The PDF specification also provides for encryption and digital signatures, file attachments and metadata to enable workflows requiring these features."</p>
-        --> <br>
-        <div><br>
+        --> <hr>
+        <div >
             <div class="form-group">
               <h4>Find PDF <span><i class="fa fa-search" aria-hidden="true"></i></span> <span style="color:red;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span></h4>
               <label for="text-input">Please select the Signature sheet in the table below</label>
@@ -68,25 +68,43 @@
             </div>
         </div>
     
-        <button class="btn btn-info" (click)="searchPdf()">Look for original pdf.!</button>
-        <button class="btn btn-info" (click)="searchScannedPdf()">Look for scanned pdf.!</button>
+        <button class="btn EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" (click)="searchPdf()" tooltip="Vivamus sagittis">Look for original pdf.!</button>
+        <button class="btn EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" (click)="searchScannedPdf()">Look for scanned pdf.!</button>
         <div class="container" *ngIf="boolpdfroute">
           <p>In case download does not start please contact a IT Agent</p>
     
-        </div><br><br>
-    </div>
+        </div><br>
+    </div> <hr>
     <div class="">
         <h3>Historical Signature Sheet Table <span><i class="fa fa-history" aria-hidden="true"></i></span></h3>
-        <form class="form-inline d-flex justify-content-end">
+        <div class="form-inline d-flex justify-content-end">
             <div class="form-group">
+               <div style="margin-right: 0.5em">
+                <select class="form-control" [(ngModel)]="sheet_option">
+                  <option value="1">Onboarding</option>
+                  <option value="2">Offboarding</option>
+                  <option value="3">Loan</option>
+                  <option value="4">Updates</option>
+                  <option value="5" selected>All Sheets</option>
+                </select>
+
+                <select class="form-control" [(ngModel)]="status_option">
+                  <option value="1">On Loan</option>
+                  <option value="2" selected> Returned</option>
+                </select>
+
+             </div>
+
                 <input type="text" placeholder="Search" class="form-control" (keyup)="searchSheet($event)">
-                <button class="btn btn-info" (click)="find()">Find</button>
-        
+                <button class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" (click)="find()" style="margin-left: 0.5em">Find</button>
+               <!-- <input type="submit" class="EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit" value="Iniciar sesión"> -->
+                
             </div>
         
-        </form><br>
-        <table class="table">
-            <thead class="thead-dark">
+          </div><br>
+
+        <table class="table table-hover table-bordered">
+            <thead class="table-head">
               <tr class="">
                 <th scope="col">Sheet Id</th>
                 <th scope="col">First Name</th>
@@ -110,8 +128,10 @@
                 <td>{{product.email}}</td>
                 <td>{{product.id_employee}}</td>
                 <td>{{product.updated}}</td>
-                <td><button class="btn btn-success btn-sm" (click)="onSelect(product)" >select</button></td>
-                <td><button class="btn btn-primary btn-sm" (click)="onselectUpload(product)" >upload</button></td>
+                <td><button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit" (click)="onSelect(product)" >select</button></td>
+                <td><button class="btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit" (click)="onselectUpload(product)">upload</button></td>
+              
+
               </tr>
           
             </tbody>
@@ -125,6 +145,9 @@
           <div class="d-flex justify-content-start" *ngIf="meta">
               <p>Search Result Quantity: {{meta['count']}}, cursor {{meta['cursor']}} More?  {{meta['more']}}.</p>
           </div>
+         <!-- {{search}} - {{sheet_option}} - {{status_option}}- {{text}} -->
+
+        <!-- <button class="btn btn-danger" [disabled]="disable_flag == 0" (click)="disable()">Test</button> -->
     </div>
 <!--    <div><br>
         <div class="form-group">
@@ -140,13 +163,37 @@
       <p>In case download does not start please contact a IT Agent</p>
 
     </div><br><br> -->
-    <div *ngIf="readyUpload">
-        <h4>Upload Pdf File <span style="color:rgb(0, 119, 255)"><i class="fa fa-cloud-upload" aria-hidden="true"></i></span></h4>
-        <label for="pdf-input">The File will be bound to the user selected</label>
-        <input disabled type="text" id="pdf-input" class="form-control" [(ngModel)]="pdfFile">
-        <input type="file" (change)="onFileSelected($event)" class="from-control">
-        <button class="btn btn-primary btn-sm" (click)="onUpload()" >Upload</button>
+    
+    <div *ngIf="readyUpload" id="upload_div" class="">
+        <hr>
+        <h4 class="row d-flex justify-content-start">Upload Pdf File. <span style="color:rgb(0, 119, 255)"><i class="fa fa-cloud-upload" aria-hidden="true"></i></span></h4>
+        <label for="pdf-input" class="row d-flex justify-content-start">The File will be bound to the user selected. </label>
+        <div class="row d-flex justify-content-start">
+            <input disabled type="text" id="pdf-input" class="form-control" [(ngModel)]="pdfFile" > 
+        </div>
+        <div class="row d-flex justify-content-start file-select" style="padding-top:0.5em;">
+            <label for="file-upload" class="btn EdgeButton EdgeButton--secondary-file EdgeButton--medium submit js-submit"  >
+                <i class="fa fa-hand-o-up file-select"></i> <span class="file-select">Select File</span> 
+            </label>
+            <input type="file" id="file-upload" (change)="onFileSelected($event)" class="from-control" size="60" style="display:none;">
+            <button class="btn btn-sm EdgeButton EdgeButton--secondaryiii " (click)="onUpload()" >upload</button>
+        </div>
+
     </div>
 
+   <!-- <button class="btn btn-danger" (click)="test()">Test</button> -->
+
+      <button class="" (click)="openModal(template)" id="modal" style="display:none"></button>
+  
+    <ng-template #template>
+      <div class="modal-body text-center alert" >
+        <p id="errorMessage">!</p>
+        <button class="btn btn-info" (click)="modalRef.hide()">Ok</button><br>
+    </div>
+    
+    </ng-template >
+    
 </div>
 
+
+<!-- style="border:1px solid #ccc; display:inline-block; cursor:pointer;" -->

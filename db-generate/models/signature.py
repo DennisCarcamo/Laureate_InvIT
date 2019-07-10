@@ -129,8 +129,8 @@ class SignatureProductsModel(db.Model):
     ciid = db.Column(db.Integer,  nullable = True)
     id_signature = db.Column(db.Integer, db.ForeignKey('tbl_signature_sheet.id_signature'), nullable = False)
     product_name =  db.Column(db.String(65),  nullable = False)
-    serial_number = db.Column(db.String(35),  nullable = True)
-    model =  db.Column(db.String(30),  nullable = True)
+    serial_number = db.Column(db.String(40),  nullable = True)
+    model =  db.Column(db.String(40),  nullable = True)
 
     def __init__(self, id_signature, id_product, product_name, serial_number, model, ciid):
         #self.id = id

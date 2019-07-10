@@ -1,4 +1,4 @@
-.select :hover{
+/*.select :hover{
     background-color: rgb(168, 213, 235);
 }
 
@@ -9,4 +9,206 @@ p { color: #4c4a37; font-family: 'Source Sans Pro', sans-serif; font-size: 18px;
 h5 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
 h2 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
 h3 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
-h4 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+h4 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; } */
+
+.EdgeButton:hover{
+    background-color: #E0F8FF;
+}
+
+.EdgeButton--secondary-file:hover{
+    background-color: #afe0ff;
+}
+
+.EdgeButton--secondaryii:hover{
+    background-color: #E0F8FF;
+    color: #1da1f2;
+}
+
+.EdgeButton--secondaryiii:hover{
+    background-color: #DBFCE8;
+    color: #69C68E;
+}
+
+
+
+/*input {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 12px;
+    width: 100%;
+} */
+
+
+.EdgeButton--secondary {
+    background-color: #fff;
+    border: 1px solid #1da1f2;
+    color: #1da1f2;
+}
+
+.EdgeButton--secondaryii {
+    background-color: #1da1f2;
+    border: 1px solid #fff;
+    color: #fff;
+ 
+}
+
+.EdgeButton--secondaryiii {
+    background-color: #69C68E;
+    border: 1px solid #fff;
+    color: #fff;
+ 
+}
+
+
+.EdgeButton--secondary-file {
+    background-color: #1da1f2;
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+
+
+.EdgeButton--medium {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 16px;
+}
+
+/*.EdgeButton, .EdgeButton:visited {
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}*/
+
+.EdgeButton {
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 25px;
+    padding: 8px 18px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.EdgeButton--secondaryii {
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.EdgeButton--secondaryiii {
+    border-radius: 100px;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+textarea, div[contenteditable], .t1-select {
+    display: inline-block;
+    width: 210px;
+    padding: 4px;
+    margin: 0;
+    outline: 0;
+    background-color: #fff;
+    border: 1px solid #e6ecf0;
+    border-radius: 3px;
+}
+
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+
+h2 {
+    display: block;
+    font-size: 1.9em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+h3 {
+    display: block;
+    font-size: 1.8em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+h4 {
+    display: block;
+    font-size: 1.7em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+h5 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+body.ms-windows {
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+.table-head {
+    background-color: rgb(35, 47, 62);
+    border-color: rgb(35, 47, 62);
+    color: #fff;
+}
+
+p, label, option{
+    font-size: 1em;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color: rgb(101, 119, 134);
+  }
+
+option, select{
+    font-size: 0.9em;
+    font-family: "Segoe UI",Arial,sans-serif;
+    color: rgb(101, 119, 134);
+}
