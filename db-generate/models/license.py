@@ -11,7 +11,7 @@ class licenseModel(db.Model):
     vendor =   db.Column(db.String(100), nullable = False)
     adquisition_date =   db.Column(db.Date, nullable = False)
     date_expiration =   db.Column(db.Date, nullable = False)
-    version_product = db.Column(db.String(8), nullable = False)
+    version_product = db.Column(db.Float, nullable = False)
     max_users = db.Column(db.Integer, nullable = False)
     accountable =   db.Column(db.String(50), nullable = True)
     price =   db.Column(db.Integer, nullable = False)
@@ -30,7 +30,6 @@ class licenseModel(db.Model):
         self.price = price
         self.enable = enable
 
-
     def json(self):
         return{
                 'id_license':self.id_license,
@@ -44,13 +43,11 @@ class licenseModel(db.Model):
                 'accountable': self.accountable,
                 'price': self.price,
                 'enable':self.enable
-
             }
 
     def insert(self):
         db.session.add(self)
         db.session.commit()
-
 
     @classmethod
     def bring_all(cls):
@@ -60,45 +57,35 @@ class licenseModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-
 class workstatiosModel(db.Model):
     __tablename__ = 'tbl_workstatios_license'
     id_relationship = db.Column(db.Integer, autoincrement=True, primary_key = True)
     id_license = db.Column(db.Integer, db.ForeignKey('tbl_license.id_license'), nullable= False)
-    name_computer =    db.Column(db.String(50), nullable=False)
+    usuario =    db.Column(db.String(50), nullable=False)
     tag = db.Column(db.String(20), nullable = False)
-    serial =   db.Column(db.String(30), nullable = False)
     enable = db.Column(db.SMALLINT, nullable = False)
     
     
-
-    def __init__(self, id_relationship, id_license, name_computer, tag, serial):
+    def __init__(self, id_relationship, id_license, usuario, tag, serial):
         self.id_relationship = id_relationship,
         self.id_license = id_license,
-        self.name_computer = name_computer,
+        self.usuario = usuario,
         self.tag = tag,
-        self.serial = serial
         self.enable = enable
 
     def json(self):
         return{
                 'id_relationship':self.id_relationship,
                 'id_license': self.id_license,
-                'name_computer': self.name_computer,
+                'usuario': self.usuario,
                 'tag': self.tag,
-                'serial': self.serial,
                 'enable': self.enable
               }
-
 
     def insert(self):
         db.session.add(self)
         db.session.commit()
 
-
-    #@classmethod
-    #def find_by_id(cls, id_type):
-    #    return cls.query.filter_by(id_type=id_type).first()
 
     @classmethod
     def bring_all(cls):

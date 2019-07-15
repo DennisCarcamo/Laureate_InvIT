@@ -16,19 +16,44 @@ export class LicenseListComponent implements OnInit {
   license: any;
   submitted: boolean;
   isEditing: boolean;
+  moreResults: boolean;
+  limit: number;
+  offset: number;
 
   constructor(
     private licenseService: LicenseService,
     private modalService: BsModalService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
     this.licenseList = [];
     this.submitted = false;
     this.isEditing = false;
+    this.moreResults = true;
+    this.limit = 10;
+    this.offset = 0;
+    this.loadLicenseList();
   }
 
-  ngOnInit() {
-    this.licenseService.getList().subscribe(data => {
-      this.licenseList = data['license_list'];
+  loadLicenseList() {
+    this.licenseService.getList({
+      limit: this.limit,
+      offset: this.offset
+    }).subscribe(data => {
+      const newData = data['data']
+      if (newData.length === this.limit) {
+        this.licenseList = newData;
+        this.moreResults = true;
+      }
+
+      if (newData.length < this.limit && newData.length > 0) {
+        this.licenseList = newData;
+        this.moreResults = false;
+      }
+
+      if (newData.length === 0) {
+        this.moreResults = false;
+      }
     });
   }
 
@@ -52,7 +77,7 @@ export class LicenseListComponent implements OnInit {
   delete(licenseId: string) {
     this.licenseService.delete(licenseId).subscribe(data => {
       this.licenseList = this.licenseList.filter(element => {
-        return element.id_license !== licenseId;
+        return element['id_license'] !== licenseId;
       });
     });
   }
@@ -69,16 +94,16 @@ export class LicenseListComponent implements OnInit {
     this.isEditing = true;
 
     this.licenseForm = this.formBuilder.group({
-      productName: [this.license.name_product, Validators.required],
-      licenses: [this.license.licences, Validators.required],
-      vendor: [this.license.vendor, Validators.required],
-      adquisitionDate: [this.license.adquisition_date, Validators.required],
-      expirationDate: [this.license.date_expiration, Validators.required],
-      productVersion: [this.license.version_product, Validators.required],
-      maxUsers: [this.license.max_users, Validators.required],
-      accountable: [this.license.accountable, [Validators.required, Validators.email]],
-      price: [this.license.price, Validators.required],
-      enable: [this.license.enable, Validators.required],
+      productName: [this.license['name_product'], Validators.required],
+      licenses: [this.license['licences'], Validators.required],
+      vendor: [this.license['vendor'], Validators.required],
+      adquisitionDate: [this.license['adquisition_date'], Validators.required],
+      expirationDate: [this.license['date_expiration'], Validators.required],
+      productVersion: [this.license['version_product'], Validators.required],
+      maxUsers: [this.license['max_users'], Validators.required],
+      accountable: [this.license['accountable'], [Validators.required, Validators.email]],
+      price: [this.license['price'], Validators.required],
+      enable: [this.license['enable'], Validators.required],
     });
   }
 
@@ -106,26 +131,35 @@ export class LicenseListComponent implements OnInit {
 
     // Edit License
     if (this.isEditing) {
-      this.licenseList = this.licenseList.map(element => {
-        if (element.id_license === this.license.id_license) {
-          return params;
-        } else {
-          return element
-        }
-      });
-  
-      this.licenseService.update(this.license.id_license, params).subscribe(resp => {
+      this.licenseService.update(this.license['id_license'], params).subscribe(resp => {
+        const newData = resp['data'];
+        this.licenseList = this.licenseList.map(element => {
+          if (element.id_license === newData['id_license']) {
+            return newData;
+          } else {
+            return element
+          }
+        });
+
         this.modalRef.hide();
       });
     // Create License
-    } else {
-      this.licenseList.unshift(params);
-  
+    } else {  
       this.licenseService.create(params).subscribe(resp => {
+        this.licenseList.unshift(resp['data']);
         this.modalRef.hide();
       });
     }
 
   }
 
+  previous() {
+    this.offset = this.offset - this.limit;
+    this.loadLicenseList();
+  }
+
+  next() {
+    this.offset = this.offset + this.limit;
+    this.loadLicenseList();
+  }
 }

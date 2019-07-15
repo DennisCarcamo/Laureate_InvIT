@@ -32,7 +32,7 @@ import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.co
 import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component';
 import { LifetimeTableComponent } from './lifetime-table/lifetime-table.component';
 import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
-import { LicenseRelationshipComponent } from './license-relationship/license-relationship.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { LicenseRelationshipComponent } from './license-relationship/license-rel
     LifetimeChartComponent,
     LifetimeTableComponent,
     LoanAssetsComponent,
-    LicenseRelationshipComponent,
+
   ],
   imports: [
     BrowserModule,

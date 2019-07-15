@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e3345859e1c7
+Revision ID: 3f9f5f2f21c2
 Revises: 
-Create Date: 2018-07-04 14:06:32.813988
+Create Date: 2019-07-12 10:40:15.018234
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e3345859e1c7'
+revision = '3f9f5f2f21c2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,7 +30,7 @@ def upgrade():
     sa.Column('vendor', sa.String(length=100), nullable=False),
     sa.Column('adquisition_date', sa.Date(), nullable=False),
     sa.Column('date_expiration', sa.Date(), nullable=False),
-    sa.Column('version_product', sa.String(length=8), nullable=False),
+    sa.Column('version_product', sa.Float(), nullable=False),
     sa.Column('max_users', sa.Integer(), nullable=False),
     sa.Column('accountable', sa.String(length=50), nullable=True),
     sa.Column('price', sa.Integer(), nullable=False),
@@ -92,9 +92,8 @@ def upgrade():
     op.create_table('tbl_workstatios_license',
     sa.Column('id_relationship', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('id_license', sa.Integer(), nullable=False),
-    sa.Column('name_computer', sa.String(length=50), nullable=False),
+    sa.Column('usuario', sa.String(length=50), nullable=False),
     sa.Column('tag', sa.String(length=20), nullable=False),
-    sa.Column('serial', sa.String(length=30), nullable=False),
     sa.Column('enable', sa.SMALLINT(), nullable=False),
     sa.ForeignKeyConstraint(['id_license'], ['tbl_license.id_license'], ),
     sa.PrimaryKeyConstraint('id_relationship')

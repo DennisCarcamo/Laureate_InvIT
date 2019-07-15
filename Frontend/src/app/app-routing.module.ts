@@ -10,9 +10,11 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
-import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component' 
-import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component'
-import { LicenseListComponent } from './license/license-list/license-list.component'
+import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component';
+import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
+import { LicenseListComponent } from './license/license-list/license-list.component';
+import { LicenseRelationshipComponent } from './license/license-relationship/license-relationship.component';
+import { ReporteComponent } from './license/reporte/reporte.component'; 
 
 const routes: Routes = [
 
@@ -81,6 +83,17 @@ const routes: Routes = [
 		component: LicenseListComponent
 
 	},
+
+	{
+		path: 'license-workstations/:licenseId',
+		component: LicenseRelationshipComponent
+
+	},
+	{
+		path: 'report',
+		component: ReporteComponent
+
+	}
 
 ];
 

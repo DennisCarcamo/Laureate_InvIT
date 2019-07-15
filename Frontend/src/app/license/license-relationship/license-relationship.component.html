@@ -1,0 +1,167 @@
+<div class="container">
+    <div>
+        <h2 class="my-4">
+            License Summary
+        </h2>
+        <div class="row" *ngIf="license">
+            <div class="col-md-3">
+                Product Name: {{ license['name_product'] }}
+            </div>
+
+            <div class="col-md-3">
+                Product Version: {{ license['version_product'] }}
+            </div>
+
+            <div class="col-md-4">
+                Licences: {{ license['licences'] }}
+            </div>
+
+            <div class="col-md-2">
+                Max Users: {{ license['max_users'] }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Assigned to:
+                <p *ngIf="!users || users.length === 0">Nobody</p>
+                <ul *ngIf="users?.length > 0">
+                    <li *ngFor="let item of users">
+                        {{'user: ' + item['usuario'] + ' tag: ' + item['tag']}}
+                        <span><button class="btn btn-link" (click)="remove(item)">Remove</button></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="my-4">
+        Assign License
+    </h2>
+
+    <div>
+        <div *ngIf="employee">
+            <h5>Selected Employee:</h5>
+            <p *ngIf="employee" [innerHtml]="employee['EMAIL']"></p>
+            <button *ngIf="employee" type="button" class="btn btn-sm"
+                (click)="collapseTag.hide(); collapseEmployee.show()" [attr.aria-expanded]="!isEmployeeCollapsed"
+                aria-controls="collapseEmployee">Change Employee
+            </button>
+
+            <hr>
+        </div>
+
+        <div *ngIf="tag">
+            <h5>Selected Tag:</h5>
+            <p *ngIf="tag" [innerHtml]="tag['TAG']"></p>
+            <button *ngIf="tag" type="button" class="btn btn-sm" (click)="collapseEmployee.hide(); collapseTag.show()"
+                [attr.aria-expanded]="!isTagCollapsed" aria-controls="collapseTag">Change Tag
+            </button>
+
+            <hr>
+        </div>
+
+        <button *ngIf="employee && tag && validate()" type="button" class="btn btn-sm btn-success"
+            (click)="save(); collapseEmployee.show()">Save
+        </button>
+
+        <p *ngIf="employee && tag && !validate()">Usear and tag already assigned</p>
+    </div>
+
+    <div *ngIf="license && users?.length >= license['max_users']">
+        <p>Maximum users limit reached</p>
+    </div>
+
+    <div [hidden]="!(license && users?.length < license['max_users'])">
+        <div id="collapseEmployee" #collapseEmployee="bs-collapse" [collapse]="isEmployeeCollapsed">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="my-4">
+                        Select Employee
+                    </h4>
+                </div>
+                <div class="col-md-4">
+                    <form class="my-4" [formGroup]="searchForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <table class="table table-hover table-bordered">
+                    <thead class="table-head">
+                        <tr class="">
+                            <th scope="col">Employee id</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="select" *ngFor="let item of employees">
+                            <td [innerHtml]="item['EMPLOYEE_ID']"></td>
+                            <td [innerHtml]="item['EMAIL']"></td>
+                            <td [innerHtml]="item['FIRST_NAME']"></td>
+                            <td [innerHtml]="item['LAST_NAME']"></td>
+                            <td>
+                                <button
+                                    class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit"
+                                    type="button"
+                                    (click)="selectEmployee(item); collapseEmployee.hide(); collapseTag.show();"
+                                    [attr.aria-expanded]="!isEmployeeCollapsed" aria-controls="collapseEmployee">
+                                    Select
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-link" (click)="previous()" *ngIf="currentPage > 0">Previous</button>
+                <button class="btn btn-link" (click)="next()" *ngIf="moreResults">Next</button>
+            </div>
+        </div>
+
+        <div id="collapseTag" #collapseTag="bs-collapse" [collapse]="isTagCollapsed">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="my-4">
+                        Select Tag
+                    </h4>
+                </div>
+            </div>
+
+            <div>
+                <table class="table table-hover table-bordered">
+                    <thead class="table-head">
+                        <tr class="">
+                            <th scope="col">Tag id</th>
+                            <th scope="col">Tag</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="select" *ngFor="let item of tags">
+                            <td [innerHtml]="item['TAG_ID']"></td>
+                            <td [innerHtml]="item['TAG']"></td>
+                            <td>
+                                <button
+                                    class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit"
+                                    type="button" (click)="selectTag(item); collapseTag.hide()"
+                                    [attr.aria-expanded]="!isTagCollapsed" aria-controls="collapseTag">
+                                    Select
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-link" (click)="previous()" *ngIf="currentPage>0">Previous</button>
+                <button class="btn btn-link" (click)="next()" *ngIf="moreResults">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

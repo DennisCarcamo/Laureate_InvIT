@@ -1,0 +1,38 @@
+<div class="container">
+    <h1 class="my-4">
+      Report License
+      <span style="color:purple;">
+        <i aria-hidden="true" class="fa fa-list-alt"></i>
+      </span>
+    </h1>
+    <button type="button" class="btn btn-primary" (click)="createMode(); openModal(createModal)">
+        License enable
+    </button>
+    <button type="button" class="btn btn-primary" (click)="createMode(); openModal(createModal)">
+        License Diseble
+    </button>
+    <hr>
+    <div>
+      <table class="table table-hover table-bordered">
+        <thead class="table-head">
+          <tr class="">
+            <th scope="col">Id_license</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Enable</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr class="select" *ngFor="let item of reporte">
+            <td [innerHtml]="item.id_license"></td>
+            <td [innerHtml]="item.usuario"></td>
+            <td [innerHtml]="item.tag"></td>
+            <td [innerHtml]="item.enable === 1 ? 'True' : 'False'"></td>
+            </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-link" (click)="previous()" *ngIf="offset > 0">Previous</button>
+    <button class="btn btn-link" (click)="next()" *ngIf="moreResults">Next</button>
+    </div>
+  </div>

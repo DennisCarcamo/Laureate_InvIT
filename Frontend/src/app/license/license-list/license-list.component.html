@@ -1,9 +1,9 @@
 <div class="container">
   <h1 class="my-4">
     License List
-   <span style="color:purple;">
+    <span style="color:purple;">
       <i aria-hidden="true" class="fa fa-list-alt"></i>
-    </span> 
+    </span>
   </h1>
   <button type="button" class="btn btn-primary" (click)="createMode(); openModal(createModal)">
     Create License
@@ -34,10 +34,15 @@
               (click)="selectLicense(item); editMode(); openModal(createModal)">Edit</button>
             <button class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit"
               (click)="openModal(showMoreModal); selectLicense(item)">Show More</button>
+            <a class="btn btn-sm btn-success" routerLink="{{'/license-workstations/' + item.id_license}}">
+              Assign</a>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <button class="btn btn-link" (click)="previous()" *ngIf="offset > 0">Previous</button>
+    <button class="btn btn-link" (click)="next()" *ngIf="moreResults">Next</button>
   </div>
 </div>
 
@@ -99,7 +104,7 @@
 
       <div class="form-group">
         <label>Product Version</label>
-        <input type="number" formControlName="productVersion" class="form-control"
+        <input type="float" formControlName="productVersion" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && controls.productVersion.errors }" />
         <div *ngIf="submitted && controls.productVersion.errors" class="invalid-feedback">
           <div *ngIf="controls.productVersion.errors.required">Product version required</div>
@@ -214,7 +219,7 @@
         </tr>
 
         <tr class="select">
-          <td [innerHtml]="'Price'"></td>
+          <td [innerHtml]="'Price ($)'"></td>
           <td [innerHtml]="license.price"></td>
         </tr>
 
