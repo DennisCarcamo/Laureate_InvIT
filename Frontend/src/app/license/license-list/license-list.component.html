@@ -104,7 +104,7 @@
 
       <div class="form-group">
         <label>Product Version</label>
-        <input type="float" formControlName="productVersion" class="form-control"
+        <input type="number" formControlName="productVersion" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && controls.productVersion.errors }" />
         <div *ngIf="submitted && controls.productVersion.errors" class="invalid-feedback">
           <div *ngIf="controls.productVersion.errors.required">Product version required</div>

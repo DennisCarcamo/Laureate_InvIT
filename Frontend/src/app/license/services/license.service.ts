@@ -48,9 +48,14 @@ export class LicenseService {
     return this.httpClient.post(url, params)
   }
 
-  getReport(): Observable<any> {
-    const url = `${this.apiUrl}/workstations-license`;
-    return this.httpClient.get<any>(url)
+  getReport(params : any): Observable<any> {
+    const url = `${this.apiUrl}/workstations-license/report`;
+    return this.httpClient.get<any>(url, { params })
+  }
+
+  searchAssetProduct(params: any): Observable<any[]>{
+    const url = `${this.apiUrl}/assetProduct`;
+    return this.httpClient.get<any>(url, { params })
   }
 
 }

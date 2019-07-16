@@ -19,15 +19,21 @@ export class LicenseRelationshipComponent implements OnInit {
   tags: any[];
   tag: any;
   currentPage: number;
-  search: string;
-  moreResults: boolean;
+  searchEmployee: string;
+  moreResultsEmployees: boolean;
   isEmployeeCollapsed: boolean;
   isTagCollapsed: boolean;
   licenseId: number;
   license: any;
   users: any[];
 
-  searchForm: FormGroup;
+  tagsLimit: number;
+  tagsOffset: number;
+  tagsSearch: string;
+  tagsMoreResults: boolean;
+  tagsForm: FormGroup;
+
+  searchEmployeeForm: FormGroup;
 
   constructor(
     private licenseService: LicenseService,
@@ -36,26 +42,17 @@ export class LicenseRelationshipComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.tags = [
-      {
-        'TAG_ID': '1',
-        'TAG': 'sdff-847-efd'
-      },
-      {
-        'TAG_ID': '2',
-        'TAG': 'g5d-7ggg7-0odfd'
-      },
-      {
-        'TAG_ID': '3',
-        'TAG': 'sadss-08-sadasd89'
-      }
-    ];
     this.licenseId = this.route.snapshot.params['licenseId'];
     this.isEmployeeCollapsed = false;
     this.isTagCollapsed = true;
-    this.moreResults = true;
+    this.moreResultsEmployees = true;
     this.currentPage = 0;
-    this.search = '';
+    this.searchEmployee = '';
+
+    this.tagsLimit = 10;
+    this.tagsOffset = 0;
+    this.tagsSearch = '';
+    this.tagsMoreResults = true;
 
     this.licenseService.get(this.licenseId).subscribe(data => {
       this.license = data['data'];
@@ -65,50 +62,83 @@ export class LicenseRelationshipComponent implements OnInit {
       this.users = data['data'];
     });
 
-    this.loadData();
+    this.loadEmployeesData();
+    this.loadTagsData();
 
-    this.searchForm = this.formBuilder.group({
+    this.searchEmployeeForm = this.formBuilder.group({
       search: ['', Validators.required]
     });
 
-    this.searchForm.controls['search'].valueChanges.pipe(
+    this.searchEmployeeForm.controls['search'].valueChanges.pipe(
       debounceTime(500),
       distinctUntilChanged()).subscribe(value => {
-        this.search = value;
+        this.searchEmployee = value;
         this.currentPage = 0;
-        this.loadData();
+        this.loadEmployeesData();
+    });
+
+    this.tagsForm = this.formBuilder.group({
+      search: ['', Validators.required]
+    });
+
+    this.tagsForm.controls['search'].valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()).subscribe(value => {
+        this.tagsSearch = value;
+        this.tagsOffset = 0;
+        this.loadTagsData();
     });
 
   }
 
-  loadData() {
-    this.searchEmployeeService.searchEmployees(this.currentPage, this.search).subscribe(data => {
-      this.moreResults = data['meta']['more'];
+  loadEmployeesData() {
+    this.searchEmployeeService.searchEmployees(this.currentPage, this.searchEmployee).subscribe(data => {
+      this.moreResultsEmployees = data['meta']['more'];
       this.employees = data['query'];
+    });
+  }
+
+  loadTagsData() {
+    this.licenseService.searchAssetProduct( {
+      limit: this.tagsLimit,
+      offset: this.tagsOffset,
+      text: this.tagsSearch
+    }).subscribe(data => {
+      this.tagsMoreResults = data['meta']['more'];
+      this.tags = data['query'];
     });
   }
 
   selectEmployee(employee: any) {
     this.employee = employee;
-    this.tag = undefined;
   }
 
   selectTag(tag: any) {
     this.tag = tag;
   }
 
-  previous() {
+  previousEmployees() {
     this.currentPage = this.currentPage - 10;
-    this.loadData();
+    this.loadEmployeesData();
   }
 
-  next() {
+  nextEmployees() {
     this.currentPage = this.currentPage + 10;
-    this.loadData();
+    this.loadEmployeesData();
+  }
+
+  previousTags() {
+    this.tagsOffset = this.tagsOffset - this.tagsLimit;
+    this.loadTagsData();
+  }
+
+  nextTags() {
+    this.tagsOffset = this.tagsOffset + this.tagsLimit;
+    this.loadTagsData();
   }
 
   save() {
-    if (!this.employee['EMAIL'] || !this.tag['TAG']) {
+    if (!this.employee['EMAIL'] || !this.tag['assettag']) {
       alert('Not saved. Selected invalid user or tag');
       return;
     }
@@ -116,7 +146,7 @@ export class LicenseRelationshipComponent implements OnInit {
     const assign = {
       'id_license': this.licenseId,
       'usuario': this.employee['EMAIL'],
-      'tag': this.tag['TAG'],
+      'tag': this.tag['assettag'],
       'enable': 1
     };
 
@@ -138,7 +168,7 @@ export class LicenseRelationshipComponent implements OnInit {
 
   validate(): boolean {
     const finded = this.users.find(element => {
-      return element['usuario'] === this.employee['EMAIL'] && element['tag'] === this.tag['TAG'];
+      return element['usuario'] === this.employee['EMAIL'] && element['tag'] === this.tag['assettag'];
     });
     return finded === undefined;
   }

@@ -17,6 +17,7 @@ export class ReporteComponent implements OnInit {
   isEditing: boolean;
   limit: number;
   offset: number;
+  more: boolean;
 
   constructor(
     private licenseService: LicenseService) {}
@@ -25,10 +26,47 @@ export class ReporteComponent implements OnInit {
     this.reporte = [];
     this.submitted = false;
     this.isEditing = false;
+    this.limit = 10;
+    this.offset = 0;
+    this.more = true;
     
 
-    this.licenseService.getReport().subscribe(data => {
-      this.reporte = data['data'];
+    this.loadReportList();
+    
+  }
+
+  loadReportList() {
+    this.licenseService.getReport({
+      limit: this.limit,
+      offset: this.offset
+    }).subscribe(data => {
+      const newData = data['data']
+      if (newData.length === this.limit) {
+        this.reporte = newData;
+        this.more = true;
+      }
+
+      if (newData.length < this.limit && newData.length > 0) {
+        this.reporte = newData;
+        this.more = false;
+      }
+
+      if (newData.length === 0) {
+        this.more = false;
+      }
     });
+  }
+
+  previous() {
+    this.offset = this.offset - this.limit;
+    this.loadReportList();
+  }
+
+  next() {
+    this.offset = this.offset + this.limit;
+    this.loadReportList();
+    console.log(this.reporte);
+    console.log(this.offset);
+    console.log(this.limit);
   }
 }

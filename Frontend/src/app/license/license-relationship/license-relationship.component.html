@@ -52,7 +52,7 @@
 
         <div *ngIf="tag">
             <h5>Selected Tag:</h5>
-            <p *ngIf="tag" [innerHtml]="tag['TAG']"></p>
+            <p *ngIf="tag" [innerHtml]="tag['assettag']"></p>
             <button *ngIf="tag" type="button" class="btn btn-sm" (click)="collapseEmployee.hide(); collapseTag.show()"
                 [attr.aria-expanded]="!isTagCollapsed" aria-controls="collapseTag">Change Tag
             </button>
@@ -80,7 +80,7 @@
                     </h4>
                 </div>
                 <div class="col-md-4">
-                    <form class="my-4" [formGroup]="searchForm">
+                    <form class="my-4" [formGroup]="searchEmployeeForm">
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="search">
                         </div>
@@ -119,8 +119,8 @@
                     </tbody>
                 </table>
 
-                <button class="btn btn-link" (click)="previous()" *ngIf="currentPage > 0">Previous</button>
-                <button class="btn btn-link" (click)="next()" *ngIf="moreResults">Next</button>
+                <button class="btn btn-link" (click)="previousEmployees()" *ngIf="currentPage > 0">Previous</button>
+                <button class="btn btn-link" (click)="nextEmployees()" *ngIf="moreResultsEmployees">Next</button>
             </div>
         </div>
 
@@ -131,22 +131,33 @@
                         Select Tag
                     </h4>
                 </div>
+                <div class="col-md-4">
+                    <form class="my-4" [formGroup]="tagsForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="search">
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div>
                 <table class="table table-hover table-bordered">
                     <thead class="table-head">
                         <tr class="">
-                            <th scope="col">Tag id</th>
                             <th scope="col">Tag</th>
+                            <th scope="col">Component Name</th>
+                            <th scope="col">Resource Name</th>
+                            <th scope="col">Serial LNO</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <tr class="select" *ngFor="let item of tags">
-                            <td [innerHtml]="item['TAG_ID']"></td>
-                            <td [innerHtml]="item['TAG']"></td>
+                            <td [innerHtml]="item['assettag']"></td>
+                            <td [innerHtml]="item['componentname']"></td>
+                            <td [innerHtml]="item['resourcename']"></td>
+                            <td [innerHtml]="item['serialno']"></td>
                             <td>
                                 <button
                                     class="btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit"
@@ -159,8 +170,8 @@
                     </tbody>
                 </table>
 
-                <button class="btn btn-link" (click)="previous()" *ngIf="currentPage>0">Previous</button>
-                <button class="btn btn-link" (click)="next()" *ngIf="moreResults">Next</button>
+                <button class="btn btn-link" (click)="previousTags()" *ngIf="tagsOffset > 0">Previous</button>
+                <button class="btn btn-link" (click)="nextTags()" *ngIf="tagsMoreResults">Next</button>
             </div>
         </div>
     </div>
