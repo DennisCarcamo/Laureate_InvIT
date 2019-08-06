@@ -26,11 +26,11 @@ class CreatePDF(object):
         qapath = settings['PDFSAVEPATH']
 
         #path produccion
-        #path = qapath + document_name + ".pdf"
+        path = qapath + document_name + ".pdf"
 
         #path desarrollo. 
-        path =  "Backend/pdfs/" + document_name + ".pdf"
-        print(path)
+        #path =  "Backend/pdfs/" + document_name + ".pdf"
+        #print(path)
         #nada
         # "Backend/pdfs/" +
     

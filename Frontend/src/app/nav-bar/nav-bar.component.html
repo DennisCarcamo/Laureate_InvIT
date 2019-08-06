@@ -1,70 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a routerLink="/" class="navbar-brand nav-title">IT Inventory <span><i class="fa fa-home"
+        aria-hidden="true"></i></span></a>
 
+  <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+    <ul class="navbar-nav">
+      <div *ngIf="privilegeDashboard">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a routerLink="/" class="navbar-brand nav-title">IT Inventory <span><i class="fa fa-home" aria-hidden="true"></i></span></a>
-
-      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-        <ul class="navbar-nav">
-          <div *ngIf="privilegeDashboard">
-
-            <li class="nav-item dropdown" *ngIf="privilegeDashboard">
-                <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" (click)="dropd()">
-                    Dashboard <span><i class="fa fa-signal" aria-hidden="true"></i></span>
-                </a>
-                <div class="dropdown-menu show" aria-labelledby="navbarDropdown" *ngIf="dropdown">
-                    <a class="dropdown-item nav-link nav-drop" routerLink="dashboard" style="color:#86888c" (click)="dropd()">Dashboard </a> 
-                    <a class="dropdown-item nav-link" routerLink="tables" style="color:#86888c" (click)="dropd()">Asset Moves </a>
-                    <a class="dropdown-item nav-link" routerLink="lifetime" style="color:#86888c" (click)="dropd()">Lifetime Table</a>
-                  <!--<a class="dropdown-item" href="#">Another action</a>
+        <li class="nav-item dropdown" *ngIf="privilegeDashboard">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            (click)="dropd()">
+            Dashboard <span><i class="fa fa-signal" aria-hidden="true"></i></span>
+          </a>
+          <div class="dropdown-menu show" aria-labelledby="navbarDropdown" *ngIf="dropdown">
+            <a class="dropdown-item nav-link nav-drop" routerLink="dashboard" style="color:#86888c"
+              (click)="dropd()">Dashboard </a>
+            <a class="dropdown-item nav-link" routerLink="tables" style="color:#86888c" (click)="dropd()">Asset Moves
+            </a>
+            <a class="dropdown-item nav-link" routerLink="lifetime" style="color:#86888c" (click)="dropd()">Lifetime
+              Table</a>
+            <!--<a class="dropdown-item" href="#">Another action</a>
                    <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a> -->
-                </div>
-              </li>          
           </div>
-            <li class="nav-item" *ngIf="privilegeCreate">
-                <a class="nav-link" routerLink="newsheet" >Create Inventory Sheet <span><i class="fa fa-file-text-o" aria-hidden="true"></i></span></a>
-            </li>
-            <li class="nav-item" *ngIf="privilegeUpdtae">
-                <a class="nav-link" routerLink="updatesheet">Update Inventory Sheet <span><i class="fa fa-wrench" aria-hidden="true"></i></span></a>
-            </li>
-            <li class="nav-item" *ngIf="privilegeLoan">
-                  <a class="nav-link" routerLink="loan">Offboarding-Loan <span><i class="fa fa-plane" aria-hidden="true"></i></span></a>
-              </li>
-              <div *ngIf="privilegePdf">
-                  <li class="nav-item dropdown" *ngIf="privilegePdf"> 
-                      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" (click)="dropdPdf()" >
-                        Pdf <span><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>
-                      </a>
-                      <div class="dropdown-menu show" aria-labelledby="navbarDropdown" *ngIf="dropdownPdf_">
-                        <a class="dropdown-item" routerLink="pdf" (click)="dropdPdf()" style="color:#86888c" >PDF</a>
-                        <a class="dropdown-item" routerLink="loansheets" (click)="dropdPdf()" style="color:#86888c"  >Loan Sheets</a>
-                      </div>
-                    </li>
-
-              </div>
-          <li class="nav-item " *ngIf="privilegeReports">
-              <a class="nav-link" routerLink="#">Reports</a>
-          </li>
-
-          <li class="nav-item " *ngIf="privilegeAdmin">
-            <a class="nav-link" routerLink="admin">User Management <span><i class="fa fa-unlock-alt" aria-hidden="true"></i></span></a>
         </li>
-        </ul>
+      </div>
+      <li class="nav-item" *ngIf="privilegeCreate">
+        <a class="nav-link" routerLink="newsheet">Create Inventory Sheet <span><i class="fa fa-file-text-o"
+              aria-hidden="true"></i></span></a>
+      </li>
+      <li class="nav-item" *ngIf="privilegeUpdtae">
+        <a class="nav-link" routerLink="updatesheet">Update Inventory Sheet <span><i class="fa fa-wrench"
+              aria-hidden="true"></i></span></a>
+      </li>
+      <li class="nav-item" *ngIf="privilegeLoan">
+        <a class="nav-link" routerLink="loan">Offboarding-Loan <span><i class="fa fa-plane"
+              aria-hidden="true"></i></span></a>
+      </li>
+      <div *ngIf="privilegePdf">
+        <li class="nav-item dropdown" *ngIf="privilegePdf">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            (click)="dropdPdf()">
+            Pdf <span><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>
+          </a>
+          <div class="dropdown-menu show" aria-labelledby="navbarDropdown" *ngIf="dropdownPdf_">
+            <a class="dropdown-item" routerLink="pdf" (click)="dropdPdf()" style="color:#86888c">PDF</a>
+            <a class="dropdown-item" routerLink="loansheets" (click)="dropdPdf()" style="color:#86888c">Loan Sheets</a>
+          </div>
+        </li>
+
       </div>
 
-      <div class="nav-item d-flex flex-row-reverse">
-            <button class="btn-sm btn btn-outline-info"(click)="Logout()">Logout <span><i class="fa fa-sign-out" aria-hidden="true"></i></span></button>
-        </div>
-    </nav>
+      <div *ngIf="privilegePdf">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            (click)="dropdLicences()">
+            Licences <span><i class="fa fa-list-alt" aria-hidden="true"></i></span> 
+          </a>
+          <div class="dropdown-menu show" aria-labelledby="navbarDropdown" *ngIf="dropdownLicences">
+            <a class="dropdown-item nav-link nav-drop" routerLink="license-list" style="color:#86888c"
+              (click)="dropdLicences()">Licences </a>
+            <a class="dropdown-item nav-link" routerLink="report" style="color:#86888c" (click)="dropdLicences()">Report License</a>
+            </div>
+        </li>
+      </div>
+
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="license-list">
+          Licences <span style="color:purple;"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+        </a>
+      </li> -->
+
+      <li class="nav-item " *ngIf="privilegeAdmin">
+        <a class="nav-link" routerLink="admin">User Management <span><i class="fa fa-unlock-alt"
+              aria-hidden="true"></i></span></a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="nav-item d-flex flex-row-reverse">
+    <button class="btn-sm btn btn-outline-info" (click)="Logout()">Logout <span><i class="fa fa-sign-out"
+          aria-hidden="true"></i></span></button>
+  </div>
+</nav>
 
 
 
 
 <div *ngIf="loggedInPending">
-        <nav class="navbar navbar-expand-sm navbar-custom">
-            <div class="d-flex justify-content-center">
-                    <h3 class="d-flex justify-content-center" style="color: #ebebeb"> IT Inventory System.!</h3>
-            </div>
-                
-              </nav>
+  <nav class="navbar navbar-expand-sm navbar-custom">
+    <div class="d-flex justify-content-center">
+      <h3 class="d-flex justify-content-center" style="color: #ebebeb"> IT Inventory System.!</h3>
+    </div>
+
+  </nav>
 </div>

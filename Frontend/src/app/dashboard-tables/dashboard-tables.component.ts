@@ -66,8 +66,8 @@ public count2;
       }
     }
     else{
-      this.privilege = true;
-      //window.location.href = '/login';
+      //this.privilege = true;
+      window.location.href = '/login';
     }
   }
 

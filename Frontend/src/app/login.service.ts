@@ -22,7 +22,7 @@ export class LoginService {
    }
 
    getCookie(){
-     return this.httpClient.get(`http://127.0.0.1:5000/getcookie`).map(result => result);
+     return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/getcookie`).map(result => result);
    }
 
    test(){
@@ -30,7 +30,7 @@ export class LoginService {
   }
 
   logout(){
-    return this.httpClient.get(`http://127.0.0.1:5000/logout`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/logout`).map(result => result);
   }
 
 }

@@ -24,6 +24,8 @@ export class NavBarComponent implements OnInit {
   public privilegeAdmin = false;
   public dropdown = false;
   public dropdownPdf_ = false;
+  public dropdownLicences = false; 
+
   ngOnInit() {
    /* if(this.cookieService.get('user_name')){
       this.loggedIn = true;
@@ -35,11 +37,11 @@ export class NavBarComponent implements OnInit {
     }*/
 
     //comentar la funcion dev only al deployar;
-    this.devOnly();
+    //this.devOnly();
 
 
     //descomentar al deployar;
-    /*
+    
     let val = this.cookieService.get("token");
     let djtw = jwt_decode(val);
     console.log(djtw);
@@ -71,7 +73,7 @@ export class NavBarComponent implements OnInit {
 
     //
 
-    */
+    
 
 
   }
@@ -85,7 +87,7 @@ export class NavBarComponent implements OnInit {
 
     }) 
     this.cookieService.deleteAll();
-    let url = `http://127.0.0.1:5000/logout`;
+    let url = `http://hnlnoitinvprod01.hnsc.net/logout`;
     window.location.href = url;
   }
 
@@ -105,6 +107,15 @@ export class NavBarComponent implements OnInit {
     }
     else{
       this.dropdownPdf_ = true;
+    }
+  }
+
+  dropdLicences(){
+    if(this.dropdownLicences){
+      this.dropdownLicences = false;
+    }
+    else{
+      this.dropdownLicences = true;
     }
   }
 

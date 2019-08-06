@@ -87,15 +87,9 @@ class Dashboardservers(Resource):
         return {'message': dquery2}
 
 
-class testBrenda(Resource):
-    def get(self):
-        return {'Mensaje' : 'Hola Brenda'}
-
-    def post(self):
-        return {'Mensaje' : 'Hola Brenda post'}
 
 
 api.add_resource(BasicDashboard, '/api/v1/dashboard')
 api.add_resource(DashboardModel, '/api/v1/dashboarddetail/<int:type>/<int:state>')
 api.add_resource(Dashboardservers, '/api/v1/dashboradserverscount')
-api.add_resource(testBrenda, '/api/v1/test')
+

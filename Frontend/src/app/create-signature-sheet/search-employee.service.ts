@@ -24,15 +24,15 @@ export class SearchEmployeeService {
   public showmeta: any = false;
   public shownext: any = false;
   public showpreview: any = false;
-  public httpserverurl = 'http://127.0.0.1:5000/api/v1/'
+  public httpserverurl = 'http://hnlnoitinvprod01.hnsc.net/api/v1/'
 
   getTest(){
     return "Hello service"
   }
 
   searchEmployees(curso, text): Observable<elementos[]>{
-    //this.url = 'http://127.0.0.1:5000/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
-    this.url = `http://127.0.0.1:5000/api/v1/assetusersearch?page=${curso}&limit=10&text=${text}`;
+    //this.url = 'http://hnlnoitinvprod01.hnsc.net/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
+    this.url = `http://hnlnoitinvprod01.hnsc.net/api/v1/assetusersearch?page=${curso}&limit=10&text=${text}`;
     return this.httpClient.get<elementos[]>(this.url).map( result => result);
 
   }
@@ -40,7 +40,7 @@ export class SearchEmployeeService {
 
   insertSignatureSheet(option, id, f_name, l_name, email, date){
     let answ;
-    let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
+    let url = `http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
     return this.httpClient.post(url, {}).map(result => result);
     /*.subscribe(
       (data) => {
@@ -55,7 +55,7 @@ export class SearchEmployeeService {
 
   updateSheet(option, id, f_name, l_name, email): Observable<responde[]>{
     let answ;
-    let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}`
+    let url = `http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}`
     return this.httpClient.post<responde[]>(url, {}).map(result => result);
     /*.subscribe(
       (data) => {
@@ -71,7 +71,7 @@ export class SearchEmployeeService {
   saveRelationships(user, products){
     //Insert into my ASSET Data base
 
-    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/signatureproducts`,
+    return this.httpClient.post(`http://hnlnoitinvprod01.hnsc.net/api/v1/signatureproducts`,
     {
       Products:JSON.stringify(products),
       id_employee: user.EMPLOYEE_ID,
@@ -91,11 +91,11 @@ export class SearchEmployeeService {
   }
 
   getUserProducts(id_employee){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/signatureproduct/${id_employee}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/signatureproduct/${id_employee}`).map(result => result);
   }
 
   updateSignatureSheet(pr,pa,cp,userinfo,typ, id_employee){
-    return this.httpClient.put(`http://127.0.0.1:5000/api/v1/signatureproduct/${id_employee}`,{
+    return this.httpClient.put(`http://hnlnoitinvprod01.hnsc.net/api/v1/signatureproduct/${id_employee}`,{
       Products_to_remove:JSON.stringify(pr),
       Products_to_add:JSON.stringify(pa),
       current_products:JSON.stringify(cp),
@@ -107,19 +107,19 @@ export class SearchEmployeeService {
   }
 
   searchSignatureSheets(page, text , limit, sheet_option, status_option){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/signaturesheet?page=${page}&text=${text}&limit=${limit}&idsheet=${sheet_option}&status=${status_option}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheet?page=${page}&text=${text}&limit=${limit}&idsheet=${sheet_option}&status=${status_option}`).map(result => result);
   }
 
   searchLoanSignatureSheets(page, text , limit, type){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loansignaturesheets?page=${page}&text=${text}&limit=${limit}&type=${type}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/loansignaturesheets?page=${page}&text=${text}&limit=${limit}&type=${type}`).map(result => result);
   }
 
   searchLoanSheetsProducts(id){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loansheetproducts?id_signature=${id}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/loansheetproducts?id_signature=${id}`).map(result => result);
   }
 
   updateOffLoanSheetsProducts(products, id_employee, id_sheet){
-    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/loansheetproducts`,{
+    return this.httpClient.post(`http://hnlnoitinvprod01.hnsc.net/api/v1/loansheetproducts`,{
       Products:JSON.stringify(products),
       id_employee: JSON.stringify(id_employee),
       id_signature:id_sheet
@@ -127,7 +127,7 @@ export class SearchEmployeeService {
   }
 
   createOffboarding(products_, id_employee_){
-    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/offboardingsheet`,
+    return this.httpClient.post(`http://hnlnoitinvprod01.hnsc.net/api/v1/offboardingsheet`,
     {
       Products: JSON.stringify(products_),
       id_employee: id_employee_
@@ -135,31 +135,31 @@ export class SearchEmployeeService {
   }
 
   processValidation(employee_id){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/offboardingsheetvalidation/${employee_id}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/offboardingsheetvalidation/${employee_id}`).map(result => result);
   }
 
   searchLoanProducts(text_, page_, limit_, status_){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/loanstatussearch?text=${text_}&page=${page_}&limit=${limit_}&status=${status_}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/loanstatussearch?text=${text_}&page=${page_}&limit=${limit_}&status=${status_}`).map(result => result);
   }
 
   pdf_validation(id_signature){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/pdfimages?id_signature=${id_signature}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/pdfimages?id_signature=${id_signature}`).map(result => result);
   }
 
   pdf_image_insert(id_signature_, doc_name_){
-    return this.httpClient.post(` http://127.0.0.1:5000/api/v1/pdfimages`, {
+    return this.httpClient.post(` http://hnlnoitinvprod01.hnsc.net/api/v1/pdfimages`, {
       id_signature: id_signature_,
       doc_name:doc_name_
     }).map(result => result);
   }
 
   signatureSheetInsert(option, id, f_name, l_name, email, date){
-    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`, {}).map(result => result);
+    return this.httpClient.post(`http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`, {}).map(result => result);
   }
 
   updateSheetInsert(option, id, f_name, l_name, email, date): Observable<responde[]>{
     let answ;
-    let url = `http://127.0.0.1:5000/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
+    let url = `http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=${option}&id_employee=${id}&first_name=${f_name}&last_name=${l_name}&email=${email}&updated=${date}`
     return this.httpClient.post<responde[]>(url, {}).map(result => result);
 
   }

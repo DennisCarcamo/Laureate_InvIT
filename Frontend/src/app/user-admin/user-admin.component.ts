@@ -232,8 +232,8 @@ export class UserAdminComponent implements OnInit {
       }
     }
     else{
-      this.privilege = true;
-      //window.location.href = '/login';
+      //this.privilege = true;
+      window.location.href = '/login';
     }
 
   }

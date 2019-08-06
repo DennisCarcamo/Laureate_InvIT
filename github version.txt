@@ -1,2 +1,5 @@
 Julio 10 2019
 Push con el fix en la creacion de hojas de inventario.
+
+Julio 15 2019
+Second push brenda Modulo de licencias con relaciones.

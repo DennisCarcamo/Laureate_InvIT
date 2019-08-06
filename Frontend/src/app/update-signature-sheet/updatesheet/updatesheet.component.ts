@@ -74,8 +74,8 @@ export class UpdatesheetComponent implements OnInit {
       }
     }
     else{
-      this.privilege = true;
-      //window.location.href = '/login';
+      //this.privilege = true;
+      window.location.href = '/login';
     }
   }
 

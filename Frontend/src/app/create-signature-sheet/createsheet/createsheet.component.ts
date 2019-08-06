@@ -70,8 +70,8 @@ export class CreatesheetComponent implements OnInit {
       }
     }
     else{
-      this.privilege = true;
-      //window.location.href = '/login';
+      //this.privilege = true;
+      window.location.href = '/login';
     }
   }
 

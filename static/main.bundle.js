@@ -34,12 +34,18 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dashboard_tables_dashboard_tables_component__ = __webpack_require__("../../../../../src/app/dashboard-tables/dashboard-tables.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__lifetime_chart_lifetime_chart_component__ = __webpack_require__("../../../../../src/app/lifetime-chart/lifetime-chart.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pdf_loan_assets_loan_assets_component__ = __webpack_require__("../../../../../src/app/pdf/loan-assets/loan-assets.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__license_license_list_license_list_component__ = __webpack_require__("../../../../../src/app/license/license-list/license-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__license_license_relationship_license_relationship_component__ = __webpack_require__("../../../../../src/app/license/license-relationship/license-relationship.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__license_reporte_reporte_component__ = __webpack_require__("../../../../../src/app/license/reporte/reporte.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -93,14 +99,26 @@ var routes = [
         path: 'loansheets',
         component: __WEBPACK_IMPORTED_MODULE_11__pdf_loan_assets_loan_assets_component__["a" /* LoanAssetsComponent */]
     },
+    {
+        path: 'license-list',
+        component: __WEBPACK_IMPORTED_MODULE_12__license_license_list_license_list_component__["a" /* LicenseListComponent */]
+    },
+    {
+        path: 'license-workstations/:licenseId',
+        component: __WEBPACK_IMPORTED_MODULE_13__license_license_relationship_license_relationship_component__["a" /* LicenseRelationshipComponent */]
+    },
+    {
+        path: 'report',
+        component: __WEBPACK_IMPORTED_MODULE_14__license_reporte_reporte_component__["a" /* ReporteComponent */]
+    }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -177,7 +195,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -202,29 +220,31 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__create_signature_sheet_create_signature_sheet_module__ = __webpack_require__("../../../../../src/app/create-signature-sheet/create-signature-sheet.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__create_signature_sheet_search_employee_service__ = __webpack_require__("../../../../../src/app/create-signature-sheet/search-employee.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__update_signature_sheet_update_signature_sheet_module__ = __webpack_require__("../../../../../src/app/update-signature-sheet/update-signature-sheet.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__share_module_share_module_module__ = __webpack_require__("../../../../../src/app/share-module/share-module.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pdf_pdf_module_pdf_module_module__ = __webpack_require__("../../../../../src/app/pdf/pdf-module/pdf-module.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__loan_admin_loan_admin_module__ = __webpack_require__("../../../../../src/app/loan-admin/loan-admin.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__login_service__ = __webpack_require__("../../../../../src/app/login.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__user_admin_user_admin_component__ = __webpack_require__("../../../../../src/app/user-admin/user-admin.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__management_service__ = __webpack_require__("../../../../../src/app/management.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ng_drag_drop__ = __webpack_require__("../../../../ng-drag-drop/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ng_drag_drop___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22_ng_drag_drop__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__dashboard_tables_dashboard_tables_component__ = __webpack_require__("../../../../../src/app/dashboard-tables/dashboard-tables.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__lifetime_chart_lifetime_chart_component__ = __webpack_require__("../../../../../src/app/lifetime-chart/lifetime-chart.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__lifetime_table_lifetime_table_component__ = __webpack_require__("../../../../../src/app/lifetime-table/lifetime-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pdf_loan_assets_loan_assets_component__ = __webpack_require__("../../../../../src/app/pdf/loan-assets/loan-assets.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__license_license_module__ = __webpack_require__("../../../../../src/app/license/license.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__share_module_share_module_module__ = __webpack_require__("../../../../../src/app/share-module/share-module.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pdf_pdf_module_pdf_module_module__ = __webpack_require__("../../../../../src/app/pdf/pdf-module/pdf-module.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__loan_admin_loan_admin_module__ = __webpack_require__("../../../../../src/app/loan-admin/loan-admin.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__login_service__ = __webpack_require__("../../../../../src/app/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__user_admin_user_admin_component__ = __webpack_require__("../../../../../src/app/user-admin/user-admin.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__management_service__ = __webpack_require__("../../../../../src/app/management.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_ng_drag_drop__ = __webpack_require__("../../../../ng-drag-drop/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_ng_drag_drop___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23_ng_drag_drop__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__dashboard_tables_dashboard_tables_component__ = __webpack_require__("../../../../../src/app/dashboard-tables/dashboard-tables.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__lifetime_chart_lifetime_chart_component__ = __webpack_require__("../../../../../src/app/lifetime-chart/lifetime-chart.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__lifetime_table_lifetime_table_component__ = __webpack_require__("../../../../../src/app/lifetime-table/lifetime-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pdf_loan_assets_loan_assets_component__ = __webpack_require__("../../../../../src/app/pdf/loan-assets/loan-assets.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -261,27 +281,28 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__nav_bar_nav_bar_component__["a" /* NavBarComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__dashboard_dashboard_component__["a" /* DashboardComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__user_admin_user_admin_component__["a" /* UserAdminComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__dashboard_tables_dashboard_tables_component__["a" /* DashboardTablesComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__lifetime_chart_lifetime_chart_component__["a" /* LifetimeChartComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__lifetime_table_lifetime_table_component__["a" /* LifetimeTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__pdf_loan_assets_loan_assets_component__["a" /* LoanAssetsComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__dashboard_dashboard_component__["a" /* DashboardComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__user_admin_user_admin_component__["a" /* UserAdminComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__dashboard_tables_dashboard_tables_component__["a" /* DashboardTablesComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__lifetime_chart_lifetime_chart_component__["a" /* LifetimeChartComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__lifetime_table_lifetime_table_component__["a" /* LifetimeTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__pdf_loan_assets_loan_assets_component__["a" /* LoanAssetsComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_8__create_signature_sheet_create_signature_sheet_module__["a" /* CreateSignatureSheetModule */],
+                __WEBPACK_IMPORTED_MODULE_11__license_license_module__["a" /* LicenseModule */],
                 __WEBPACK_IMPORTED_MODULE_10__update_signature_sheet_update_signature_sheet_module__["a" /* UpdateSignatureSheetModule */],
-                __WEBPACK_IMPORTED_MODULE_11__share_module_share_module_module__["a" /* ShareModuleModule */],
-                __WEBPACK_IMPORTED_MODULE_12__pdf_pdf_module_pdf_module_module__["a" /* PdfModuleModule */],
-                __WEBPACK_IMPORTED_MODULE_15__loan_admin_loan_admin_module__["a" /* LoanAdminModule */],
-                __WEBPACK_IMPORTED_MODULE_22_ng_drag_drop__["NgDragDropModule"].forRoot()
+                __WEBPACK_IMPORTED_MODULE_12__share_module_share_module_module__["a" /* ShareModuleModule */],
+                __WEBPACK_IMPORTED_MODULE_13__pdf_pdf_module_pdf_module_module__["a" /* PdfModuleModule */],
+                __WEBPACK_IMPORTED_MODULE_16__loan_admin_loan_admin_module__["a" /* LoanAdminModule */],
+                __WEBPACK_IMPORTED_MODULE_23_ng_drag_drop__["NgDragDropModule"].forRoot()
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_9__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_14__dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_17__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_18__auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_19_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_21__management_service__["a" /* ManagementService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_15__dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_18__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_19__auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_20_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_22__management_service__["a" /* ManagementService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -364,7 +385,7 @@ var CreateSignatureSheetModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__share_module_share_module_module__["a" /* ShareModuleModule */],
                 __WEBPACK_IMPORTED_MODULE_5_ngx_bootstrap_modal__["b" /* ModalModule */].forRoot()
             ],
@@ -408,7 +429,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/create-signature-sheet/createsheet/createsheet.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<br>\r\n<div class=\"container\" *ngIf=\"privilege\">\r\n    <h1 class=\"my-4\">OnBoarding- Loan new Signature Sheet <span style=\"color:rgb(0, 89, 255)\"><i class=\"fa fa-paper-plane\" aria-hidden=\"true\" (click)=\"siteInformation()\"></i></span>\r\n        \r\n    </h1><hr>\r\n        <div class=\"row\" *ngIf=\"siteInfo\">\r\n\r\n                <!-- Blog Entries Column -->\r\n                <div class=\"col-md-8\">\r\n        \r\n        \r\n                  <!-- Blog Post -->\r\n                  <div class=\"card mb-4\">\r\n                    <img class=\"card-img-top\" [src]=\"fullImagePath\" alt=\"Card image cap\">\r\n                    <div class=\"card-body\">\r\n                      <h2 class=\"card-title\">Some statements</h2>\r\n                      <p class=\"card-text\">\"The sheet of onboarding is the first sheet that must be created to an employee, it is a process of only addition, where the initial equipment is established with which the user will work, no other process can be done to an employee without his sheet of onboarding.\"</p>\r\n                      <button class=\"btn btn-info btn-sm\" (click)=\"start()\">Let's Get Started!</button>\r\n                    </div>\r\n                    <div class=\"card-footer text-muted\">\r\n                      Laureate International Universities\r\n                    </div>\r\n                  </div>\r\n        \r\n                </div>\r\n        \r\n                <!-- Sidebar Widgets Column -->\r\n                <div class=\"col-md-4\">\r\n        \r\n\r\n                  <br><br><br>\r\n        \r\n                  <!-- Categories Widget -->\r\n                  <div class=\"card my-4\">\r\n                    <h5 class=\"card-header\">Reminder</h5>\r\n                    <div class=\"card-body\">\r\n                      <div class=\"\">\r\n                        <p>In this section you will not be able to create loan sheets, go create a sheet for that, you can only release the resources of loan sheets already created</p>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n        \r\n                  <!-- Side Widget -->\r\n                  <div class=\"card my-4\">\r\n                    <h5 class=\"card-header\">Loan Policy</h5>\r\n                    <div class=\"card-body\">\r\n                            The policy should also address postorigination activities, such as ongoing monitoring and credit administration, including postorigination monitoring of loan covenants, obtaining financial information, and assessing the borrower's ongoing ability to service the debt and ultimately repay the loan.\r\n                    </div>\r\n                  </div>\r\n        \r\n                </div>\r\n        \r\n              </div>\r\n    \r\n  <!--  <div>\r\n        <h3>OnBoarding- Loan new Signature Sheet <span style=\"color:rgb(0, 89, 255)\"><i class=\"fa fa-paper-plane\" aria-hidden=\"true\"></i></span></h3>\r\n        <p>\"Onboarding, also known as organizational socialization, refers to the mechanism through which new employees acquire the necessary knowledge, skills, and behaviors to become effective organizational members and insiders.It is the process of integrating a new employee into the organization and its culture. Tactics used in this process include formal meetings, lectures, videos, printed materials, or computer-based orientations to introduce newcomers to their new jobs and organizations. Research has demonstrated that these socialization techniques lead to positive outcomes for new employees such as higher job satisfaction, better job performance, greater organizational commitment, and reduction in occupational stress and intent to quit.\"</p>\r\n         <br>\r\n        <div class=\"form-group\"> \r\n            <button class=\"btn btn-info btn-sm\" (click)=\"start()\">Let's Get Started!</button>\r\n        </div>\r\n    </div> -->\r\n\r\n    <div class=\" col-6\" *ngIf=\"boolfirst\">\r\n        <h3>First-Step select a type and date <span><i class=\"fa fa-calendar\" aria-hidden=\"true\"></i></span></h3>\r\n        <div class=\"form-group\">\r\n            <select class=\"form-control\" [(ngModel)]=\"option\">\r\n                    <option value=\"1\">OnBoarding</option>\r\n                    <option value=\"3\">Loan</option>\r\n            </select>\r\n            \r\n    </div>\r\n        <div class=\"form-group\">\r\n            <input type=\"Date\" class=\"form-control\" [(ngModel)]=\"date\">\r\n            <hr>\r\n            <small> <span style=\"color:rgb(255, 102, 0)\"><i class=\"fa fa-bell\" aria-hidden=\"true\"></i></span> Remember, if you do an Onboarding, the date to enter is the start date, but if you make a Loan sheet  the date to enter is the return of the assets.</small>\r\n        </div>\r\n        \r\n        <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit\" (click)=\"validate()\">Continue</button>\r\n    </div>\r\n    <ul class=\"list-group\" *ngFor=\"let item of selectemploye\">\r\n        <li class=\"list-group-item list-group-item-success \">{{item.FIRST_NAME}}  {{item.LAST_NAME}} - {{item.EMAIL}}</li>\r\n      \r\n      </ul>\r\n\r\n    <div *ngIf=\"boolemployee\">\r\n        <h3>Second-Step select the employee <span><i class=\"fa fa-users\" aria-hidden=\"true\"></i></span></h3>\r\n        <!-- <ul class=\"list-group\" *ngFor=\"let item of selectemploye\">{{item.FIRST_NAME}} - {{item.LAST_NAME}} - {{item.EMAIL}} </ul> -->\r\n\r\n\r\n\r\n        <app-employee-table (employeevent)=\"selectemploye=$event\"></app-employee-table>\r\n        <div class=\"d-flex justify-content-center\">\r\n                <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit\" (click)=\"backemployee()\">Go Back</button><h4>-</h4>\r\n                <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit\" (click)=\"continueemployee(procesValidationtemplate)\">Continue</button>\r\n        </div>\r\n\r\n        \r\n    </div>\r\n    \r\n    <!-- <app-type></app-type> -->\r\n\r\n    <div *ngIf=\"boolproducts\" >\r\n        <app-product-list (productsevent)=\"productsevent=$event\"></app-product-list> <br>\r\n        <!--<button class=\"btn btn-info \" (click)=\"backproducts()\">Go Back</button> -->\r\n        <div class=\"d-flex justify-content-center\">\r\n                <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit\" (click)=\"backproducts()\">Go Back</button>\r\n        </div>  \r\n    </div>\r\n    <br><br><br><br>\r\n    <div *ngIf=\"boolproducts\" class=\"d-flex justify-content-center\">\r\n        <!-- <button class=\"btn btn-link btn-lg\" (click)=\"createSignatureSheet()\"></button> -->\r\n        <button class=\"EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit\" (click)=\"openModal(template)\">Save New Signature Sheet</button><br>\r\n    </div><br>\r\n    <div *ngIf=\"confirmation\" class=\"alert\" role=\"alert\">\r\n        <h5 class=\"alert-heading\">Warning.! <span><i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i></span></h5>\r\n        <p>The employee does not have Employee Id, please make sure to get all the info ready before proceding</p>\r\n        <hr>\r\n    </div>\r\n<!--\r\n    <button class=\"btn\" (click)=\"testalert()\">Botonsito</button> -->\r\n\r\n</div>\r\n\r\n\r\n\r\n<!-- <button type=\"button\" class=\"btn btn-primary\" (click)=\"openModal(template)\">Create template modal</button> -->\r\n     \r\n<ng-template #template>\r\n    <div class=\"modal-body text-center alert\">\r\n        <p>Are you sure of save this Signature Sheet?? <span><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i></span></p>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"insertSheet()\" [disabled]=\"disable_flag == 0\">Yes</button>\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"abort()\" >No</button>\r\n        <div class=\"modal-body alert\" role=\"alert\">\r\n                The information will be save and automatically create a pdf file of the sheet, press 'YES', to continue or 'No', to go back.\r\n        </div>\r\n    </div>\r\n\r\n   \r\n</ng-template>\r\n\r\n<ng-template #procesValidationtemplate>\r\n        <div class=\"modal-body text-center alert alert-info\">\r\n            <p>It is not possible to create this sheet.! <span><i class=\"fa fa-times\" aria-hidden=\"true\"></i></span></p>\r\n            <button class=\"btn btn-danger\" (click)=\"ok()\">Ok</button><br>\r\n            <div class=\"modal-body alert alert-warning\" role=\"alert\">\r\n                    Verify that the user has an onboarding sheet, or does not have an offboarding sheet\r\n            </div>\r\n        </div>\r\n        \r\n           \r\n    </ng-template>\r\n\r\n\r\n"
+module.exports = "<br>\r\n<div class=\"container\" *ngIf=\"privilege\">\r\n    <h1 class=\"my-4\">OnBoarding- Loan new Signature Sheet <span style=\"color:rgb(0, 89, 255)\"><i class=\"fa fa-paper-plane\" aria-hidden=\"true\" (click)=\"siteInformation()\"></i></span>\r\n        \r\n    </h1><hr>\r\n        <div class=\"row\" *ngIf=\"siteInfo\">\r\n\r\n                <!-- Blog Entries Column -->\r\n                <div class=\"col-md-8\">\r\n        \r\n        \r\n                  <!-- Blog Post -->\r\n                  <div class=\"card mb-4\">\r\n                    <img class=\"card-img-top\" [src]=\"fullImagePath\" alt=\"Card image cap\">\r\n                    <div class=\"card-body\">\r\n                      <h2 class=\"card-title\">Some statements</h2>\r\n                      <p class=\"card-text\">\"The sheet of onboarding is the first sheet that must be created to an employee, it is a process of only addition, where the initial equipment is established with which the user will work, no other process can be done to an employee without his sheet of onboarding.\"</p>\r\n                      <button class=\"btn btn-info btn-sm\" (click)=\"start()\">Let's Get Started!</button>\r\n                    </div>\r\n                    <div class=\"card-footer text-muted\">\r\n                      Laureate International Universities\r\n                    </div>\r\n                  </div>\r\n        \r\n                </div>\r\n        \r\n                <!-- Sidebar Widgets Column -->\r\n                <div class=\"col-md-4\">\r\n        \r\n\r\n                  <br><br><br>\r\n        \r\n                  <!-- Categories Widget -->\r\n                  <div class=\"card my-4\">\r\n                    <h5 class=\"card-header\">Reminder</h5>\r\n                    <div class=\"card-body\">\r\n                      <div class=\"\">\r\n                        <p>In this section you will not be able to create loan sheets, go create a sheet for that, you can only release the resources of loan sheets already created</p>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n        \r\n                  <!-- Side Widget -->\r\n                  <div class=\"card my-4\">\r\n                    <h5 class=\"card-header\">Loan Policy</h5>\r\n                    <div class=\"card-body\">\r\n                            The policy should also address postorigination activities, such as ongoing monitoring and credit administration, including postorigination monitoring of loan covenants, obtaining financial information, and assessing the borrower's ongoing ability to service the debt and ultimately repay the loan.\r\n                    </div>\r\n                  </div>\r\n        \r\n                </div>\r\n        \r\n              </div>\r\n    \r\n  <!--  <div>\r\n        <h3>OnBoarding- Loan new Signature Sheet <span style=\"color:rgb(0, 89, 255)\"><i class=\"fa fa-paper-plane\" aria-hidden=\"true\"></i></span></h3>\r\n        <p>\"Onboarding, also known as organizational socialization, refers to the mechanism through which new employees acquire the necessary knowledge, skills, and behaviors to become effective organizational members and insiders.It is the process of integrating a new employee into the organization and its culture. Tactics used in this process include formal meetings, lectures, videos, printed materials, or computer-based orientations to introduce newcomers to their new jobs and organizations. Research has demonstrated that these socialization techniques lead to positive outcomes for new employees such as higher job satisfaction, better job performance, greater organizational commitment, and reduction in occupational stress and intent to quit.\"</p>\r\n         <br>\r\n        <div class=\"form-group\"> \r\n            <button class=\"btn btn-info btn-sm\" (click)=\"start()\">Let's Get Started!</button>\r\n        </div>\r\n    </div> -->\r\n\r\n    <div class=\" col-6\" *ngIf=\"boolfirst\">\r\n        <h3>First-Step select a type and date <span><i class=\"fa fa-calendar\" aria-hidden=\"true\"></i></span></h3>\r\n        <div class=\"form-group\">\r\n            <select class=\"form-control\" [(ngModel)]=\"option\">\r\n                    <option value=\"1\">OnBoarding</option>\r\n                    <option value=\"3\">Loan</option>\r\n            </select>\r\n            \r\n    </div>\r\n        <div class=\"form-group\">\r\n            <input type=\"Date\" class=\"form-control\" [(ngModel)]=\"date\">\r\n            <hr>\r\n            <small> <span style=\"color:rgb(255, 102, 0)\"><i class=\"fa fa-bell\" aria-hidden=\"true\"></i></span> Remember, if you do an Onboarding, the date to enter is the start date, but if you make a Loan sheet  the date to enter is the return of the assets.</small>\r\n        </div>\r\n        \r\n        <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit\" (click)=\"validate()\">Continue</button>\r\n    </div>\r\n    <ul class=\"list-group\" *ngFor=\"let item of selectemploye\">\r\n        <li class=\"list-group-item list-group-item-success \">{{item.FIRST_NAME}}  {{item.LAST_NAME}} - {{item.EMAIL}}</li>\r\n      \r\n      </ul>\r\n\r\n    <div *ngIf=\"boolemployee\">\r\n        <h3>Second-Step select the employee <span><i class=\"fa fa-users\" aria-hidden=\"true\"></i></span></h3>\r\n        <!-- <ul class=\"list-group\" *ngFor=\"let item of selectemploye\">{{item.FIRST_NAME}} - {{item.LAST_NAME}} - {{item.EMAIL}} </ul> -->\r\n\r\n\r\n\r\n        <app-employee-table (employeevent)=\"selectemploye=$event\"></app-employee-table>\r\n        <div class=\"d-flex justify-content-center\">\r\n                <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit\" (click)=\"backemployee()\">Go Back</button><h4>-</h4>\r\n                <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit\" (click)=\"continueemployee(procesValidationtemplate)\">Continue</button>\r\n        </div>\r\n\r\n        \r\n    </div>\r\n    \r\n    <!-- <app-type></app-type> -->\r\n\r\n    <div *ngIf=\"boolproducts\" >\r\n        <app-product-list (productsevent)=\"productsevent=$event\"></app-product-list> <br>\r\n        <!--<button class=\"btn btn-info \" (click)=\"backproducts()\">Go Back</button> -->\r\n        <div class=\"d-flex justify-content-center\">\r\n                <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryiii EdgeButton--medium submit js-submit\" (click)=\"backproducts()\">Go Back</button>\r\n        </div>  \r\n    </div>\r\n    <br><br><br><br>\r\n    <div *ngIf=\"boolproducts\" class=\"d-flex justify-content-center\">\r\n        <!-- <button class=\"btn btn-link btn-lg\" (click)=\"createSignatureSheet()\"></button> -->\r\n        <button class=\"EdgeButton EdgeButton--secondary EdgeButton--medium submit js-submit\" (click)=\"openModal(template)\">Save New Signature Sheet</button><br>\r\n    </div><br>\r\n    <div *ngIf=\"confirmation\" class=\"alert\" role=\"alert\">\r\n        <h5 class=\"alert-heading\">Warning.! <span><i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i></span></h5>\r\n        <p>The employee does not have Employee Id, please make sure to get all the info ready before proceding</p>\r\n        <hr>\r\n    </div>\r\n<!--\r\n    <button class=\"btn\" (click)=\"testalert()\">Botonsito</button> -->\r\n\r\n \r\n<!--\r\n    <button class=\"btn\" (click)=\"testalert()\">Botonsito</button> -->\r\n\r\n</div>\r\n\r\n\r\n\r\n<!-- <button type=\"button\" class=\"btn btn-primary\" (click)=\"openModal(template)\">Create template modal</button> -->\r\n     \r\n<ng-template #template>\r\n    <div class=\"modal-body text-center alert\">\r\n        <p>Are you sure of save this Signature Sheet?? <span><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i></span></p>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"insertSheet2()\" [disabled]=\"disable_flag == 0\">Yes</button>\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"abort()\" >No</button>\r\n        <div class=\"modal-body alert\" role=\"alert\">\r\n                The information will be save and automatically create a pdf file of the sheet, press 'YES', to continue or 'No', to go back.\r\n        </div>\r\n    </div>\r\n\r\n   \r\n</ng-template>\r\n\r\n<ng-template #procesValidationtemplate>\r\n        <div class=\"modal-body text-center alert alert-info\">\r\n            <p>It is not possible to create this sheet.! <span><i class=\"fa fa-times\" aria-hidden=\"true\"></i></span></p>\r\n            <button class=\"btn btn-danger\" (click)=\"ok()\">Ok</button><br>\r\n            <div class=\"modal-body alert alert-warning\" role=\"alert\">\r\n                    Verify that the user has an onboarding sheet, or does not have an offboarding sheet\r\n            </div>\r\n        </div>\r\n        \r\n           \r\n    </ng-template>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -463,9 +484,9 @@ var CreatesheetComponent = /** @class */ (function () {
         this.fullImagePath = '/assets/images/black-coffee-cactus-cellphone-875514.jpg';
     }
     CreatesheetComponent.prototype.ngOnInit = function () {
-        if (!this.cookieService.get('user_name')) {
-            this.router.navigateByUrl('/');
-        }
+        //if(!this.cookieService.get('user_name')){
+        //this.router.navigateByUrl('/');
+        //}
         var val = this.cookieService.get("token");
         if (val) {
             var djtw = __WEBPACK_IMPORTED_MODULE_6_jwt_decode__(val);
@@ -598,34 +619,20 @@ var CreatesheetComponent = /** @class */ (function () {
     CreatesheetComponent.prototype.insertSheet = function () {
         this.disable_flag = 0;
         var x = this.selectemploye[0];
-        //validacion
-        /*let m;
-        this.searchEmployeeService.processValidation(x.EMPLOYEE_ID)
-        .subscribe( res => {
-          m = res['message'];
-          console.log(res);
-          if(this.option == 1 && m == 'null'){
-            this.validation = 1;
-          }
-          if((this.option == 1) && (m['id_type'] == 2)){
-            this.validation = 1;
-          }
-    
-          if(this.option == 3 && m['id_type'] != 2){
-            this.validation = 1;
-          }
-    
-    
-          console.log(m['id_type']);
-          console.log(this.validation);
-          console.log(this.option);
-        }) */
         var response;
         var l = this.productsevent.length;
         if (x && (l != 0) && this.validation == 1) {
             this.searchEmployeeService.insertSignatureSheet(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL, this.date)
                 .subscribe(function (res) {
                 console.log(res);
+                if (res['message'] == 'Signature Sheet correctly inserted') {
+                    console.log('Hoja creada');
+                    alert('Hoja creada');
+                }
+                else {
+                    console.log('Hoja no creada.');
+                    alert('Hoja no creada');
+                }
             });
             //alert(response);
             alert("Creating sheet..");
@@ -644,7 +651,55 @@ var CreatesheetComponent = /** @class */ (function () {
                 alert('Make sure to select at least one Product');
             }
         }
-        window.location.href = '/newsheet';
+        //window.location.href = '/newsheet'; 
+    };
+    CreatesheetComponent.prototype.insertSheet2 = function () {
+        var _this = this;
+        this.disable_flag = 0;
+        var x = this.selectemploye[0];
+        var response;
+        var l = this.productsevent.length;
+        if (x && (l != 0) && this.validation == 1) {
+            this.searchEmployeeService.updateSheetInsert(this.option, x.EMPLOYEE_ID, x.FIRST_NAME, x.LAST_NAME, x.EMAIL, this.date)
+                .subscribe(function (result) {
+                //alert("Preparing to update..");
+                console.log(result);
+                if (result['message'] == "Signature Sheet correctly inserted") {
+                    console.log('Dentro del condicionante del mensaje');
+                    alert("Creating sheet this could take a few seconds.!");
+                    //this.createSignatureSheet(x, this.productsevent);
+                    _this.searchEmployeeService.saveRelationships(x, _this.productsevent)
+                        .subscribe(function (result) {
+                        console.log(result);
+                        alert("Done");
+                        //alert('Signature Sheet successfully created.!');
+                        window.location.href = '/newsheet';
+                    });
+                    //alert('Carajo1');
+                }
+                else {
+                    alert('Something wrong contact your System Admin.');
+                }
+            });
+            //alert(response);
+            // alert("Creating sheet..");
+            //pendiente aun #### 
+            //this.createSignatureSheet(x, this.productsevent);
+            //alert('Signature sheet successfully created.!!');
+        }
+        else {
+            if (this.validation == 0 && this.option == 1) {
+                alert('You cannot create this signature sheet, offboarding sheet is needed');
+            }
+            if (this.validation == 0 && this.option == 3) {
+                alert('You have to create an onboarding sheet first');
+            }
+            if ((l == 0)) {
+                alert('Make sure to select at least one Product');
+            }
+        }
+        //alert('Signature Sheet successfully created.!');
+        //window.location.href = '/newsheet'; 
     };
     CreatesheetComponent.prototype.createSignatureSheet = function (x, y) {
         var user = this.selectemploye[0];
@@ -672,7 +727,7 @@ var CreatesheetComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/create-signature-sheet/createsheet/createsheet.component.html"),
             styles: [__webpack_require__("../../../../../src/app/create-signature-sheet/createsheet/createsheet.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */]])
     ], CreatesheetComponent);
     return CreatesheetComponent;
 }());
@@ -1060,7 +1115,7 @@ var SearchEmployeeService = /** @class */ (function () {
         this.showmeta = false;
         this.shownext = false;
         this.showpreview = false;
-        this.httpserverurl = 'http://hnlnoitinvprod01.hnsc.netapi/v1/';
+        this.httpserverurl = 'http://hnlnoitinvprod01.hnsc.net/api/v1/';
     }
     SearchEmployeeService.prototype.getTest = function () {
         return "Hello service";
@@ -1068,7 +1123,7 @@ var SearchEmployeeService = /** @class */ (function () {
     SearchEmployeeService.prototype.searchEmployees = function (curso, text) {
         //this.url = 'http://hnlnoitinvprod01.hnsc.net/api/v1/assetusersearch?page='+this.cursor + '&limit=10&text=' + this.search;
         this.url = "http://hnlnoitinvprod01.hnsc.net/api/v1/assetusersearch?page=" + curso + "&limit=10&text=" + text;
-        return this.httpClient.get(this.url);
+        return this.httpClient.get(this.url).map(function (result) { return result; });
     };
     SearchEmployeeService.prototype.insertSignatureSheet = function (option, id, f_name, l_name, email, date) {
         var answ;
@@ -1086,7 +1141,7 @@ var SearchEmployeeService = /** @class */ (function () {
     SearchEmployeeService.prototype.updateSheet = function (option, id, f_name, l_name, email) {
         var answ;
         var url = "http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=" + option + "&id_employee=" + id + "&first_name=" + f_name + "&last_name=" + l_name + "&email=" + email;
-        return this.httpClient.post(url, {});
+        return this.httpClient.post(url, {}).map(function (result) { return result; });
         /*.subscribe(
           (data) => {
             answ = data.message;
@@ -1098,16 +1153,17 @@ var SearchEmployeeService = /** @class */ (function () {
     };
     SearchEmployeeService.prototype.saveRelationships = function (user, products) {
         //Insert into my ASSET Data base
-        var _this = this;
-        this.httpClient.post("http://hnlnoitinvprod01.hnsc.net/api/v1/signatureproducts", {
+        return this.httpClient.post("http://hnlnoitinvprod01.hnsc.net/api/v1/signatureproducts", {
             Products: JSON.stringify(products),
             id_employee: user.EMPLOYEE_ID,
             requesterid: user.CIID
-        })
-            .subscribe(function (data) {
+        }).map(function (result) { return result; });
+        /*.subscribe(
+          (data:any) => {
             console.log(JSON.stringify(products));
-            _this.getTest();
-        });
+            this.getTest();
+            alert("Sheet done.");
+          }*/
     };
     SearchEmployeeService.prototype.getUserProducts = function (id_employee) {
         return this.httpClient.get("http://hnlnoitinvprod01.hnsc.net/api/v1/signatureproduct/" + id_employee).map(function (result) { return result; });
@@ -1157,6 +1213,14 @@ var SearchEmployeeService = /** @class */ (function () {
             id_signature: id_signature_,
             doc_name: doc_name_
         }).map(function (result) { return result; });
+    };
+    SearchEmployeeService.prototype.signatureSheetInsert = function (option, id, f_name, l_name, email, date) {
+        return this.httpClient.post("http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=" + option + "&id_employee=" + id + "&first_name=" + f_name + "&last_name=" + l_name + "&email=" + email + "&updated=" + date, {}).map(function (result) { return result; });
+    };
+    SearchEmployeeService.prototype.updateSheetInsert = function (option, id, f_name, l_name, email, date) {
+        var answ;
+        var url = "http://hnlnoitinvprod01.hnsc.net/api/v1/signaturesheets?id_type=" + option + "&id_employee=" + id + "&first_name=" + f_name + "&last_name=" + l_name + "&email=" + email + "&updated=" + date;
+        return this.httpClient.post(url, {}).map(function (result) { return result; });
     };
     SearchEmployeeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1519,7 +1583,7 @@ var DashboardTablesComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard-tables/dashboard-tables.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard-tables/dashboard-tables.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_4__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_4__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__["a" /* CookieService */]])
     ], DashboardTablesComponent);
     return DashboardTablesComponent;
 }());
@@ -1725,15 +1789,15 @@ var DashboardComponent = /** @class */ (function () {
     };
     DashboardComponent.prototype.ngOnInit = function () {
         //this.cookieValue = this.cookieService.get('user_name');
-        if (this.cookieService.get('user_name')) {
-            this.initialDashboard();
-        }
-        else {
-            // alert(this.logged);
-            this.router.navigateByUrl('/');
-        }
+        //if(this.cookieService.get('user_name')){
+        //this.initialDashboard();
+        //}
+        //else{
+        // alert(this.logged);
+        //this.router.navigateByUrl('/');
+        //}
         //comentar los privilegios en producción y qa;
-        this.privilege = true;
+        //this.privilege = true;
         //OJO
         var val = this.cookieService.get("token");
         if (val) {
@@ -2227,7 +2291,7 @@ var DashboardComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/dashboard.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/dashboard.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_3__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_5_ngx_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_3__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_5_ngx_cookie_service__["a" /* CookieService */]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -2291,6 +2355,716 @@ var FooterComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], FooterComponent);
     return FooterComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license-list/license-list.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license-list/license-list.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n  <h1 class=\"my-4\">\r\n    License List\r\n    <span style=\"color:purple;\">\r\n      <i aria-hidden=\"true\" class=\"fa fa-list-alt\"></i>\r\n    </span>\r\n  </h1>\r\n  <button type=\"button\" class=\"btn btn-primary\" (click)=\"createMode(); openModal(createModal)\">\r\n    Create License\r\n  </button>\r\n  <hr>\r\n  <div>\r\n    <table class=\"table table-hover table-bordered\">\r\n      <thead class=\"table-head\">\r\n        <tr class=\"\">\r\n          <th scope=\"col\">Product Name</th>\r\n          <th scope=\"col\">Licences</th>\r\n          <th scope=\"col\">Product Version</th>\r\n          <th scope=\"col\">Max Users</th>\r\n          <th scope=\"col\">Enable</th>\r\n          <th scope=\"col\">Actions</th>\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr class=\"select\" *ngFor=\"let item of licenseList\">\r\n          <td [innerHtml]=\"item.name_product\"></td>\r\n          <td [innerHtml]=\"item.licences\"></td>\r\n          <td [innerHtml]=\"item.version_product\"></td>\r\n          <td [innerHtml]=\"item.max_users\"></td>\r\n          <td [innerHtml]=\"item.enable === 1 ? 'True' : 'False'\"></td>\r\n          <td>\r\n            <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit\"\r\n              (click)=\"selectLicense(item); editMode(); openModal(createModal)\">Edit</button>\r\n            <button class=\"btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit\"\r\n              (click)=\"openModal(showMoreModal); selectLicense(item)\">Show More</button>\r\n            <a class=\"btn btn-sm btn-success\" routerLink=\"{{'/license-workstations/' + item.id_license}}\">\r\n              Assign</a>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n\r\n    <button class=\"btn btn-link\" (click)=\"previous()\" *ngIf=\"offset > 0\">Previous</button>\r\n    <button class=\"btn btn-link\" (click)=\"next()\" *ngIf=\"moreResults\">Next</button>\r\n  </div>\r\n</div>\r\n\r\n<!-- Create Modal -->\r\n<ng-template #createModal>\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title pull-left\" *ngIf=\"!isEditing\">Create License</h4>\r\n    <h4 class=\"modal-title pull-left\" *ngIf=\"isEditing\">Edit License</h4>\r\n    <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <form [formGroup]=\"licenseForm\" (ngSubmit)=\"onSubmit()\">\r\n      <div class=\"form-group\">\r\n        <label>Product Name</label>\r\n        <input type=\"text\" formControlName=\"productName\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.productName.errors }\" />\r\n        <div *ngIf=\"submitted && controls.productName.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.productName.errors.required\">Product name required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Licenses</label>\r\n        <input type=\"text\" formControlName=\"licenses\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.licenses.errors }\" />\r\n        <div *ngIf=\"submitted && controls.licenses.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.licenses.errors.required\">Licenses required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Vendor</label>\r\n        <input type=\"text\" formControlName=\"vendor\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.vendor.errors }\" />\r\n        <div *ngIf=\"submitted && controls.vendor.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.vendor.errors.required\">Vendor required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Adquisition Date</label>\r\n        <input type=\"date\" formControlName=\"adquisitionDate\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.adquisitionDate.errors }\" />\r\n        <div *ngIf=\"submitted && controls.adquisitionDate.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.adquisitionDate.errors.required\">Adquisition date required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Expiration Date</label>\r\n        <input type=\"date\" formControlName=\"expirationDate\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.expirationDate.errors }\" />\r\n        <div *ngIf=\"submitted && controls.expirationDate.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.expirationDate.errors.required\">Expiration date required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Product Version</label>\r\n        <input type=\"number\" formControlName=\"productVersion\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.productVersion.errors }\" />\r\n        <div *ngIf=\"submitted && controls.productVersion.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.productVersion.errors.required\">Product version required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Max Users</label>\r\n        <input type=\"number\" formControlName=\"maxUsers\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.maxUsers.errors }\" />\r\n        <div *ngIf=\"submitted && controls.maxUsers.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.maxUsers.errors.required\">Max users required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Accountable</label>\r\n        <input type=\"text\" formControlName=\"accountable\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.accountable.errors }\" />\r\n        <div *ngIf=\"submitted && controls.accountable.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.accountable.errors.required\">Accountable required</div>\r\n          <div *ngIf=\"controls.accountable.errors.email\">Accountable have to be an email</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Price</label>\r\n        <input type=\"number\" formControlName=\"price\" class=\"form-control\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.price.errors }\" />\r\n        <div *ngIf=\"submitted && controls.price.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.price.errors.required\">Price required</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <label>Status</label>\r\n        <select class=\"form-control\" formControlName=\"enable\"\r\n          [ngClass]=\"{ 'is-invalid': submitted && controls.enable.errors }\">\r\n          <option value=\"\">Seleccionar</option>\r\n          <option [value]=\"1\">Enable</option>\r\n          <option [value]=\"0\">Disable</option>\r\n        </select>\r\n        <div *ngIf=\"submitted && controls.enable.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"controls.enable.errors.required\">Por favor, Selecciona el status</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <button [disabled]=\"loading\" class=\"btn btn-primary\">Save</button>\r\n      </div>\r\n\r\n    </form>\r\n  </div>\r\n</ng-template>\r\n\r\n<!-- Show More Modal -->\r\n<ng-template #showMoreModal>\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title pull-left\">Details:</h4>\r\n    <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <table class=\"table table-hover table-bordered\">\r\n      <thead class=\"table-head\">\r\n        <tr class=\"\">\r\n          <th scope=\"col\">Field</th>\r\n          <th scope=\"col\">Value</th>\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Name Product'\"></td>\r\n          <td [innerHtml]=\"license.name_product\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'License'\"></td>\r\n          <td [innerHtml]=\"license.licences\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Vendor'\"></td>\r\n          <td [innerHtml]=\"license.vendor\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Adquisition Date'\"></td>\r\n          <td [innerHtml]=\"license.adquisition_date\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Date Expiration'\"></td>\r\n          <td [innerHtml]=\"license.date_expiration\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Version Product'\"></td>\r\n          <td [innerHtml]=\"license.version_product\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Max users'\"></td>\r\n          <td [innerHtml]=\"license.max_users\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Accountable'\"></td>\r\n          <td [innerHtml]=\"license.accountable\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Price ($)'\"></td>\r\n          <td [innerHtml]=\"license.price\"></td>\r\n        </tr>\r\n\r\n        <tr class=\"select\">\r\n          <td [innerHtml]=\"'Enable'\"></td>\r\n          <td [innerHtml]=\"license.enable\"></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</ng-template>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license-list/license-list.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LicenseListComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_license_service__ = __webpack_require__("../../../../../src/app/license/services/license.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jwt_decode__ = __webpack_require__("../../../../jwt-decode/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jwt_decode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_jwt_decode__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var LicenseListComponent = /** @class */ (function () {
+    function LicenseListComponent(licenseService, modalService, cookieService, formBuilder) {
+        this.licenseService = licenseService;
+        this.modalService = modalService;
+        this.cookieService = cookieService;
+        this.formBuilder = formBuilder;
+        this.privilege = false;
+    }
+    LicenseListComponent.prototype.ngOnInit = function () {
+        var val = this.cookieService.get("token");
+        if (val) {
+            var djtw = __WEBPACK_IMPORTED_MODULE_5_jwt_decode__(val);
+            var identity = djtw['identity'];
+            for (var _i = 0; _i < identity.length; _i++) {
+                if (identity[_i]['privilege'] == 'pdf') {
+                    this.privilege = true;
+                }
+            }
+        }
+        else {
+            //this.privilege = true;
+            window.location.href = '/login';
+        }
+        if (this.privilege) {
+            this.licenseList = [];
+            this.submitted = false;
+            this.isEditing = false;
+            this.moreResults = true;
+            this.limit = 10;
+            this.offset = 0;
+            this.loadLicenseList();
+        }
+        else {
+            window.location.href = '/login';
+        }
+    };
+    LicenseListComponent.prototype.loadLicenseList = function () {
+        var _this = this;
+        this.licenseService.getList({
+            limit: this.limit,
+            offset: this.offset
+        }).subscribe(function (data) {
+            var newData = data['data'];
+            if (newData.length === _this.limit) {
+                _this.licenseList = newData;
+                _this.moreResults = true;
+            }
+            if (newData.length < _this.limit && newData.length > 0) {
+                _this.licenseList = newData;
+                _this.moreResults = false;
+            }
+            if (newData.length === 0) {
+                _this.moreResults = false;
+            }
+        });
+    };
+    LicenseListComponent.prototype.createMode = function () {
+        this.isEditing = false;
+        this.licenseForm = this.formBuilder.group({
+            productName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            licenses: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            vendor: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            adquisitionDate: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            expirationDate: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            productVersion: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            maxUsers: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            accountable: ['', [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].email]],
+            price: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            enable: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+        });
+    };
+    LicenseListComponent.prototype.delete = function (licenseId) {
+        var _this = this;
+        this.licenseService.delete(licenseId).subscribe(function (data) {
+            _this.licenseList = _this.licenseList.filter(function (element) {
+                return element['id_license'] !== licenseId;
+            });
+        });
+    };
+    LicenseListComponent.prototype.openModal = function (template) {
+        this.modalRef = this.modalService.show(template);
+    };
+    LicenseListComponent.prototype.selectLicense = function (license) {
+        this.license = license;
+    };
+    LicenseListComponent.prototype.editMode = function () {
+        this.isEditing = true;
+        this.licenseForm = this.formBuilder.group({
+            productName: [this.license['name_product'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            licenses: [this.license['licences'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            vendor: [this.license['vendor'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            adquisitionDate: [this.license['adquisition_date'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            expirationDate: [this.license['date_expiration'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            productVersion: [this.license['version_product'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            maxUsers: [this.license['max_users'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            accountable: [this.license['accountable'], [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].email]],
+            price: [this.license['price'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+            enable: [this.license['enable'], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* Validators */].required],
+        });
+    };
+    Object.defineProperty(LicenseListComponent.prototype, "controls", {
+        get: function () { return this.licenseForm.controls; },
+        enumerable: true,
+        configurable: true
+    });
+    LicenseListComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.submitted = true;
+        if (this.licenseForm.invalid) {
+            return;
+        }
+        var params = {
+            'name_product': this.licenseForm.value.productName,
+            'licences': this.licenseForm.value.licenses,
+            'vendor': this.licenseForm.value.vendor,
+            'adquisition_date': this.licenseForm.value.adquisitionDate,
+            'date_expiration': this.licenseForm.value.expirationDate,
+            'version_product': this.licenseForm.value.productVersion,
+            'max_users': this.licenseForm.value.maxUsers,
+            'accountable': this.licenseForm.value.accountable,
+            'price': this.licenseForm.value.price,
+            'enable': this.licenseForm.value.enable
+        };
+        // Edit License
+        if (this.isEditing) {
+            this.licenseService.update(this.license['id_license'], params).subscribe(function (resp) {
+                var newData = resp['data'];
+                _this.licenseList = _this.licenseList.map(function (element) {
+                    if (element.id_license === newData['id_license']) {
+                        return newData;
+                    }
+                    else {
+                        return element;
+                    }
+                });
+                _this.modalRef.hide();
+            });
+            // Create License
+        }
+        else {
+            this.licenseService.create(params).subscribe(function (resp) {
+                _this.licenseList.unshift(resp['data']);
+                _this.modalRef.hide();
+            });
+        }
+    };
+    LicenseListComponent.prototype.previous = function () {
+        this.offset = this.offset - this.limit;
+        this.loadLicenseList();
+    };
+    LicenseListComponent.prototype.next = function () {
+        this.offset = this.offset + this.limit;
+        this.loadLicenseList();
+    };
+    LicenseListComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-license-list',
+            template: __webpack_require__("../../../../../src/app/license/license-list/license-list.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/license/license-list/license-list.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_license_service__["a" /* LicenseService */],
+            __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_modal__["a" /* BsModalService */],
+            __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */]])
+    ], LicenseListComponent);
+    return LicenseListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license-relationship/license-relationship.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license-relationship/license-relationship.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n    <div>\r\n        <h2 class=\"my-4\">\r\n            License Summary\r\n        </h2>\r\n        <div class=\"row\" *ngIf=\"license\">\r\n            <div class=\"col-md-3\">\r\n                Product Name: {{ license['name_product'] }}\r\n            </div>\r\n\r\n            <div class=\"col-md-3\">\r\n                Product Version: {{ license['version_product'] }}\r\n            </div>\r\n\r\n            <div class=\"col-md-4\">\r\n                Licences: {{ license['licences'] }}\r\n            </div>\r\n\r\n            <div class=\"col-md-2\">\r\n                Max Users: {{ license['max_users'] }}\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                Assigned to:\r\n                <p *ngIf=\"!users || users.length === 0\">Nobody</p>\r\n                <ul *ngIf=\"users?.length > 0\">\r\n                    <li *ngFor=\"let item of users\">\r\n                        {{'user: ' + item['usuario'] + ' tag: ' + item['tag']}}\r\n                        <span><button class=\"btn btn-link\" (click)=\"remove(item)\">Remove</button></span>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <h2 class=\"my-4\">\r\n        Assign License\r\n    </h2>\r\n\r\n    <div>\r\n        <div *ngIf=\"employee\">\r\n            <h5>Selected Employee:</h5>\r\n            <p *ngIf=\"employee\" [innerHtml]=\"employee['EMAIL']\"></p>\r\n            <button *ngIf=\"employee\" type=\"button\" class=\"btn btn-sm\"\r\n                (click)=\"collapseTag.hide(); collapseEmployee.show()\" [attr.aria-expanded]=\"!isEmployeeCollapsed\"\r\n                aria-controls=\"collapseEmployee\">Change Employee\r\n            </button>\r\n\r\n            <hr>\r\n        </div>\r\n\r\n        <div *ngIf=\"tag\">\r\n            <h5>Selected Tag:</h5>\r\n            <p *ngIf=\"tag\" [innerHtml]=\"tag['assettag']\"></p>\r\n            <button *ngIf=\"tag\" type=\"button\" class=\"btn btn-sm\" (click)=\"collapseEmployee.hide(); collapseTag.show()\"\r\n                [attr.aria-expanded]=\"!isTagCollapsed\" aria-controls=\"collapseTag\">Change Tag\r\n            </button>\r\n\r\n            <hr>\r\n        </div>\r\n\r\n        <button *ngIf=\"employee && tag && validate()\" type=\"button\" class=\"btn btn-sm btn-success\"\r\n            (click)=\"save(); collapseEmployee.show()\">Save\r\n        </button>\r\n\r\n        <p *ngIf=\"employee && tag && !validate()\">Usear and tag already assigned</p>\r\n    </div>\r\n\r\n    <div *ngIf=\"license && users?.length >= license['max_users']\">\r\n        <p>Maximum users limit reached</p>\r\n    </div>\r\n\r\n    <div [hidden]=\"!(license && users?.length < license['max_users'])\">\r\n        <div id=\"collapseEmployee\" #collapseEmployee=\"bs-collapse\" [collapse]=\"isEmployeeCollapsed\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-8\">\r\n                    <h4 class=\"my-4\">\r\n                        Select Employee\r\n                    </h4>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <form class=\"my-4\" [formGroup]=\"searchEmployeeForm\">\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"search\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n\r\n            <div>\r\n                <table class=\"table table-hover table-bordered\">\r\n                    <thead class=\"table-head\">\r\n                        <tr class=\"\">\r\n                            <th scope=\"col\">Employee id</th>\r\n                            <th scope=\"col\">Email</th>\r\n                            <th scope=\"col\">First Name</th>\r\n                            <th scope=\"col\">Last Name</th>\r\n                            <th scope=\"col\">Actions</th>\r\n                        </tr>\r\n                    </thead>\r\n\r\n                    <tbody>\r\n                        <tr class=\"select\" *ngFor=\"let item of employees\">\r\n                            <td [innerHtml]=\"item['EMPLOYEE_ID']\"></td>\r\n                            <td [innerHtml]=\"item['EMAIL']\"></td>\r\n                            <td [innerHtml]=\"item['FIRST_NAME']\"></td>\r\n                            <td [innerHtml]=\"item['LAST_NAME']\"></td>\r\n                            <td>\r\n                                <button\r\n                                    class=\"btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit\"\r\n                                    type=\"button\"\r\n                                    (click)=\"selectEmployee(item); collapseEmployee.hide(); collapseTag.show();\"\r\n                                    [attr.aria-expanded]=\"!isEmployeeCollapsed\" aria-controls=\"collapseEmployee\">\r\n                                    Select\r\n                                </button>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n                <button class=\"btn btn-link\" (click)=\"previousEmployees()\" *ngIf=\"currentPage > 0\">Previous</button>\r\n                <button class=\"btn btn-link\" (click)=\"nextEmployees()\" *ngIf=\"moreResultsEmployees\">Next</button>\r\n            </div>\r\n        </div>\r\n\r\n        <div id=\"collapseTag\" #collapseTag=\"bs-collapse\" [collapse]=\"isTagCollapsed\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-8\">\r\n                    <h4 class=\"my-4\">\r\n                        Select Tag\r\n                    </h4>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <form class=\"my-4\" [formGroup]=\"tagsForm\">\r\n                        <div class=\"form-group\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"search\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n\r\n            <div>\r\n                <table class=\"table table-hover table-bordered\">\r\n                    <thead class=\"table-head\">\r\n                        <tr class=\"\">\r\n                            <th scope=\"col\">Tag</th>\r\n                            <th scope=\"col\">Component Name</th>\r\n                            <th scope=\"col\">Resource Name</th>\r\n                            <th scope=\"col\">Serial LNO</th>\r\n                            <th scope=\"col\">Actions</th>\r\n                        </tr>\r\n                    </thead>\r\n\r\n                    <tbody>\r\n                        <tr class=\"select\" *ngFor=\"let item of tags\">\r\n                            <td [innerHtml]=\"item['assettag']\"></td>\r\n                            <td [innerHtml]=\"item['componentname']\"></td>\r\n                            <td [innerHtml]=\"item['resourcename']\"></td>\r\n                            <td [innerHtml]=\"item['serialno']\"></td>\r\n                            <td>\r\n                                <button\r\n                                    class=\"btn btn-sm EdgeButton EdgeButton--secondaryii EdgeButton--medium submit js-submit\"\r\n                                    type=\"button\" (click)=\"selectTag(item); collapseTag.hide()\"\r\n                                    [attr.aria-expanded]=\"!isTagCollapsed\" aria-controls=\"collapseTag\">\r\n                                    Select\r\n                                </button>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n                <button class=\"btn btn-link\" (click)=\"previousTags()\" *ngIf=\"tagsOffset > 0\">Previous</button>\r\n                <button class=\"btn btn-link\" (click)=\"nextTags()\" *ngIf=\"tagsMoreResults\">Next</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license-relationship/license-relationship.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LicenseRelationshipComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__create_signature_sheet_search_employee_service__ = __webpack_require__("../../../../../src/app/create-signature-sheet/search-employee.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_license_service__ = __webpack_require__("../../../../../src/app/license/services/license.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jwt_decode__ = __webpack_require__("../../../../jwt-decode/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jwt_decode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_jwt_decode__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var LicenseRelationshipComponent = /** @class */ (function () {
+    function LicenseRelationshipComponent(licenseService, searchEmployeeService, route, cookieService, formBuilder) {
+        this.licenseService = licenseService;
+        this.searchEmployeeService = searchEmployeeService;
+        this.route = route;
+        this.cookieService = cookieService;
+        this.formBuilder = formBuilder;
+        this.privilege = false;
+    }
+    LicenseRelationshipComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var val = this.cookieService.get("token");
+        if (val) {
+            var djtw = __WEBPACK_IMPORTED_MODULE_7_jwt_decode__(val);
+            var identity = djtw['identity'];
+            for (var _i = 0; _i < identity.length; _i++) {
+                if (identity[_i]['privilege'] == 'pdf') {
+                    this.privilege = true;
+                }
+            }
+        }
+        else {
+            //this.privilege = true;
+            window.location.href = '/login';
+        }
+        if (this.privilege) {
+            this.licenseId = this.route.snapshot.params['licenseId'];
+            this.isEmployeeCollapsed = false;
+            this.isTagCollapsed = true;
+            this.moreResultsEmployees = true;
+            this.currentPage = 0;
+            this.searchEmployee = '';
+            this.tagsLimit = 10;
+            this.tagsOffset = 0;
+            this.tagsSearch = '';
+            this.tagsMoreResults = true;
+            this.licenseService.get(this.licenseId).subscribe(function (data) {
+                _this.license = data['data'];
+            });
+            this.licenseService.getUsers(this.licenseId).subscribe(function (data) {
+                _this.users = data['data'];
+            });
+            this.loadEmployeesData();
+            this.loadTagsData();
+            this.searchEmployeeForm = this.formBuilder.group({
+                search: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* Validators */].required]
+            });
+            this.searchEmployeeForm.controls['search'].valueChanges.pipe(Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["a" /* debounceTime */])(500), Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["b" /* distinctUntilChanged */])()).subscribe(function (value) {
+                _this.searchEmployee = value;
+                _this.currentPage = 0;
+                _this.loadEmployeesData();
+            });
+            this.tagsForm = this.formBuilder.group({
+                search: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* Validators */].required]
+            });
+            this.tagsForm.controls['search'].valueChanges.pipe(Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["a" /* debounceTime */])(500), Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["b" /* distinctUntilChanged */])()).subscribe(function (value) {
+                _this.tagsSearch = value;
+                _this.tagsOffset = 0;
+                _this.loadTagsData();
+            });
+        }
+        else {
+            window.location.href = '/login';
+        }
+        //-------------------------------
+    };
+    LicenseRelationshipComponent.prototype.loadEmployeesData = function () {
+        var _this = this;
+        this.searchEmployeeService.searchEmployees(this.currentPage, this.searchEmployee).subscribe(function (data) {
+            _this.moreResultsEmployees = data['meta']['more'];
+            _this.employees = data['query'];
+        });
+    };
+    LicenseRelationshipComponent.prototype.loadTagsData = function () {
+        var _this = this;
+        this.licenseService.searchAssetProduct({
+            limit: this.tagsLimit,
+            offset: this.tagsOffset,
+            text: this.tagsSearch
+        }).subscribe(function (data) {
+            _this.tagsMoreResults = data['meta']['more'];
+            _this.tags = data['query'];
+        });
+    };
+    LicenseRelationshipComponent.prototype.selectEmployee = function (employee) {
+        this.employee = employee;
+    };
+    LicenseRelationshipComponent.prototype.selectTag = function (tag) {
+        this.tag = tag;
+    };
+    LicenseRelationshipComponent.prototype.previousEmployees = function () {
+        this.currentPage = this.currentPage - 10;
+        this.loadEmployeesData();
+    };
+    LicenseRelationshipComponent.prototype.nextEmployees = function () {
+        this.currentPage = this.currentPage + 10;
+        this.loadEmployeesData();
+    };
+    LicenseRelationshipComponent.prototype.previousTags = function () {
+        this.tagsOffset = this.tagsOffset - this.tagsLimit;
+        this.loadTagsData();
+    };
+    LicenseRelationshipComponent.prototype.nextTags = function () {
+        this.tagsOffset = this.tagsOffset + this.tagsLimit;
+        this.loadTagsData();
+    };
+    LicenseRelationshipComponent.prototype.save = function () {
+        var _this = this;
+        if (!this.employee['EMAIL'] || !this.tag['assettag']) {
+            alert('Not saved. Selected invalid user or tag');
+            return;
+        }
+        var assign = {
+            'id_license': this.licenseId,
+            'usuario': this.employee['EMAIL'],
+            'tag': this.tag['assettag'],
+            'enable': 1
+        };
+        this.licenseService.assign(assign).subscribe(function (data) {
+            _this.employee = undefined;
+            _this.tag = undefined;
+            _this.users.push(data['data']);
+        });
+    };
+    LicenseRelationshipComponent.prototype.remove = function (user) {
+        var _this = this;
+        this.licenseService.disableUser(user['id_relationship'], { enable: 0 }).subscribe(function (data) {
+            _this.users = _this.users.filter(function (element) {
+                return element['id_relationship'] !== data['data']['id_relationship'];
+            });
+        });
+    };
+    ;
+    LicenseRelationshipComponent.prototype.validate = function () {
+        var _this = this;
+        var finded = this.users.find(function (element) {
+            return element['usuario'] === _this.employee['EMAIL'] && element['tag'] === _this.tag['assettag'];
+        });
+        return finded === undefined;
+    };
+    LicenseRelationshipComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-license-relationship',
+            template: __webpack_require__("../../../../../src/app/license/license-relationship/license-relationship.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/license/license-relationship/license-relationship.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__services_license_service__["a" /* LicenseService */],
+            __WEBPACK_IMPORTED_MODULE_4__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_6_ngx_cookie_service__["a" /* CookieService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], LicenseRelationshipComponent);
+    return LicenseRelationshipComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/license.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LicenseModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap_collapse__ = __webpack_require__("../../../../ngx-bootstrap/collapse/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__license_list_license_list_component__ = __webpack_require__("../../../../../src/app/license/license-list/license-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__license_relationship_license_relationship_component__ = __webpack_require__("../../../../../src/app/license/license-relationship/license-relationship.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__reporte_reporte_component__ = __webpack_require__("../../../../../src/app/license/reporte/reporte.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_license_service__ = __webpack_require__("../../../../../src/app/license/services/license.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+var LicenseModule = /** @class */ (function () {
+    function LicenseModule() {
+    }
+    LicenseModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
+                __WEBPACK_IMPORTED_MODULE_5_ngx_bootstrap_modal__["b" /* ModalModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap_collapse__["a" /* CollapseModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* ReactiveFormsModule */]
+            ],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_7__license_list_license_list_component__["a" /* LicenseListComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__license_relationship_license_relationship_component__["a" /* LicenseRelationshipComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__reporte_reporte_component__["a" /* ReporteComponent */]
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_7__license_list_license_list_component__["a" /* LicenseListComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__license_relationship_license_relationship_component__["a" /* LicenseRelationshipComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__reporte_reporte_component__["a" /* ReporteComponent */]
+            ],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_10__services_license_service__["a" /* LicenseService */]
+            ]
+        })
+    ], LicenseModule);
+    return LicenseModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/reporte/reporte.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/reporte/reporte.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n    <h1 class=\"my-4\">\r\n      Report License\r\n      <span style=\"color:purple;\">\r\n        <i aria-hidden=\"true\" class=\"fa fa-list-alt\"></i>\r\n      </span>\r\n    </h1>\r\n    <!-- <button type=\"button\" class=\"btn btn-primary\" (click)=\"createMode(); openModal(createModal)\">\r\n        License enable\r\n    </button>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"createMode(); openModal(createModal)\">\r\n        License Diseble\r\n    </button> -->\r\n    <hr>\r\n    <div>\r\n      <table class=\"table table-hover table-bordered\">\r\n        <thead class=\"table-head\">\r\n          <tr class=\"\">\r\n            <th scope=\"col\">Id license</th>\r\n            <th scope=\"col\">Name</th>\r\n            <th scope=\"col\">Usuario</th>\r\n            <th scope=\"col\">Tag</th>\r\n            <th scope=\"col\">Max users</th>\r\n            <th scope=\"col\">accountable</th>\r\n            <th scope=\"col\">Enable</th>\r\n          </tr>\r\n        </thead>\r\n  \r\n        <tbody>\r\n          <tr class=\"select\" *ngFor=\"let item of reporte\">\r\n            <td [innerHtml]=\"item.id_license\"></td>\r\n            <td [innerHtml]=\"item.license\"></td>\r\n            <td [innerHtml]=\"item.user\"></td>\r\n            <td [innerHtml]=\"item.tag\"></td>\r\n            <td [innerHtml]=\"item.max_user\"></td>\r\n            <td [innerHtml]=\"item.accountable\"></td>\r\n            <td [innerHtml]=\"item.enable === 1 ? 'True' : 'False'\"></td>\r\n            </tr>\r\n        </tbody>\r\n      </table>\r\n      <button class=\"btn btn-link\" (click)=\"previous()\" *ngIf=\"offset > 0\">Previous</button>\r\n    <button class=\"btn btn-link\" (click)=\"next()\" *ngIf=\"more\">Next</button>\r\n    </div>\r\n  </div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/reporte/reporte.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReporteComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_license_service__ = __webpack_require__("../../../../../src/app/license/services/license.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jwt_decode__ = __webpack_require__("../../../../jwt-decode/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jwt_decode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jwt_decode__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ReporteComponent = /** @class */ (function () {
+    function ReporteComponent(licenseService, cookieService) {
+        this.licenseService = licenseService;
+        this.cookieService = cookieService;
+        this.privilege = false;
+    }
+    ReporteComponent.prototype.ngOnInit = function () {
+        var val = this.cookieService.get("token");
+        if (val) {
+            var djtw = __WEBPACK_IMPORTED_MODULE_3_jwt_decode__(val);
+            var identity = djtw['identity'];
+            for (var _i = 0; _i < identity.length; _i++) {
+                if (identity[_i]['privilege'] == 'pdf') {
+                    this.privilege = true;
+                }
+            }
+        }
+        else {
+            //this.privilege = true;
+            window.location.href = '/login';
+        }
+        if (this.privilege) {
+            this.reporte = [];
+            this.submitted = false;
+            this.isEditing = false;
+            this.limit = 10;
+            this.offset = 0;
+            this.more = true;
+            this.loadReportList();
+        }
+        else {
+            window.location.href = '/login';
+        }
+    };
+    ReporteComponent.prototype.loadReportList = function () {
+        var _this = this;
+        this.licenseService.getReport({
+            limit: this.limit,
+            offset: this.offset
+        }).subscribe(function (data) {
+            var newData = data['data'];
+            if (newData.length === _this.limit) {
+                _this.reporte = newData;
+                _this.more = true;
+            }
+            if (newData.length < _this.limit && newData.length > 0) {
+                _this.reporte = newData;
+                _this.more = false;
+            }
+            if (newData.length === 0) {
+                _this.more = false;
+            }
+        });
+    };
+    ReporteComponent.prototype.previous = function () {
+        this.offset = this.offset - this.limit;
+        this.loadReportList();
+    };
+    ReporteComponent.prototype.next = function () {
+        this.offset = this.offset + this.limit;
+        this.loadReportList();
+        console.log(this.reporte);
+        console.log(this.offset);
+        console.log(this.limit);
+    };
+    ReporteComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-reporte',
+            template: __webpack_require__("../../../../../src/app/license/reporte/reporte.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/license/reporte/reporte.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_license_service__["a" /* LicenseService */], __WEBPACK_IMPORTED_MODULE_2_ngx_cookie_service__["a" /* CookieService */]])
+    ], ReporteComponent);
+    return ReporteComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/license/services/license.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LicenseService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LicenseService = /** @class */ (function () {
+    function LicenseService(httpClient) {
+        this.httpClient = httpClient;
+        this.apiUrl = 'http://hnlnoitinvprod01.hnsc.net/api/v1';
+    }
+    LicenseService.prototype.get = function (identifier) {
+        var url = this.apiUrl + "/license/" + identifier;
+        return this.httpClient.get(url);
+    };
+    LicenseService.prototype.getUsers = function (identifier) {
+        var url = this.apiUrl + "/workstations-license/license/" + identifier + "/users";
+        return this.httpClient.get(url);
+    };
+    LicenseService.prototype.create = function (params) {
+        var url = this.apiUrl + "/license";
+        return this.httpClient.put(url, params);
+    };
+    LicenseService.prototype.update = function (id, params) {
+        var url = this.apiUrl + "/license/" + id;
+        return this.httpClient.post(url, params);
+    };
+    LicenseService.prototype.getList = function (params) {
+        var url = this.apiUrl + "/license";
+        return this.httpClient.get(url, { params: params });
+    };
+    LicenseService.prototype.delete = function (licenseId) {
+        var url = this.apiUrl + "/license/" + licenseId;
+        return this.httpClient.delete(url);
+    };
+    LicenseService.prototype.assign = function (params) {
+        var url = this.apiUrl + "/workstations-license";
+        return this.httpClient.put(url, params);
+    };
+    LicenseService.prototype.disableUser = function (id, params) {
+        var url = this.apiUrl + "/workstations-license/" + id;
+        return this.httpClient.post(url, params);
+    };
+    LicenseService.prototype.getReport = function (params) {
+        var url = this.apiUrl + "/workstations-license/report";
+        return this.httpClient.get(url, { params: params });
+    };
+    LicenseService.prototype.searchAssetProduct = function (params) {
+        var url = this.apiUrl + "/assetProduct";
+        return this.httpClient.get(url, { params: params });
+    };
+    LicenseService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], LicenseService);
+    return LicenseService;
 }());
 
 
@@ -2385,8 +3159,8 @@ var LifetimeChartComponent = /** @class */ (function () {
             }
         }
         else {
-            //this.privilege = true;
-            window.location.href = '/login';
+            this.privilege = true;
+            //window.location.href = '/login';
         }
     };
     LifetimeChartComponent.prototype.generateTable = function () {
@@ -2724,17 +3498,21 @@ var LoanAComponent = /** @class */ (function () {
                         alert('No signature to show');
                         window.location.href = '/loan';
                     }
-                    if (m['id_type'] != 2) {
+                    if (m['id_type'] == 2) {
+                        alert('No signature to show');
+                        window.location.href = '/loan';
+                    }
+                    if ((m['id_type'] != 2)) {
                         _this.validation = 1;
+                        _this._Service.getUserProducts(x.EMPLOYEE_ID)
+                            .subscribe(function (res) {
+                            console.log(res);
+                            _this.offBoardingProducts = res['SignatureSheetsProducts'];
+                            _this.booloffboarding = true;
+                            _this.boolemployee = false;
+                        });
                     }
                     console.log(res);
-                });
-                this._Service.getUserProducts(x.EMPLOYEE_ID)
-                    .subscribe(function (res) {
-                    console.log(res);
-                    _this.offBoardingProducts = res['SignatureSheetsProducts'];
-                    _this.booloffboarding = true;
-                    _this.boolemployee = false;
                 });
             }
         }
@@ -2874,7 +3652,7 @@ var LoanAComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/loan-admin/loan-a/loan-a.component.html"),
             styles: [__webpack_require__("../../../../../src/app/loan-admin/loan-a/loan-a.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_2__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_2__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
     ], LoanAComponent);
     return LoanAComponent;
 }());
@@ -2912,7 +3690,7 @@ var LoanAdminModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_3__share_module_share_module_module__["a" /* ShareModuleModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormsModule */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__loan_a_loan_a_component__["a" /* LoanAComponent */]
@@ -3115,7 +3893,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/login/login.component.html"),
             styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_3__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_1_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_3__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -3210,7 +3988,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/nav-bar/nav-bar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n        <a routerLink=\"/\" class=\"navbar-brand nav-title\">IT Inventory <span><i class=\"fa fa-home\" aria-hidden=\"true\"></i></span></a>\r\n\r\n      <div class=\"collapse navbar-collapse justify-content-md-center\" id=\"navbarsExample08\">\r\n        <ul class=\"navbar-nav\">\r\n          <div *ngIf=\"privilegeDashboard\">\r\n\r\n            <li class=\"nav-item dropdown\" *ngIf=\"privilegeDashboard\">\r\n                <a class=\"nav-link dropdown-toggle\"  id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" (click)=\"dropd()\">\r\n                    Dashboard <span><i class=\"fa fa-signal\" aria-hidden=\"true\"></i></span>\r\n                </a>\r\n                <div class=\"dropdown-menu show\" aria-labelledby=\"navbarDropdown\" *ngIf=\"dropdown\">\r\n                    <a class=\"dropdown-item nav-link nav-drop\" routerLink=\"dashboard\" style=\"color:#86888c\" (click)=\"dropd()\">Dashboard </a> \r\n                    <a class=\"dropdown-item nav-link\" routerLink=\"tables\" style=\"color:#86888c\" (click)=\"dropd()\">Asset Moves </a>\r\n                    <a class=\"dropdown-item nav-link\" routerLink=\"lifetime\" style=\"color:#86888c\" (click)=\"dropd()\">Lifetime Table</a>\r\n                  <!--<a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n                   <div class=\"dropdown-divider\"></div>\r\n                  <a class=\"dropdown-item\" href=\"#\">Something else here</a> -->\r\n                </div>\r\n              </li>          \r\n          </div>\r\n            <li class=\"nav-item\" *ngIf=\"privilegeCreate\">\r\n                <a class=\"nav-link\" routerLink=\"newsheet\" >Create Inventory Sheet <span><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i></span></a>\r\n            </li>\r\n            <li class=\"nav-item\" *ngIf=\"privilegeUpdtae\">\r\n                <a class=\"nav-link\" routerLink=\"updatesheet\">Update Inventory Sheet <span><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></span></a>\r\n            </li>\r\n            <li class=\"nav-item\" *ngIf=\"privilegeLoan\">\r\n                  <a class=\"nav-link\" routerLink=\"loan\">Offboarding-Loan <span><i class=\"fa fa-plane\" aria-hidden=\"true\"></i></span></a>\r\n              </li>\r\n              <div *ngIf=\"privilegePdf\">\r\n                  <li class=\"nav-item dropdown\" *ngIf=\"privilegePdf\"> \r\n                      <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" (click)=\"dropdPdf()\" >\r\n                        Pdf <span><i class=\"fa fa-file-pdf-o\" aria-hidden=\"true\"></i></span>\r\n                      </a>\r\n                      <div class=\"dropdown-menu show\" aria-labelledby=\"navbarDropdown\" *ngIf=\"dropdownPdf_\">\r\n                        <a class=\"dropdown-item\" routerLink=\"pdf\" (click)=\"dropdPdf()\" style=\"color:#86888c\" >PDF</a>\r\n                        <a class=\"dropdown-item\" routerLink=\"loansheets\" (click)=\"dropdPdf()\" style=\"color:#86888c\"  >Loan Sheets</a>\r\n                      </div>\r\n                    </li>\r\n\r\n              </div>\r\n          <li class=\"nav-item \" *ngIf=\"privilegeReports\">\r\n              <a class=\"nav-link\" routerLink=\"#\">Reports</a>\r\n          </li>\r\n\r\n          <li class=\"nav-item \" *ngIf=\"privilegeAdmin\">\r\n            <a class=\"nav-link\" routerLink=\"admin\">User Management <span><i class=\"fa fa-unlock-alt\" aria-hidden=\"true\"></i></span></a>\r\n        </li>\r\n        </ul>\r\n      </div>\r\n\r\n      <div class=\"nav-item d-flex flex-row-reverse\">\r\n            <button class=\"btn-sm btn btn-outline-info\"(click)=\"Logout()\">Logout <span><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i></span></button>\r\n        </div>\r\n    </nav>\r\n\r\n\r\n\r\n\r\n<div *ngIf=\"loggedInPending\">\r\n        <nav class=\"navbar navbar-expand-sm navbar-custom\">\r\n            <div class=\"d-flex justify-content-center\">\r\n                    <h3 class=\"d-flex justify-content-center\" style=\"color: #ebebeb\"> IT Inventory System.!</h3>\r\n            </div>\r\n                \r\n              </nav>\r\n</div>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n  <a routerLink=\"/\" class=\"navbar-brand nav-title\">IT Inventory <span><i class=\"fa fa-home\"\r\n        aria-hidden=\"true\"></i></span></a>\r\n\r\n  <div class=\"collapse navbar-collapse justify-content-md-center\" id=\"navbarsExample08\">\r\n    <ul class=\"navbar-nav\">\r\n      <div *ngIf=\"privilegeDashboard\">\r\n\r\n        <li class=\"nav-item dropdown\" *ngIf=\"privilegeDashboard\">\r\n          <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n            (click)=\"dropd()\">\r\n            Dashboard <span><i class=\"fa fa-signal\" aria-hidden=\"true\"></i></span>\r\n          </a>\r\n          <div class=\"dropdown-menu show\" aria-labelledby=\"navbarDropdown\" *ngIf=\"dropdown\">\r\n            <a class=\"dropdown-item nav-link nav-drop\" routerLink=\"dashboard\" style=\"color:#86888c\"\r\n              (click)=\"dropd()\">Dashboard </a>\r\n            <a class=\"dropdown-item nav-link\" routerLink=\"tables\" style=\"color:#86888c\" (click)=\"dropd()\">Asset Moves\r\n            </a>\r\n            <a class=\"dropdown-item nav-link\" routerLink=\"lifetime\" style=\"color:#86888c\" (click)=\"dropd()\">Lifetime\r\n              Table</a>\r\n            <!--<a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n                   <div class=\"dropdown-divider\"></div>\r\n                  <a class=\"dropdown-item\" href=\"#\">Something else here</a> -->\r\n          </div>\r\n        </li>\r\n      </div>\r\n      <li class=\"nav-item\" *ngIf=\"privilegeCreate\">\r\n        <a class=\"nav-link\" routerLink=\"newsheet\">Create Inventory Sheet <span><i class=\"fa fa-file-text-o\"\r\n              aria-hidden=\"true\"></i></span></a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"privilegeUpdtae\">\r\n        <a class=\"nav-link\" routerLink=\"updatesheet\">Update Inventory Sheet <span><i class=\"fa fa-wrench\"\r\n              aria-hidden=\"true\"></i></span></a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"privilegeLoan\">\r\n        <a class=\"nav-link\" routerLink=\"loan\">Offboarding-Loan <span><i class=\"fa fa-plane\"\r\n              aria-hidden=\"true\"></i></span></a>\r\n      </li>\r\n      <div *ngIf=\"privilegePdf\">\r\n        <li class=\"nav-item dropdown\" *ngIf=\"privilegePdf\">\r\n          <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n            (click)=\"dropdPdf()\">\r\n            Pdf <span><i class=\"fa fa-file-pdf-o\" aria-hidden=\"true\"></i></span>\r\n          </a>\r\n          <div class=\"dropdown-menu show\" aria-labelledby=\"navbarDropdown\" *ngIf=\"dropdownPdf_\">\r\n            <a class=\"dropdown-item\" routerLink=\"pdf\" (click)=\"dropdPdf()\" style=\"color:#86888c\">PDF</a>\r\n            <a class=\"dropdown-item\" routerLink=\"loansheets\" (click)=\"dropdPdf()\" style=\"color:#86888c\">Loan Sheets</a>\r\n          </div>\r\n        </li>\r\n\r\n      </div>\r\n\r\n      <div *ngIf=\"privilegePdf\">\r\n        <li class=\"nav-item dropdown\">\r\n          <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n            (click)=\"dropdLicences()\">\r\n            Licences <span><i class=\"fa fa-list-alt\" aria-hidden=\"true\"></i></span> \r\n          </a>\r\n          <div class=\"dropdown-menu show\" aria-labelledby=\"navbarDropdown\" *ngIf=\"dropdownLicences\">\r\n            <a class=\"dropdown-item nav-link nav-drop\" routerLink=\"license-list\" style=\"color:#86888c\"\r\n              (click)=\"dropdLicences()\">Licences </a>\r\n            <a class=\"dropdown-item nav-link\" routerLink=\"report\" style=\"color:#86888c\" (click)=\"dropdLicences()\">Report License</a>\r\n            </div>\r\n        </li>\r\n      </div>\r\n\r\n      <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"license-list\">\r\n          Licences <span style=\"color:purple;\"><i class=\"fa fa-list-alt\" aria-hidden=\"true\"></i></span>\r\n        </a>\r\n      </li> -->\r\n\r\n      <li class=\"nav-item \" *ngIf=\"privilegeAdmin\">\r\n        <a class=\"nav-link\" routerLink=\"admin\">User Management <span><i class=\"fa fa-unlock-alt\"\r\n              aria-hidden=\"true\"></i></span></a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n\r\n  <div class=\"nav-item d-flex flex-row-reverse\">\r\n    <button class=\"btn-sm btn btn-outline-info\" (click)=\"Logout()\">Logout <span><i class=\"fa fa-sign-out\"\r\n          aria-hidden=\"true\"></i></span></button>\r\n  </div>\r\n</nav>\r\n\r\n\r\n\r\n\r\n<div *ngIf=\"loggedInPending\">\r\n  <nav class=\"navbar navbar-expand-sm navbar-custom\">\r\n    <div class=\"d-flex justify-content-center\">\r\n      <h3 class=\"d-flex justify-content-center\" style=\"color: #ebebeb\"> IT Inventory System.!</h3>\r\n    </div>\r\n\r\n  </nav>\r\n</div>"
 
 /***/ }),
 
@@ -3257,6 +4035,7 @@ var NavBarComponent = /** @class */ (function () {
         this.privilegeAdmin = false;
         this.dropdown = false;
         this.dropdownPdf_ = false;
+        this.dropdownLicences = false;
     }
     NavBarComponent.prototype.ngOnInit = function () {
         /* if(this.cookieService.get('user_name')){
@@ -3328,6 +4107,14 @@ var NavBarComponent = /** @class */ (function () {
             this.dropdownPdf_ = true;
         }
     };
+    NavBarComponent.prototype.dropdLicences = function () {
+        if (this.dropdownLicences) {
+            this.dropdownLicences = false;
+        }
+        else {
+            this.dropdownLicences = true;
+        }
+    };
     NavBarComponent.prototype.devOnly = function () {
         //OJO manejo de los permisos del nav bar se removeran solo para el ambiente de desarrollo comentar lo de abajo y descomentar lo de arriba. 
         //comentar desde aqui
@@ -3347,7 +4134,7 @@ var NavBarComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/nav-bar/nav-bar.component.html"),
             styles: [__webpack_require__("../../../../../src/app/nav-bar/nav-bar.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_4__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_4__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */]])
     ], NavBarComponent);
     return NavBarComponent;
 }());
@@ -3389,8 +4176,8 @@ module.exports = "<br>\n<div class=\"container\" *ngIf=\"privilege\">\n    <h1 c
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__ = __webpack_require__("../../../../../src/app/create-signature-sheet/search-employee.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__ = __webpack_require__("../../../../ngx-cookie-service/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jwt_decode__ = __webpack_require__("../../../../jwt-decode/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jwt_decode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_jwt_decode__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3508,7 +4295,7 @@ var LoanAssetsComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/pdf/loan-assets/loan-assets.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pdf/loan-assets/loan-assets.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]])
     ], LoanAssetsComponent);
     return LoanAssetsComponent;
 }());
@@ -3546,7 +4333,7 @@ var PdfModuleModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_4__share_module_share_module_module__["a" /* ShareModuleModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_3__pdfs_pdfs_component__["a" /* PdfsComponent */]
@@ -3865,18 +4652,18 @@ var PdfsComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/pdf/pdfs/pdfs.component.html"),
             styles: [__webpack_require__("../../../../../src/app/pdf/pdfs/pdfs.component.css")],
             animations: [
-                Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["d" /* trigger */])('slideInOut', [
-                    Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["c" /* transition */])(':enter', [
-                        Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["b" /* style */])({ transform: 'translateY(-100%)' }),
-                        Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["a" /* animate */])('200ms ease-in', Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["b" /* style */])({ transform: 'translateY(0%)' }))
+                Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["i" /* trigger */])('slideInOut', [
+                    Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["h" /* transition */])(':enter', [
+                        Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["g" /* style */])({ transform: 'translateY(-100%)' }),
+                        Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["e" /* animate */])('200ms ease-in', Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["g" /* style */])({ transform: 'translateY(0%)' }))
                     ]),
-                    Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["c" /* transition */])(':leave', [
-                        Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["a" /* animate */])('200ms ease-in', Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["b" /* style */])({ transform: 'translateY(-100%)' }))
+                    Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["h" /* transition */])(':leave', [
+                        Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["e" /* animate */])('200ms ease-in', Object(__WEBPACK_IMPORTED_MODULE_7__angular_animations__["g" /* style */])({ transform: 'translateY(-100%)' }))
                     ])
                 ])
             ]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap_modal__["a" /* BsModalService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap_modal__["a" /* BsModalService */]])
     ], PdfsComponent);
     return PdfsComponent;
 }());
@@ -3915,7 +4702,7 @@ var ShareModuleModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_3__create_signature_sheet_employee_table_employee_table_component__["a" /* EmployeeTableComponent */],
@@ -3969,7 +4756,7 @@ var UpdateSignatureSheetModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__share_module_share_module_module__["a" /* ShareModuleModule */],
                 __WEBPACK_IMPORTED_MODULE_6_ngx_bootstrap_modal__["b" /* ModalModule */].forRoot()
                 //CreateSignatureSheetModule
@@ -4241,7 +5028,7 @@ var UpdatesheetComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/update-signature-sheet/updatesheet/updatesheet.component.html"),
             styles: [__webpack_require__("../../../../../src/app/update-signature-sheet/updatesheet/updatesheet.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__create_signature_sheet_search_employee_service__["a" /* SearchEmployeeService */], __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_3_ngx_cookie_service__["a" /* CookieService */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
     ], UpdatesheetComponent);
     return UpdatesheetComponent;
 }());

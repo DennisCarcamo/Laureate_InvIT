@@ -303,6 +303,7 @@ from backend.resources.loansheets import *
 from backend.resources.lifetime import *
 from backend.resources.dashboardStates import *
 from backend.resources.images import *
+from backend.resources.license import *
 
 
 if __name__ == '__main__':

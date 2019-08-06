@@ -5,6 +5,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 from models.Item import ItemModel
 from models.signature import *
 from models.auth import *
+from models.license import *
 
 items = []
 

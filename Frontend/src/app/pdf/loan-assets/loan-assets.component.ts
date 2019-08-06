@@ -6,8 +6,8 @@ import { TemplateRef } from '@angular/core';
 import { fail } from 'assert';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
-import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import * as jwt_decode from 'jwt-decode';
 
 @Component({
@@ -44,8 +44,8 @@ export class LoanAssetsComponent implements OnInit {
       }
 
     }else{
-      this.privilege = true;
-      //window.location.href = '/login';
+      //this.privilege = true;
+      window.location.href = '/login';
     }
 
     if(this.privilege){

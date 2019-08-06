@@ -108,10 +108,10 @@ export class DashboardComponent implements AfterViewInit {
       else{
 
       //comentar los privilegios en producción y qa;
-      this.privilege = true;
-      this.initialDashboard();
+      //this.privilege = true;
+      //this.initialDashboard();
       //OJO descomentar el href;
-        //window.location.href = '/login';
+        window.location.href = '/login';
       }
 
     

@@ -84,8 +84,8 @@ export class PdfsComponent implements OnInit {
       }
 
     }else{
-      this.privilege = true;
-      //window.location.href = '/login';
+      //this.privilege = true;
+      window.location.href = '/login';
     }
 
     if(this.privilege){
@@ -138,7 +138,7 @@ export class PdfsComponent implements OnInit {
     searchPdf(){
       if(this.text){
         this.boolpdfroute = true;
-        this.url = `http://127.0.0.1:5000/pdf/${this.text}`;
+        this.url = `http://hnlnoitinvprod01.hnsc.net/pdf/${this.text}`;
         window.location.href = this.url;          
       }
       else{
@@ -154,7 +154,7 @@ export class PdfsComponent implements OnInit {
         .subscribe(res => {
           if(res['message'] == 'Yes'){
             this.boolpdfroute = true;
-            this.url = `http://127.0.0.1:5000/scannedpdf/${this.text}`;
+            this.url = `http://hnlnoitinvprod01.hnsc.net/scannedpdf/${this.text}`;
             window.location.href = this.url;
           }
           else{
@@ -279,7 +279,7 @@ export class PdfsComponent implements OnInit {
                 //alert(this.pdfFile);
                 const fd = new FormData();
                 fd.append('pdf', this.selectedFile, this.selectedFile.name)
-                this.httpClient.post(`http://127.0.0.1:5000/upload/${this.pdfFile}`, fd)
+                this.httpClient.post(`http://hnlnoitinvprod01.hnsc.net/upload/${this.pdfFile}`, fd)
                 .subscribe(result => {
                     if(result['message'] == 'Done'){
                       window.location.href = '/pdf';

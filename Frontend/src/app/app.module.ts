@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CreateSignatureSheetModule } from './create-signature-sheet/create-signature-sheet.module';
 import { SearchEmployeeService } from './create-signature-sheet/search-employee.service';
 import { UpdateSignatureSheetModule } from './update-signature-sheet/update-signature-sheet.module';
+import { LicenseModule } from './license/license.module'
 
 import { ShareModuleModule } from './share-module/share-module.module';
 
@@ -33,7 +34,6 @@ import { LifetimeTableComponent } from './lifetime-table/lifetime-table.componen
 import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +46,6 @@ import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
     LifetimeChartComponent,
     LifetimeTableComponent,
     LoanAssetsComponent,
-        
 
   ],
   imports: [
@@ -55,6 +54,7 @@ import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
     FormsModule,
     HttpClientModule,
     CreateSignatureSheetModule,
+    LicenseModule,
     UpdateSignatureSheetModule,
     ShareModuleModule,
     PdfModuleModule,
