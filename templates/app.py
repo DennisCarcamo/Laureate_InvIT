@@ -187,7 +187,7 @@ def loansheets():
         resp = make_response(redirect('/login'))
         return resp
 
-@app.route('/report')
+@app.route('/reports')
 def reports():
     name = request.cookies.get('token')
     if name:
@@ -214,14 +214,6 @@ def admin():
         resp = make_response(redirect('/login'))
         return resp
 
-@app.route('/license-list')
-def licenseList():
-    name = request.cookies.get('token')
-    if name:
-        return render_template('index.html')
-    else:
-        resp = make_response(redirect('/login'))
-        return resp
 
 @app.route('/login', methods=['GET', 'POST'])
 def register():
@@ -311,8 +303,6 @@ from backend.resources.loansheets import *
 from backend.resources.lifetime import *
 from backend.resources.dashboardStates import *
 from backend.resources.images import *
-from backend.resources.license import *
-from backend.resources.bitly import *
 
 
 if __name__ == '__main__':

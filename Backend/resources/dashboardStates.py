@@ -107,29 +107,40 @@ class DashboardStatesSearchTable(Resource):
         format_ = "'"+'DD/MM/YYYY'+"'"
         space_ = "'"+ ' '+ "'" 
 
-        engine = create_engine(settings['ASSETDB'],  pool_pre_ping=True, pool_size=20, max_overflow=5) 
-        engine = sqlalchemy.create_engine(settings['ASSETDB'],  pool_pre_ping=True)
-        Session = scoped_session(sessionmaker(autocommit = False, bind=engine)) 
-        s = Session()
+        #engine = create_engine(settings['ASSETDB'],  pool_pre_ping=True, pool_size=20, max_overflow=5) 
+        #engine = sqlalchemy.create_engine(settings['ASSETDB'],  pool_pre_ping=True)
+        #Session = scoped_session(sessionmaker(autocommit = False, bind=engine)) 
+        #s = Session()
         
-        d =s.execute('SELECT F.RESOURCENAME,F.ASSETTAG, D.DISPLAYSTATE AS "STATE", G.STATEDESC AS "PREV", TO_CHAR(TO_TIMESTAMP(D.STARTTIME / 1000), {}) AS "DATE", K.FIRSTNAME || {} || K.LASTNAME AS "NAME" FROM (SELECT A.RESOURCESTATEID,A.RESOURCEID, B.DISPLAYSTATE, A.PREVRESOURCESTATEID,A.STARTTIME, A.statehistoryid FROM RESOURCESTATEHISTORY AS A  LEFT JOIN RESOURCESTATE AS B ON (A.RESOURCESTATEID = B.RESOURCESTATEID)) AS D LEFT JOIN RESOURCES AS F ON (D.RESOURCEID = F.RESOURCEID)  LEFT JOIN RESOURCESTATE AS G ON (D.PREVRESOURCESTATEID = G.RESOURCESTATEID) LEFT JOIN RESOURCEOWNER AS J ON(J.RESOURCEID = F.RESOURCEID) left join resourceownerhistory as l on(l.statehistoryid = d.statehistoryid) left JOIN SDUSER AS K ON(l.USERID = K.USERID) WHERE F.ASSETTAG LIKE {} or  F.RESOURCENAME like {} or F.SERIALNO LIKE {} ORDER BY D.STARTTIME DESC LIMIT 10 offset {}'.format(format_, space_,paramSearch_,paramSearch_,paramSearch_ , page))
-        dquery = json.dumps( [dict(ix) for ix in d] )
+        #d =s.execute('SELECT F.RESOURCENAME,F.ASSETTAG, D.DISPLAYSTATE AS "STATE", G.STATEDESC AS "PREV", TO_CHAR(TO_TIMESTAMP(D.STARTTIME / 1000), {}) AS "DATE", K.FIRSTNAME || {} || K.LASTNAME AS "NAME" FROM (SELECT A.RESOURCESTATEID,A.RESOURCEID, B.DISPLAYSTATE, A.PREVRESOURCESTATEID,A.STARTTIME, A.statehistoryid FROM RESOURCESTATEHISTORY AS A  LEFT JOIN RESOURCESTATE AS B ON (A.RESOURCESTATEID = B.RESOURCESTATEID)) AS D LEFT JOIN RESOURCES AS F ON (D.RESOURCEID = F.RESOURCEID)  LEFT JOIN RESOURCESTATE AS G ON (D.PREVRESOURCESTATEID = G.RESOURCESTATEID) LEFT JOIN RESOURCEOWNER AS J ON(J.RESOURCEID = F.RESOURCEID) left join resourceownerhistory as l on(l.statehistoryid = d.statehistoryid) left JOIN SDUSER AS K ON(l.USERID = K.USERID) WHERE F.ASSETTAG LIKE {} or  F.RESOURCENAME like {} or F.SERIALNO LIKE {} ORDER BY D.STARTTIME DESC LIMIT 10 offset {}'.format(format_, space_,paramSearch_,paramSearch_,paramSearch_ , page))
+        #dquery = json.dumps( [dict(ix) for ix in d] )
 
-        count = s.execute('SELECT count(*) FROM (SELECT A.RESOURCESTATEID,A.RESOURCEID, B.DISPLAYSTATE, A.PREVRESOURCESTATEID,A.STARTTIME, A.statehistoryid FROM RESOURCESTATEHISTORY AS A  LEFT JOIN RESOURCESTATE AS B ON (A.RESOURCESTATEID = B.RESOURCESTATEID)) AS D LEFT JOIN RESOURCES AS F ON (D.RESOURCEID = F.RESOURCEID)  LEFT JOIN RESOURCESTATE AS G ON (D.PREVRESOURCESTATEID = G.RESOURCESTATEID) LEFT JOIN RESOURCEOWNER AS J ON(J.RESOURCEID = F.RESOURCEID) left join resourceownerhistory as l on(l.statehistoryid = d.statehistoryid) left JOIN SDUSER AS K ON(l.USERID = K.USERID)  WHERE F.ASSETTAG LIKE {} or  F.RESOURCENAME like {} or F.SERIALNO LIKE {}'.format(paramSearch_,paramSearch_,paramSearch_))
-        c = json.dumps( [dict(ix) for ix in count] )
-        c = json.loads(c)
-        count_number = c[0].get('count')
+        #count = s.execute('SELECT count(*) FROM (SELECT A.RESOURCESTATEID,A.RESOURCEID, B.DISPLAYSTATE, A.PREVRESOURCESTATEID,A.STARTTIME, A.statehistoryid FROM RESOURCESTATEHISTORY AS A  LEFT JOIN RESOURCESTATE AS B ON (A.RESOURCESTATEID = B.RESOURCESTATEID)) AS D LEFT JOIN RESOURCES AS F ON (D.RESOURCEID = F.RESOURCEID)  LEFT JOIN RESOURCESTATE AS G ON (D.PREVRESOURCESTATEID = G.RESOURCESTATEID) LEFT JOIN RESOURCEOWNER AS J ON(J.RESOURCEID = F.RESOURCEID) left join resourceownerhistory as l on(l.statehistoryid = d.statehistoryid) left JOIN SDUSER AS K ON(l.USERID = K.USERID)  WHERE F.ASSETTAG LIKE {} or  F.RESOURCENAME like {} or F.SERIALNO LIKE {}'.format(paramSearch_,paramSearch_,paramSearch_))
+        #c = json.dumps( [dict(ix) for ix in count] )
+        #c = json.loads(c)
+        #count_number = c[0].get('count')
 
-        s.close()
+        #s.close()
+        #return {
+        #    "query": json.loads(dquery),
+        #    "meta": {
+        #    "count": count_number,
+        #    "cursor": page + 10,
+        #    "more": (page + 10) < count_number
+        #    }
+        #}  
+
+        res = SignatureSheetModel.query.join(SignatureProductsModel, SignatureSheetModel.id_signature==SignatureProductsModel.id_signature).add_columns(SignatureSheetModel.id_signature, SignatureSheetModel.email, SignatureSheetModel.updated, SignatureProductsModel.id_product, SignatureProductsModel.model)
+        count_number = SignatureSheetModel.query.join(SignatureProductsModel, SignatureSheetModel.id_signature==SignatureProductsModel.id_signature).add_columns(SignatureSheetModel.id_signature, SignatureSheetModel.email, SignatureSheetModel.updated, SignatureProductsModel.id_product, SignatureProductsModel.model).count()
+
         return {
-            "query": json.loads(dquery),
+            "query": list(map(lambda x: x.json(),res)),
             "meta": {
-            "count": count_number,
-            "cursor": page + 10,
-            "more": (page + 10) < count_number
-            }
-        }  
-
+                "count": count_number,
+                "cursor": page + 10,
+                "more": (page + 10) < count_number
+                }
+        } 
 
 class DashboardTest(Resource):
     #@jwt_required

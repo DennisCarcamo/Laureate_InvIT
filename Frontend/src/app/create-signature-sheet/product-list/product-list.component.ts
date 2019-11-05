@@ -104,7 +104,7 @@ export class ProductListComponent implements OnInit {
   }
 
   searchProducts(){
-    this.url = 'http://hnlnoitinvprod01.hnsc.net/api/v1/assetproductsearch?page='+this.cursor + '&limit=10&text=' + this.product +'&status=In Store';
+    this.url = 'http://127.0.0.1:5000/api/v1/assetproductsearch?page='+this.cursor + '&limit=10&text=' + this.product +'&status=In Store';
     this.httpClient.get<elementos>
     (this.url)
     .subscribe(

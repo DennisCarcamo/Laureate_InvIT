@@ -37,12 +37,12 @@ export class NavBarComponent implements OnInit {
     }*/
 
     //comentar la funcion dev only al deployar;
-    //this.devOnly();
+    this.devOnly();
 
 
     //descomentar al deployar;
     
-    let val = this.cookieService.get("token");
+    /*let val = this.cookieService.get("token");
     let djtw = jwt_decode(val);
     console.log(djtw);
     console.log("up");
@@ -69,7 +69,7 @@ export class NavBarComponent implements OnInit {
       if(identity[_i]['privilege'] == 'reports' ){
         this.privilegeReports = true;
       }
-    }
+    } */
 
     //
 
@@ -87,7 +87,7 @@ export class NavBarComponent implements OnInit {
 
     }) 
     this.cookieService.deleteAll();
-    let url = `http://hnlnoitinvprod01.hnsc.net/logout`;
+    let url = `http://127.0.0.1:5000/logout`;
     window.location.href = url;
   }
 

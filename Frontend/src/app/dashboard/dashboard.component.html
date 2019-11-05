@@ -57,11 +57,18 @@
                 <h2>{{ serversInUse }}</h2>
               </div>
             </div>
-            <div class="card border-info mb-3 mx-1" style="width: 17rem;">
-                <div class="card-header">Servers</div>
+            <div *ngIf="boolCrosscheckValidation" class="card border-info mb-3 mx-1" style="width: 17rem;">
+                <div class="card-header">CrossCheck</div>
                 <div class="card-body text-secondary">
-                  <h5 class="card-title"> Servers In Store</h5>
-                  <h2>{{ serversInStore }}</h2>
+                  <h5 class="card-title"> Flush Alert!</h5>
+                  <h2>{{ crosscheckValidation }}</h2>
+                </div>
+              </div>
+              <div *ngIf="boolCrosscheckValidation2" class="card border-danger mb-3 mx-1" style="width: 17rem;">
+                <div class="card-header"style="color: #f5393d">CrossCheck</div>
+                <div class="card-body text-secondary">
+                  <h5 class="card-title"> Flush Alert!</h5>
+                  <h2 style="color: #f5393d">{{ crosscheckValidation }}</h2>
                 </div>
               </div>
   

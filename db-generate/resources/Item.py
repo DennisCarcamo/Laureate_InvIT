@@ -2,9 +2,9 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required, current_identity
 #from flask_sqlalchemy import SQLAlchemy
-from models.Item import ItemModel
-from models.signature import *
-from models.auth import *
+#from models.Item import ItemModel
+#from models.signature import *
+#from models.auth import *
 from models.license import *
 
 items = []

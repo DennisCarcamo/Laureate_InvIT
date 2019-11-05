@@ -44,8 +44,8 @@ export class LoanAssetsComponent implements OnInit {
       }
 
     }else{
-      //this.privilege = true;
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
 
     if(this.privilege){

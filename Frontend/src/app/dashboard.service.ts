@@ -34,14 +34,14 @@ export class DashboardService {
     let x = 'Bearer' + ' ' + this.cookieService.get("token")
     const headers = new HttpHeaders()
       .set( 'Authorization', x);
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboard`, {headers}).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboard`, {headers}).map(result => result);
   }
 
   inStoreModels(type, state){
     let x = 'Bearer' + ' ' + this.cookieService.get("token")
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboarddetail/${type}/${state}`, {headers}).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboarddetail/${type}/${state}`, {headers}).map(result => result);
   }
 
   stateTable(datefrom, dateto, page){
@@ -49,7 +49,7 @@ export class DashboardService {
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
     
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboardstatetable?datefrom=${datefrom}&dateto=${dateto}&page=${page}`, {headers}).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardstatetable?datefrom=${datefrom}&dateto=${dateto}&page=${page}`, {headers}).map(result => result);
   }
 
   searchProductState(product, page){
@@ -57,35 +57,43 @@ export class DashboardService {
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
 
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboardseachproductstate?paramSearch=${product}&page=${page}`, {headers}).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardseachproductstate?paramSearch=${product}&page=${page}`, {headers}).map(result => result);
   }
 
   searchLifetime(){
     let x = 'Bearer' + ' ' + this.cookieService.get("token")
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboardlifetime`, {headers}).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardlifetime`, {headers}).map(result => result);
   }
 
   searchLifetimeDetail(less, number, state, page){
     let x = 'Bearer' + ' ' + this.cookieService.get("token")
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboardlifetimedetail?less=${less}&number=${number}&state=${state}&page=${page}`).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardlifetimedetail?less=${less}&number=${number}&state=${state}&page=${page}`).map(result => result);
   }
 
   searchItemLifetimeDetail(page, text){
     let x = 'Bearer' + ' ' + this.cookieService.get("token")
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
-    return this.httpClient.get(`http://hnlnoitinvprod01.hnsc.net/api/v1/dashboardsearchlifetimedetail?text=${text}&page=${page}`).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboardsearchlifetimedetail?text=${text}&page=${page}`).map(result => result);
   }
 
   serversCount(){
     let x = 'Bearer' + ' ' + this.cookieService.get("token")
     const headers = new HttpHeaders()
     .set( 'Authorization', x);
-    return this.httpClient.get(` http://hnlnoitinvprod01.hnsc.net/api/v1/dashboradserverscount`).map(result => result);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboradserverscount`).map(result => result);
+  }
+
+  crossCheck(){
+    let x = 'Bearer' + ' ' + this.cookieService.get("token")
+    const headers = new HttpHeaders()
+    .set( 'Authorization', x);
+    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/dashboard-crosscheck`).map(result => result);
+ 
   }
 
 }

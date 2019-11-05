@@ -66,8 +66,8 @@ public count2;
       }
     }
     else{
-      //this.privilege = true;
-      window.location.href = '/login';
+      this.privilege = true;
+      //window.location.href = '/login';
     }
   }
 
@@ -134,12 +134,7 @@ public count2;
       alert('Search Field is empty.!')
     }
     else{
-      /*if(!this.searchTable){
-        this.searchTable = true;
-        this.searchDateTable = false;
-        this.cursor = 0;
-      }*/
-      this._dashboardService.searchProductState(this.searchprod, this.cursor2)
+      /*this._dashboardService.searchProductState(this.searchprod, this.cursor2)
       .subscribe( res => {
         //console.log(res);
         this.storageMovesItems2 = res['query'];
@@ -161,7 +156,11 @@ public count2;
           this.showpreview2 = true;
         }
         this.moveTable2 = true;
-      })
+      }) */
+
+      alert('');
+
+      
       
     }
   }

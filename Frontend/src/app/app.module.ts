@@ -32,6 +32,8 @@ import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.co
 import { LifetimeChartComponent } from './lifetime-chart/lifetime-chart.component';
 import { LifetimeTableComponent } from './lifetime-table/lifetime-table.component';
 import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
+import { BitlyLoginComponent } from './bitly-login/bitly-login.component';
+import { MainBitlyComponent } from './main-bitly/main-bitly.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
     LifetimeChartComponent,
     LifetimeTableComponent,
     LoanAssetsComponent,
+    BitlyLoginComponent,
+    MainBitlyComponent,
 
   ],
   imports: [

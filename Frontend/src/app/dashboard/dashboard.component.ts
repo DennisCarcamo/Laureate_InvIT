@@ -29,6 +29,10 @@ export class DashboardComponent implements AfterViewInit {
   public inUseWorkstationData : any;
   public serversInUse : any = 0;
   public serversInStore : any = 0;
+  public crosscheckValidation : any;
+  public boolCrosscheckValidation: any = false;
+  public boolCrosscheckValidation2: any = false;
+  
   
   public inStoreAssetsLabels : any = [];
   
@@ -108,10 +112,12 @@ export class DashboardComponent implements AfterViewInit {
       else{
 
       //comentar los privilegios en producción y qa;
-      //this.privilege = true;
-      //this.initialDashboard();
+      this.privilege = true;
+      this.initialDashboard();
+      this.getCrosscheck();
+
       //OJO descomentar el href;
-        window.location.href = '/login';
+      //window.location.href = '/login';
       }
 
     
@@ -174,32 +180,10 @@ export class DashboardComponent implements AfterViewInit {
 
 
       } //end for
-      //console.log('Resultados en variables');
-      //console.log('In Use.');
-      //console.table(this.inUseAssetsData);
-      //console.log('In Store');
-      //console.table(this.inStoreAssetsData);
-      //console.log('Expired');
-      //console.table(this.expiredAssetsData);
-      //console.log('disrepair');
-      //console.table(this.disrepairAssetsData);
-      //console.log('Out');
-      //console.table(this.outAssetsData);
-      //console.log('Repair');
-      //console.table(this.inrepairAssetsData);
+
       
       this.validatePeriphericalStates();
       
-      //console.log("Arreglo in use");
-      //console.log(this.inUseAssetsDataflag);
-
-      //console.log("Arreglo in Store");
-      //console.log(this.inStoreAssetsDataflag);
-      
-      //console.log("Arreglo in Expire");
-      //console.log(this.expiredAssetsDataflag);
-
-  
      this.inStorePeriphericalChart();
     }) 
 
@@ -229,6 +213,24 @@ export class DashboardComponent implements AfterViewInit {
     })
   }
 
+  getCrosscheck(){
+    this._dashboardService.crossCheck()
+    .subscribe( res =>{
+      let x = res['message'];
+      let y: string = x[0]
+      console.table(y['diff'])
+
+      if(y['diff'] == '1'){
+        this.crosscheckValidation = 'CrossCheck up to Date';
+        this.boolCrosscheckValidation = true;        
+      }else{
+        this.crosscheckValidation = 'UPDATE CROSSCHECK'
+        this.boolCrosscheckValidation2 = true;
+      }
+      
+    })
+  }
+
 
 
 
@@ -255,6 +257,8 @@ export class DashboardComponent implements AfterViewInit {
         display:true
       }
     });
+
+
 
 
     new Chart(document.getElementById("bar-chart-horizontal"), {
