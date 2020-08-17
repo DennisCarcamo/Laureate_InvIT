@@ -64,47 +64,54 @@ class SignatureSheets(Resource):
         
 #pdf
 class SignatureSheet(Resource):
-    search_args = {
-        'page': fields.Int(required = True),
-        'text': fields.Str(required = True),
-        'limit': fields.Int(required = True),
-        'idsheet': fields.Str(required= True),
-        'status':fields.Str(required= True)
-    }
 
-    @use_args(search_args)
+    #ctr k+c comment
+    #ctr k+y discomment
+
+    # search_args = {
+    #     'page': fields.Int(required = True),
+    #     'text': fields.Str(required = True),
+    #     'limit': fields.Int(required = True),
+    #     'idsheet': fields.Str(required= True),
+    #     'status':fields.Str(required= True)
+    # }
+
+    # @use_args(search_args)
     def get(self, args):
-        text = args.get('text', None)
-        page = args.get('page', None)
-        limit = args.get('limit', None)
-        sheet_option = args.get('idsheet', None)
-        status_option = args.get('status', None)
-        param =   text + "%"
+        return {
+            'valor' : 'holaDennis'
+        }
+    #     text = args.get('text', None)
+    #     page = args.get('page', None)
+    #     limit = args.get('limit', None)
+    #     sheet_option = args.get('idsheet', None)
+    #     status_option = args.get('status', None)
+    #     param =   text + "%"
 
-        #print("IDS")
-        #print(sheet_option + ' ' + status_option)
+    #     #print("IDS")
+    #     #print(sheet_option + ' ' + status_option)
 
-        _page = page 
-        per_page = limit
+    #     _page = page 
+    #     per_page = limit
 
-        if sheet_option == '5':
-            records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
-            count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).count()
-        else:
-            records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param)), and_(SignatureSheetModel.id_type == sheet_option, SignatureSheetModel.status == status_option)).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
-            count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param)) , and_(SignatureSheetModel.id_type == sheet_option, SignatureSheetModel.status == status_option)).count()
+    #     if sheet_option == '5':
+    #         records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
+    #         count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param))).count()
+    #     else:
+    #         records = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param)), and_(SignatureSheetModel.id_type == sheet_option, SignatureSheetModel.status == status_option)).order_by(SignatureSheetModel.id_signature.desc()).limit(per_page).offset((_page - 1) * per_page).all()
+    #         count = SignatureSheetModel.query.filter(or_(SignatureSheetModel.email.like(param),  SignatureSheetModel.last_name.like(param), SignatureSheetModel.id_employee.like(param)) , and_(SignatureSheetModel.id_type == sheet_option, SignatureSheetModel.status == status_option)).count()
         
-        if records:
-            cursor = (page * 10) + 1
-            return{ 'SignatureSheets':  list(map(lambda x: x.json(),records)),
-                    'meta':{
-                        'count': count,
-                        "cursor": cursor,
-                        "more": cursor <= count
-                    }        
-                }
+    #     if records:
+    #         cursor = (page * 10) + 1
+    #         return{ 'SignatureSheets':  list(map(lambda x: x.json(),records)),
+    #                 'meta':{
+    #                     'count': count,
+    #                     "cursor": cursor,
+    #                     "more": cursor <= count
+    #                 }        
+    #             }
         
-        return{'message': 'Nothing found'}
+    #     return{'message': 'Nothing found'}
 
 
 class LoanSignatureSheets(Resource):

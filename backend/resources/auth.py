@@ -70,8 +70,8 @@ class UserAuthentication(object):
         
         if user:
         #domain controler validation
-            server = Server('hnlnodc1.hnsc.net', get_info=ALL )
-            user_name = 'HNSCNET\{}'.format(username)
+            server = Server('loe.corp', get_info=ALL )
+            user_name = 'LOE\{}'.format(username)
             password_ = userpassword
             conn = Connection(server, user=user_name,password=password_, authentication=NTLM)
 

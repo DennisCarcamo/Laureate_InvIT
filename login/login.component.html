@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <form>
+                <br />
+                <br />
+                <div class="form-group">
+                    <label for="exampleInputEmail1">User ID</label>
+                    <input #userIdValue type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter User ID" />
+                </div>
+                <div class="form-group">
+                    <label for="examplepassword">Password</label>
+                    <input #passwordValue type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                </div>
+                <!-- <div class="form-group">
+                    <label for="exampleApikey">API_KEY</label>
+                    <input #apiValue type="password" class="form-control" id="exampleApikey" placeholder="API_KEY" />
+                </div> -->
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label
+          >
+        </div>
+        <button type="button" class="btn btn-primary" (click)="loadData(userIdValue.value, passwordValue.value)">Call the service </button>
+      </form>
+    </div>
+    <div class="col-sm"></div>
+  </div>
+</div>

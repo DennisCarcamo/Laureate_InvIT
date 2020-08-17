@@ -16,7 +16,7 @@ export class TypeComponent implements OnInit {
 
 getTypes(){
   this.httpClient.get<elementos>
-  ('http://127.0.0.1:5000/api/v1/types')
+  ('http://hnlnoinvitqa.hnsc.net/api/v1/types')
   .subscribe(
     (data) => {
       this.types = data.Types;

@@ -1,3 +1,257 @@
-<p>
-  main-bitly works!
-</p>
+
+<body *ngIf="boolToken">
+
+        <section id="top-1" class="engine"><a href="">Mobirise Website Builder</a> v4.9.6</section>
+        <section class="section-table cid-rJ2yeFHWxk" id="table1-0">
+      
+        
+        
+        <div class="container container-table">
+            <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
+                    Update Bitly Short URL's <span style="color:rgb(0, 89, 255)"><i class="fa fa-cloud-upload" aria-hidden="true" ></i></span>
+            </h2>
+            <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
+                    The integration with Bitly allows us to create and update multiple short URL's just by uploading an excel file, see the instructions section if you have questions..     
+            </h3>
+
+            
+
+          </div>
+      </section>
+      
+      <section class="engine"><a href="">website creation software</a></section>
+      <section class="mbr-section form3 cid-rJ2yl9Pehs" id="form3-1">
+            <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="title col-12 col-lg-8">
+                            <h2 class="align-center pb-2 mbr-fonts-style display-2">
+                                Upload your file
+                            </h2>
+                            <h3 class="mbr-section-subtitle align-center pb-5 mbr-light mbr-fonts-style display-5">
+                                Remember it has to be a XLS file
+                            </h3>
+                        </div>
+                    </div>
+            
+                    <div class="row py-2 justify-content-center">
+                        <div class="col-12 col-lg-6  col-md-8 " data-form-type="formoid">
+                            <form action="https://mobirise.com/" method="POST" class="mbr-form form-with-styler" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="HGFHkU6gks4B8wmiOEj2vM7jBOPPHCto+PupSXsBIftnmongKtIgEaGvTyNXcM4ioVPgiY6bOPVp+CSYs1HqIcGIiIPL/TpbMAAeQVLW9fj79f9hyHa7R+m0TrSneXrM">
+                                <div class="row">
+                                    <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                                    <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                                    </div>
+                                </div>
+                                <div class="dragArea row">
+                                    <!-- <div class="form-group col" data-for="email">
+                                        <input type="email" name="email" placeholder="Email" data-form-field="Email" required="required" class="form-control display-7" id="email-form3-1">
+                                    </div> -->
+                                    <div class="form-group col" data-for="email">
+                                            <div class="custom-file overflow-hidden rounded-pill mb-5" >
+                                                    <input id="customFile" type="file" class="custom-file-input rounded-pill" (change)="onFileSelected($event)">
+                                                    <label for="customFile" class="custom-file-label rounded-pill">Choose file</label>
+                                                  </div>
+                                    </div>
+                                    <div class="col-auto input-group-btn">
+                                        <button type="submit" class="btn btn-primary  display-4" (click)="readData1()">RUN</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row py-2 justify-content-center">
+                            <div class="">
+                                    <div class="d-flex justify-content-xl-start" *ngIf="boolProgressBar">
+                                            <progress-bar style="width: 36em" [progress]=GetBarValue() name="pbar" [color]="'#488aff'">
+                                            </progress-bar>
+                                            
+                                        </div>
+                                        <p class="row py-2 justify-content-center" *ngIf="boolProgressBar">Success Records: {{SuccessRecords}}    Failed Records: {{totalErrors}}</p>
+                            </div>
+                    </div>
+                    <div class="row py-2 justify-content-center">
+                           
+                    </div>
+                    <div class="row justify-content-center" *ngIf="boolProgressBar">
+                        <div class="form-inline ">
+                            <h5>Malfunction Report</h5>
+                            <input type="number" [(ngModel)]="showNumber" min="10" max="100" class="form-control form-number-jz">
+                            <button class="EdgeButton EdgeButton--secondary EdgeButton--medium" style="margin-left: 0.5em" (click)="find()">Find</button>
+
+                        </div>
+
+                    </div>
+                    <div class="row py-2 justify-content-center" *ngIf="boolProgressBar">
+                        
+                            <div *ngIf="boolProgressBar" class="">
+                                    <table class="table table-hover table-bordered">
+                                            <thead class="table-head">
+                                              <tr class="">
+                                                <th scope="col">Row number</th>
+                                                <th scope="col">Error Message</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Long URL</th>
+                                                <th scope="col">Short URL</th>
+                                               <!-- <th scope="col">Status</th>
+                                                <th scope="col">Last?</th> -->
+                                                
+                                              </tr>
+                                            </thead>
+                                             <tbody *ngFor="let product of errorArrayFlag">
+                                          
+                                              <tr class="select">
+                                                <td>{{product.Row}}</td>
+                                                <th scope="row">{{product.error}}</th>
+                                                <td>{{product.description}}</td>
+                                                <td>{{product.long_url}}</td>
+                                                <td>{{product.short_url}}</td>
+                                              </tr>
+                                          
+                                            </tbody> 
+                                          
+                                          </table>
+                            </div>
+                    </div>
+
+                    
+                </div> 
+                <div class="row py-2 justify-content-center">
+                        <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  
+                                  <li class="page-item" *ngFor="let x of paginationPages" value="{{x.val}}" ><button style="color: rgb(0, 89, 255)" value="{{x.val}}" id="{{x.val}}" class="btn-jz btn-light" (click)="getValue(x.val)" >{{x.val}}</button></li>  
+                                </ul>
+                              </nav>
+                </div>
+          
+      </section>
+      
+      <section class="accordion2 cid-rJ2ypcZjyd" id="accordion2-2">
+      
+          
+      
+      
+          
+          <div class="container">
+              <div class="media-container-row pt-5">
+                  <div class="accordion-content">
+                      <h1 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                        Indications
+                      </h1>
+                      
+                      <div id="bootstrap-accordion_2" class="panel-group accordionStyles accordion pt-5 mt-3" role="tablist" aria-multiselectable="true">
+                        <div class="card" (click)="changeCollapseOne()">
+                            <div class="card-header" role="tab" id="headingTwo" >
+                                <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-core="" aria-expanded="false" aria-controls="collapse2" >
+                                    <h4 class="mbr-fonts-style mbr-fonts-style display-5">
+                                      <span><i class="fa fa-arrow-down" aria-hidden="true"></i></span> <span class="sign mbr-iconfont mbri-arrow-down inactive"></span> How do I set the data?
+                                    </h4>
+                                </a>
+                                
+                            </div>
+                            <div id="collapse2_2" class="panel-collapse noScroll" role="tabpanel" aria-labelledby="headingTwo" data-parent="#bootstrap-accordion_2" *ngIf="collapsedOne">
+                                <div class="panel-body p-4">
+                                    <p class="mbr-fonts-style panel-text display-7">
+                                        The document must contain 3 headings one of DESCRPTION, LONGURL and SHORTURL in capital letters without spaces, under these must go the information to modify in bitly.</p>
+                                </div>
+                            </div>
+                        </div>
+                      
+                              <div class="card" (click)="changeCollapseTwo()">
+                                  <div class="card-header" role="tab" id="headingTwo" >
+                                      <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-core="" aria-expanded="false" aria-controls="collapse2" >
+                                          <h4 class="mbr-fonts-style mbr-fonts-style display-5">
+                                            <span><i class="fa fa-arrow-down" aria-hidden="true"></i></span> <span class="sign mbr-iconfont mbri-arrow-down inactive"></span> What considerations should I take?
+                                          </h4>
+                                      </a>
+                                      
+                                  </div>
+                                  <div id="collapse2_2" class="panel-collapse noScroll" role="tabpanel" aria-labelledby="headingTwo" data-parent="#bootstrap-accordion_2" *ngIf="collapsedTwo">
+                                      <div class="panel-body p-4">
+                                          <p class="mbr-fonts-style panel-text display-7">
+                                            It must be a single sheet, no matter its name, it must be a document with .XLS extension, the data must be complete without blank spaces or it will fail.</p>
+                                      </div>
+                                  </div>
+                              </div>
+                      
+                              <div class="card" (click)="changeCollapsetree()">
+                                <div class="card-header" role="tab" id="headingTwo" >
+                                    <a role="button" class="collapsed panel-title text-black" data-toggle="collapse" data-core="" aria-expanded="false" aria-controls="collapse2" >
+                                        <h4 class="mbr-fonts-style mbr-fonts-style display-5">
+                                          <span><i class="fa fa-arrow-down" aria-hidden="true"></i></span> <span class="sign mbr-iconfont mbri-arrow-down inactive"></span> What if something goes wrong?
+                                        </h4>
+                                    </a>
+                                    
+                                </div>
+                                <div id="collapse2_2" class="panel-collapse noScroll" role="tabpanel" aria-labelledby="headingTwo" data-parent="#bootstrap-accordion_2" *ngIf="collapsedTree">
+                                    <div class="panel-body p-4">
+                                        <p class="mbr-fonts-style panel-text display-7">
+                                            After loading the file and pressing RUN, it will show a progress bar and a table with the possible inconsistencies in the data where it will show the URLS that could not be completed and the reason for this, in this case modify the faults and try again.</p>
+                                    </div>
+                                </div>
+                            </div>
+                      
+                              
+                      
+                              
+                      
+                              
+                      </div>
+                  </div>
+                  <div class="mbr-figure" style="width: 155%;">
+                          <img [src]="mainImage" alt="template">
+                        </div>
+                    </div>
+                    <button class="btn-sm btn-primary" style="margin-top:0.8em" (click)="getTemplate()" >Download Template</button>
+          </div>
+
+
+      </section>
+</body>
+
+
+<!-- <section>
+    <div class="container p-5">
+
+      <div class="row mb-5 text-center text-white">
+        <div class="col-lg-10 mx-auto">
+          <h1 class="display-4">File upload button </h1>
+          <p class="lead">Build a simple file upload button using Bootstrap 4.</p>
+        </div>
+      </div>
+ 
+  
+  
+      <div class="row">
+        <div class="col-lg-5 mx-auto">
+          <div class="p-5 bg-white shadow rounded-lg"><img src="https://res.cloudinary.com/mhmd/image/upload/v1557366994/img_epm3iz.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+  
+     
+  
+            <h6 class="text-center mb-4 text-muted">
+              You can use default Bootstrap file upload
+            </h6>
+  
+            <div class="custom-file overflow-hidden rounded-pill mb-5">
+              <input id="customFile" type="file" class="custom-file-input rounded-pill">
+              <label for="customFile" class="custom-file-label rounded-pill">Choose file</label>
+            </div>
+       
+  
+            <h6 class="text-center mb-4 text-muted">
+              Or a custom button that launches file browser
+            </h6>
+  
+            <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
+                          <input id="fileUpload" type="file">
+                      </label>
+       
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  -->
+
+
+

@@ -16,7 +16,7 @@ import { LicenseListComponent } from './license/license-list/license-list.compon
 import { LicenseRelationshipComponent } from './license/license-relationship/license-relationship.component';
 import { ReporteComponent } from './license/reporte/reporte.component'; 
 import { BitlyLoginComponent } from './bitly-login/bitly-login.component';
-import { MainBitlyComponent } from './main-bitly/main-bitly.component'
+import { MainBitlyComponent } from './main-bitly/main-bitly.component';
 const routes: Routes = [
 
 

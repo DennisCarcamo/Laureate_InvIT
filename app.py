@@ -86,7 +86,7 @@ def after_request(response):
     response.headers.add(
         'Access-Control-Allow-Headers',
         ", ".join(valid_headers))
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH')
 
     return response 
 
@@ -126,6 +126,24 @@ class RegistrationForm(Form):
 
 @app.route('/newsheet')
 def newsheet():
+    name = request.cookies.get('token')
+    if name:
+        return render_template('index.html')
+    else:
+        resp = make_response(redirect('/login'))
+        return resp
+
+@app.route('/blogin')
+def blogin():
+    name = request.cookies.get('token')
+    if name:
+        return render_template('index.html')
+    else:
+        resp = make_response(redirect('/login'))
+        return resp
+
+@app.route('/mainbitly')
+def mainbitly():
     name = request.cookies.get('token')
     if name:
         return render_template('index.html')
@@ -232,6 +250,7 @@ def register():
 
 
         if value == 'authenticated':
+            print('correctamente autenticado')
             user = UsersModel.query.filter_by(user_name=request.form.get('username')).add_columns(UsersModel.id_role ).first()
             p = PrivilegesRolesModel.query.filter_by(id_role = user[1]).join(PrivilegesModel, PrivilegesRolesModel.id_privilege==PrivilegesModel.id).add_columns(PrivilegesModel.privilege_name,PrivilegesModel.id )
             x =[]
@@ -247,6 +266,7 @@ def register():
             return resp
         else:
             #print(value)
+            print('mal autenticado')
             return render_template('login.html', form=form)
 
     return render_template('login.html', form=form)
@@ -286,6 +306,11 @@ def pdfs(pdf_name):
     name = pdf_name + '.pdf'
     return send_from_directory(settings['PDFSAVEPATH'], name, as_attachment=True)
 
+@app.route("/xls/<string:pdf_name>")
+def xls(pdf_name):
+    name = pdf_name + '.xlsx'
+    return send_from_directory(settings['PDFSAVEPATH'], name, as_attachment=True)
+
 @app.route("/scannedpdf/<string:pdf_name>")
 def searchPdf(pdf_name):
     name = pdf_name + '.pdf'
@@ -300,6 +325,16 @@ def searchImages(image_name):
     path = './templates/assets/images/' + image_name
     return send_file(path, mimetype='image')
 
+@app.route("/customreports")
+def customReports():
+    name = request.cookies.get('token')
+    if name:
+        return render_template('index.html')
+    else:
+        resp = make_response(redirect('/login'))
+        return resp
+
+
 from backend.resources.assetexplorer import *
 from backend.resources.signatureTypes import *
 from backend.resources.signaturesheets import *
@@ -313,6 +348,7 @@ from backend.resources.dashboardStates import *
 from backend.resources.images import *
 from backend.resources.license import *
 from backend.resources.bitly import *
+from backend.resources.customReportsResources.customReports import *
 
 
 if __name__ == '__main__':

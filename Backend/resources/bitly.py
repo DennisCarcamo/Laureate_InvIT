@@ -40,14 +40,14 @@ class BitlyLogin(Resource):
         clientParams = "{}:{}".format(_clientId,_clientSecret)
         usrPass = bytes(clientParams, 'utf-8')
         b64Val = base64.b64encode(usrPass).decode('utf-8')
-        print(b64Val)
+        #print(b64Val)
         r=requests.post("https://api-ssl.bitly.com/oauth/access_token", 
                headers={"Authorization": "Basic {}".format(b64Val)},
                data={})
-        print(r.text)
+
         return r.text
 
-class BitlyOperattions(Resource):
+class BitlyOperations(Resource):
 
     params = {
         'domain': fields.Str(required = True),
@@ -70,8 +70,8 @@ class BitlyOperattions(Resource):
         _domain = args.get('domain', None)
         _title = args.get('title', None)
         _group_guid = args.get('group_guid', None)
-        # _tags = args.get('tags', None)
-        # _deeplinks = args.get('deeplinks', None)
+        #_tags = args.get('tags', None)
+        #_deeplinks = args.get('deeplinks', None)
         _long_url = args.get('long_url', None)
         _bearer_token = args.get('bearer_token', None)
 
@@ -84,13 +84,13 @@ class BitlyOperattions(Resource):
             "long_url": _long_url
         }
         print(data)
+        print(_domain)
         
         headers = {"Content-Type":"application/json" ,"Authorization": "Bearer {}".format(_bearer_token)}
         r=requests.post("https://api-ssl.bitly.com/v4/bitlinks",
                 headers = headers,
                 data = json.dumps(data))
-        print(r.text)
-        return json.dumps(r.text)
+        return r.json()
 
     
     # redirect bitlink 
@@ -112,9 +112,8 @@ class BitlyOperattions(Resource):
         r = requests.patch(url,
                 headers = headers,
                 data = json.dumps(data))
-        
-        print(r.text)
-        return json.dumps(r.text)
+        print(r.json)
+        return r.json()
 
 
     paramsGet = {
@@ -132,8 +131,7 @@ class BitlyOperattions(Resource):
         r = requests.get(url,
                 headers = headers,
                 data = {})
-        print (r.text)
-        return r.text
+        return r.json()
 
 api.add_resource(BitlyLogin, '/api/v1/bitlygettoken')
-api.add_resource(BitlyOperattions, '/api/v1/createbitlink')
+api.add_resource(BitlyOperations, '/api/v1/createbitlink')

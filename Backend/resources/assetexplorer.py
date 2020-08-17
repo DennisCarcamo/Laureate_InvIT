@@ -17,6 +17,8 @@ from webargs.flaskparser import use_args
 from app import settings, app, api
 from marshmallow import fields
 
+
+
 class AssetexplorerUsers(Resource):
     def get(self, page):
         engine = sqlalchemy.create_engine('postgresql://postgres:Laureate123$@172.20.33.55:65433/assetexplorer', pool_pre_ping=True, pool_size=20, max_overflow=5)

@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <form>
+                <br>
+                <br>
+                <label for="">1. Prepare the file</label>
+                <br>
+
+                <div class="form-group">
+                    <div class="custom-file" id="customFile" lang="es">
+                        <input type="file" class="custom-file-input" (change)="onFileSelected($event)" id="exampleInputFile" aria-describedby="fileHelp" />
+                        <label class="custom-file-label" for="exampleInputFile">
+                  Select file...
+                </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-success" (click)="readData1()">Continue</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>

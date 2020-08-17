@@ -14,33 +14,33 @@ export class ManagementService {
   }
 
   getRoles(){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/roles`).map(result => result);
+    return this.httpClient.get(`http://hnlnoinvitqa.hnsc.net/api/v1/roles`).map(result => result);
   }
 
   getPrivilegesbyRoles(role){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/roles_x_privileges/${role}`).map(result => result);
+    return this.httpClient.get(`http://hnlnoinvitqa.hnsc.net/api/v1/roles_x_privileges/${role}`).map(result => result);
   }
 
   postUseradmin(email, rol){
-    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/usersadmins`,{
+    return this.httpClient.post(`http://hnlnoinvitqa.hnsc.net/api/v1/usersadmins`,{
       'user_name': email,
       'id_role': rol
     }).map(result => result);
   }
 
   postNewRolePrivileges(name, privileges_){
-    return this.httpClient.post(`http://127.0.0.1:5000/api/v1/roles`, {
+    return this.httpClient.post(`http://hnlnoinvitqa.hnsc.net/api/v1/roles`, {
       'rol_name': name,
       'privileges': JSON.stringify(privileges_)
     }).map(result => result);
   }
 
   getSystemUsers(){
-    return this.httpClient.get(`http://127.0.0.1:5000/api/v1/usersadmins`).map(result => result);
+    return this.httpClient.get(`http://hnlnoinvitqa.hnsc.net/api/v1/usersadmins`).map(result => result);
   }
 
   deleteUser(user_name, id){
-    return this.httpClient.put(`http://127.0.0.1:5000/api/v1/usersadmins`, {
+    return this.httpClient.put(`http://hnlnoinvitqa.hnsc.net/api/v1/usersadmins`, {
      'user_name': user_name,
      'id_role': id
 

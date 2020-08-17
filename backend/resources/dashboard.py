@@ -154,7 +154,8 @@ class Test(Resource):
         'to': [{'email': 'julio.zuniga@laureate.net',
                 'name': 'Julio',
                 'type': 'to'}]}
-        result = mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool')
+        #result = mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool')
+        result = "Hello mother"
         print(result)
 
         return result

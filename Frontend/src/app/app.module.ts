@@ -34,6 +34,8 @@ import { LifetimeTableComponent } from './lifetime-table/lifetime-table.componen
 import { LoanAssetsComponent } from './pdf/loan-assets/loan-assets.component';
 import { BitlyLoginComponent } from './bitly-login/bitly-login.component';
 import { MainBitlyComponent } from './main-bitly/main-bitly.component';
+import {ProgressBarModule} from 'angular-progress-bar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';    
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { MainBitlyComponent } from './main-bitly/main-bitly.component';
     ShareModuleModule,
     PdfModuleModule,
     LoanAdminModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    ProgressBarModule,
+    BrowserAnimationsModule
 
   ],
   providers: [SearchEmployeeService, DashboardService, LoginService, AuthGuard, CookieService, ManagementService],
