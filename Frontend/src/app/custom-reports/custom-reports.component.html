@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <!-- Our Custom CSS -->
+
+    <!-- Font Awesome JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+      integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+      integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar  -->
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <h1 id="title">Custom Reports</h1>
+        </div>
+
+        <ul class="list-unstyled components">
+          <label id="titulo-parametro">Choose Report:</label>
+          <li>
+            <a (click)="showEmployeeReport()">Employees</a>
+          </li>
+
+          <li>
+            <a (click)="showInventoryReport()">Inventory Pages</a>
+          </li>
+          <li>
+            <a (click)="showAssetReport()">Assets</a>
+          </li>
+          <li>
+            <a (click)="showSavedReport()">Saved Reports</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Page Content  -->
+      <div id="content">
+        <div>
+          <div id="titulo-reporte">
+            <h1>{{ activeReport }}</h1>
+          </div>
+          <div class="line"></div>
+        </div>
+
+        <!-- =======================================Componente de JOBTITLE============================ -->
+        <div *ngIf="showJobtitleComponent">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Job Title
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                [(ngModel)]="jobtitle"
+                (change)="($event.target.value)"
+              >
+                <option *ngFor="let job of jobtitleOptions" [ngValue]="job">
+                  {{ job.job }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Group By
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                [(ngModel)]="jobtitleGroup"
+                (change)="($event.target.value)"
+              >
+                <option
+                  *ngFor="let group of jobtitleGroupOptions"
+                  [ngValue]="group"
+                >
+                  {{ group.group }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+          </div>
+          <pre></pre>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                From
+              </h3>
+            </div>
+            <div class="col">
+              <input
+                type="Date"
+                (change)="($event.target.value)"
+                [(ngModel)]="jobtitleFrom"
+              />
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                To
+              </h3>
+            </div>
+            <div class="col">
+              <input
+                type="Date"
+                (change)="($event.target.value)"
+                [(ngModel)]="jobtitleTo"
+              />
+            </div>
+            <div class="col"></div>
+          </div>
+          <pre></pre>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span
+                  ><i aria-hidden="true" style="color: cadetblue"></i>
+                </span>
+                Asset
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                (change)="($event.target.value)"
+                class="form-control"
+                [(ngModel)]="jobtitleAsset"
+              >
+                <option
+                  *ngFor="let option of jobtitleAssetOptions"
+                  [ngValue]="option"
+                >
+                  {{ option.asset }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Status
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                (change)="($event.target.value)"
+                [(ngModel)]="jobtitleAssetStatus"
+              >
+                <option
+                  *ngFor="let status of jobtitleAssetStatusOptions"
+                  [ngValue]="status"
+                >
+                  {{ status.status }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+          </div>
+          <pre></pre>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span
+                  ><i aria-hidden="true" style="color: cadetblue"></i>
+                </span>
+                Antiqueness
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                (change)="($event.target.value)"
+                [(ngModel)]="jobtitleAssetRange"
+              >
+                <option
+                  *ngFor="let range of jobtitleAssetRangeOptions"
+                  [ngValue]="range"
+                >
+                  {{ range.range }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Months
+              </h3>
+            </div>
+            <div class="col">
+              <input
+                type="number"
+                min="1"
+                class="form-control"
+                style="width: 70px"
+                [(ngModel)]="jobtitleAssetMonths"
+              />
+            </div>
+            <div class="col"></div>
+          </div>
+
+          <!-- =======================================Componente de JOBTITLE============================ -->
+          <div class="line"></div>
+        </div>
+        <!--============================================Componente Inventory Pages ====================== -->
+        <div *ngIf="showInventoryPagesComponente">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Page Type
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                [(ngModel)]="inventoryPageType"
+                (change)="($event.target.value)"
+              >
+                <option
+                  *ngFor="let page of inventoryPageTypeOptions"
+                  [ngValue]="page"
+                >
+                  {{ page.type }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                From
+              </h3>
+            </div>
+            <div class="col">
+              <input type="Date" [(ngModel)]="inventoryPageFrom" />
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                To
+              </h3>
+            </div>
+            <div class="col">
+              <input type="Date" [(ngModel)]="inventoryPageTo" />
+            </div>
+            <div class="col"></div>
+          </div>
+
+          <div class="line"></div>
+        </div>
+        <!--=======================================Componentes Inventory Pages =========================-->
+        <!-- =======================================Componente de Asset ============================ -->
+        <div *ngIf="showAssetsComponent">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Asset
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                (change)="($event.target.value)"
+                [(ngModel)]="assetType"
+              >
+                <option
+                  *ngFor="let asset of jobtitleAssetOptions"
+                  [ngValue]="asset"
+                >
+                  {{ asset.asset }}
+                </option>
+              </select>
+            </div>
+
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Status
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                (change)="($event.target.value)"
+                [(ngModel)]="assetStatus"
+              >
+                <option
+                  *ngFor="let status of assetStatusOptions"
+                  [ngValue]="status"
+                >
+                  {{ status.status }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+          </div>
+          <pre></pre>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                From
+              </h3>
+            </div>
+            <div class="col">
+              <input type="Date" [(ngModel)]="assetFrom" />
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                To
+              </h3>
+            </div>
+            <div class="col">
+              <input type="Date" [(ngModel)]="assetTo" />
+            </div>
+            <div class="col"></div>
+          </div>
+          <pre></pre>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Antiqueness
+              </h3>
+            </div>
+            <div class="col">
+              <select
+                class="form-control"
+                (change)="($event.target.value)"
+                [(ngModel)]="assetRange"
+              >
+                <option
+                  *ngFor="let range of assetRangeOptions"
+                  [ngValue]="range"
+                >
+                  {{ range.status }}
+                </option>
+              </select>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <h3>
+                <span><i aria-hidden="true" style="color: cadetblue"></i></span>
+                Months
+              </h3>
+              <pre></pre>
+            </div>
+            <div class="col">
+              <input
+                type="number"
+                min="1"
+                class="form-control"
+                style="width: 70px"
+                [(ngModel)]="assetMonths"
+              />
+            </div>
+            <div class="col"></div>
+          </div>
+          <div class="line"></div>
+        </div>
+        <!-- =======================================Componente de Asset ============================ -->
+        <!-- =======================================Componente de SavedReports ============================ -->
+
+        <!-- =======================================Componente de SavedReports ============================ -->
+        <div *ngIf = "showSavedReportsComponent">
+          <table class="table table-hover table-bordered">
+            <thead class="table-head">
+              <tr class="">
+                <th scope="col">Created By</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Description</th>
+                <th scope="col">Report Type</th>
+                <th scope="col">Report Name</th>
+                <th scope="col">Get It</th>
+                <!-- <th scope="col">Status</th>
+                <th scope="col">Last?</th> -->
+              </tr>
+            </thead>
+            <tbody *ngFor="let value of savedReportsResults">
+              <tr class="select">
+                <th scope="row">{{ value.created_by }}</th>
+                <td>{{ value.created_at }}</td>
+                <td>{{ value.description }}</td>
+                <td>{{ value.report_type }}</td>
+                <td>{{ value.report_name }}</td>
+                <td><button>Run</button>></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- =======================================Componente de Asset ============================ -->
+        <!-- ======================================= Employee Results ============================ -->
+        <div *ngIf="showEmployeeTable">
+          <div class="line"></div>
+          <table class="table table-hover table-bordered">
+            <thead class="table-head">
+              <tr class="">
+                <th scope="col">Employee ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Asset Tag</th>
+                <th scope="col">Component Name</th>
+                <!-- <th scope="col">Status</th>
+                <th scope="col">Last?</th> -->
+              </tr>
+            </thead>
+            <tbody *ngFor="let value of jobtitleResult">
+              <tr class="select">
+                <th scope="row">{{ value.employeeid }}</th>
+                <td>{{ value.firstname }}</td>
+                <td>{{ value.lastname }}</td>
+                <td>{{ value.deptname }}</td>
+                <td>{{ value.assettag }}</td>
+                <td>{{ value.resourcename }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <pre></pre>
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col">
+                <button (click)="exportAsXLSX()" class="navbar-btn2">
+                  <a>Export XLSX</a>
+                </button>
+              </div>
+              <div class="cols">
+                <button (click)="saveReport()" class="navbar-btn2">
+                  <a>Save As Favorite</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ======================================= Employee Results ============================ -->
+        <!-- ======================================= Inventory Pages Results ===================== -->
+        <div *ngIf="showInventoryPagesTable">
+          <div class="line"></div>
+          <table class="table table-hover table-bordered">
+            <thead class="table-head">
+              <tr class="">
+                <th scope="col">Page Type</th>
+                <th scope="col">Page ID</th>
+                <th scope="col">Employee ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Image Url</th>
+                <th scope="col">Created At</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let value of inventroyPageResults">
+              <tr class="select">
+                <th scope="row">{{ value["Page Type"] }}</th>
+                <th scope="row">{{ value["Page ID"] }}</th>
+                <th scope="row">{{ value["Employee ID"] }}</th>
+                <th scope="row">{{ value["First Name"] }}</th>
+                <th scope="row">{{ value["Last Name"] }}</th>
+                <th scope="row">{{ value["Image URL"] }}</th>
+                <th scope="row">{{ value["Updated"] }}</th>
+              </tr>
+            </tbody>
+          </table>
+          <pre></pre>
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col">
+                <button (click)="exportAsXLSX()" class="navbar-btn2">
+                  <a>Export XLSX</a>
+                </button>
+              </div>
+              <div class="cols">
+                <button (click)="saveReport()" class="navbar-btn2">
+                  <a>Save As Favorite</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ======================================= Inventory Pages Results ================== -->
+        <!-- ======================================= Asset Results ============================ -->
+        <div *ngIf="showAssetTable">
+          <div class="line"></div>
+          <table class="table table-hover table-bordered">
+            <thead class="table-head">
+              <tr class="">
+                <th scope="col">Resource ID</th>
+                <th scope="col">Asset Tag</th>
+                <th scope="col">Serial Number</th>
+                <th scope="col">Component Name</th>
+                <th scope="col">Resource Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Owner</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let value of assetResults">
+              <tr class="select">
+                <th scope="row">{{ value.resourceid }}</th>
+                <td>{{ value.assettag }}</td>
+                <td>{{ value.serialno }}</td>
+                <td>{{ value.componentname }}</td>
+                <td>{{ value.resourcename }}</td>
+                <td>{{ value.displaystate }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <pre></pre>
+          <div class="container">
+            <div class="row justify-content-start">
+              <div class="col">
+                <button (click)="exportAsXLSX()" class="navbar-btn2">
+                  <a>Export XLSX</a>
+                </button>
+              </div>
+              <div class="cols">
+                <button (click)="saveReport()" class="navbar-btn2">
+                  <a>Save As Favorite</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ======================================= Asset Results ============================ -->
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#sidebarCollapse").on("click", function () {
+          $("#sidebar").toggleClass("active");
+        });
+      });
+    </script>
+  </body>
+</html>

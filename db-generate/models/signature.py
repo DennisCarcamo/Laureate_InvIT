@@ -119,8 +119,8 @@ class SignatureSheetModel(db.Model):
         db.session.commit()
 
     def myConvertor(self):
-            return self.updated.__str__()
-   
+        return self.updated.__str__()
+
 
 class SignatureProductsModel(db.Model):
     __tablename__ = 'tbl_signature_x_product'
@@ -168,6 +168,7 @@ class SignatureProductsModel(db.Model):
     def delete_item(self):
         db.session.delete(self)
         db.session.commit()
+    
 
 class ImageModel(db.Model):
     __tablename__ = 'tbl_images'
@@ -206,4 +207,3 @@ class ImageModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    

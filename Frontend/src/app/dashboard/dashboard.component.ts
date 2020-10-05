@@ -98,46 +98,6 @@ export class DashboardComponent implements AfterViewInit {
         }
       }
     }
-
-    /* This is before Dennis changes. 
-    //this.cookieValue = this.cookieService.get('user_name');
-    //if(this.cookieService.get('user_name')){
-    //this.initialDashboard();
-    //}
-    //else{
-    // alert(this.logged);
-    //this.router.navigateByUrl('/');
-    //}
-
-    //comentar los privilegios en producción y qa;
-    //this.privilege = true;
-    //OJO
-
-    let val = this.cookieService.get("token");
-    if (val) {
-      let djtw = jwt_decode(val);
-      let identity = djtw["identity"];
-      for (var _i = 0; _i < identity.length; _i++) {
-        if (identity[_i]["privilege"] == "dashboard") {
-          this.privilege = true;
-        }
-      }
-
-      if (this.privilege) {
-        this.initialDashboard();
-        this.getCrosscheck();
-      } else {
-        window.location.href = "/login";
-      }
-    } else {
-      //comentar los privilegios en producción y qa;
-      // this.privilege = true;
-      // this.initialDashboard();
-      // this.getCrosscheck();
-
-      //OJO descomentar el href;
-      window.location.href = "/login";
-    }*/
   }
 
   initialDashboard() {
