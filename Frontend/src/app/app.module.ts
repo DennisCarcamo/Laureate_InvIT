@@ -2,8 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -40,10 +38,9 @@ import { BitlyLoginComponent } from "./bitly-login/bitly-login.component";
 import { MainBitlyComponent } from "./main-bitly/main-bitly.component";
 import { ProgressBarModule } from "angular-progress-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
 import { CustomReportsComponent } from "./custom-reports/custom-reports.component";
 import { ExcelGeneratorService } from './excel-generator.service';
-import { ModalContentComponent } from './modal-content/modal-content.component'
+
 
 @NgModule({
   declarations: [
@@ -60,7 +57,6 @@ import { ModalContentComponent } from './modal-content/modal-content.component'
     BitlyLoginComponent,
     MainBitlyComponent,
     CustomReportsComponent,
-    ModalContentComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +83,6 @@ import { ModalContentComponent } from './modal-content/modal-content.component'
     CustomReportsService,
     ExcelGeneratorService,
   ],
-  bootstrap: [AppComponent, NgbModule],
-  entryComponents: [ ModalContentComponent ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

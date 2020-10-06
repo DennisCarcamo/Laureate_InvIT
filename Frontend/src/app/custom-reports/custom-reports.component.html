@@ -403,6 +403,17 @@
         </div>
         <!-- =======================================Componente de Asset ============================ -->
         <!-- =======================================Componente de SavedReports ============================ -->
+         <!-- =======================================Componente de SavedReports ============================ -->
+         <div *ngIf="showButtons" class="contenedor-botones">
+          <button class="navbar-btn">
+            <a type="submit" (click)="resetValues()">Reset Values </a>
+          </button>
+
+          <button class="navbar-btn2">
+            <a (click)="showOptions()">Generate Report</a>
+          </button>
+        </div>
+        <!-- =======================================Componente de Asset ============================ -->
 
         <!-- =======================================Componente de SavedReports ============================ -->
         <div *ngIf = "showSavedReportsComponent">

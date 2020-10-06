@@ -53,7 +53,7 @@ export class CustomReportsService {
     assetTo: string,
     assetRange: string,
     assetMonths: number,
-  ) {
+  ) { 
 
     console.log(typeof(assetType) + assetType);
     console.log(typeof(assetStatus) + assetStatus);
@@ -70,7 +70,7 @@ export class CustomReportsService {
     assetTo: assetTo,
     assetRange: assetRange,
     assetMonths: assetMonths,
-    } );
+    })
    }
 
    saveReport(

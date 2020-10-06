@@ -4,8 +4,7 @@ import { CustomReportsService } from '../custom-reports.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ExcelGeneratorService } from '../excel-generator.service';
 import { CookieService } from "ngx-cookie-service";
-import { ModalContentComponent } from '../modal-content/modal-content.component'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-custom-reports',
@@ -17,7 +16,7 @@ export class CustomReportsComponent implements OnInit {
     private _customReportsService: CustomReportsService,
     private excelService: ExcelGeneratorService,
     private cookieService: CookieService,
-    private modalService: NgbModal
+    
   ) {}
   // variables que maneja la vista de los componentes
   activeReport = 'Laureate IT Operations Reports';
@@ -197,8 +196,7 @@ export class CustomReportsComponent implements OnInit {
   }
 
   popupReportName(commingname: string){
-    const modalRef = this.modalService.open(ModalContentComponent);
-    modalRef.componentInstance.name = commingname;
+   
   }
 
   saveReport(): void{
